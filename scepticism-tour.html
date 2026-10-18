@@ -139,6 +139,12 @@ aside{position:static!important}
 
 .panel .pair .resp{margin:0}
 table.doubt{width:100%;border-collapse:collapse;margin:14px 0;font-size:.95rem}table.doubt th,table.doubt td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}table.doubt th{background:#f6f9fd;color:var(--ink);font-weight:600}
+.consol{background:var(--tint);color:var(--ink);border-radius:14px;padding:18px 20px}
+.consol h4{margin:0 0 6px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.consol p{margin:0 0 10px;font-size:.92rem}
+.consol a{display:flex;gap:10px;align-items:center;background:var(--card);color:var(--ink);text-decoration:none;font-weight:600;font-size:.92rem;padding:10px 14px;border-radius:10px;overflow-wrap:anywhere}
+.consol a:hover{text-decoration:underline}
+.consol .fmt{margin-left:auto;font-size:.72rem;letter-spacing:.1em;color:var(--muted);font-weight:600}
 </style>
 <script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
 
@@ -170,6 +176,7 @@ table.doubt{width:100%;border-collapse:collapse;margin:14px 0;font-size:.95rem}t
   <div class="map" id="map"></div>
 </div>
 <aside>
+  <div class="consol"><h4>Consolidate knowledge</h4><p>Download the workbook and test yourself on this topic.</p><a href="downloads/Scepticism_Workbook.pdf"><span aria-hidden="true">⬇</span>Scepticism Workbook<span class="fmt">PDF</span></a></div>
   <div class="card"><h4>Key definition</h4><p>Scepticism about a field of claims F is the claim that ‘the only justified attitude with respect to propositions in F is suspension of judgment’.</p></div>
   <div class="card"><h4>How to use this tour</h4><p>Work through the stops in order to learn the topic, or jump straight to a stop to revise. Dotted words are in the glossary: tap one to see its meaning.</p></div>
 </aside></div>
@@ -310,6 +317,7 @@ table.doubt{width:100%;border-collapse:collapse;margin:14px 0;font-size:.95rem}t
   <div class="resp for"><span class="tag">Evaluation</span><p>Start with the positives: the sceptic’s arguments are valid, and each reply pays a price. Then the limits: few take scepticism to be true, and strong replies exist. A good judgement is that scepticism’s value lies in what the responses reveal about justification.</p></div>
 </div>
 <aside>
+  <div class="consol"><h4>Consolidate knowledge</h4><p>Download the workbook and test yourself on this topic.</p><a href="downloads/Scepticism_Workbook.pdf"><span aria-hidden="true">⬇</span>Scepticism Workbook<span class="fmt">PDF</span></a></div>
   <div class="card"><h4>In a nutshell</h4><p>The sceptic need not believe their conclusion. The point is to make us explain how we know.</p></div>
   <div class="card"><h4>Think about it</h4><p>Go back to the thing you were certain of at Stop 0. Does it survive the evil demon? Does it survive the regress?</p></div>
 </aside></div>
@@ -406,6 +414,10 @@ function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);el
 if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
 window.addEventListener("hashchange",route);route();
 
+</script>
+<script>
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest(".consol a");if(!a)return;
+e.preventDefault();var p=a.getAttribute("href");window.parent.postMessage({dlFile:p,dlName:p.split("/").pop()},"*");});
 </script>
 </body>
 </html>

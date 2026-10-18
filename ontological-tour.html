@@ -147,6 +147,12 @@ details.resp summary{cursor:pointer}
 .portrait.wide img{aspect-ratio:4/3;object-position:center}
 .portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
 .portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+.consol{background:var(--tint);color:var(--ink);border-radius:14px;padding:18px 20px}
+.consol h4{margin:0 0 6px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.consol p{margin:0 0 10px;font-size:.92rem}
+.consol a{display:flex;gap:10px;align-items:center;background:var(--card);color:var(--ink);text-decoration:none;font-weight:600;font-size:.92rem;padding:10px 14px;border-radius:10px;overflow-wrap:anywhere}
+.consol a:hover{text-decoration:underline}
+.consol .fmt{margin-left:auto;font-size:.72rem;letter-spacing:.1em;color:var(--muted);font-weight:600}
 </style>
 <script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
 
@@ -200,6 +206,7 @@ details.resp summary{cursor:pointer}
   <div class="map" id="map"></div>
 </div>
 <aside>
+  <div class="consol"><h4>Consolidate knowledge</h4><p>Download the workbook and test yourself on this topic.</p><a href="downloads/Ontological_Arguments_Workbook.pdf"><span aria-hidden="true">⬇</span>Ontological Arguments Workbook<span class="fmt">PDF</span></a></div>
   <div class="card"><h4>The big question</h4><p>Can the existence of God be proved a priori, from the concept of God alone?</p></div>
   <div class="card"><h4>How to use this tour</h4><p>New to the topic? Go in order: each stop answers the one before. Revising? Jump to a stop or go to <b>Revise</b>. Dotted words open a definition. Cards marked ‘Beyond the spec’ in the margin are extension.</p></div>
   <div class="card"><h4>Exam lens</h4><p>AQA asks you to notice the <b>logical form</b> (deductive, a priori), the <b>strength of the conclusion</b> (God exists, or God <i>must</i> exist) and the <b>nature of God</b> each argument assumes.</p></div>
@@ -528,6 +535,7 @@ details.resp summary{cursor:pointer}
   <div id="quiz"></div>
 </div>
 <aside>
+  <div class="consol"><h4>Consolidate knowledge</h4><p>Download the workbook and test yourself on this topic.</p><a href="downloads/Ontological_Arguments_Workbook.pdf"><span aria-hidden="true">⬇</span>Ontological Arguments Workbook<span class="fmt">PDF</span></a></div>
   <div class="card"><h4>25-mark essay plan</h4><p><b>Can the existence of God be proved a priori?</b><br>1. Thesis; define ontological argument and a priori.<br>2. Anselm P2 → Gaunilo → Anselm’s reply → judge.<br>3. Descartes → Kant (existence not a predicate) → judge.<br>4. Malcolm (necessary existence) → P5 objection → judge.<br>5. Conclusion: at most, if God exists, God exists necessarily.</p></div>
 </aside></div>
 </template>
@@ -675,6 +683,10 @@ function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.
 function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
 if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
 window.addEventListener("hashchange",route);route();
+</script>
+<script>
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest(".consol a");if(!a)return;
+e.preventDefault();var p=a.getAttribute("href");window.parent.postMessage({dlFile:p,dlName:p.split("/").pop()},"*");});
 </script>
 </body>
 </html>
