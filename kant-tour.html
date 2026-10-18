@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kantian Ethics Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#d6efdf; --ink:#245c3c;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#d6efdf}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#ece0f5}
+.stretch h4{color:#5a2f78}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#ece0f5;color:#5a2f78;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#f5fbf7}
+details.resp summary{cursor:pointer}
+.bspec{display:inline-block;margin-left:8px;font-size:.7rem;font-weight:600;letter-spacing:.08em;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;vertical-align:middle}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="#">← Moral Philosophy</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 1 · Spec 3.2.1</span>
+      <h1>Kantian deontological ethics</h1>
+      <p>Morality is not about producing good outcomes but about acting from duty, on principles any rational being could will as law. This tour follows Kant’s <i>Groundwork of the Metaphysics of Morals</i> (1785): the good will, acting from duty, hypothetical and categorical imperatives, and the first two formulations of the categorical imperative. It then covers the objections on the specification and some that go beyond it.</p>
+    </div>
+    <svg viewBox="0 0 320 220" role="img" aria-label="Flowchart of the universal law test: state your maxim; could it be a universal law without contradiction? If no, contradiction in conception, perfect duty not to act on it. If yes, could you will it as a universal law? If no, contradiction in will, imperfect duty. If yes, permissible.">
+      <rect width="320" height="220" rx="14" fill="#fff"/>
+      <g font-family="Nunito Sans,sans-serif" font-size="11" text-anchor="middle">
+        <rect x="95" y="12" width="130" height="26" rx="8" fill="#d6efdf"/><text x="160" y="29" fill="#245c3c">1. State your maxim</text>
+        <line x1="160" y1="38" x2="160" y2="52" stroke="#5b6070"/>
+        <rect x="60" y="52" width="200" height="30" rx="8" fill="#f1f6fb" stroke="#dbe4ee"/><text x="160" y="71" fill="#23262f">Conceivable as universal law?</text>
+        <line x1="160" y1="82" x2="160" y2="100" stroke="#5b6070"/><text x="172" y="95" fill="#245c3c">yes</text>
+        <line x1="260" y1="67" x2="282" y2="67" stroke="#5b6070"/><line x1="282" y1="67" x2="282" y2="100" stroke="#5b6070"/><text x="290" y="62" fill="#8a3f1c">no</text>
+        <rect x="236" y="100" width="78" height="44" rx="8" fill="#fbe3d6"/><text x="275" y="118" fill="#8a3f1c">Perfect duty:</text><text x="275" y="134" fill="#8a3f1c">never do it</text>
+        <rect x="60" y="100" width="170" height="30" rx="8" fill="#f1f6fb" stroke="#dbe4ee"/><text x="145" y="119" fill="#23262f">Could you will it as law?</text>
+        <line x1="145" y1="130" x2="145" y2="160" stroke="#5b6070"/><text x="157" y="150" fill="#245c3c">yes</text>
+        <line x1="60" y1="115" x2="38" y2="115" stroke="#5b6070"/><line x1="38" y1="115" x2="38" y2="160" stroke="#5b6070"/><text x="30" y="110" fill="#8a3f1c">no</text>
+        <rect x="6" y="160" width="84" height="44" rx="8" fill="#ece0f5"/><text x="48" y="178" fill="#5a2f78">Imperfect duty:</text><text x="48" y="194" fill="#5a2f78">sometimes do X</text>
+        <rect x="100" y="160" width="90" height="30" rx="8" fill="#245c3c"/><text x="145" y="179" fill="#fff">Permissible</text>
+      </g>
+    </svg>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Built from the departmental slides <i>Kantian Ethics: Duty, reason and the good will</i> and Johnson and Cureton, ‘Kant’s Moral Philosophy’, <i>Stanford Encyclopedia of Philosophy</i> (Winter 2025). Quotations from the <i>Groundwork</i> are given with Akademie page numbers (e.g. 4:394). Material marked ‘Added’ was not in those sources and should be checked. Material marked ‘Beyond the spec’ is extension only. AQA 7172 · Moral Philosophy.</footer>
+</div>
+
+<!-- START -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>Is morality a matter of duty rather than consequences?</h2>
+  <p>Utilitarianism asks: <i>what will this action bring about?</i> Immanuel Kant (1724–1804) asks a different question: <i>does this action accord with duty, and is it done for the sake of duty?</i> His ethics is <span class="term" data-t="Deontology">deontological</span>, from the Greek <i>deon</i>, duty. Some actions are required or forbidden whatever their consequences.</p>
+  <p>Kant’s ethics is also <b>rationalist</b>. Moral requirements are not learned from tradition, religion, authority or human psychology. They are requirements of reason itself, binding on every rational being. In the preface to the <i>Groundwork</i>, Kant says the ground of obligation “must not be sought in the nature of the human being or in the circumstances of the world in which he is placed, but <i>a priori</i> simply in concepts of pure reason” (4:389). If he is right, every immoral action is also <b>irrational</b>.</p>
+  <h3>Why it matters</h3>
+  <p>Kant’s ethics grounds the idea that every person has equal dignity and deserves respect, and that there are things we must never do to anyone, whatever the gain. That idea underpins modern thinking about human rights. But it also seems to forbid lying even to save a life, and to give no moral credit for acting out of love.</p>
+  <h3>The specification in outline</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">The theory</span><p>The good will; acting in accordance with duty vs out of duty; hypothetical vs categorical imperatives; the first formulation (contradiction in conception and in will); the second formulation.</p></div>
+    <div class="resp against"><span class="tag">Issues</span><p>Clashing duties; universalisable maxims that are not moral, and non-universalisable ones that are not immoral; whether consequences determine moral value; the value of motives such as love, friendship and kindness.</p></div>
+  </div>
+  <h3>The tour</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-kant.jpg" alt="Portrait of Immanuel Kant" loading="lazy"><figcaption><b>Immanuel Kant</b>1724–1804 · Set text: <i>Groundwork of the Metaphysics of Morals</i> (1785), chapters 1 and 2</figcaption></figure>
+  <div class="card"><h4>How to use this tour</h4><p>Stops 1–5 follow the argument of the <i>Groundwork</i>. Stop 6 is extension. Stops 7–11 cover the issues. Hover over or tap any dotted term for its definition.</p></div>
+</aside></div>
+</template>
+
+<!-- GOOD WILL -->
+<template id="s-goodwill">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · Groundwork I</div>
+  <h2>The good will</h2>
+  <blockquote>It is impossible to think of anything at all in the world, or indeed even beyond it, that could be considered good without limitation except a good will.<cite>Kant, <i>Groundwork</i>, 4:393</cite></blockquote>
+  <p>Kant opens the <i>Groundwork</i> with this claim. Everything else we think of as good is good only <b>conditionally</b>: it is good only when combined with a good will.</p>
+  <ul class="list">
+    <li><b>Talents of mind</b>, such as understanding, wit and judgement, can be used to plan a crime.</li>
+    <li><b>Qualities of temperament</b>, such as courage, resolution and perseverance, make a villain more dangerous.</li>
+    <li><b>Gifts of fortune</b>, such as power, wealth and happiness, can produce “boldness and thereby often arrogance” unless a good will corrects their influence.</li>
+  </ul>
+  <h3>Good in itself, not for its results</h3>
+  <blockquote>A good will is not good because of what it effects or accomplishes, because of its fitness to attain some proposed end, but only because of its volition.<cite>Kant, <i>Groundwork</i>, 4:394</cite></blockquote>
+  <p>Even if, through bad luck, a good will achieved nothing at all, it would still, in Kant’s image, “like a jewel … shine by itself, as something that has its full worth in itself” (4:394). This is the first break with consequentialism: the moral value of an action lies in the will behind it, not in what it brings about.</p>
+  <h3>What makes a will good?</h3>
+  <p>A good will is one that acts <b>from duty</b>. Kant introduces the concept of duty to bring the good will into view, because duty contains the good will “though under certain subjective limitations and hindrances” which, “far from concealing it … rather bring it out by contrast and make it shine forth all the more brightly” (4:397). We see a good will most clearly when someone does their duty <i>against</i> their inclinations.</p>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>Something is good without limitation only if it is good in every circumstance.</li>
+    <li>Talents, temperament and gifts of fortune can all make a situation worse when combined with a bad will. <span class="note">(The villain’s courage.)</span></li>
+    <li>A good will is good in every circumstance, even when it achieves nothing. <span class="note">(The jewel.)</span></li>
+    <li>Therefore the good will is the only thing good without limitation.</li>
+  </ol>
+  <div class="resp against"><span class="tag">Objection</span><p>Is anything good unconditionally? A good will acting on false beliefs can cause great harm. And some goods, such as the pleasure of an innocent child, seem good in themselves without needing a good will.</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>Kant is not denying that pleasure or happiness are good. His point is that their goodness is <i>conditional</i>: an evil person’s happiness is not something an impartial rational observer can approve of.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Exam tip</h4><p>For “What does Kant mean by a good will?” (5 marks), give: good without qualification; other goods conditional, with an example; good in its willing, not its effects; acts from duty.</p></div>
+</aside></div>
+</template>
+
+<!-- DUTY -->
+<template id="s-duty">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · Groundwork I</div>
+  <h2>In accordance with duty vs out of duty</h2>
+  <div class="pair">
+    <div class="resp"><span class="tag">In accordance with duty</span><p>The action is what duty requires, but it is done for some other reason: self-interest, fear, or because we feel like it.</p></div>
+    <div class="resp"><span class="tag">Out of (from) duty</span><p>The action is done <i>because</i> it is our duty, out of respect for the moral law. Only this has <span class="term" data-t="Moral worth">moral worth</span>.</p></div>
+  </div>
+  <h3>The shopkeeper</h3>
+  <blockquote>It certainly conforms with duty that a shopkeeper not overcharge an inexperienced customer … but this is not nearly enough for us to believe that the merchant acted in this way from duty.<cite>Kant, <i>Groundwork</i>, 4:397</cite></blockquote>
+  <p>An honest shopkeeper who charges everyone the same price because it is good for business acts in accordance with duty, but from self-interest. His action is right, but has no moral worth.</p>
+  <h3>The marketplace thought experiment</h3>
+  <p><b>John</b> sells his apples at the right price even though it makes him miserable. <b>Lucy</b> sells hers at the right price because it makes her feel good. Who acts morally? For Kant, it is John whose action most clearly has moral worth, because only he is clearly acting from duty rather than inclination.</p>
+  <h3>The sympathetic person</h3>
+  <p>Kant considers a person naturally inclined to help others, who takes pleasure in spreading joy. Such kindness is “amiable”, but it has no genuine moral worth. Now imagine the same person overwhelmed by their own sorrow, no longer moved by others’ needs. If they still tear themselves out of “this deadly insensibility and [do] the action without any inclination, simply from duty; then the action first has its genuine moral worth” (4:398).</p>
+  <h3>Kant’s three propositions about duty</h3>
+  <ol class="list">
+    <li>An action has moral worth only if it is done from duty.</li>
+    <li>An action done from duty has its moral worth “not in the purpose to be attained by it but in the maxim in accordance with which it is decided upon” (4:399–400).</li>
+    <li>Duty is the necessity of an action from respect for the moral law.</li>
+  </ol>
+  <h3>Maxims</h3>
+  <p>A <span class="term" data-t="Maxim">maxim</span> is the principle on which you act: what you are doing and why. Kant calls it “the subjective principle of acting”, to be distinguished from the objective principle, the practical law (4:421n). For example: “I will borrow money with the intention of paying it back when I can.” Morality judges the maxim, not the outcome.</p>
+  <div class="resp against"><span class="tag">Objection</span><p>This seems to give less moral credit to the person who enjoys being kind than to the person who does good reluctantly. See Stop 11.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Common mistake</h4><p>Kant does not say that acting from inclination is <i>wrong</i>. The shopkeeper acts rightly. His action simply lacks <b>moral worth</b>.</p></div>
+</aside></div>
+</template>
+
+<!-- IMPERATIVES -->
+<template id="s-imperatives">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · Groundwork II</div>
+  <h2>Hypothetical and categorical imperatives</h2>
+  <p>An <span class="term" data-t="Imperative">imperative</span> is a command of reason: an “ought”. Kant distinguishes two kinds.</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Hypothetical</span><p><b>If</b> you want X, do Y. “If you want your plants to grow, put them by the window.” It binds you only if you have the desire; give up the goal and the command lapses.</p></div>
+    <div class="resp"><span class="tag">Categorical</span><p>Do X. No “if”, no “want”. “Do not lie.” It binds every rational being unconditionally, whatever they desire.</p></div>
+  </div>
+  <blockquote>Whoever wills the end also wills (insofar as reason has decisive influence on his actions) the indispensably necessary means to it that are within his power.<cite>Kant, <i>Groundwork</i>, 4:417</cite></blockquote>
+  <blockquote>The categorical imperative would be that which represented an action as objectively necessary of itself, without reference to another end.<cite>Kant, <i>Groundwork</i>, 4:414</cite></blockquote>
+  <h3>Why morality must be categorical</h3>
+  <p>Moral requirements bind us whatever we want. “Don’t torture innocents” does not lapse because someone has no desire to be good. So moral commands cannot be hypothetical: they must be categorical. And because a categorical imperative does not depend on any particular desire, its content can only be the form of law itself: universality. This leads Kant to the categorical imperative.</p>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>Moral requirements apply to all rational beings, whatever their desires.</li>
+    <li>Hypothetical imperatives apply only to those who have the relevant desire.</li>
+    <li>Therefore moral requirements are not hypothetical but categorical imperatives.</li>
+    <li>A categorical imperative cannot draw its content from any particular end, so it can only command conformity to universal law as such.</li>
+  </ol>
+  <h3>Four kinds of duty</h3>
+  <p>Kant recognises duties to <b>ourselves</b> and to <b>others</b>, and duties that are <b>perfect</b> or <b>imperfect</b>.</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Perfect duties</span><p>Strict duties that admit no exception in favour of inclination (4:421n): never make a lying promise; never commit suicide to avoid unhappiness.</p></div>
+    <div class="resp"><span class="tag">Imperfect duties</span><p>Duties to adopt an end, which we must pursue sometimes and to some extent: develop our talents; help others in need.</p></div>
+  </div>
+  <p class="note">The departmental slides describe a distinction between “general” and “specific” duties (owed to all vs owed to those we have relationships with). This is a useful teaching distinction but is not Kant’s own terminology in the <i>Groundwork</i>; use perfect/imperfect and to self/to others in the exam.</p>
+</div>
+<aside>
+  <div class="card"><h4>Test yourself</h4><p>“If you want to be trusted, keep your promises.” Hypothetical or categorical? <i>Hypothetical</i>: it depends on wanting trust. Kant’s point is that “keep your promises” binds you even if you don’t care about trust.</p></div>
+</aside></div>
+</template>
+
+<!-- CI 1 -->
+<template id="s-ci1">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · Groundwork II</div>
+  <h2>The first formulation: universal law</h2>
+  <blockquote>Act only in accordance with that maxim through which you can at the same time will that it become a universal law.<cite>Kant, <i>Groundwork</i>, 4:421</cite></blockquote>
+  <p>Kant also gives a variant, the Formula of the Law of Nature: “act as if the maxim of your action were to become by your will a universal law of nature” (4:421). The question is: <b>could everyone act on this maxim?</b></p>
+  <h3>The test, step by step</h3>
+  <ol class="list">
+    <li>Formulate your maxim: what you are doing and why.</li>
+    <li>Imagine a world in which everyone acts on that maxim, as a law of nature.</li>
+    <li><b>Contradiction in conception?</b> Can that world even be conceived without contradiction? If not, you have a <b>perfect duty</b> never to act on the maxim.</li>
+    <li><b>Contradiction in will?</b> If it can be conceived, could you rationally <i>will</i> it? If not, you have an <b>imperfect duty</b> to act against the maxim sometimes and to some extent.</li>
+  </ol>
+  <h3>Contradiction in conception: the lying promise</h3>
+  <blockquote>Some actions are so constituted that their maxim cannot even be thought without contradiction as a universal law of nature, far less could one will that it should become such.<cite>Kant, <i>Groundwork</i>, 4:424</cite></blockquote>
+  <p>Maxim: “When I need money, I will borrow it, promising to repay, though I know I cannot.” Universalised, everyone in need makes promises they will not keep. Then, in Kant’s words, the universality of such a law “would make the promise … itself impossible, since no one would believe what was promised him” (4:422). The maxim undermines the very practice it relies on. It cannot be conceived as universal law.</p>
+  <div class="resp"><span class="tag">Compare</span><p>“Borrow money with the intention of paying it back” can be universalised without contradiction. It passes.</p></div>
+  <p class="note">Note: the departmental slide headed “Contradiction in the will” uses the 4:424 quotation above, but that passage describes a contradiction in <b>conception</b>. The two tests are set out correctly here.</p>
+  <h3>Contradiction in will: refusing to help</h3>
+  <p>Maxim: “I will never help others in need.” A world where no one helps anyone is conceivable; humanity could survive. But Kant argues you cannot rationally <i>will</i> it, because you will inevitably need others’ help, and in willing this law you would deprive yourself of the help you want. Your will would contradict itself. So we have an imperfect duty to help others sometimes. Kant gives a parallel argument for developing our talents.</p>
+  <h3>Kant’s four examples (Groundwork 4:421–23)</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">Perfect duties (conception)</span><p><b>To self:</b> not to commit suicide out of self-love when life threatens more ills than pleasures.<br><b>To others:</b> not to make a lying promise.</p></div>
+    <div class="resp"><span class="tag">Imperfect duties (will)</span><p><b>To self:</b> to develop one’s talents rather than live only for enjoyment.<br><b>To others:</b> to help others in need.</p></div>
+  </div>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>Moral requirements must be categorical, binding all rational beings. <span class="note">(Stop 3.)</span></li>
+    <li>So a moral maxim must be one that any rational being could act on: it must be fit to be a universal law.</li>
+    <li>A maxim whose universalisation is inconceivable, or which cannot be consistently willed, is not fit to be a universal law.</li>
+    <li>Therefore it is morally impermissible to act on such a maxim.</li>
+  </ol>
+</div>
+<aside>
+  <div class="card"><h4>Key distinction</h4><p><b>Conception:</b> the universalised world is self-contradictory → perfect duty.<br><b>Will:</b> the world is possible but you cannot rationally want it → imperfect duty.</p></div>
+  <div class="card"><h4>Exam tip</h4><p>For a 12-mark answer on the first formulation, use one example of each contradiction and link each to perfect or imperfect duty.</p></div>
+</aside></div>
+</template>
+
+<!-- CI 2 -->
+<template id="s-ci2">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 5 · Groundwork II</div>
+  <h2>The second formulation: humanity as an end</h2>
+  <blockquote>So act that you use humanity, whether in your own person or in the person of any other, always at the same time as an end, never merely as a means.<cite>Kant, <i>Groundwork</i>, 4:429</cite></blockquote>
+  <p>For Kant, “every rational being exists as an end in itself” (4:428). Things have a <b>price</b>: they can be exchanged for something of equal value. Rational beings have <b>dignity</b>: a worth beyond any price. By “humanity”, Kant means our rational nature: our capacity to set our own ends and act on principles.</p>
+  <h3>“Merely” as a means</h3>
+  <p>The formula does not forbid using people as means. We do it all the time: the taxi driver, the shop assistant, the teacher. What is forbidden is using them <b>merely</b> as a means. As the encyclopedia entry puts it, if a taxi driver has freely chosen his work, we use his capacities permissibly when we act in a way he could, as a rational agent, consent to, for instance by paying the agreed price.</p>
+  <h3>The lying promise again</h3>
+  <p>Someone who makes a lying promise uses the lender merely as a means. As Kant puts it, the person “whom I want to use for my purposes by such a promise cannot possibly agree to my way of behaving toward him, and so himself contain the end of this action” (4:429–30). Deception and coercion are paradigm cases of treating someone merely as a means, because they bypass the other person’s rational agency.</p>
+  <h3>Treating humanity as an end</h3>
+  <p>The formula has a positive side too: we must not only refrain from using people, but also promote their ends, by helping them and developing our own rational capacities. These are the imperfect duties again, now seen in a new light.</p>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>Rational beings set their own ends and are the source of all value in the things they choose. <span class="note">(4:428.)</span></li>
+    <li>So rational nature has unconditional worth: it is an end in itself.</li>
+    <li>To treat something with unconditional worth merely as a tool is to fail to respect its worth.</li>
+    <li>Therefore we must always treat humanity, in ourselves and others, as an end and never merely as a means.</li>
+  </ol>
+  <h3>One law, several formulas</h3>
+  <p>Kant claims his formulations are “basically only so many formulations of precisely the same law” (4:436). They are meant to generate the same duties: respect for humanity could never lead you to act on a maxim that could not be universalised, and vice versa. Kant uses the same four examples for both.</p>
+  <div class="resp against"><span class="tag">Objection: what about non-rational beings?</span><p>If dignity comes from rational nature, what of animals, infants, or humans with severe cognitive disabilities? Kantians have offered several replies, from treating all humans as having moral status to extending the argument to animals (Korsgaard).</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Evaluation</h4><p>Most philosophers who find Kant attractive do so because of this formula: it captures the idea of respect for persons and explains why deception and coercion are wrong.</p></div>
+</aside></div>
+</template>
+
+<!-- BEYOND -->
+<template id="s-beyond">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 6 · Beyond the spec</div>
+  <h2>Autonomy and the kingdom of ends</h2>
+  <p class="note">The specification names only the first two formulations. The others are extension, but they help explain why Kant thought morality binds us.</p>
+  <h3>The autonomy formula</h3>
+  <p>Kant’s third formulation is “the Idea of the will of every rational being as a will that legislates universal law” (4:432). Put as an imperative: act so that through your maxims you could be a legislator of universal laws. The first formula presents us as <b>followers</b> of universal law; this one presents us as its <b>authors</b>.</p>
+  <p>This is Kant’s idea of <span class="term" data-t="Autonomy">autonomy</span>: a rational will is self-governing, bound only by laws it gives itself through reason. Its opposite is <span class="term" data-t="Heteronomy">heteronomy</span>: acting on laws imposed from outside, by desire, custom or authority. For Kant, being the source of the moral law is the very source of our dignity.</p>
+  <h3>The kingdom of ends</h3>
+  <p>Closely connected is the idea of a “Kingdom of Ends”: a “systematic union of different rational beings under common laws” (4:433). We must act as a member legislating universal laws for “a merely possible kingdom of ends” (4:439). The intuitive idea is that we should act only on principles that a community of fully rational agents, each with an equal share in making the rules, could accept. Rawls drew on this idea in his theory of justice.</p>
+  <h3>Kant on virtue</h3>
+  <p>In his later <i>Metaphysics of Morals</i>, Kant defines virtue as “the moral strength of a human being’s will in fulfilling his duty” (MM 6:405). This differs sharply from Aristotle. For Kant, virtue presupposes an account of duty, rather than duty being explained by virtue; and virtue is strength of will against temptation, not a “second nature” instilled by habit.</p>
+</div>
+<aside>
+  <div class="card"><h4>Link</h4><p>Compare Kant’s virtue as strength of will with Aristotle’s virtue as a settled disposition of feeling. See the Virtue Ethics topic.</p></div>
+</aside></div>
+</template>
+
+<!-- CLASHING -->
+<template id="s-clash">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 7 · Issues</div>
+  <h2>Clashing and competing duties</h2>
+  <p>Perfect duties admit no exceptions. But what if two duties conflict? I have promised to keep a secret, and telling the truth would break it. I have a duty not to lie, and a duty to protect an innocent person.</p>
+  <h3>The murderer at the door</h3>
+  <p class="note">Added to complete the spec. This example comes from Kant’s later essay ‘On a Supposed Right to Lie from Philanthropy’ (1797), not the <i>Groundwork</i>.</p>
+  <p>Your friend is hiding in your house. A murderer knocks and asks where they are. Kant appears to hold, in that essay, that you must not lie even here. Most people find this conclusion deeply counter-intuitive.</p>
+  <p>Kant insists that moral laws carry “absolute necessity”. In the <i>Groundwork</i> preface he gives the example that the command “thou shalt not lie” does not hold only for human beings (4:389): it binds all rational beings, without exception.</p>
+  <ol class="list">
+    <li>Kant’s perfect duties are absolute: they admit no exceptions.</li>
+    <li>In some situations, two perfect duties conflict, or following one leads to disaster.</li>
+    <li>An absolute theory cannot tell us what to do when absolute duties conflict, or forces an unacceptable choice.</li>
+    <li>Therefore Kant’s theory is inadequate.</li>
+  </ol>
+  <div class="resp for"><span class="tag">Response 1: no real conflict</span><p>Kant held that genuine conflicts of duty are impossible: if two rules seem to conflict, one is not really a duty in that case. Perfect duties are negative (do not lie, do not kill), and it is always possible to refrain from doing both at once.</p></div>
+  <div class="resp for"><span class="tag">Response 2: perfect beats imperfect</span><p>Where a perfect and an imperfect duty compete, the perfect duty takes priority. Imperfect duties leave us latitude about when and how to fulfil them.</p></div>
+  <div class="resp for"><span class="tag">Response 3: reformulate the maxim</span><p>The maxim “I will lie to a murderer to protect an innocent life” may well be universalisable. Many Kantians argue the test does not forbid it, even if Kant himself said otherwise.</p></div>
+  <div class="resp for"><span class="tag">Response 4: Ross’s prima facie duties</span><p class="note">Added: W. D. Ross is not in the source materials.</p><p>W. D. Ross proposed that duties are <i>prima facie</i>: binding unless outweighed by a stronger duty in the situation. This keeps much of Kant’s structure while allowing conflicts to be resolved by judgement.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Evaluation</h4><p>The strongest Kantian reply is that the lying-to-the-murderer maxim passes the universal law test. But this weakens the theory’s promise of clear, exceptionless rules.</p></div>
+</aside></div>
+</template>
+
+<!-- UNIVERSALISABILITY -->
+<template id="s-univ">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 8 · Issues</div>
+  <h2>Universalisable maxims that aren’t moral, and the reverse</h2>
+  <p>The specification raises two problems: <b>not all universalisable maxims are distinctly moral</b>, and <b>not all non-universalisable maxims are immoral</b>.</p>
+  <h3>1. Universalisable but trivial or wrong</h3>
+  <p>“I will tie my left shoelace first” passes the test, but it is not a moral principle at all. Worse, some clearly bad maxims seem to pass when stated narrowly enough.</p>
+  <div class="resp against"><span class="tag">The ultra-specific maxim</span><p>“I will borrow money, without the intention of paying it back, when my name is Nir, it is 10 June 2024, and the lender is called James.” Universalising this would not undermine the practice of promising, since it applies to only one case. So it seems to pass.</p></div>
+  <div class="resp for"><span class="tag">Kant’s response</span><p>The morally relevant maxim is simply “borrow money without intending to repay it”. Names and dates are not part of the reason for acting. An action from duty has its moral worth “in the maxim in accordance with which it is decided upon” (4:399–400), so we must test the agent’s real principle.</p></div>
+  <div class="resp against"><span class="tag">Counter-objection</span><p>There is no clear rule for how general a maxim should be. Its description can be chosen to get the result we want.</p></div>
+  <h3>2. Not universalisable, but not immoral</h3>
+  <div class="resp against"><span class="tag">The salesman</span><p>After 30 years in sales, a salesman resolves: “I will never sell anything again; I will only buy.” Universalised, no one sells, so no one can buy: a contradiction in conception. But retiring from sales is not immoral.</p></div>
+  <p>Other examples: “I will give more to charity than the average person” (not everyone can) or “I will play tennis early on Sunday mornings when the courts are empty”.</p>
+  <div class="resp for"><span class="tag">Response</span><p>Again, the problem lies in how the maxim is described. The salesman’s real maxim is “I will stop selling when I choose to retire”, which can be universalised. Kantians also argue the test is meant to show which maxims are forbidden, not to create a duty for every trivial choice.</p></div>
+  <h3>3. The empty formalism objection</h3>
+  <p class="note">Beyond the spec. Added: Hegel is not in the source materials.</p>
+  <p>Hegel and others argued that the universal law test is empty: on its own, a consistency test cannot generate any moral content. Almost any maxim can pass if described cleverly; the content comes from assumptions about what we want. The second formulation is often used to supply the missing content.</p>
+</div>
+<aside>
+  <div class="card"><h4>Evaluation</h4><p>These are objections to the first formulation used as a mechanical test. Kant can draw on the second formulation and on judgement about agents’ real maxims, but this concedes that the test is not self-sufficient.</p></div>
+</aside></div>
+</template>
+
+<!-- CONSEQUENCES -->
+<template id="s-conseq">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 9 · Issues</div>
+  <h2>Do consequences determine moral value?</h2>
+  <p>For Kant, the moral value of an action lies in the maxim and motive, not the outcome. A good will shines like a jewel even if it achieves nothing (4:394). Consequentialists object that this is the wrong way round.</p>
+  <ol class="list">
+    <li>Kant’s theory forbids certain actions whatever their consequences.</li>
+    <li>In some cases, refusing such an action leads to disaster: refusing to lie to the murderer, or to break a promise to prevent great suffering.</li>
+    <li>It is irrational to let a disaster happen to keep a rule. <span class="note">(The point of morality is to make the world better.)</span></li>
+    <li>Therefore the consequences of actions must matter to their moral value.</li>
+  </ol>
+  <div class="resp against"><span class="tag">Objection: Kant relies on consequences anyway</span><p>Some critics argue that the universal law test smuggles in consequences: the lying promise is wrong because of what would happen if everyone lied. And the contradiction in will for refusing help depends on our wanting help in future.</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>The test asks not whether the results of universal lying would be bad, but whether the maxim is <b>coherent</b> as a universal law. A lying promise in a world of universal lying-promises is not merely harmful but impossible. That is a logical, not a consequentialist, point.</p></div>
+  <div class="resp for"><span class="tag">Response: moral luck</span><p>Kant’s view protects us from moral luck. If moral value depended on outcomes, a well-meaning person whose good act turned out badly through no fault of their own would have acted wrongly. Kant locates value in what is within our control: our will.</p></div>
+  <div class="resp for"><span class="tag">Response: rights and justice</span><p>Kant’s refusal to let consequences override duty is exactly what blocks the transplant case and the tyranny of the majority that trouble utilitarianism.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Link</h4><p>Compare the Utilitarianism tour: Stop 7 (rights) and Stop 10 (intentions) are the mirror image of this issue.</p></div>
+</aside></div>
+</template>
+
+<!-- MOTIVES -->
+<template id="s-motives">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 10 · Issues</div>
+  <h2>Does Kant ignore love, friendship and kindness?</h2>
+  <p>For Kant, an action has moral worth only if done from duty. Acting from love, friendship or kindness, however admirable, has no genuine moral worth (Stop 2).</p>
+  <h3>Visiting a dying friend</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">Visits from duty</span><p>Not from any desire to see their friend. On Kant’s view, this has more moral worth.</p></div>
+    <div class="resp"><span class="tag">Visits willingly</span><p>Because they love their friend and want to see them. On Kant’s view, this has less moral worth.</p></div>
+  </div>
+  <p>This seems backwards. The friend who visits out of love seems the better person, and the dying friend would surely prefer it. Worse, Kant seems to require not only that duty motivates, but that no other motive, even love, cooperates.</p>
+  <p class="note">Added: Williams’ phrase is not in the source materials. Bernard Williams made a related point: a man who saves his drowning wife rather than a stranger should not need a moral principle to justify it; seeking one is “one thought too many”.</p>
+  <ol class="list">
+    <li>Kant says only actions done from duty have moral worth.</li>
+    <li>Actions done from love, friendship or kindness are not done from duty.</li>
+    <li>But such actions clearly have great moral value.</li>
+    <li>Therefore Kant’s account of moral worth is mistaken.</li>
+  </ol>
+  <div class="resp for"><span class="tag">Response 1: worth is not the same as goodness</span><p>Kant’s defenders argue his point is not that we should not admire love or sympathy, only that, from the point of view of someone deliberating about what to do, these motives are not decisive in the way duty is. Kant calls the kind person’s actions “amiable” and worthy of praise.</p></div>
+  <div class="resp for"><span class="tag">Response 2: motives can coexist</span><p>Many Kantians argue that an action can be done from love <i>and</i> from duty, provided duty would have been sufficient on its own. Love need not be absent, only not the deciding reason.</p></div>
+  <div class="resp for"><span class="tag">Response 3: reliability</span><p>Feelings are fickle. The person who visits only when they feel like it may stop when the feelings fade. Duty is what keeps us faithful when love runs out.</p></div>
+  <div class="resp for"><span class="tag">Response 4: cultivating feelings</span><p>In the later <i>Metaphysics of Morals</i>, Kant argues that we have a duty to cultivate sympathetic feelings, as means of helping us do our duty.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Evaluation</h4><p>Response 2 is the strongest: it keeps duty central while letting love play a role. But it still seems to put a moral principle between friends where many think it does not belong.</p></div>
+</aside></div>
+</template>
+
+<!-- ABUSE -->
+<template id="s-abuse">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 11 · Beyond the spec</div>
+  <h2>Consent and exploitation</h2>
+  <p class="note">This objection is from the departmental slides. It is not one of the specification’s named issues, but it is a strong evaluation point on the second formulation.</p>
+  <p>The humanity formula seems to allow us to use people as means if they could consent to it: the taxi driver who agrees a fare. But many who seem to agree are forced to by their circumstances, such as poverty or subjugation. A worker who accepts dangerous, badly paid work because the alternative is starvation “consents”, but is this real consent?</p>
+  <ol class="list">
+    <li>Kant permits using others as means when they consent.</li>
+    <li>Many apparent consents are produced by poverty or oppression.</li>
+    <li>So Kant’s theory seems to permit exploitation of those whose circumstances force their agreement.</li>
+  </ol>
+  <div class="resp for"><span class="tag">Response</span><p>Kant’s test is not whether someone <i>does</i> agree, but whether they <i>could</i> agree as a rational agent exercising their capacities. In Kant’s words, the deceived person “cannot possibly agree to my way of behaving toward him” (4:429–30). Taking advantage of someone’s desperation to bypass their real choice treats them merely as a means, so Kant’s theory condemns exploitation.</p></div>
+  <div class="resp against"><span class="tag">Counter-objection</span><p>Then everything turns on what a rational agent “could” consent to, which is hard to determine and open to dispute.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Exam use</h4><p>Use this in a 25-mark essay on the second formulation to show you can test a response, not just state it.</p></div>
+</aside></div>
+</template>
+
+<!-- REVISE -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>Is Kant right that morality is a matter of duty?</h2>
+  <h3>Overall evaluation</h3>
+  <p>Kant’s great achievement is to explain why morality binds us unconditionally and why every person has dignity. The second formulation in particular captures what is wrong with deception, coercion and exploitation, and blocks the sacrifices of the innocent that trouble utilitarianism. The first formulation is weaker as a mechanical test: ultra-specific and trivial maxims show that everything depends on how a maxim is described, and the charge of empty formalism has force. The absoluteness of perfect duties produces counter-intuitive results when duties clash, though many Kantians argue that lying to the murderer is universalisable. The objection about love and friendship is serious, but can be softened by allowing other motives alongside a sufficient motive of duty. A sustained judgement: <b>Kant is right that some things may not be done to persons whatever the consequences, and the humanity formula is the strongest statement of this; but morality cannot be reduced to a consistency test, and an adequate ethics must give more weight to consequences and to the motives of love and care than Kant allows.</b></p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Deontological and rationalist:</b> duty, not consequences; known a priori by reason.</li>
+    <li><b>Good will:</b> the only thing good without limitation; good in its willing (jewel); acts from duty.</li>
+    <li><b>In accordance with vs from duty:</b> shopkeeper; sympathetic person; only from duty has moral worth.</li>
+    <li><b>Imperatives:</b> hypothetical (if you want X) vs categorical (do X); morality is categorical.</li>
+    <li><b>Perfect vs imperfect duties</b>, to self and to others; Kant’s four examples.</li>
+    <li><b>First formulation:</b> universal law; contradiction in conception (lying promise → perfect duty); contradiction in will (refusing help → imperfect duty).</li>
+    <li><b>Second formulation:</b> humanity always as an end, never merely as a means; dignity vs price; consent.</li>
+    <li><b>Issues:</b> clashing duties (murderer at the door); trivial and ultra-specific maxims; salesman; consequences; love and friendship.</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Is Kantian deontological ethics correct?</b><br>1. Thesis; define deontology and the good will.<br>2. First formulation → ultra-specific maxim and salesman → real maxim reply → judge.<br>3. Clashing duties → murderer at the door → universalisable lie → judge.<br>4. Love and friendship → coexisting motives → judge.<br>5. Second formulation as Kant’s strongest ground; conclusion.</p></div>
+</aside></div>
+</template>
+
+<!-- GLOSSARY -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>For 3-mark questions, learn these definitions precisely: one accurate sentence is better than a vague paragraph.</p></div></aside></div>
+</template>
+
+<script>
+var GLOSS=[
+ ["Deontology","An ethical theory that judges actions by whether they accord with duty, not by their consequences.","t"],
+ ["Rationalism (ethical)","The view that moral truths can be known a priori through reason alone.","t"],
+ ["Good will","A will that acts from duty; for Kant, the only thing good without limitation.","t"],
+ ["Moral worth","The special value an action has when done from duty.","t"],
+ ["In accordance with duty","Doing what duty requires, but for some other motive, such as self-interest or inclination.","t"],
+ ["Out of duty","Doing what duty requires because it is one’s duty, from respect for the moral law.","t"],
+ ["Inclination","A desire or feeling that moves us to act, as opposed to duty.","t"],
+ ["Maxim","The subjective principle on which a person acts: what they do and why.","t"],
+ ["Imperative","A command of reason, expressed by an ‘ought’.","t"],
+ ["Hypothetical imperative","A command that applies only if one has a certain end: ‘If you want X, do Y.’","t"],
+ ["Categorical imperative","A command that applies unconditionally to all rational beings, regardless of their desires.","t"],
+ ["Perfect duty","A strict duty admitting no exception in favour of inclination, e.g. not to make lying promises.","t"],
+ ["Imperfect duty","A duty to adopt an end, pursued sometimes and to some extent, e.g. to help others.","t"],
+ ["Universal law formula","Act only on a maxim you can at the same time will to become a universal law.","t"],
+ ["Contradiction in conception","A maxim that cannot even be conceived as a universal law without contradiction; generates a perfect duty.","t"],
+ ["Contradiction in will","A maxim that can be conceived as universal law but not rationally willed; generates an imperfect duty.","t"],
+ ["Humanity formula","Treat humanity, in yourself and others, always as an end and never merely as a means.","t"],
+ ["End in itself","Something with unconditional worth, not valuable merely as a means to something else.","t"],
+ ["Dignity","The worth of rational beings, beyond any price or exchange.","t"],
+ ["Autonomy","Self-governance: being bound only by laws one gives oneself through reason.","t"],
+ ["Heteronomy","Acting on laws imposed from outside reason, e.g. by desire or authority.","t"],
+ ["Kingdom of ends","A systematic union of rational beings under common laws they each legislate.","t"],
+ ["Prima facie duty","Ross: a duty that holds unless outweighed by a stronger duty in the situation.","t"]
+];
+var STOPS=[["start","Start here"],["goodwill","Good will"],["duty","From duty"],["imperatives","Imperatives"],["ci1","Universal law"],["ci2","Humanity"],["beyond","Autonomy & ends"],["clash","Clashing duties"],["univ","Universalisability"],["conseq","Consequences"],["motives","Love & friendship"],["abuse","Consent"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["goodwill","Stop 1","The good will","Good without limitation."],
+ ["duty","Stop 2","From duty","The shopkeeper and moral worth."],
+ ["imperatives","Stop 3","Imperatives","Hypothetical and categorical."],
+ ["ci1","Stop 4","Universal law","Contradictions in conception and will."],
+ ["ci2","Stop 5","Humanity","Never merely as a means."],
+ ["beyond","Stop 6","Autonomy and ends","Beyond the spec."],
+ ["clash","Stop 7","Clashing duties","The murderer at the door."],
+ ["univ","Stop 8","Universalisability","Trivial, specific and salesman maxims."],
+ ["conseq","Stop 9","Consequences","Do outcomes matter?"],
+ ["motives","Stop 10","Love and friendship","The dying friend."],
+ ["abuse","Stop 11","Consent","Beyond the spec: exploitation."],
+ ["revise","Revise","Summary and quiz","Evaluation, recap, retrieval."]
+];
+var STRETCH={
+ "start":[["Kant against Hobbes and Hume","Hobbes, Locke and Aquinas also linked morality to reason, but Kant’s view is distinctive: the categorical imperative is a non-instrumental principle of rationality. Reason is not, in Hume’s phrase, a ‘slave’ to the passions.","Johnson and Cureton, ‘Kant’s Moral Philosophy’, SEP (intro)"]],
+ "goodwill":[["The highest good","In the <i>Critique of Practical Reason</i>, Kant argues that the highest good is complete virtue together with happiness in proportion to it. Since virtue does not guarantee happiness in this life, he argues we must postulate God and immortality.","Johnson and Cureton, SEP §1"]],
+ "duty":[["Respect for the moral law","For Kant, recognising the moral law brings a distinctive feeling akin to awe and fear. We inevitably feel this respect even when we fail to comply with the standards we recognise.","Johnson and Cureton, SEP §3"]],
+ "imperatives":[["Skill and prudence","Kant divides hypothetical imperatives into rules of skill (‘problematic’: if you happen to want X) and counsels of prudence (‘assertoric’: since you necessarily want happiness). Neither is moral.","Johnson and Cureton, SEP §4"]],
+ "ci1":[["Perfect and imperfect, formally","Following Hill, perfect duties take the form ‘never (or always) do φ’, imperfect duties ‘sometimes and to some extent do φ’. Kant’s argument for the duty to develop talents relies on the claim that we necessarily will our own happiness.","Johnson and Cureton, SEP §5"]],
+ "ci2":[["Three senses of ‘end’","An end can be something we aim to produce (losing weight); or something that constrains us negatively (self-preservation, on Korsgaard’s example). Humanity is an end in this second, limiting sense: not something to bring about, but something not to act against.","Johnson and Cureton, SEP §6"],["Even the worst keep their dignity","Kant thought persons cannot lose their humanity by their misdeeds: even the most vicious deserve basic respect as persons.","Johnson and Cureton, SEP §6"]],
+ "beyond":[["Kant and artificial intelligence","Could an AI ever be a person in Kant’s sense, with dignity and rights? The encyclopedia entry notes that Kant’s account of rational agency gives a framework for asking what would be needed.","Johnson and Cureton, SEP §16"]],
+ "conseq":[["Teleology or deontology?","The standard view is that Kant denies that rightness depends on goodness of outcomes or character. But some read Kant teleologically, grounding the categorical imperative in the absolute value of humanity as an end in itself (Korsgaard, Wood).","Johnson and Cureton, SEP §14"]],
+ "motives":[["Virtue as strength","Kant defines virtue as ‘the moral strength of a human being’s will in fulfilling his duty’ (MM 6:405). Unlike Aristotle, he treats virtue as resolve against temptation, not a habituated ‘second nature’ of feeling.","Johnson and Cureton, SEP §12"]],
+ "univ":[["Kant’s four-step procedure","The encyclopedia sets out the universal law test as four steps: formulate the maxim; recast it as a universal law of nature; ask whether it is conceivable in that world; ask whether you could rationally will it. Only a maxim that passes all four is permissible.","Johnson and Cureton, SEP §5"]],
+ "clash":[["Judgement can’t be eliminated","Kant himself acknowledged that rules cannot specify every circumstance: applying moral principles requires judgement.","Johnson and Cureton, SEP §13"]],
+ "abuse":[["Disability and moral status","Kantians debate how severe cognitive disability fits Kant’s account of dignity. Approaches include presuming moral status for all humans, arguing all humans have the relevant features, or extending respect beyond rational capacities.","Johnson and Cureton, SEP §11"]]
+};
+var QS={
+ "start":["What is meant by deontological ethics?","Explain why Kant’s ethics is described as rationalist.","Explain Kant’s deontological ethics.","Is Kantian deontological ethics correct?"],
+ "goodwill":["What does Kant mean by a ‘good will’?","Explain why Kant thinks the good will is the only thing good without limitation.","Explain Kant’s account of the good will.","Is the good will the only thing that is good without qualification?"],
+ "duty":["What is a maxim?","Explain the difference between acting in accordance with duty and acting out of duty.","Explain Kant’s account of moral worth, with reference to acting out of duty.","Is Kant right that only actions done out of duty have moral worth?"],
+ "imperatives":["What is a categorical imperative?","Explain the difference between hypothetical and categorical imperatives.","Explain Kant’s distinction between hypothetical and categorical imperatives and why morality must be categorical.","Can morality be based on categorical imperatives?"],
+ "ci1":["State the first formulation of the categorical imperative.","Explain the difference between a contradiction in conception and a contradiction in will.","Explain the first formulation of the categorical imperative, including the distinction between a contradiction in conception and a contradiction in will.","Is the first formulation of the categorical imperative a good test of morality?"],
+ "ci2":["State the second formulation of the categorical imperative.","Explain what Kant means by treating someone ‘merely as a means’.","Explain the second formulation of the categorical imperative.","Does the second formulation of the categorical imperative succeed?"],
+ "beyond":["What does Kant mean by autonomy?","Explain the kingdom of ends.","Explain how the autonomy and kingdom of ends formulations relate to the first two (extension).","Is autonomy the source of moral obligation?"],
+ "clash":["What is meant by a clash of duties?","Explain why clashing duties are a problem for Kant.","Explain the issue of clashing/competing duties for Kantian ethics.","Can Kantian ethics deal with clashing duties?"],
+ "univ":["Give an example of a universalisable maxim that is not moral.","Explain why not all non-universalisable maxims are immoral.","Explain the objection that universalisability is neither necessary nor sufficient for morality.","Is the universalisability test a good test of moral rightness?"],
+ "conseq":["What is meant by moral luck?","Explain why a consequentialist would object to Kantian ethics.","Explain the objection that consequences determine the moral value of actions.","Should consequences determine the moral value of actions?"],
+ "motives":["Give an example of a motive Kant is said to ignore.","Explain why Kant gives no moral worth to actions done from love.","Explain the objection that Kant ignores the value of motives such as love, friendship and kindness.","Does Kant ignore the value of love, friendship and kindness?"],
+ "abuse":["What does Kant mean by consent in the humanity formula?","Explain the objection that Kant’s theory allows exploitation.","Explain how Kant might respond to the exploitation objection (extension).","Can Kantian ethics prevent exploitation?"]
+};
+var QUIZ=[
+ ["Why is the good will the only thing good without limitation?","Other goods, such as courage or wealth, can make things worse with a bad will; a good will is good in itself, whatever it achieves."],
+ ["What is the difference between acting in accordance with duty and from duty?","In accordance: doing the right thing for another motive. From duty: doing it because it is one’s duty. Only the latter has moral worth."],
+ ["Why is the honest shopkeeper’s action not morally worthy?","He acts honestly from self-interest, not from duty."],
+ ["Give an example of a hypothetical imperative.","“If you want your plants to grow, put them by the window.”"],
+ ["Why does the lying promise fail the first formulation?","If everyone made lying promises, no one would believe a promise, so the practice of promising, and the maxim, would be impossible."],
+ ["What kind of duty does a contradiction in will generate?","An imperfect duty, e.g. to help others sometimes."],
+ ["What does ‘merely as a means’ add to the second formulation?","Using people as means is allowed; using them in ways they could not rationally consent to is not."],
+ ["How might Kant respond to the ultra-specific maxim?","Test the agent’s real reason for acting, e.g. ‘borrow without repaying’, not irrelevant details."],
+ ["Why is the salesman a problem for Kant?","‘Never sell, only buy’ cannot be universalised, yet retiring from sales is not immoral."],
+ ["How can Kantians reply to the dying-friend objection?","An action can be done from love and duty together, provided duty would have been sufficient on its own."]
+];
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src">'+(x[2]==="h"?"From the slide glossary":"Course definition")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+
+</script>
+</body>
+</html>

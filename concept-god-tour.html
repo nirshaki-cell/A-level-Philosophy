@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Concept of God Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#ece0f5; --ink:#5a2f78;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#ece0f5}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#d6efdf}
+.stretch h4{color:#245c3c}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#faf6fd}
+details.resp summary{cursor:pointer}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="#">← Metaphysics of God</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 2 · Spec 3.3.1</span>
+      <h1>The concept and nature of ‘God’</h1>
+      <p>What do we mean by ‘God’ – and does it hang together? Take the tour: the divine attributes, God’s relationship to time, and three arguments that the concept of God is incoherent.</p>
+    </div>
+    <svg viewBox="0 0 320 220" role="img" aria-label="Boethius' picture: time as the circumference of a circle, God as its centre, equidistant from every moment.">
+      <rect width="320" height="220" rx="14" fill="#fff"/>
+      <circle cx="160" cy="110" r="78" fill="none" stroke="#5a2f78" stroke-width="3"/>
+      <g stroke="#b79bd0" stroke-width="1.5"><line x1="160" y1="110" x2="160" y2="32"/><line x1="160" y1="110" x2="238" y2="110"/><line x1="160" y1="110" x2="105" y2="165"/><line x1="160" y1="110" x2="215" y2="55"/><line x1="160" y1="110" x2="82" y2="110"/><line x1="160" y1="110" x2="215" y2="165"/></g>
+      <circle cx="160" cy="110" r="9" fill="#5a2f78"/>
+      <g fill="#ece0f5" stroke="#5a2f78" stroke-width="2"><circle cx="160" cy="32" r="6"/><circle cx="238" cy="110" r="6"/><circle cx="105" cy="165" r="6"/><circle cx="215" cy="55" r="6"/><circle cx="82" cy="110" r="6"/><circle cx="215" cy="165" r="6"/></g>
+      <text x="172" y="128" font-size="13" fill="#23262f" font-family="Nunito Sans,sans-serif">God</text>
+      <text x="16" y="208" font-size="12" fill="#5b6070" font-family="Nunito Sans,sans-serif">Each point on the circle = a moment in time</text>
+    </svg>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Text adapted from the departmental handouts <i>The concept and nature of ‘God’</i>, <i>The paradox of the stone</i>, <i>The Euthyphro dilemma</i>, <i>God and eternity</i>, <i>God’s omniscience and free human beings</i> and the coherence revision table. Boxes marked ‘Beyond the spec’ are extension only. AQA 7172 · Metaphysics of God.</footer>
+</div>
+
+<!-- ============ STOP 0 ============ -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>Is the concept of God coherent?</h2>
+  <p>Before we can ask whether God exists, we need to know what we are asking about. There are many concepts of God around the world, but almost all agree that God is <span class="term" data-t="Maximal greatness">‘maximally great’</span> – that nothing could be greater than God. This topic develops that idea more narrowly: the attributes that Judaism, Christianity and Islam – the three great monotheistic traditions – have thought central, as the debate has developed in the Western Christian tradition. Philosophers call this picture <span class="term" data-t="Classical theism">classical theism</span>.</p>
+  <p>The question matters because a concept can fail before we ever look at the world. A ‘square circle’ does not exist, and we know this without searching, because the concept contradicts itself. If the concept of God is <span class="term" data-t="Incoherent">incoherent</span> – if, say, being <span class="term" data-t="Omnipotence">omnipotent</span> and being <span class="term" data-t="Omnibenevolence">supremely good</span> cannot both be true of one being – then no argument for God’s existence could succeed, because there would be nothing coherent for it to prove. The ontological, teleological and cosmological arguments you meet next all assume a particular concept of God; this is where that concept is tested.</p>
+  <div class="thesis"><b>The structure of the topic.</b> First, the attributes and what they mean (Stops 1–2). Then three arguments for incoherence, each aimed at a different attribute: the paradox of the stone (omnipotence), the Euthyphro dilemma (omnipotence and goodness), and divine foreknowledge versus human freedom (omniscience and goodness). Stop 5 on eternity is the key to Stop 6.</div>
+  <h3>Choose where to go</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <div class="card"><h4>The big question</h4><p>Can omnipotence, omniscience, supreme goodness and eternity be combined in a single, coherent concept?</p></div>
+  <div class="card"><h4>How to use this tour</h4><p>Learning it for the first time? Go through the stops in order. Revising? Jump to a stop, or go straight to <b>Revise</b> for the summary and quiz. Dotted words are in the glossary: tap one to see its meaning.</p></div>
+  <div class="card"><h4>Spec checklist</h4><p>✓ Omniscience, omnipotence, supreme goodness – and their meanings<br>✓ Timeless (eternal) vs within time (everlasting)<br>✓ Paradox of the stone<br>✓ Euthyphro dilemma<br>✓ Omniscience and free human beings</p></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 1 ============ -->
+<template id="s-attributes">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · The divine attributes</div>
+  <h2>Perfection and the divine attributes</h2>
+  <h3>Perfection and reality</h3>
+  <p>We start with the thought that nothing could be greater than God – that God is <span class="term" data-t="Perfection">perfect</span>. In <i>On Christian Doctrine</i>, Augustine says that to think of God is to</p>
+  <blockquote>‘attempt to conceive something than which nothing more excellent or sublime exists’.<cite>Augustine, <i>On Christian Doctrine</i> (as quoted in the departmental handout)</cite></blockquote>
+  <p>But thinking only of what does exist, and taking God as the best of these, may be too limited. Some philosophers claim that God is the most perfect being that <i>could</i> exist: if God exists, then not only does nothing greater exist, but it is <i>impossible</i> for anything greater to exist.</p>
+  <p>Perfection has been linked to reality in two ways. First, what is perfect has been thought to be <i>more real</i> than what is not: imperfections involve something failing to exist in a better way. Second, perfection involves complete <span class="term" data-t="Self-sufficiency">self-sufficiency</span> – not depending on anything and not lacking anything. Whatever is not the ultimate reality depends on what is, and so is not perfect. So God, as the most perfect being, is traditionally thought of as the ultimate reality: the ground or basis of everything that exists.</p>
+
+  <h3>Omniscience</h3>
+  <p>Perfect knowledge is usually taken to mean <span class="term" data-t="Omniscience">omniscience</span> (Latin <i>omni-</i>, ‘all’; <i>sciens</i>, ‘knowing’). The obvious definition is ‘knowing everything’. But God is the most perfect <i>possible</i> being, and perhaps it is impossible to know everything – for example, if human beings have free will, perhaps it is not possible to know what they will do. So for now: <b>omniscience is knowing everything that it is possible to know.</b></p>
+  <p>Omniscience concerns not only <i>what</i> God knows but <i>how</i>. In the <i>Summa Theologica</i>, Aquinas argues that God knows everything <i>directly</i>, not through inference or through a system of representation such as language or propositions. Two reasons:</p>
+  <ul class="list">
+    <li>To know something perfectly, the form of knowledge must match the nature of the object – we know visible things best through sight.</li>
+    <li>Knowing each thing as the particular thing it is is better than general knowledge. Knowing each tree as the tree it is is more perfect than knowing general facts about trees.</li>
+  </ul>
+  <p>So direct knowledge of particulars is superior to knowledge mediated by concepts. It is a bit like knowing what you are doing <i>while</i> you are doing it – and for Aquinas everything exists as a result of God’s activity. Other philosophers reply that if God does not know all true <span class="term" data-t="Proposition">propositions</span>, there is something God does not know; so God must have conceptual and propositional knowledge as well as direct knowledge.</p>
+
+  <h3>Omnipotence</h3>
+  <p>Power is the ability to do things. The obvious definition of <span class="term" data-t="Omnipotence">omnipotence</span> (<i>omni-</i>, ‘all’; <i>potens</i>, ‘powerful’) is ‘the power to do anything’. But could God make 2 + 2 = 5, or create a married bachelor? Some pious philosophers have wanted to say yes – logic is no limit on God. The handout’s verdict is that there is simply no way we can meaningfully say this.</p>
+  <p>Aquinas argues that God can do anything <i>possible</i>. What is <span class="term" data-t="Logically impossible">logically impossible</span> is a contradiction in terms: the words used to describe it literally contradict each other. So a description of a logically impossible power describes nothing at all.</p>
+  <div class="thesis"><b>Key idea.</b> The limits of the logically possible are not limitations on God’s power. Even if God can’t do the logically impossible, there is still nothing that God can’t do.</div>
+
+  <h3>Supreme goodness (omnibenevolence)</h3>
+  <p>There are two senses of perfect goodness:</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Metaphysical sense</span><p>Goodness just is perfection. ‘God is perfectly good’ means God is perfect in every way – including perfect power and perfect knowledge.</p></div>
+    <div class="resp"><span class="tag">Moral sense</span><p>‘God is perfectly good’ means God’s will is always in accordance with moral values.</p></div>
+  </div>
+  <p>Plato and Augustine connect the two. Evil is a <span class="term" data-t="Privation">‘lack’</span>, a ‘falling short’ or absence of goodness; it is not a positive force standing against goodness. If evil is a lack, then what is morally good is more real than what is not – so what is morally perfect and what is metaphysically perfect are the same thing.</p>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-aquinas.jpg" alt="Painting of Aquinas in a Dominican habit holding a model church and a book" loading="lazy"><figcaption><b>Thomas Aquinas</b>Carlo Crivelli, 1476 (detail of an altarpiece) · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Omniscience</dt><dd>Knowing everything it is possible to know.</dd><dt>Omnipotence</dt><dd>The power to do anything logically possible.</dd><dt>Omnibenevolence</dt><dd>Perfect goodness, moral and metaphysical.</dd><dt>Classical theism</dt><dd>God as a single, perfect being with these attributes.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 2 ============ -->
+<template id="s-time">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · God and time</div>
+  <h2>Eternal or everlasting?</h2>
+  <p>Being perfect, God is self-sufficient, dependent on nothing for existence. If something brought God into existence, God would depend on it. If something could end God’s existence, God would depend on it not exercising that power. So if God depends on nothing, nothing can begin or end God’s existence: <b>God’s existence has no beginning or end.</b></p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>God is perfect, and so self-sufficient. <span class="note">(From the concept of perfection – Stop 1.)</span></li>
+    <li>If anything could bring God into existence or end it, God would depend on that thing. <span class="note">(Analysis of dependence.)</span></li>
+    <li>So nothing can bring God into existence or end God’s existence. <span class="note">(From 1 and 2.)</span></li>
+    <li>Therefore God’s existence has no beginning or end.</li>
+  </ol>
+  <p>This can be understood in two ways – and the spec asks you to know both:</p>
+  <div class="pair">
+    <div class="resp for"><span class="tag">Everlasting (within time)</span><p>God is a <span class="term" data-t="Everlasting">temporal</span> being who exists throughout <i>all</i> time, with no beginning or end. God has a past, a present and a future, as we do.</p></div>
+    <div class="resp against"><span class="tag">Eternal (timeless)</span><p>God is <span class="term" data-t="Eternal (atemporal)">atemporal</span> – outside time altogether. Beginning and ending only make sense in time, so a being not in time cannot start or stop.</p></div>
+  </div>
+  <p>The ‘eternal’ view says very little on its own – just that God is atemporal – and even this is negative (God is <i>not</i> in time). It is very hard to understand what it could mean for a being to exist ‘outside time’. Stop 5 explores this through Boethius, Stump and Kretzmann.</p>
+  <h3>Why the choice matters</h3>
+  <ul class="list">
+    <li><b>For eternity:</b> it fits perfection and self-sufficiency best; an everlasting God would be ‘subject to’ time, and (Stop 5) would have most of its existence lost in the past or not yet arrived.</li>
+    <li><b>For everlastingness:</b> it fits the biblical picture of a God who acts, responds to prayer and enters relationships, which seem to require time; and it may offer an easy solution to the foreknowledge problem (Stop 6).</li>
+  </ul>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Everlasting</dt><dd>Existing at every point in time, without beginning or end, but still temporal.</dd><dt>Eternal</dt><dd>Existing outside time, without temporal succession.</dd><dt>Self-sufficiency</dt><dd>Depending on nothing else and lacking nothing.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 3 ============ -->
+<template id="s-stone">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · Argument for incoherence 1</div>
+  <h2>The paradox of the stone</h2>
+  <p>Is the concept of omnipotence coherent? If not, the concept of an omnipotent being – God – is incoherent too.</p>
+  <h3>The paradox</h3>
+  <p>Can God create a stone that he can’t lift? If ‘no’, there is something God cannot do: create the stone. If ‘yes’, there is something God cannot do: lift the stone. Either way there is something God cannot do – so God isn’t omnipotent. Indeed, no being could be.</p>
+  <ol class="list">
+    <li>Either God can create a stone God cannot lift, or God cannot. <span class="note">(Law of excluded middle.)</span></li>
+    <li>If God can, there is something God cannot do (lift it).</li>
+    <li>If God cannot, there is something God cannot do (create it).</li>
+    <li>So there is something God cannot do. <span class="note">(From 1–3: a dilemma.)</span></li>
+    <li>An omnipotent being can do anything. <span class="note">(Definition.)</span></li>
+    <li>Therefore God is not omnipotent – and the concept of an omnipotent being is incoherent.</li>
+  </ol>
+  <h3>Reply 1: logical limits aren’t real limits</h3>
+  <div class="resp for"><span class="tag">Response</span><p>The paradox presupposes something logically impossible. ‘x can make a stone too heavy for x to lift’ is not normally self-contradictory – but it <i>becomes</i> contradictory when x is omnipotent. ‘A stone an omnipotent being can’t lift’ describes nothing, like a married bachelor. So lacking the power to create it is not lacking any <i>possible</i> power (Aquinas’ account, Stop 1).</p></div>
+  <div class="resp against"><span class="tag">Counter: it begs the question</span><p>This reply assumes that ‘omnipotent being’ is coherent in order to show that ‘a stone an omnipotent being can’t lift’ is the contradictory part. But the coherence of ‘omnipotent being’ is exactly what is in question. An argument that assumes its conclusion to prove it <span class="term" data-t="Begging the question">begs the question</span> – so this reply fails.</p></div>
+  <h3>Reply 2: the conditional reply</h3>
+  <div class="resp for"><span class="tag">A better response</span><p>Grant that God can lift any stone but cannot create a stone he can’t lift. ‘God cannot create a stone God cannot lift’ only means: <b>if God can create a stone, then God can lift it.</b> God can create a stone of <i>any</i> size, and can then lift it. So is there a stone God can’t create? No. There is no limit on God’s power of lifting, and so the ‘inability’ is no limit on the stones God can create. God lacks no power related to creating or lifting stones.</p></div>
+  <p>The coherence table adds a further line from Aquinas: <span class="term" data-t="Active and passive power">active power</span> (the ability to do something, such as lift) is infinite in God, whereas <i>passive</i> power – the capacity to be overcome or limited – is a deficiency, not a power God needs to have.</p>
+  <h3>Evaluation</h3>
+  <p>Reply 2 is stronger than Reply 1 because it does not assume what it needs to prove: it shows directly that every stone God can make, God can lift, so no task in the stone domain is beyond God. Its cost is that it accepts there is a description – ‘make a stone its maker cannot lift’ – which God cannot satisfy, but which you or I could. A critic may press that this is a power humans have and God lacks; the defender answers that it is only a ‘power’ in virtue of the agent’s limitation, which is exactly what perfection excludes.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Paradox</dt><dd>Apparently valid reasoning from plausible premises to an unacceptable conclusion.</dd><dt>Begging the question</dt><dd>Assuming the conclusion you are trying to prove.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 4 (Euthyphro) ============ -->
+<template id="s-euthyphro">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · Argument for incoherence 2</div>
+  <h2>The Euthyphro dilemma</h2>
+  <p>What is the relationship between God and morality? Can God make right be wrong, or good bad? The answer, it seems, must be one of two:</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Horn 1 · Independence</span><p>Morality is independent of what God wills. God wills what is right <i>because it is right</i>. <b>Cost:</b> a constraint on God – God cannot turn wrong into right, so seems not omnipotent.</p></div>
+    <div class="resp"><span class="tag">Horn 2 · Dependence</span><p>Morality is whatever God wills: what is right is right <i>because God wills it</i> (<span class="term" data-t="Divine command theory">divine command theory</span>). <b>Cost:</b> if God commanded the murder of babies, it would be right.</p></div>
+  </div>
+  <p>Logically, it must be one or the other. If neither is satisfactory – and our concept of morality is coherent – then it is our concept of God we have reason to question.</p>
+  <h3>Plato’s original</h3>
+  <p>The debate derives from Plato’s dialogue <i>Euthyphro</i>, which is about <i>piety</i> and <i>the gods</i>, and focuses more on defining piety without circularity. Euthyphro defines piety as ‘what the gods love’. Socrates asks: is something pious because the gods love it, or do the gods love it because it is pious? Euthyphro chooses the second – making piety independent of the gods. Socrates objects that what is dear to the gods is dear to them because they love it. When Euthyphro tries to say what piety is independently (justice towards the gods – pleasing them with prayer and sacrifice), it collapses back into ‘what pleases the gods’. He cannot say what piety is independent of the gods’ love.</p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>Either morality is independent of God’s will, or it depends on God’s will. <span class="note">(Exhaustive alternatives.)</span></li>
+    <li>If independent, God cannot change it, so God is not omnipotent – and something exists independent of God, the ultimate reality.</li>
+    <li>If dependent, morality is arbitrary and ‘God is good’ is an empty <span class="term" data-t="Tautology">tautology</span>, so God is not good in any meaningful sense.</li>
+    <li>Therefore God cannot be both omnipotent and (meaningfully) good. The concept is incoherent.</li>
+  </ol>
+  <h3>Why neither horn satisfies</h3>
+  <p><b>Against Horn 1.</b> A defender might say that wrong cannot become right because that is logically impossible, so no limit on omnipotence. But ‘murdering babies is right’ is not obviously a contradiction. If what makes wrong wrong is something about how the world is, an omnipotent being should be able to change it. And if the explanation refers neither to logic nor to God, it refers to something that constrains God – which sits badly with God as the ground of everything.</p>
+  <p><b>Against Horn 2</b>, keep three objections separate:</p>
+  <ul class="list">
+    <li><b>The moral cost:</b> if God willed the death of children, it would be right – which violates our sense of morality. We would no longer think God good if God ordered it.</li>
+    <li><b>The empty claim:</b> ‘God is good’ reduces to ‘God wills whatever God wills’.</li>
+    <li><b>Arbitrariness:</b> God invents morality, so no fact – such as a child’s suffering – can be a reason for God to will one thing over another. Morality has no rational structure.</li>
+  </ul>
+  <p>Together these push us back to Horn 1 – we seem to rely on an independent standard to judge God good – but Horn 1 conflicts with omnipotence.</p>
+  <h3>Responses</h3>
+  <div class="resp for"><span class="tag">1 · God’s nature, not an external standard</span><p>Start again from the concept of God. If God is the ultimate reality, everything good relates back to God. Good cannot become evil not because logic forbids it, nor an outside standard, but because goodness depends on God’s <i>nature</i> – and it is impossible for God not to be God.</p></div>
+  <div class="resp for"><span class="tag">2 · God’s will is structured by love</span><p>God’s will responds to nothing independent of it, yet is not arbitrary: it is structured by God’s love. <b>Objection:</b> why does God love what he does? <b>Reply:</b> if God loves all reality, or if we cannot clearly conceive of God loving differently and still being God, the objection fades.</p></div>
+  <div class="resp for"><span class="tag">3 · Same property, different concepts</span><p>‘Water’ and ‘H₂O’ are different concepts – people knew water before they knew chemistry – yet they pick out one thing. Likewise ‘good’ and ‘what God wills’ are different concepts (so ‘God is good’ is not analytic, not a tautology), but the same <span class="term" data-t="Concept and property">property</span>. Morality depends on God metaphysically, not conceptually.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>How could we establish that goodness is what God wills without an independent standard of goodness to test God’s will against?</p></div>
+  <div class="resp for"><span class="tag">Counter-counter</span><p>That is a point about how we <i>know</i> the identity, not what goodness <i>is</i>. We needed an independent grip on water to discover it is H₂O; once discovered, we use H₂O to identify water. Likewise, once we believe goodness is God’s will, our understanding of God’s will can become our best guide to goodness.</p></div>
+  <div class="thesis"><b>Exam tip.</b> Keep the two versions of Horn 2 apart. The <i>conceptual</i> version (‘good’ <i>means</i> ‘willed by God’) is defeated by the tautology objection. The <i>metaphysical</i> version (goodness <i>is the same property as</i> what God wills) survives it, and must be attacked on other ground.</div>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Divine command theory</dt><dd>What is right or wrong is determined by God’s commands or will.</dd><dt>Tautology</dt><dd>True by its own terms, so uninformative.</dd><dt>Arbitrary</dt><dd>Done for no reason.</dd><dt>Analytic truth</dt><dd>True in virtue of the meanings of its terms.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 5 (Eternity) ============ -->
+<template id="s-eternity">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 5 · Understanding eternity</div>
+  <h2>God and eternity: Boethius, Stump and Kretzmann</h2>
+  <p>What could it mean for God to exist ‘outside time’? This stop follows Eleonore Stump and Norman Kretzmann’s article ‘Eternity’ (1981). You need it for Stop 6.</p>
+  <h3>Boethius’ definition</h3>
+  <blockquote>An eternal being has ‘the complete possession all at once of illimitable life’.<cite>Boethius, <i>The Consolation of Philosophy</i> (as quoted in the departmental handout)</cite></blockquote>
+  <p>This life is possessed in its ‘whole fullness’, so that nothing future is absent from it and nothing past has flowed away; it is ‘always present to itself’. In <i>On the Trinity</i>, Boethius adds that ‘now’ means something different for an eternal being. For us, ‘now’ is always becoming the past. For an eternal being, ‘now’ remains – it marks out its whole life.</p>
+  <p>So an eternal being:</p>
+  <ol class="list">
+    <li><b>has life</b> – not biological (that is temporal and changing), so a ‘psychological life’;</li>
+    <li><b>is illimitable</b> – it has no beginning or end, and cannot be limited;</li>
+    <li><b>is atemporal</b> – it possesses its whole life all at once, a present not flanked by past or future;</li>
+    <li><b>has a special kind of duration</b> – no part of its life is ever absent.</li>
+  </ol>
+  <p>(1) and (2) are compatible with God being everlasting. (3) rules that out – and is the hard part.</p>
+  <h3>A picture: timeline versus circle</h3>
+  <svg viewBox="0 0 640 170" role="img" aria-label="A timeline from 1550 to 1750 showing the overlapping lives of Descartes, Locke and Leibniz, with 1646 to 1650 marked as the period all three were alive.">
+    <rect width="640" height="170" rx="12" fill="#f8f4fb"/>
+    <line x1="40" y1="140" x2="600" y2="140" stroke="#23262f" stroke-width="2"/>
+    <g font-size="12" fill="#5b6070" font-family="Nunito Sans,sans-serif" text-anchor="middle"><text x="40" y="160">1550</text><text x="180" y="160">1600</text><text x="320" y="160">1650</text><text x="460" y="160">1700</text><text x="600" y="160">1750</text></g>
+    <rect x="309" y="22" width="12" height="118" fill="#ece0f5"/>
+    <g font-size="13" font-family="Nunito Sans,sans-serif" fill="#23262f">
+      <rect x="152" y="30" width="151" height="16" rx="8" fill="#b79bd0"/><text x="150" y="43" text-anchor="end">Descartes 1596–1650</text>
+      <rect x="226" y="62" width="202" height="16" rx="8" fill="#9f7fbf"/><text x="436" y="75">Locke 1632–1704</text>
+      <rect x="306" y="94" width="196" height="16" rx="8" fill="#5a2f78"/><text x="510" y="107">Leibniz 1646–1716</text>
+    </g>
+  </svg>
+  <p>A line at right angles to a timeline picks out a moment; whatever lies on it is <span class="term" data-t="T-simultaneity">simultaneous</span>. Descartes, Locke and Leibniz were all alive in 1646–50. But an eternal being cannot be placed on this line, because it has no past or future. Boethius suggests picturing the whole of time as the <b>circumference of a circle</b> and God as its <b>centre</b> (see the picture at the top of this page): from the centre, a line can be drawn to every point, so God is ‘simultaneous’ with every moment. (He is not saying time goes in a circle!) But ‘simultaneous’ cannot mean the same as it did for Descartes and Locke.</p>
+  <h3>Three kinds of simultaneity</h3>
+  <dl class="gloss" style="display:grid">
+    <div><dt>T-simultaneity</dt><dd>Two things exist or occur at one and the same <i>time</i>. Presupposes both are in time.</dd></div>
+    <div><dt>E-simultaneity</dt><dd>Two things exist or occur in one and the same <i>eternal present</i>. Any two events in God’s life are E-simultaneous.</dd></div>
+    <div><dt>ET-simultaneity</dt><dd>The relation between something eternal and something temporal. They cannot share a time or the eternal present – so a third concept is needed.</dd></div>
+  </dl>
+  <p>Take your reading this paragraph. From God’s standpoint, it is present – and so is the whole of God’s eternal life. From your standpoint, your reading is now in time, and God is eternally present. In Stump and Kretzmann’s words:</p>
+  <blockquote>‘From a temporal standpoint, the present is ET-simultaneous with the whole infinite extent of an eternal entity’s life. From the standpoint of eternity, every time is present, co-occurrent with the whole of infinite atemporal duration.’<cite>Stump and Kretzmann, ‘Eternity’ (1981), as quoted in the departmental handout</cite></blockquote>
+  <h3>The formal definition</h3>
+  <p>Let x be a temporal event and y an eternal one. x and y are ET-simultaneous if and only if:</p>
+  <ol class="list">
+    <li>for some eternal being A, x and y are both present – x observed as temporally present, y as eternally present; and</li>
+    <li>for some temporal being B, x and y are both present – x observed as temporally present, y as eternally present.</li>
+  </ol>
+  <p>So you and God do not exist T-simultaneously (God is not in time), nor E-simultaneously (you are not eternal) – but, if God exists and is eternal, ET-simultaneously.</p>
+  <h3>ET-simultaneity is not transitive</h3>
+  <p>T-simultaneity is <span class="term" data-t="Transitive relation">transitive</span>: if Descartes overlaps Locke and Locke overlaps Leibniz at the same time, Descartes overlaps Leibniz. ET-simultaneity is not. Your reading this and your 10th birthday are both ET-simultaneous with God – but they are not simultaneous with each other. This is what stops the view collapsing into ‘everything happens at once’.</p>
+  <h3>Atemporal duration</h3>
+  <p>How do <i>you</i> exist? Your past no longer exists; your future does not yet exist. So you exist only in the present – a fleeting instant at which future becomes past. To exist in time is barely to exist at all! The same would be true of an everlasting God: most of God’s existence would be past or future. Now think of an existence <i>none</i> of which has gone and none of which is yet to come – the whole of it present. That is atemporal duration: everything God ever ‘was’ or ‘will be’ always ‘is’. On this view, eternal existence is not thinner than ours but fuller.</p>
+  <h3>Objection and response</h3>
+  <div class="resp against"><span class="tag">Objection</span><p>ET-simultaneity is stipulated to behave oddly (it is not transitive). Perhaps it is just a technical label for something we do not really understand – so the concept of a timeless God remains unintelligible.</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>Coherence does not require easy comprehension. Many coherent ideas – such as the relativity of simultaneity in physics – are counter-intuitive. ET-simultaneity is precisely defined and does explanatory work (Stop 6), so unfamiliarity alone does not show incoherence.</p></div>
+</div>
+<aside>
+  <figure class="card portrait wide"><img src="img/phil-boethius.jpg" alt="Illuminated letter showing Boethius teaching students" loading="lazy"><figcaption><b>Boethius</b>Illuminated initial from a medieval manuscript of the Consolation of Philosophy · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Atemporal duration</dt><dd>Limitless, pastless, futureless existence, the whole of which is present.</dd><dt>Transitive</dt><dd>If it holds between x and y and between y and z, it holds between x and z.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 6 (Freedom) ============ -->
+<template id="s-freedom">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 6 · Argument for incoherence 3</div>
+  <h2>God’s omniscience and free human beings</h2>
+  <p>If God is eternal, it seems God knows what we will do in the future: past, present and future are all the same to God. But then are our actions free?</p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>For me to do an action freely, I must be able to do it or refrain from doing it. <span class="note">(A ‘could have done otherwise’ account of freedom.)</span></li>
+    <li>If God knows what I will do before I do it, then it must be true that I will do that action. <span class="note">(Knowledge is factive: you cannot know what is false.)</span></li>
+    <li>So it cannot be true both that God knows what I will do and that I don’t do it.</li>
+    <li>If it is true that I will do that action, nothing I can do can prevent it from coming true.</li>
+    <li>So if God knows what I will do before I do it, I cannot refrain from doing it.</li>
+    <li>Therefore, if God knows what I will do before I do it, that action is not free.</li>
+  </ol>
+  <p>The argument does not say we aren’t free; it is a conditional. Run it the other way: if we are free, God does not know what we will do, so God is not omniscient.</p>
+  <h3>From freedom to goodness: the full dilemma</h3>
+  <p>We could simply accept that we are not free. But free will is a great good: it lets us choose good or evil, enter willingly into a relationship with God, and makes our lives meaningful and morally significant. A supremely good God would want us to have it. So:</p>
+  <div class="thesis"><b>If we are free, God is not omniscient. If we are not free, God is not supremely good.</b> Either way, God cannot be both – unless omniscience and freedom are compatible.</div>
+  <h3>Solution 1: God is everlasting</h3>
+  <div class="resp for"><span class="tag">Response</span><p>God is in time. Free actions are not yet fixed, so it is logically impossible – even for God – to know them in advance. Omniscience is knowing all that it is <i>possible</i> to know, so this is no real limit. God knows everything knowable at any given time.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>This waters down omniscience from its traditional, maximal sense, and makes God a temporal being moving through time like us – reopening hard questions about God’s perfection and relation to a changing world.</p></div>
+  <h3>Solution 2: compatibilism</h3>
+  <div class="resp for"><span class="tag">Response</span><p>Premise 2 is ambiguous. It is necessarily true that <i>if</i> God knows I will do X, I will do X. But it does not follow that I <i>must</i> do X. Paris is the capital of France – true, but not necessarily true. Likewise, I won’t refrain from X, but that doesn’t mean I <i>can’t</i>. So God can know what I will do while I do it freely.</p></div>
+  <div class="resp against"><span class="tag">Objection 1</span><p>If I can refrain from what God knows I will do, I can change what God already knows – changing the past. Or I can make God’s belief false, making God not omniscient. I can do neither.</p></div>
+  <div class="resp against"><span class="tag">Objection 2</span><p>How could God know? You can know a kind friend will help an old lady because of his character and what he has said – reliable, justified, and no threat to his freedom. But God’s knowledge is complete and infallible. Character cannot tell you every detail, nor what someone will be doing on 23 May 2026 – God would have to know whether they will even be alive. Infallible knowledge seems possible only if the future is fixed. And then can we act freely?</p></div>
+  <h3>Solution 3: understanding eternity</h3>
+  <div class="resp for"><span class="tag">Response (Stump and Kretzmann)</span><p>Every moment in time is ET-simultaneous with God’s eternal present. So God does not <i>foresee</i>: there is no ‘before’ for God. God’s knowledge of events is ET-simultaneous with their happening – God only ever knows what is happening <i>as</i> it happens. Premise 2 is confused: it treats God’s knowledge as located in time. We know what we are doing while we do it, without that stopping our actions being free. The same is true of God’s knowledge.</p></div>
+  <p><b>Apparent contradiction.</b> If my death lies in the future, does God know I am ‘now’ alive and ‘now’ dead? ‘Now’ is ambiguous between the temporal and the eternal now. I am alive in the temporal present and dead in the temporal future; I exist in no eternal present at all. Both my life and my death are ET-simultaneous with God’s eternal present.</p>
+  <div class="resp against"><span class="tag">Counter</span><p>The solution is only as strong as the concept of ET-simultaneity, which is complex and contested (Stop 5). And it gives up the picture of a God who responds to us in time.</p></div>
+  <h3>Evaluation</h3>
+  <p>The eternity solution is the most powerful because it removes the premise that generates the problem – foreknowledge – rather than shrinking omniscience (Solution 1) or leaving an unexplained infallible knowledge of an open future (Solution 2). Its strength, however, is borrowed: if a timeless God is unintelligible, the solution trades one incoherence for another. A strong answer will judge whether Stop 5’s defence of eternity succeeds.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Theological fatalism</dt><dd>If God infallibly knows what we will do, our actions cannot be free.</dd><dt>Compatibilism</dt><dd>Free will is compatible with foreknowledge (or determinism).</dd><dt>Contingent</dt><dd>True, but could have been otherwise.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ REVISE ============ -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>Is the God of classical theism coherent?</h2>
+  <h3>Overall evaluation</h3>
+  <p>Each argument for incoherence has a strong reply, but each reply has a price. The paradox of the stone is the weakest challenge: the conditional reply shows God lacks no power over stones without assuming its conclusion. The Euthyphro dilemma is more serious, because the best reply – goodness is identical with God’s nature – must explain how we can recognise God’s goodness without an independent standard; the water/H₂O analogy answers this, but only if the identity can be discovered. The foreknowledge problem is solved most cleanly by the eternity solution, but this makes everything rest on the intelligibility of timelessness. A sustained judgement: <b>the concept of God survives as coherent only on a carefully refined account – omnipotence as power over the logically possible, goodness as God’s nature, God as timeless – and the weakest link is the concept of eternity.</b> Whether that refined God is still the personal God of religious life is a further question.</p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Perfection:</b> God is the greatest possible being, self-sufficient, the ultimate reality.</li>
+    <li><b>Omniscience:</b> knowing all that can be known; Aquinas – God knows directly, not by inference.</li>
+    <li><b>Omnipotence:</b> power to do anything logically possible (Aquinas).</li>
+    <li><b>Goodness:</b> metaphysical and moral; Plato and Augustine – evil is a lack.</li>
+    <li><b>Time:</b> everlasting (in time, no beginning or end) vs eternal (outside time).</li>
+    <li><b>Stone:</b> Reply 1 begs the question; Reply 2 (conditional) – every stone God makes, God can lift.</li>
+    <li><b>Euthyphro:</b> independence threatens omnipotence; dependence threatens goodness. Replies: God’s nature; love; same property, different concepts.</li>
+    <li><b>Eternity:</b> Boethius’ ‘complete possession all at once of illimitable life’; T-, E-, ET-simultaneity; ET is not transitive.</li>
+    <li><b>Freedom:</b> everlasting God; compatibilism; eternity – God knows as it happens, not before.</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Is the concept of God coherent?</b><br>1. Claim and definitions (attributes).<br>2. Stone → conditional reply → judge.<br>3. Euthyphro → same-property reply → counter → judge.<br>4. Foreknowledge → eternity solution → is eternity intelligible?<br>5. Conclusion that follows from your judgements.</p></div>
+</aside></div>
+</template>
+
+<!-- ============ GLOSSARY ============ -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>For 3-mark questions, learn these definitions precisely – one accurate sentence is better than a vague paragraph.</p></div></aside></div>
+</template>
+
+<script>
+var GLOSS=[
+ ["Classical theism","The conception of God broadly shared by Judaism, Christianity and Islam: a single, perfect being who is omnipotent, omniscient, omnibenevolent, and eternal or everlasting.","h"],
+ ["Maximal greatness","The idea that nothing could be greater than God.","t"],
+ ["Perfection","Being the best possible; lacking nothing. Linked to being most real and to self-sufficiency.","t"],
+ ["Self-sufficiency","Not depending on anything else and not lacking anything.","t"],
+ ["Omniscience","Perfect knowledge: knowing everything that it is logically possible to know.","h"],
+ ["Omnipotence","Perfect power: the ability to do anything that is logically possible.","h"],
+ ["Omnibenevolence","Being perfectly good, both morally and metaphysically.","h"],
+ ["Privation","Evil understood as a ‘lack’ or absence of goodness, not a positive force (Plato, Augustine).","t"],
+ ["Proposition","What a declarative sentence expresses; something that can be true or false.","t"],
+ ["Logically impossible","Involving a contradiction (e.g. a square circle), and so not a coherent state of affairs at all.","h"],
+ ["Incoherent","Self-contradictory: a concept whose parts cannot all be true of one thing.","t"],
+ ["Eternal (atemporal)","Existing entirely outside time, with no beginning, end or temporal succession.","h"],
+ ["Everlasting","Existing at every point within time, with no beginning or end, but still temporal.","h"],
+ ["Paradox of the stone","Could an omnipotent being create a stone too heavy for it to lift? Used to question whether omnipotence is coherent.","h"],
+ ["Active and passive power","Aquinas: active power is the ability to do something (e.g. lift); passive power is the capacity to have something done to you. Only active power belongs to omnipotence.","h"],
+ ["Begging the question","A fallacy in which an argument assumes the very claim it is trying to prove.","h"],
+ ["Euthyphro dilemma","Is something good because God wills it, or does God will it because it is good?","h"],
+ ["Divine command theory","The view that what is morally right or wrong is determined entirely by God’s commands or will.","h"],
+ ["Tautology","A statement true by its own terms, which therefore tells us nothing.","h"],
+ ["Arbitrary","Done for no reason.","h"],
+ ["Analytic truth","A truth that holds in virtue of the meanings of its terms alone.","h"],
+ ["Concept and property","Two different concepts (‘water’, ‘H₂O’) can refer to one and the same property or thing. Used to argue goodness is the same property as what God wills (cf. Frege’s sense and reference).","h"],
+ ["T-simultaneity","Ordinary temporal simultaneity: occurring at one and the same time.","h"],
+ ["E-simultaneity","Existing or occurring together in one and the same eternal present.","h"],
+ ["ET-simultaneity","Stump and Kretzmann’s relation between a temporal event and an eternal being: each is present to the other, one temporally, one eternally.","h"],
+ ["Transitive relation","A relation that, if it holds between x and y and between y and z, holds between x and z. ET-simultaneity is not transitive.","t"],
+ ["Atemporal duration","Limitless, pastless, futureless existence, the whole of which is present.","t"],
+ ["Theological fatalism","The argument that if God infallibly knows in advance what we will do, our actions cannot be free.","h"],
+ ["Compatibilism","The view that free will is compatible with God’s foreknowledge (or with determinism).","h"],
+ ["Contingent","True, but could have been otherwise – e.g. Paris being the capital of France.","t"]
+];
+var STOPS=[["start","Start here"],["attributes","The attributes"],["time","God and time"],["stone","Paradox of the stone"],["euthyphro","Euthyphro dilemma"],["eternity","Eternity"],["freedom","Omniscience & freedom"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["attributes","Stop 1","The divine attributes","Perfection, omniscience, omnipotence and supreme goodness."],
+ ["time","Stop 2","Eternal or everlasting?","Is God outside time, or in it for ever?"],
+ ["stone","Stop 3","The paradox of the stone","Can God make a stone he cannot lift?"],
+ ["euthyphro","Stop 4","The Euthyphro dilemma","Is it good because God wills it?"],
+ ["eternity","Stop 5","Understanding eternity","Boethius, Stump and Kretzmann; ET-simultaneity."],
+ ["freedom","Stop 6","Omniscience and freedom","If God knows what I will do, am I free?"]
+];
+var STRETCH={
+ "start":[
+  ["Anselm and ‘perfect being theology’","Anselm’s <i>Proslogion</i> describes God as that than which nothing greater can be conceived. Working out God’s attributes by asking ‘what would a maximally great being be like?’ is now called perfect being theology. You will meet the same definition again in the ontological argument.","Paraphrased; Anselm, <i>Proslogion</i> ch. 2"],
+  ["Divine simplicity","Aquinas held that God has no parts at all, not even distinct attributes: God’s power, knowledge and goodness are identical with each other and with God’s essence. Some philosophers say this makes the attributes impossible to pull apart, so the arguments for incoherence lose their target. Others think the doctrine is itself incoherent.","Paraphrased; Aquinas, <i>Summa Theologica</i> I, q.3"],
+  ["Negative theology","Maimonides argued that we can only say what God is <i>not</i>. ‘God is powerful’ really means ‘God is not weak’. If he is right, coherence debates may be pushing our concepts beyond their limits. This links to religious language (3.3.3).","Paraphrased; Maimonides, <i>Guide for the Perplexed</i> I"]],
+ "attributes":[
+  ["Descartes: God and the eternal truths","In letters to Mersenne (1630), Descartes held that God freely created even the truths of mathematics, so God is not bound by them. He is the main historical example of the ‘pious philosophers’ who say logic is no limit on God. Compare Aquinas.","Paraphrased; Descartes, letters to Mersenne, 1630"],
+  ["Absolute and ordained power","Medieval theologians, Ockham among them, distinguished God’s <i>absolute</i> power (everything God could do without contradiction) from God’s <i>ordained</i> power (what God has actually chosen to do). This lets God be fully powerful while also faithful to the order God has set.","Paraphrased; see Courtenay, <i>Capacity and Volition</i> (1990)"],
+  ["Can God know particulars?","Al-Ghazālī accused Avicenna of holding that God knows particular things only ‘in a universal way’, and argued that this denies God true omniscience. This is a debate from Islamic philosophy that runs parallel to Aquinas’ account of direct knowledge.","Paraphrased; al-Ghazālī, <i>The Incoherence of the Philosophers</i>, Discussion 13"],
+  ["Can God sin?","Aquinas argued that sinning is a falling short in action, so being unable to sin is not a lack of power. This is a second place where omnipotence and goodness seem to clash, and it is answered in the same way as the logically impossible.","Paraphrased; Aquinas, <i>Summa Theologica</i> I, q.25, a.3"]],
+ "time":[
+  ["Kenny’s objection to timelessness","Anthony Kenny argued that if God’s timeless ‘now’ is simultaneous with every moment, then events at different times would be simultaneous with each other, which is absurd. Stump and Kretzmann’s non-transitive ET-simultaneity was designed to block exactly this objection.","Paraphrased; Kenny, <i>The God of the Philosophers</i> (1979)"],
+  ["The case for everlastingness","Nicholas Wolterstorff argued that the God of the Bible acts in history: God responds, redeems and changes how he relates to people. That requires a sequence of events, so God must be everlasting, not timeless. Swinburne also defends a temporal God.","Paraphrased; Wolterstorff, ‘God Everlasting’ (1975); Swinburne, <i>The Coherence of Theism</i> (1977)"],
+  ["A middle way","William Lane Craig proposes that God is timeless ‘without’ creation but temporal since the moment of creation, entering time in order to relate to the world.","Paraphrased; Craig, <i>Time and Eternity</i> (2001)"],
+  ["Augustine: time was created","In <i>Confessions</i> XI, Augustine argues that God created time along with the world, so asking what God was doing ‘before’ creation makes no sense. He also admits that time is easy to use and very hard to define.","Paraphrased; Augustine, <i>Confessions</i> Book XI"]],
+ "stone":[
+  ["Mavrodes and Savage","George Mavrodes (1963) defended omnipotence much as Reply 1 does: the task described is self-contradictory. C. Wade Savage (1967) objected that this begs the question, and offered the conditional analysis that the handout calls ‘a better response’.","Paraphrased; Mavrodes, ‘Some Puzzles Concerning Omnipotence’ (1963); Savage, ‘The Paradox of the Stone’ (1967)"],
+  ["Frankfurt’s twist","Harry Frankfurt argued that even if God <i>can</i> do the impossible (as Descartes held), the paradox fails anyway: a God who can create an unliftable stone can also lift it, since doing the impossible is within that God’s power.","Paraphrased; Frankfurt, ‘The Logic of Omnipotence’ (1964)"],
+  ["Is omnipotence the wrong ideal?","Process theologians such as Charles Hartshorne reject classical omnipotence. On their view God’s power is persuasive, not coercive, and a God who held all power would leave no room for real creatures. This links to the problem of evil (3.3.2).","Paraphrased; Hartshorne, <i>Omnipotence and Other Theological Mistakes</i> (1984)"]],
+ "euthyphro":[
+  ["Modified divine command theory","Robert Adams argued that rightness is what a <i>loving</i> God commands, so if (per impossibile) God commanded cruelty for its own sake, the theory would not count cruelty as right. This is a developed version of Response 2.","Paraphrased; Adams, ‘A Modified Divine Command Theory of Ethical Wrongness’ (1973)"],
+  ["Ockham’s voluntarism","William of Ockham is often read as accepting the second horn outright: whatever God commands is right, and God’s will is not bound by any prior standard. Scholars still debate how far he went.","Paraphrased; see ‘William of Ockham’, <i>Stanford Encyclopedia of Philosophy</i>"],
+  ["Leibniz’s complaint","Leibniz objected that if things are good only because God wills them, then praising God for what he has done is empty: God would deserve equal praise for doing the opposite.","Paraphrased; Leibniz, <i>Discourse on Metaphysics</i> §2"],
+  ["Links to Moral philosophy","The ‘same property’ reply has the same structure as naturalist moral realism (Paper 1, meta-ethics): goodness is identical to a natural property, discovered a posteriori. Moore’s open question argument can be pointed at it.","Cross-link within the AQA course"]],
+ "eternity":[
+  ["Can a timeless God know what time it is?","Norman Kretzmann (before he co-wrote ‘Eternity’) argued that a perfect knower must always know what time it is now. That knowledge changes, so an omniscient God must change, and so must be in time. Defenders of timelessness reply that God knows all the same facts tenselessly.","Paraphrased; Kretzmann, ‘Omniscience and Immutability’ (1966)"],
+  ["Physics and the block universe","On some readings of relativity, all times are equally real (the ‘block universe’). This fits a God who sees all of time ‘at once’. Stump and Kretzmann themselves discuss the relativity of simultaneity.","Paraphrased; Stump and Kretzmann, ‘Eternity’ (1981)"],
+  ["Boethius’ own use","Boethius introduced his definition of eternity in <i>The Consolation of Philosophy</i> Book V precisely to solve the foreknowledge problem. Stump and Kretzmann are reviving a 1,500-year-old solution.","Paraphrased; Boethius, <i>Consolation</i> Book V"]],
+ "freedom":[
+  ["Pike’s modern version","Nelson Pike’s 1965 paper set out the foreknowledge argument in the form most modern discussions use. He emphasised that God’s past beliefs are fixed and infallible.","Paraphrased; Pike, ‘Divine Omniscience and Voluntary Action’ (1965)"],
+  ["Is premise 1 true?","Harry Frankfurt argued that you can be morally responsible even when you could not have done otherwise. If he is right, premise 1’s ‘could have done otherwise’ condition may be too strong, and foreknowledge stops being a threat.","Paraphrased; Frankfurt, ‘Alternate Possibilities and Moral Responsibility’ (1969)"],
+  ["Two more routes","<b>Ockham’s way out:</b> facts about God’s past beliefs are ‘soft’ facts, partly fixed by what we later do, so we are not changing the past. <b>Molinism:</b> Luis de Molina proposed that God has ‘middle knowledge’ of what any free creature would do in any circumstance. <b>Open theism</b> (e.g. William Hasker) develops Solution 1: the future is genuinely open, even to God.","Paraphrased; see Zagzebski, ‘Foreknowledge and Free Will’, <i>Stanford Encyclopedia of Philosophy</i>"]],
+ "revise":[
+  ["Where next: the problem of evil","The attributes tested here return in 3.3.2: can an omnipotent, omniscient, supremely good God coexist with evil? The free-will discussion in Stop 6 feeds straight into the free will defence.","Cross-link within the AQA course"],
+  ["Is the God of the philosophers the God of faith?","Pascal contrasted the ‘God of Abraham, Isaac and Jacob’ with the ‘God of the philosophers’. A refined, timeless God may be coherent and still not the personal God of worship. This is a strong closing thought for a 25-mark essay.","Paraphrased; Pascal, ‘Memorial’ (1654)"]]
+};
+var QS={
+ "attributes":["Define ‘omnipotence’.","Explain Aquinas’ account of how God knows.","Explain how the concepts of omniscience, omnipotence and supreme goodness have been understood.","Is the concept of God coherent?"],
+ "time":["What is the difference between God being eternal and God being everlasting?","Explain why God’s existence is thought to have no beginning or end.","Explain the views that God is timeless and that God is within time.","Is God better understood as eternal or as everlasting?"],
+ "stone":["What is the paradox of the stone?","Explain why the reply that the stone is logically impossible may beg the question.","Explain the paradox of the stone and how it challenges the coherence of the concept of God.","Does the paradox of the stone show that the concept of God is incoherent?"],
+ "euthyphro":["State the Euthyphro dilemma.","Explain why divine command theory may make morality arbitrary.","Explain the Euthyphro dilemma and why it is a challenge to the coherence of the concept of God.","Does the Euthyphro dilemma show that the concept of God is incoherent?"],
+ "eternity":["What is ET-simultaneity?","Explain why ET-simultaneity is not transitive.","Explain Boethius’ account of eternity and Stump and Kretzmann’s development of it.","Is the concept of a timeless God coherent?"],
+ "freedom":["What is meant by omniscience?","Explain the argument that God’s foreknowledge is incompatible with human freedom.","Explain how the claim that God is eternal is used to reconcile omniscience and free will.","Is the existence of an omniscient God compatible with free human beings?"]
+};
+var QUIZ=[
+ ["How does Aquinas define omnipotence?","The power to do anything logically possible; the logically impossible is not anything at all, so is no limit on power."],
+ ["Give the two senses of ‘supremely good’.","Metaphysical: perfect in every way. Moral: God’s will always accords with moral values."],
+ ["What is the difference between eternal and everlasting?","Eternal: outside time altogether. Everlasting: in time, throughout all time, with no beginning or end."],
+ ["Why does Reply 1 to the paradox of the stone beg the question?","It assumes ‘omnipotent being’ is coherent in order to show the stone is the contradictory part – but that coherence is what is in question."],
+ ["State the conditional reply to the paradox of the stone.","‘God cannot create a stone he can’t lift’ means ‘if God creates a stone, God can lift it’ – so there is no stone God cannot create."],
+ ["What are the two horns of the Euthyphro dilemma, and which attribute does each threaten?","Morality independent of God (threatens omnipotence); morality dependent on God’s will (threatens goodness – arbitrary, tautology)."],
+ ["How does the water/H₂O analogy help divine command theory?","‘Good’ and ‘willed by God’ are different concepts but the same property, so ‘God is good’ is not a tautology."],
+ ["Give Boethius’ definition of eternity.","‘The complete possession all at once of illimitable life.’"],
+ ["Why is non-transitivity important for ET-simultaneity?","Two moments can each be ET-simultaneous with God without being simultaneous with each other – so not everything happens ‘at once’."],
+ ["How does the eternity solution undermine premise 2 of the foreknowledge argument?","God knows nothing ‘before’ we act; God knows what we do ET-simultaneously, as it happens – like our knowing what we do as we do it."]
+];
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src">'+(x[2]==="h"?"Handout glossary":"From the handout text")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>

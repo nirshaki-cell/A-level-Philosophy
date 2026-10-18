@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ontological Arguments Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#ece0f5; --ink:#5a2f78;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#ece0f5}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#d6efdf}
+.stretch h4{color:#245c3c}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#faf6fd}
+details.resp summary{cursor:pointer}
+.bspec{display:inline-block;margin-left:8px;font-size:.7rem;font-weight:600;letter-spacing:.08em;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;vertical-align:middle}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="#">← Metaphysics of God</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 2 · Spec 3.3.2</span>
+      <h1>Ontological arguments</h1>
+      <p>Can we prove that God exists just by thinking about what God is? Take the tour: Anselm and Gaunilo, Descartes and Leibniz, the empiricist and Kantian objections, and the modal arguments of Malcolm and Plantinga.</p>
+    </div>
+    <svg viewBox="0 0 320 220" role="img" aria-label="Diagram: the concept of God on the left, an arrow labelled 'reason alone' pointing to 'God exists' on the right, with a crossed-out eye showing no experience is used.">
+      <rect width="320" height="220" rx="14" fill="#fff"/>
+      <rect x="18" y="74" width="110" height="64" rx="12" fill="#ece0f5"/>
+      <text x="73" y="102" text-anchor="middle" font-size="13" fill="#5a2f78" font-family="Nunito Sans,sans-serif">The concept</text>
+      <text x="73" y="120" text-anchor="middle" font-size="13" fill="#5a2f78" font-family="Nunito Sans,sans-serif">of God</text>
+      <rect x="192" y="74" width="110" height="64" rx="12" fill="#5a2f78"/>
+      <text x="247" y="111" text-anchor="middle" font-size="14" fill="#fff" font-family="Nunito Sans,sans-serif">God exists</text>
+      <line x1="134" y1="106" x2="180" y2="106" stroke="#5a2f78" stroke-width="3"/>
+      <polygon points="186,106 176,100 176,112" fill="#5a2f78"/>
+      <text x="160" y="60" text-anchor="middle" font-size="11" fill="#5b6070" font-family="Nunito Sans,sans-serif">reason alone?</text>
+      <g transform="translate(160,168)" stroke="#8a3f1c" stroke-width="2.5" fill="none"><ellipse cx="0" cy="0" rx="18" ry="10"/><circle cx="0" cy="0" r="4" fill="#8a3f1c"/><line x1="-20" y1="12" x2="20" y2="-12"/></g>
+      <text x="160" y="200" text-anchor="middle" font-size="11" fill="#5b6070" font-family="Nunito Sans,sans-serif">no appeal to experience: a priori</text>
+    </svg>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Built from the departmental resources: <i>The Ontological Argument</i> slides, <i>Kant and the ontological argument</i>, the two <i>Malcolm’s ontological argument</i> decks (after Lacewing 2017, ch. 2), and Oppy, Rasmussen and Schmid, ‘Ontological Arguments’, <i>Stanford Encyclopedia of Philosophy</i> (Fall 2025). Material marked ‘Beyond the spec’ is extension only. AQA 7172 · Metaphysics of God.</footer>
+</div>
+
+<!-- START -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>Can God’s existence be proved from the concept of God?</h2>
+  <p>Ontological arguments claim that we can <b>deduce the existence of God from the concept of God</b>. Just by thinking carefully about what God is, we can conclude that God must exist. The Stanford Encyclopedia describes them as arguments from premises that are typically alleged to be <span class="term" data-t="Analytic">analytic</span>, <span class="term" data-t="A priori">a priori</span> and <span class="term" data-t="Necessary truth">necessary</span> to the conclusion that God exists.</p>
+  <p>This makes them unlike every other argument for God you will study. The teleological and cosmological arguments start from features of the world – order, causation, contingency – and are <span class="term" data-t="A posteriori">a posteriori</span>. The ontological argument does not look at the world at all. If it works, it is as certain as a proof in geometry, and it shows not just that God exists but that God <i>must</i> exist. If it fails, working out <i>why</i> it fails has taught philosophers a great deal about existence, necessity and meaning.</p>
+  <p>Two ideas sit underneath almost every version (from the departmental slides):</p>
+  <ol class="list">
+    <li>That which is greater has more being (existence) than that which is lesser.</li>
+    <li>A <span class="term" data-t="Necessary being">necessary</span> entity has greater being than one that is <span class="term" data-t="Contingent being">contingent</span>.</li>
+  </ol>
+  <div class="pair">
+    <div class="resp"><span class="tag">Necessary</span><p>A being or fact it would be a contradiction to deny – for example, that 2 + 2 = 4.</p></div>
+    <div class="resp"><span class="tag">Contingent</span><p>A being or state of affairs it is not a contradiction to deny – for example, that there are eight planets in the solar system.</p></div>
+  </div>
+  <div class="thesis"><b>What the spec requires.</b> Anselm, Descartes and Malcolm; and the issues of Gaunilo’s perfect island, empiricist objections to a priori arguments for existence (Hume), and Kant’s claim that existence is not a predicate. <b>Leibniz and Plantinga are beyond the spec</b> but sharpen your evaluation.</div>
+  <h3>Choose where to go</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <div class="card"><h4>The big question</h4><p>Can the existence of God be proved a priori, from the concept of God alone?</p></div>
+  <div class="card"><h4>How to use this tour</h4><p>New to the topic? Go in order: each stop answers the one before. Revising? Jump to a stop or go to <b>Revise</b>. Dotted words open a definition. Cards marked ‘Beyond the spec’ in the margin are extension.</p></div>
+  <div class="card"><h4>Exam lens</h4><p>AQA asks you to notice the <b>logical form</b> (deductive, a priori), the <b>strength of the conclusion</b> (God exists, or God <i>must</i> exist) and the <b>nature of God</b> each argument assumes.</p></div>
+</aside></div>
+</template>
+
+<!-- ANSELM -->
+<template id="s-anselm">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · Anselm (1033–1109)</div>
+  <h2>Anselm: that than which nothing greater can be conceived</h2>
+  <h3>Faith seeking understanding</h3>
+  <p>Anselm, Archbishop of Canterbury, described theology as <i>faith seeking understanding</i>. His <i>Proslogion</i> (1078) is written as a prayer: he already believes, and wants to understand what he believes. He addresses the ‘fool’ of Psalm 14, who ‘says in his heart, there is no God’. Anselm’s claim is that the fool contradicts himself. The departmental slides note that this makes the argument theological as well as philosophical – a point worth making in evaluation.</p>
+  <h3>The definition</h3>
+  <p>Anselm defines God as <b>something than which nothing greater can be thought (or conceived)</b>. Note the wording: not ‘the greatest thing there is’, but something that cannot even be <i>thought</i> to be surpassed.</p>
+  <h3>Proslogion 2: the argument from existence in reality</h3>
+  <p>Even the fool understands the phrase ‘that than which nothing greater can be conceived’. Whatever is understood exists ‘in the understanding’. Anselm uses the analogy of a painter: before the painting exists, it exists in the painter’s understanding; once painted, it exists in the understanding <i>and</i> in reality.</p>
+  <p>Now suppose that than which nothing greater can be conceived existed only in the understanding. Then we could conceive of it existing in reality as well – and that would be greater. But then we could conceive of something greater than that than which nothing greater can be conceived, which is a contradiction. So it must exist in reality too.</p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>When the fool hears the words ‘that than which no greater can be conceived’, he understands them. <span class="note">(Premise: an appeal to ordinary understanding.)</span></li>
+    <li>Whatever is understood exists in the understanding. <span class="note">(Premise: the painter analogy.)</span></li>
+    <li>So that than which no greater can be conceived exists in the understanding. <span class="note">(From 1, 2.)</span></li>
+    <li>If it exists in the understanding, it can be conceived to exist in reality. <span class="note">(Premise.)</span></li>
+    <li>It is greater if it exists in reality than if it exists only in the understanding. <span class="note">(Premise: existence is great-making.)</span></li>
+    <li>It is impossible to conceive of something greater than that than which no greater can be conceived. <span class="note">(From the definition.)</span></li>
+    <li>Therefore that than which no greater can be conceived exists in reality. <span class="note">(From 3–6, by <span class="term" data-t="Reductio ad absurdum">reductio ad absurdum</span>.)</span></li>
+  </ol>
+  <p class="note">This formulation follows the Stanford Encyclopedia’s reconstruction. Its authors note that it is not obvious exactly how (7) follows from (3)–(6) – a gap you can use in evaluation.</p>
+  <h3>Proslogion 3: the argument from necessary existence</h3>
+  <p>Anselm then makes a further move. Something that cannot be conceived not to exist is greater than something that can. So if that than which nothing greater can be conceived could be conceived not to exist, it would not be that than which nothing greater can be conceived. Therefore God cannot be conceived not to exist: <b>God exists necessarily</b>.</p>
+  <ol class="list">
+    <li>God is that than which nothing greater can be conceived.</li>
+    <li>A being that cannot be conceived not to exist is greater than one that can.</li>
+    <li>So if God could be conceived not to exist, God would not be that than which nothing greater can be conceived – a contradiction.</li>
+    <li>Therefore God cannot be conceived not to exist: God exists necessarily.</li>
+  </ol>
+  <div class="thesis"><b>Keep the two apart.</b> Proslogion 2 treats <i>existence</i> as great-making; Proslogion 3 treats <i>necessary existence</i> as great-making. Kant’s objection hits the first; Malcolm (Stop 7) argues the second survives.</div>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-anselm.jpg" alt="Engraved profile portrait of Anselm with long grey hair and a red robe" loading="lazy"><figcaption><b>Anselm of Canterbury</b>Imagined likeness by an unknown artist – no portrait from his lifetime survives · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Ontological argument</dt><dd>An a priori argument from the concept of God to God’s existence.</dd><dt>Reductio ad absurdum</dt><dd>Refuting a claim by showing it leads to a contradiction.</dd><dt>In the understanding</dt><dd>Present as an object of thought.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- GAUNILO -->
+<template id="s-gaunilo">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · Gaunilo’s perfect island</div>
+  <h2>Gaunilo: ‘On Behalf of the Fool’</h2>
+  <p>Gaunilo, a monk of Marmoutier and Anselm’s contemporary, replied in a short work called <i>On Behalf of the Fool</i>. He raised two kinds of objection, summarised on the departmental slides: (1) that we cannot really think about the greatest possible being; and (2) that even if we could, this would not prove the existence of God. His most famous move is a <b>parody</b>.</p>
+  <h3>The perfect island</h3>
+  <p>Gaunilo asks us to imagine an island, lost somewhere in the ocean, more richly endowed with every kind of riches and delight than any land people inhabit. The story is easily told and easy to understand. But if someone went on to argue that this island must exist in reality – because otherwise any real island would be more excellent than it – Gaunilo says he would think the person was joking, or wonder which of them was the bigger fool.</p>
+  <blockquote>‘The story is easily told, and involves no difficulty, and so I understand it’.<cite>Gaunilo, <i>On Behalf of the Fool</i>, in the translation used on the departmental slides</cite></blockquote>
+  <h3>The parody in standard form</h3>
+  <ol class="list">
+    <li>When the fool hears the words ‘that island than which no greater island can be conceived’, he understands them.</li>
+    <li>Whatever is understood exists in the understanding.</li>
+    <li>So that island exists in the understanding.</li>
+    <li>If it exists in the understanding, it can be conceived to exist in reality.</li>
+    <li>It is greater if it exists in reality than if only in the understanding.</li>
+    <li>It is impossible to conceive of an island greater than that island than which no greater island can be conceived.</li>
+    <li>Therefore that island exists in reality.</li>
+  </ol>
+  <p>The conclusion is absurd. But the argument has exactly the same form as Anselm’s. So either Anselm’s argument is invalid too, or at least one of its premises is false. This strategy is a <span class="term" data-t="Parody">parody</span>, a kind of reductio: it does not say <i>which</i> step fails, only that something must.</p>
+  <h3>Anselm’s replies</h3>
+  <div class="resp for"><span class="tag">Reply 1 · We can think of God</span><p>We can think about things that exist and things that do not. The only things we cannot think about are impossible ideas, like a square triangle. ‘That than which nothing greater can be conceived’ is coherent, and we can reach it by working up from lesser things.</p></div>
+  <div class="resp for"><span class="tag">Reply 2 · Saying is not thinking</span><p>We can <i>say</i> something without actually <i>thinking</i> it (the slides call this an ‘empty’ intuition), so it can look as if we have thought it. Someone who denies God’s existence has said the words without genuinely thinking the concept. When you really do think about God, you realise God must exist.</p></div>
+  <div class="resp for"><span class="tag">Reply 3 · The argument applies only to God</span><p>Existence is an intrinsic part of the idea of that than which nothing greater can be conceived, as lines are part of the idea of a triangle. The idea of an island – land surrounded by water – has no such connection to real existence. Islands are not the kind of thing the argument is about.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>The parody need not use islands. The Stanford Encyclopedia suggests ‘that score on this test than which no greater score can be conceived’, where there <i>is</i> a natural maximum. If the argument proves the perfect score exists, something has gone wrong.</p></div>
+  <h3>Evaluation</h3>
+  <p>Gaunilo’s parody is powerful because it needs no theory of what is wrong with Anselm’s argument: it shows the form proves too much. Anselm’s best reply is Reply 3, that only a being than which nothing greater can be conceived has existence built into its concept. But this concedes that the argument’s force lies in the special status of necessary existence – which points forward to Proslogion 3, Descartes and Malcolm, rather than rescuing Proslogion 2 as it stands.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Parody</dt><dd>An argument of the same form with an absurd conclusion, showing the original form is flawed.</dd><dt>Intrinsic maximum</dt><dd>A highest possible degree of a quality.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- DESCARTES -->
+<template id="s-descartes">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · Descartes (1596–1650)</div>
+  <h2>Descartes: the supremely perfect being</h2>
+  <p>Descartes gives his ontological argument in the Fifth <i>Meditation</i> (1641). Unlike Anselm, he starts from an idea he finds within himself:</p>
+  <blockquote>‘The idea of God (that is of a supremely perfect being) is certainly one that I find within me…; and I understand from this idea that it belongs to God’s nature that he always exists’.<cite>Descartes, <i>Meditation V</i>, as quoted on the departmental slides</cite></blockquote>
+  <h3>Essence and existence</h3>
+  <p>When I think of a triangle, I find that its angles must add up to 180 degrees. This belongs to the <span class="term" data-t="Essence">essence</span> of a triangle whether or not any triangle exists. Descartes argues that in the same way, existence belongs to the essence of a supremely perfect being. There is no less contradiction in conceiving a supremely perfect being who lacks existence than in conceiving a triangle whose angles do not add up to 180 degrees. He also compares it to the impossibility of thinking of a mountain without a valley.</p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>I have the idea of God. <span class="note">(Introspection: an innate idea.)</span></li>
+    <li>The idea of God is the idea of a supremely perfect being. <span class="note">(Definition.)</span></li>
+    <li>A supremely perfect being does not lack any perfection. <span class="note">(Analysis of ‘supremely perfect’.)</span></li>
+    <li>Existence is a perfection. <span class="note">(Premise – the target of Kant.)</span></li>
+    <li>Therefore God exists.</li>
+  </ol>
+  <h3>But am I free to think of God as I like?</h3>
+  <p>Descartes anticipates the worry that he is simply building existence into a definition. He replies that he is not free to think of God without existence, any more than to think of a triangle without its properties. The necessity lies in the thing, not in his thinking:</p>
+  <blockquote>‘whenever I do choose to think of the first and supreme being… it is necessary that I attribute perfections to him… And this necessity plainly guarantees that, when I later realize that existence is a perfection, I am correct in inferring that the first supreme being exists.’<cite>Descartes, <i>Meditation V</i>, as quoted on the departmental slides</cite></blockquote>
+  <p>Descartes adds that it is more perfect to exist necessarily than contingently, so God exists necessarily. Why, then, can people doubt it? Because a necessary truth need not be obvious: the sum 223,798 + 1,232,131 has a necessary answer, but you have to work it out (example from the departmental slides).</p>
+  <h3>Objections</h3>
+  <div class="resp against"><span class="tag">Caterus: the concept, not the thing</span><p>Even if the concept of a supremely perfect being includes existence, all that follows is that the <i>concept</i> includes existence – not that anything in reality matches it. ‘An existing lion’ includes existence, but no lion follows. (Raised in the First Objections to the <i>Meditations</i>.)</p></div>
+  <div class="resp against"><span class="tag">The redundant premise</span><p>The Stanford Encyclopedia notes that if premise 3 simply says ‘God has every perfection’, the conclusion follows from that premise alone – and atheists deny it precisely because they deny there is a God to have perfections. If it says ‘<i>by definition</i>, God has every perfection’, all that follows is ‘by definition, God exists’, which is not the same as God existing.</p></div>
+  <div class="resp against"><span class="tag">Is existence a perfection?</span><p>Hume (Stop 5) and Kant (Stop 6) both attack premise 4.</p></div>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-descartes.jpg" alt="Portrait of Descartes in black with a white collar" loading="lazy"><figcaption><b>René Descartes</b>After Frans Hals, c. 1649 · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Essence</dt><dd>The properties that make a thing what it is.</dd><dt>Perfection</dt><dd>A property it is better to have than to lack.</dd><dt>Innate idea</dt><dd>An idea not derived from experience.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- LEIBNIZ -->
+<template id="s-leibniz">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · Leibniz (1646–1716) <span class="bspec">Beyond the spec</span></div>
+  <h2>Leibniz: is a supremely perfect being even possible?</h2>
+  <p>Leibniz thought Descartes’ argument was nearly right but incomplete. In the <i>New Essays Concerning Human Understanding</i> (written 1704, published 1765) he argues that Descartes’ proof fails unless one first shows that the idea of a supremely perfect being is <b>coherent</b> – that it is <i>possible</i> for such a being to exist. An impossible concept, such as ‘the largest number’, can seem to support conclusions it cannot really support.</p>
+  <h3>Leibniz’s completion</h3>
+  <p>According to the Stanford Encyclopedia, Leibniz argued that perfections are simple and unanalysable – purely positive qualities with no limits built in. Two qualities can only be incompatible if one contains the denial of what the other contains. Since perfections are simple and purely positive, it is impossible to demonstrate that any two are incompatible. He concluded that all perfections can coexist in a single being.</p>
+  <ol class="list">
+    <li>A perfection is a simple, purely positive quality, without limits. <span class="note">(Definition.)</span></li>
+    <li>Two qualities are incompatible only if one includes the negation of the other. <span class="note">(Analysis of incompatibility.)</span></li>
+    <li>Purely positive simple qualities include no negation. <span class="note">(From 1.)</span></li>
+    <li>So all perfections are compatible: a being with every perfection is possible. <span class="note">(From 2, 3.)</span></li>
+    <li>If a necessary being is possible, it exists. <span class="note">(Its existence depends on nothing but its possibility.)</span></li>
+    <li>Therefore God exists.</li>
+  </ol>
+  <h3>Why this matters for the spec</h3>
+  <p>Leibniz identifies the weak point that runs through the whole debate: <b>the possibility premise</b>. Malcolm’s premise 6 (‘the concept of God is not self-contradictory’) and Plantinga’s premise 1 (‘a maximally great being is possible’) are versions of Leibniz’s concern. Kant replies (Stop 6) that logical consistency does not show real possibility.</p>
+  <div class="resp against"><span class="tag">Objection</span><p>Are the divine attributes really simple and purely positive? The concept of God topic (3.3.1) gives reasons to think omnipotence, omniscience and supreme goodness may conflict – the paradox of the stone, Euthyphro, foreknowledge and freedom. If so, Leibniz’s step 4 fails.</p></div>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-leibniz.jpg" alt="Portrait of Leibniz in a long dark curled wig" loading="lazy"><figcaption><b>Gottfried Wilhelm Leibniz</b>Christoph Bernhard Francke, c. 1695 · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Coherent</dt><dd>Free of internal contradiction.</dd><dt>Possibility premise</dt><dd>The claim that God’s existence is possible.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- HUME -->
+<template id="s-hume">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 5 · Hume (1711–1776)</div>
+  <h2>Hume: empiricist objections to a priori arguments for existence</h2>
+  <p>The spec asks for ‘empiricist objections to a priori arguments for existence’. The classic source is Hume’s <i>Dialogues Concerning Natural Religion</i> (published 1779), Part IX, which the Stanford Encyclopedia describes as a general attack on a priori arguments. The character Cleanthes argues that no existence claim can be proved a priori.</p>
+  <h3>Hume’s fork</h3>
+  <p>Hume divides all knowable propositions into two kinds (you met this in Epistemology):</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Relations of ideas</span><p>Known a priori; true by definition; their denial is a contradiction. E.g. ‘a triangle has three sides’. They tell us nothing about what exists.</p></div>
+    <div class="resp"><span class="tag">Matters of fact</span><p>Known a posteriori, through experience; their denial is never a contradiction. E.g. ‘the sun will rise tomorrow’. All claims about existence are matters of fact.</p></div>
+  </div>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>Nothing is demonstrable (provable a priori) unless its contrary implies a contradiction. <span class="note">(What a priori proof is.)</span></li>
+    <li>Nothing that is distinctly conceivable implies a contradiction. <span class="note">(Conceivability implies possibility.)</span></li>
+    <li>Whatever we conceive as existent, we can also conceive as non-existent. <span class="note">(Appeal to how existence claims work.)</span></li>
+    <li>So there is no being whose non-existence implies a contradiction. <span class="note">(From 2, 3.)</span></li>
+    <li>Therefore no being’s existence – including God’s – is demonstrable a priori. <span class="note">(From 1, 4.)</span></li>
+  </ol>
+  <p class="note">Premises 1–4 follow the wording of Cleanthes in <i>Dialogues</i> Part IX closely. Check a full text before quoting them directly.</p>
+  <p>Hume’s point is that ‘necessary existence’ is confused. Necessity belongs to <i>relations between ideas</i> – ‘if anything is a triangle, it has three sides’ – not to <i>things</i>. So ‘God exists necessarily’ makes no sense. The departmental slides add a second Humean worry: even if a perfect being existed, there is no reason to think it would be the God of classical theism.</p>
+  <h3>Responses</h3>
+  <div class="resp for"><span class="tag">Response · Are all existence claims contingent?</span><p>Hume assumes that every existence claim is a matter of fact. The ontological argument is precisely a challenge to that assumption: the concept of God is claimed to be the one exception, the only concept that contains necessary existence. To assume otherwise is to beg the question against Anselm and Descartes.</p></div>
+  <div class="resp for"><span class="tag">Response · Conceivability</span><p>Can we really conceive God not existing? Anselm’s ‘saying is not thinking’ reply (Stop 2) suggests that we only <i>think</i> we can. If someone has genuinely grasped the concept, its non-existence would not be conceivable.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>But then the theist must show, independently, that God is the exception. Simply asserting it does not move anyone who does not already believe.</p></div>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-hume.jpg" alt="Portrait of Hume wearing a red turban-style cap and brown coat" loading="lazy"><figcaption><b>David Hume</b>Allan Ramsay, 1766 · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Hume’s fork</dt><dd>All knowledge concerns either relations of ideas or matters of fact.</dd><dt>Empiricism</dt><dd>All substantive knowledge of the world comes from experience.</dd><dt>Demonstrable</dt><dd>Provable a priori, so its denial is a contradiction.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- KANT -->
+<template id="s-kant">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 6 · Kant (1724–1804)</div>
+  <h2>Kant: existence is not a predicate</h2>
+  <p>In the <i>Critique of Pure Reason</i> (1781/1787), Kant gave the name ‘ontological argument’ to arguments that, in his words, ‘abstract finally from all experience and argue completely a priori from bare concepts’. He describes the shared assumption of Anselm and Descartes like this: one thinks of a possible thing in which all perfection is united, assumes existence is also a perfection, and so infers the existence of a most perfect being from the possibility of such a being.</p>
+  <h3>Objection 1: existence is not a real predicate</h3>
+  <blockquote>‘Being is obviously not a real predicate, i.e. a concept of something which could be added to the concept of a thing.’<cite>Kant, <i>Critique of Pure Reason</i>, as quoted in the departmental handout</cite></blockquote>
+  <p>Kant distinguishes a <span class="term" data-t="Logical predicate">logical predicate</span> – anything that can grammatically follow ‘is’ – from a <span class="term" data-t="Real predicate">real predicate</span>, which adds to our concept of a thing and tells us what it is like. ‘Exists’ is a logical predicate but not a real one. Saying that something exists does not add a property to it; it <i>posits</i> the thing, with all its properties, as real.</p>
+  <p>Think of a red kite in the sky. Now think that the red kite exists. The idea has not changed at all. It must not change: if adding ‘exists’ changed the concept, then what existed would not be what I had thought of, and I could never say that <i>the object of my concept</i> exists. Kant’s own illustration is money: a hundred real thalers (coins) contain no more than a hundred possible thalers – although being actually in my pocket makes a difference to my wealth.</p>
+  <h3>Objection 1 in standard form</h3>
+  <ol class="list">
+    <li>A real predicate adds something to the concept of a thing. <span class="note">(Definition.)</span></li>
+    <li>Saying a thing exists adds nothing to its concept – the existing kite is exactly the kite I thought of. <span class="note">(Example and argument.)</span></li>
+    <li>So existence is not a real predicate. <span class="note">(From 1, 2.)</span></li>
+    <li>A perfection is a real predicate: a property that makes a thing greater. <span class="note">(What ‘perfection’ means.)</span></li>
+    <li>Therefore existence is not a perfection, and Anselm’s and Descartes’ arguments fail. <span class="note">(From 3, 4: premise 4 of Descartes and premise 5 of Proslogion 2 are false.)</span></li>
+  </ol>
+  <p>In his earlier work <i>The Only Possible Argument</i>, Kant gives the example of Julius Caesar: list every predicate of Caesar you like, and he can still exist or not exist. Ordinary talk such as ‘sea unicorns (narwhals) exist’ really means ‘the predicates I think together as a sea unicorn belong to certain existing sea creatures’. So ‘God exists’ should be read as ‘something existent is God’.</p>
+  <h3>Objection 2: necessity belongs to judgements, not things</h3>
+  <p>‘Necessarily, a triangle has three sides’ is a necessary judgement. Denying it while keeping the triangle is a contradiction. But I can deny the triangle <i>together with</i> its sides with no contradiction. Likewise, ‘God exists necessarily’ only means: <i>if</i> there is a God, God exists necessarily. Reject the subject – God – and nothing contradictory remains.</p>
+  <h3>Objection 3: existence claims are synthetic</h3>
+  <p>A judgement is <span class="term" data-t="Analytic">analytic</span> if the predicate is contained in the subject concept (‘a triangle has lines’); <span class="term" data-t="Synthetic">synthetic</span> if it adds to it (‘John has red hair’). Since existence adds nothing to a concept, ‘God exists’ cannot be analytic. It is synthetic – and so, like Hume’s matters of fact, can be denied without contradiction.</p>
+  <h3>Objection 4: coherence is not possibility</h3>
+  <p>Against Descartes and Leibniz, Kant allows that a consistent concept is <i>logically</i> possible, but denies that this shows it is <i>really</i> possible. The coherence of the idea of God is not proof that God could exist.</p>
+  <h3>Responses</h3>
+  <div class="resp for"><span class="tag">Response · Existence as both</span><p>The departmental handout suggests a defender could claim existence works as both a logical and a real predicate: what makes a narwhal different from a land unicorn is precisely that one exists – an extra feature the other lacks.</p></div>
+  <div class="resp for"><span class="tag">Response · Necessary existence is different</span><p>Even if <i>existence</i> is not a property, <i>necessary</i> existence might be. This is Malcolm’s strategy (Stop 7).</p></div>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-kant.jpg" alt="Portrait of Kant in old age with powdered grey hair" loading="lazy"><figcaption><b>Immanuel Kant</b>Unknown painter, possibly of the school of Anton Graff · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Real predicate</dt><dd>A predicate that adds to the concept of a thing.</dd><dt>Logical predicate</dt><dd>Anything that can follow ‘is’ in a sentence.</dd><dt>Synthetic</dt><dd>The predicate adds to the subject concept.</dd><dt>Ens realissimum</dt><dd>Kant’s term for the ‘most real being’.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- MALCOLM -->
+<template id="s-malcolm">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 7 · Norman Malcolm (1911–1990)</div>
+  <h2>Malcolm: can necessary existence do what existence cannot?</h2>
+  <p>In ‘Anselm’s Ontological Arguments’ (1960), Malcolm argues that Anselm gave <b>two</b> arguments, not one – and that the second survives Kant.</p>
+  <h3>Anselm’s two comparisons</h3>
+  <div class="pair">
+    <div class="resp against"><span class="tag">Comparison 1 · Vulnerable</span><p>A being which exists vs a being which does not exist. Anselm says the first is greater. This compares what exists with what does not.</p></div>
+    <div class="resp for"><span class="tag">Comparison 2 · Survives, says Malcolm</span><p>A being whose non-existence is inconceivable vs a being whose non-existence is conceivable. This compares two <i>concepts</i>: something that by its nature may or may not exist, and something that by its nature must exist.</p></div>
+  </div>
+  <h3>The key move</h3>
+  <p>Malcolm <b>concedes</b> Kant’s point that existence is not a property, so cannot make a being greater. But he <b>resists</b> the extension to necessary existence: Kant has not shown that necessary existence is not a property. So Anselm’s second comparison works where the first does not.</p>
+  <h3>Why God cannot depend on anything</h3>
+  <ol class="list">
+    <li>‘God is the greatest possible being’ is a logically necessary truth – part of our concept of God.</li>
+    <li>A being that depends on something else for its existence is not as great as one whose existence is completely independent.</li>
+    <li>So God cannot depend on anything for coming into existence, or for staying in existence.</li>
+  </ol>
+  <h3>Two suppositions</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">Suppose God exists</span><p>Nothing can cause God to cease to exist. So God’s non-existence is inconceivable: if God exists, God exists necessarily.</p></div>
+    <div class="resp"><span class="tag">Suppose God does not exist</span><p>If God came into existence, God would depend on whatever caused or allowed it – which is impossible. So if God does not exist, God’s existence is impossible.</p></div>
+  </div>
+  <h3>The argument in standard form</h3>
+  <ol class="list" style="list-style:none;padding-left:0">
+    <li><b>P1</b> Either God exists or God does not exist.</li>
+    <li><b>P2</b> God cannot come into existence or go out of existence.</li>
+    <li><b>P3</b> If God exists, God cannot cease to exist.</li>
+    <li><b>C1</b> Therefore, if God exists, God’s existence is necessary.</li>
+    <li><b>P4</b> If God does not exist, God cannot come into existence.</li>
+    <li><b>C2</b> Therefore, if God does not exist, God’s existence is impossible.</li>
+    <li><b>C3</b> Therefore, God’s existence is either necessary or impossible.</li>
+    <li><b>P5</b> God’s existence is impossible only if the concept of God is self-contradictory.</li>
+    <li><b>P6</b> The concept of God is not self-contradictory.</li>
+    <li><b>C4</b> Therefore, God’s existence is not impossible.</li>
+    <li><b>C5</b> Therefore (from C3 and C4), God exists necessarily.</li>
+  </ol>
+  <p class="note">P2–P4 come from the dependence reasoning above. P5 and P6 do all the work of ruling out the second horn.</p>
+  <h3>Malcolm’s reply to Kant</h3>
+  <div class="resp against"><span class="tag">Kant</span><p>It is part of the concept of the greatest possible being that it would exist necessarily. But that only means ‘<i>if</i> God exists, God exists necessarily’ – compatible with God not existing at all.</p></div>
+  <div class="resp for"><span class="tag">Malcolm</span><p>This is confused. If ‘God exists necessarily’ is an analytic truth derived from the concept of God, it rules out ‘it is possible that God doesn’t exist’. ‘God doesn’t exist’ is necessarily false. Kant does not properly distinguish ‘God exists’ from ‘God exists necessarily’ – and the two concepts have different logics.</p></div>
+  <h3>Objection 1: is the concept coherent? (attacks P6)</h3>
+  <div class="resp against"><span class="tag">Objection</span><p>Malcolm has not shown P6 is true. He admits he can think of no general proof that the concept of God is coherent.</p></div>
+  <div class="resp for"><span class="tag">Malcolm’s reply</span><p>There should be no presumption that it is incoherent. The argument is sound unless we can show the concept is incoherent. The dispute becomes one about the <b>burden of proof</b>.</p></div>
+  <h3>Objection 2: P5 is false</h3>
+  <div class="resp against"><span class="tag">The more serious objection</span><p>If God does not exist, God’s existence is impossible – but not because the <i>concept</i> of God is contradictory. The contradiction is in the idea of <i>bringing into existence</i> something that depends on nothing. So God’s existence could be impossible even if the concept is coherent. P5 is false, and C4 does not follow.</p></div>
+  <p>All Malcolm’s argument then establishes is: if God exists, God exists necessarily; if God does not exist, God’s existence is impossible. Neither tells us whether God exists. Independence characterises the <i>nature</i> of God’s existence, <i>if</i> God exists.</p>
+  <h3>Evaluation</h3>
+  <p>Malcolm’s strengths are real: he answers Kant on Kant’s own terms, and he identifies a genuine distinction Kant blurred. But the argument’s weight falls on P5 and P6, and the P5 objection is decisive: the impossibility in C2 is not logical impossibility, so coherence of the concept cannot rule it out. The argument shows what kind of existence God would have, not that God has it.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Necessary existence</dt><dd>Existence that depends on nothing and cannot fail; non-existence is inconceivable.</dd><dt>Burden of proof</dt><dd>Who must prove their case.</dd><dt>Dilemma</dt><dd>An argument from two exhaustive options.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- PLANTINGA -->
+<template id="s-plantinga">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 8 · Alvin Plantinga (b. 1932) <span class="bspec">Beyond the spec</span></div>
+  <h2>Plantinga: the modal ontological argument</h2>
+  <p>In <i>The Nature of Necessity</i> (1974), Plantinga restates the argument using the logic of <span class="term" data-t="Possible world">possible worlds</span>. A possible world is a complete way things could have been. Something is <b>possible</b> if it is true in at least one possible world, and <b>necessary</b> if it is true in all of them.</p>
+  <h3>Maximal greatness</h3>
+  <p>Plantinga distinguishes two notions:</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Maximal excellence</span><p>Being omnipotent, omniscient and morally perfect in a given world.</p></div>
+    <div class="resp"><span class="tag">Maximal greatness</span><p>Being maximally excellent in <i>every</i> possible world. So a maximally great being exists necessarily, if it exists at all.</p></div>
+  </div>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>It is possible that a maximally great being exists. <span class="note">(The possibility premise.)</span></li>
+    <li>So there is a possible world in which a maximally great being exists. <span class="note">(Definition of ‘possible’.)</span></li>
+    <li>A maximally great being exists in every possible world, if it exists in any. <span class="note">(Definition of ‘maximally great’.)</span></li>
+    <li>So a maximally great being exists in every possible world. <span class="note">(From 2, 3.)</span></li>
+    <li>The actual world is a possible world. <span class="note">(Obvious.)</span></li>
+    <li>Therefore a maximally great being exists in the actual world.</li>
+  </ol>
+  <p>The step from 2 and 3 to 4 relies on a principle of modal logic called <span class="term" data-t="S5">S5</span>: whatever is possibly necessary is necessary. The argument is valid. Everything turns on premise 1.</p>
+  <h3>Plantinga on Gaunilo</h3>
+  <p>The Stanford Encyclopedia reports Plantinga’s reply to the island: the greatness of an island has no <span class="term" data-t="Intrinsic maximum">intrinsic maximum</span> – any island could be improved with more palm trees – whereas knowledge, power and goodness do (knowing everything, and so on). So ‘the greatest possible island’ makes no sense, but ‘the greatest possible being’ does. The entry’s authors reply that palm trees do not always make an island better, and that the score-on-a-test parody still works.</p>
+  <h3>Objection: the symmetry problem</h3>
+  <p>The Stanford Encyclopedia calls this perhaps the most important objection. Consider the reverse argument:</p>
+  <ol class="list">
+    <li>It is possible that no maximally great being exists.</li>
+    <li>So there is a world in which none exists.</li>
+    <li>A maximally great being exists in every world, if in any.</li>
+    <li>So it exists in no world – it is impossible.</li>
+  </ol>
+  <p>This is valid in the same logic. ‘Possibly God exists’ and ‘possibly God does not exist’ seem equally plausible, but they cannot both be true. Without some independent reason to prefer the first, the argument makes no headway with anyone who does not already believe.</p>
+  <h3>Plantinga’s own verdict</h3>
+  <blockquote>‘They cannot, perhaps, be said to prove or establish their conclusion. But since it is rational to accept their central premise, they do show that it is rational to accept that conclusion.’<cite>Plantinga, <i>The Nature of Necessity</i> (1974: 221), as quoted in the Stanford Encyclopedia</cite></blockquote>
+  <p>So Plantinga claims less than Anselm: not proof, but the rationality of belief. The Encyclopedia’s authors argue that the symmetry problem undermines even this.</p>
+  <h3>Link to Leibniz and Malcolm</h3>
+  <p>Plantinga’s premise 1 is Leibniz’s possibility question and Malcolm’s P6 in modern dress. All three arguments are only as strong as our grounds for thinking God’s existence is possible – and those grounds seem hard to establish without already assuming God exists.</p>
+</div>
+<aside>
+  <figure class="card portrait wide"><img src="img/phil-plantinga.jpg" alt="Photograph of Plantinga smiling, with glasses and a grey beard" loading="lazy"><figcaption><b>Alvin Plantinga</b>Photograph · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Possible world</dt><dd>A complete way things could have been.</dd><dt>Maximal greatness</dt><dd>Maximal excellence in every possible world.</dd><dt>S5</dt><dd>A modal logic in which whatever is possibly necessary is necessary.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- REVISE -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>Can God’s existence be proved a priori?</h2>
+  <h3>Overall evaluation</h3>
+  <p>The ontological argument moves through three phases. Anselm’s Proslogion 2 and Descartes treat <i>existence</i> as a perfection; Gaunilo shows the form proves too much, and Kant explains why – existence adds nothing to a concept. Anselm’s Proslogion 3 and Malcolm shift to <i>necessary existence</i>, which escapes Kant’s first objection; but Kant’s second objection returns in a new form: all that follows is that God’s existence is either necessary or impossible, and Malcolm cannot rule out impossibility without assuming what he must prove. Plantinga’s modal version makes this explicit: the argument is valid, but its possibility premise is no more plausible than its rival. A sustained judgement: <b>the ontological argument does not prove God’s existence, but it does show that, if God exists at all, God exists necessarily – so the real question becomes whether God’s existence is possible, which reason alone cannot settle.</b></p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Anselm P2:</b> God is that than which nothing greater can be conceived; existing in reality is greater; so God exists.</li>
+    <li><b>Anselm P3:</b> what cannot be conceived not to exist is greater; so God exists necessarily.</li>
+    <li><b>Gaunilo:</b> perfect island parody; same form, absurd conclusion. Anselm: the argument applies only to God.</li>
+    <li><b>Descartes:</b> existence belongs to God’s essence as 180° belongs to a triangle; existence is a perfection.</li>
+    <li><b>Leibniz (beyond spec):</b> must first prove God is possible; perfections are simple and compatible.</li>
+    <li><b>Hume:</b> whatever we conceive as existent we can conceive as non-existent; no existence is demonstrable a priori.</li>
+    <li><b>Kant:</b> existence is not a real predicate; necessity belongs to judgements; existence claims are synthetic.</li>
+    <li><b>Malcolm:</b> necessary existence is a property; God’s existence is necessary or impossible; not impossible; so necessary. Weakness: P5.</li>
+    <li><b>Plantinga (beyond spec):</b> possibly a maximally great being exists; by S5, it exists. Weakness: symmetry.</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Can the existence of God be proved a priori?</b><br>1. Thesis; define ontological argument and a priori.<br>2. Anselm P2 → Gaunilo → Anselm’s reply → judge.<br>3. Descartes → Kant (existence not a predicate) → judge.<br>4. Malcolm (necessary existence) → P5 objection → judge.<br>5. Conclusion: at most, if God exists, God exists necessarily.</p></div>
+</aside></div>
+</template>
+
+<!-- GLOSSARY -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>For 3-mark questions, learn these definitions precisely – one accurate sentence is better than a vague paragraph.</p></div></aside></div>
+</template>
+
+<script>
+var GLOSS=[
+ ["Ontological argument","An a priori argument that begins from the concept or definition of God and tries to derive God’s existence through reason alone.","h"],
+ ["A priori","Known independently of experience.","t"],
+ ["A posteriori","Known through experience.","t"],
+ ["Analytic","True in virtue of the meanings of the words; the predicate is contained in the subject concept.","t"],
+ ["Synthetic","Not true by meaning alone; the predicate adds to the subject concept.","t"],
+ ["Necessary truth","A truth whose denial is a contradiction; true in every possible world.","t"],
+ ["Necessary being","A being whose non-existence is impossible; a being that must exist.","h"],
+ ["Contingent being","A being that exists but might not have; its non-existence is not a contradiction.","t"],
+ ["Reductio ad absurdum","Refuting a position by showing that it leads to an absurd or self-contradictory conclusion.","h"],
+ ["Parody","An argument with the same logical form as another but an absurd conclusion, showing the form is flawed.","t"],
+ ["Intrinsic maximum","A greatest possible degree of a quality, such as knowing everything.","t"],
+ ["Essence","The properties that make a thing the kind of thing it is.","t"],
+ ["Perfection","A property it is better to have than to lack.","h"],
+ ["Real predicate","Kant’s term for a predicate that adds information to the concept of a thing – a genuine property. Kant argues existence is not one.","h"],
+ ["Logical predicate","Anything that can grammatically follow ‘is’ in a sentence.","t"],
+ ["Second-order predicate","A predicate that applies to concepts, not objects – e.g. ‘exists’ says that a concept has instances (Frege, Russell).","h"],
+ ["Ens realissimum","Kant’s term for the ‘most real being’, the being the ontological argument tries to prove.","t"],
+ ["Hume’s fork","All knowable propositions concern either relations of ideas (a priori) or matters of fact (a posteriori).","t"],
+ ["Necessary existence","Existence that depends on nothing and cannot fail; for Malcolm, a property even if existence is not.","t"],
+ ["Burden of proof","The obligation on one side of a debate to establish its case.","t"],
+ ["Possible world","A complete way things could have been.","t"],
+ ["Maximal greatness","Plantinga: being maximally excellent (omnipotent, omniscient, morally perfect) in every possible world.","t"],
+ ["S5","A system of modal logic in which whatever is possibly necessary is necessary.","t"],
+ ["Symmetry problem","The objection that ‘possibly God does not exist’ is as plausible as ‘possibly God exists’, and yields the opposite conclusion.","t"]
+];
+var STOPS=[["start","Start here"],["anselm","Anselm"],["gaunilo","Gaunilo"],["descartes","Descartes"],["leibniz","Leibniz"],["hume","Hume"],["kant","Kant"],["malcolm","Malcolm"],["plantinga","Plantinga"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["anselm","Stop 1","Anselm","That than which nothing greater can be conceived."],
+ ["gaunilo","Stop 2","Gaunilo","The perfect island parody."],
+ ["descartes","Stop 3","Descartes","The supremely perfect being and the triangle."],
+ ["leibniz","Stop 4 · Beyond the spec","Leibniz","Is a perfect being even possible?"],
+ ["hume","Stop 5","Hume","No existence can be proved a priori."],
+ ["kant","Stop 6","Kant","Existence is not a real predicate."],
+ ["malcolm","Stop 7","Malcolm","Necessary existence and Anselm’s second argument."],
+ ["plantinga","Stop 8 · Beyond the spec","Plantinga","Possible worlds and maximal greatness."]
+];
+var STRETCH={
+ "start":[
+  ["Six kinds of ontological argument","Graham Oppy’s taxonomy sorts ontological arguments into definitional, conceptual, modal, Meinongian, higher-order and ‘Hegelian’. On this scheme Descartes is broadly definitional, Anselm’s Proslogion 2 conceptual, and Malcolm and Plantinga modal.","Oppy, Rasmussen and Schmid, ‘Ontological Arguments’, <i>Stanford Encyclopedia of Philosophy</i> (2025), §2"],
+  ["Russell’s confession","Bertrand Russell observed that it is much easier to be persuaded that ontological arguments are no good than it is to say exactly what is wrong with them. That is partly why they have fascinated philosophers for nearly a thousand years.","Paraphrased, as reported in the <i>Stanford Encyclopedia</i>, citing Russell 1946: 586"],
+  ["What is the argument for?","Who is the argument meant to persuade? Atheists, agnostics, believers, or philosophy students ‘cutting their critical teeth’? The SEP authors suggest a successful ontological argument should give atheists and agnostics a reason to believe that they did not recognise before.","<i>Stanford Encyclopedia</i>, §4"]],
+ "anselm":[
+  ["Was Anselm even giving a proof?","Some commentators deny that Anselm meant to prove God’s existence at all; others disagree about whether the real proof is in Proslogion 2 (Charlesworth) or Proslogion 3 (Malcolm), or spans both chapters.","<i>Stanford Encyclopedia</i>, §6"],
+  ["The really existent Martian","If we understand ‘the really existent tallest inhabitant of Mars’, does it exist in the understanding with the property of really existing? If Anselm’s background theory allows that, it seems to prove that Martians exist – so the theory needs limits.","Paraphrased; <i>Stanford Encyclopedia</i>, §6"],
+  ["Aquinas’ rejection","Aquinas rejected an argument descended from Anselm’s: we do not know God’s essence, so we cannot see that God’s existence follows from it. God’s existence is self-evident in itself, but not to us.","Paraphrased; Aquinas, <i>Summa Theologica</i> I, q.2, a.1"]],
+ "gaunilo":[
+  ["Parody as a strategy","A parody has a particular advantage: you can use it even if you cannot say which premise is false. Where the background theory is unclear – as with ‘existence in the understanding’ – parody may be the quickest way to show an argument should not persuade.","<i>Stanford Encyclopedia</i>, §11"],
+  ["The devil’s version","Philosophers have built parodies proving the existence of a maximally <i>evil</i> being, or a ‘no-devil’ corollary. Timothy Chambers discusses this tradition.","Chambers, ‘On Behalf of the Devil’ (2000), cited in the <i>Stanford Encyclopedia</i>"]],
+ "descartes":[
+  ["Gassendi’s objection","In the Fifth Objections, Pierre Gassendi argued that existence is not a perfection at all but that without which there are no perfections – anticipating Kant by over a century.","Paraphrased; Gassendi, Fifth Objections to the <i>Meditations</i> (1641)"],
+  ["The Cartesian circle link","Descartes uses God’s existence to guarantee his clear and distinct ideas – but his ontological argument relies on a clear and distinct idea of God. This links to the ‘Cartesian circle’ in Epistemology.","Cross-link within the AQA course"],
+  ["Meinong and Santa Claus","‘Santa Claus has a white beard’ seems true, yet Santa does not exist. Alexius Meinong held that there are non-existent objects with properties. If so, could ‘God has every perfection’ be true of a non-existent God? The SEP authors argue this does not help the argument.","<i>Stanford Encyclopedia</i>, §7"]],
+ "leibniz":[
+  ["Gödel’s proof","The logician Kurt Gödel developed a formal ontological argument inspired by Leibniz, using ‘positive properties’. It was published only in his <i>Collected Works</i> (1995), and has since been checked by computer theorem-provers – which confirm it is valid, not that it is sound.","<i>Stanford Encyclopedia</i>, §9; Benzmüller and Woltzenlogel Paleo (2014)"],
+  ["Spinoza","Spinoza’s <i>Ethics</i> contains an argument that a substance with infinite attributes necessarily exists. Its conclusion is not obviously religious: Spinoza’s God is ‘God or Nature’.","<i>Stanford Encyclopedia</i>, timeline"]],
+ "hume":[
+  ["Mitigated scepticism","Hume’s own position on God is debated: he neither clearly asserted nor denied God’s existence, but argued that human reason cannot settle the matter.","Paraphrased; departmental textbook glossary"],
+  ["Ayer and verification","A.J. Ayer later argued that existence claims that cannot be verified by experience are not false but meaningless. This links Hume’s objection to religious language (3.3.3).","Ayer, <i>Language, Truth and Logic</i> (1936; 2nd ed. 1946)"]],
+ "kant":[
+  ["Frege and Russell: existence as second-order","Frege argued that existence is a property of concepts, not objects: ‘cows exist’ says that the concept <i>cow</i> has instances. Since ontological arguments conclude that a particular <i>object</i> exists, Frege thought they were doomed. Russell developed this with his theory of descriptions.","<i>Stanford Encyclopedia</i>, timeline (Frege 1884); departmental Kant handout"],
+  ["Hegel’s defence","Hegel thought Kant had found a fatal flaw in Anselm but that it could be overcome – though he never set out the premises of the version he endorsed.","<i>Stanford Encyclopedia</i>, §10"],
+  ["Why the idea must not change","The handout suggests Kant’s deeper point is about representation: for an idea to be <i>about</i> something – and able to be wrong about it – it must be the same idea whether or not the thing exists.","Departmental Kant handout"]],
+ "malcolm":[
+  ["Hartshorne","Charles Hartshorne defended a similar modal argument, allegedly derived from Proslogion 3, in <i>Man’s Vision of God</i> (1941) – two decades before Malcolm.","<i>Stanford Encyclopedia</i>, timeline"],
+  ["Which chapter is the real proof?","Malcolm read Proslogion 3 as Anselm’s main proof and Proslogion 2 as an inferior first attempt – the reverse of commentators such as Charlesworth.","<i>Stanford Encyclopedia</i>, §6"]],
+ "plantinga":[
+  ["Lewis: invalid or question-begging","David Lewis argued that every ontological argument is either invalid or question-begging, and that many have two readings, one of each kind.","Lewis, ‘Anselm and Actuality’ (1970), cited in the <i>Stanford Encyclopedia</i>"],
+  ["Breaking the symmetry","Defenders try to find a ‘symmetry breaker’ – an independent reason to prefer ‘possibly God exists’. But many such reasons are not a priori, so the argument stops being purely ontological.","<i>Stanford Encyclopedia</i>, §8"],
+  ["Is God a necessary being at all?","Some theists, notably Richard Swinburne, reject the claim that God would be a metaphysically necessary being. If they are right, the necessity premise of modal arguments fails – from the theist side.","<i>Stanford Encyclopedia</i>, §8, citing Swinburne 2012"]],
+ "revise":[
+  ["The consensus","The SEP authors report a fairly widespread consensus, even among theists, that no known ontological argument succeeds in giving non-theists reason to believe – while it remains open whether some undiscovered argument could.","<i>Stanford Encyclopedia</i>, §12"],
+  ["Link to the concept of God","Malcolm’s P6, Leibniz and Plantinga all need the concept of God to be coherent. Use 3.3.1 (stone, Euthyphro, foreknowledge) as ammunition in a 25-mark answer.","Cross-link within the AQA course"]]
+};
+var QS={
+ "anselm":["What is meant by an ‘a priori’ argument?","Explain Anselm’s definition of God.","Explain Anselm’s ontological argument.","Can the existence of God be proved a priori?"],
+ "gaunilo":["What is Gaunilo’s perfect island objection?","Explain one response Anselm gives to Gaunilo.","Explain Anselm’s ontological argument and Gaunilo’s objection to it.","Does Gaunilo’s objection succeed against Anselm?"],
+ "descartes":["State Descartes’ definition of God.","Explain Descartes’ triangle analogy.","Explain Descartes’ ontological argument.","Is Descartes’ ontological argument successful?"],
+ "hume":["What is meant by a ‘matter of fact’?","Explain the empiricist objection to a priori arguments for existence.","Explain how Hume’s fork is used to criticise ontological arguments.","Can any existence claim be known a priori?"],
+ "kant":["What did Kant mean by a ‘real predicate’?","Explain Kant’s claim that existence is not a predicate.","Explain Kant’s objections to the ontological argument.","Does Kant’s objection defeat the ontological argument?"],
+ "malcolm":["Explain what is meant by ‘necessary existence’.","Explain why Malcolm claims that God’s existence is either necessary or impossible.","Explain Malcolm’s ontological argument.","Is Malcolm’s ontological argument successful?"],
+ "plantinga":["What is a possible world?","Explain the difference between maximal excellence and maximal greatness.","Explain Plantinga’s modal ontological argument (extension).","Does the modal ontological argument succeed?"]
+};
+var QUIZ=[
+ ["What is Anselm’s definition of God?","That than which nothing greater can be conceived (thought)."],
+ ["What is the difference between Proslogion 2 and Proslogion 3?","P2 argues existence in reality is greater than existence in the understanding; P3 argues necessary existence (non-existence inconceivable) is greater."],
+ ["What kind of objection is Gaunilo’s perfect island?","A parody (reductio): an argument of the same form with an absurd conclusion."],
+ ["What analogy does Descartes use?","Existence belongs to God’s essence as having angles that add up to 180° belongs to a triangle (or a valley to a mountain)."],
+ ["What did Leibniz think Descartes had failed to show?","That a supremely perfect being is possible (the concept is coherent)."],
+ ["Give Hume’s key claim against a priori existence proofs.","Whatever we conceive as existent we can also conceive as non-existent, so no being’s non-existence implies a contradiction."],
+ ["What does Kant mean by saying existence is not a real predicate?","Saying a thing exists adds nothing to its concept; it posits the thing rather than adding a property."],
+ ["What does Malcolm concede to Kant, and what does he resist?","Concedes existence is not a property; resists the claim that necessary existence is not."],
+ ["Which premise of Malcolm’s argument is most vulnerable, and why?","P5: God’s existence could be impossible (if God does not exist) without the concept being self-contradictory."],
+ ["What is the symmetry problem for Plantinga?","‘Possibly God does not exist’ is as plausible as ‘possibly God exists’, and by the same logic proves God is impossible."]
+];
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src">'+(x[2]==="h"?"Handout glossary":"From the handout text")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>

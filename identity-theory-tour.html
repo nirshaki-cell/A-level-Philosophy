@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Identity Theory Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#fbe3d6; --ink:#8a3f1c;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#fbe3d6}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#d6efdf}
+.stretch h4{color:#245c3c}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#fdf5f0}
+details.resp summary{cursor:pointer}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+
+/* mind tours additions */
+.resp.against{border-left-color:#f1b796}
+.gloss .src.b{color:#245c3c}
+.argbox{border:1px solid var(--line);border-radius:12px;padding:16px 20px 6px;margin:18px 0;background:#fffaf7}
+.argbox .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--ink)}
+.argbox ol{margin-top:8px}
+.ai{font-size:.8rem;color:var(--muted)}
+.band img{max-height:320px;object-fit:cover}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+</head>
+<body>
+<!--TITLE:Identity Theory Tour-->
+<div class="wrap">
+  <a class="back" href="#">← Metaphysics of Mind</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 2 · Spec 3.4.3</span>
+      <h1>Mind–brain type identity theory</h1>
+      <p>Are sensations simply brain processes? Take the tour: Place and Smart’s thesis, ontological versus analytic reduction, Smart’s replies to objections, the dualist arguments applied, and the problem of multiple realisability.</p>
+    </div>
+    <img src="img/mind-brain-glow.jpg" alt="A glowing, stylised human brain with threads of light.">
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Text adapted from the departmental handouts <i>Mind–Brain type Identity Theory</i>, <i>David Lewis’ philosophy of mind</i> and <i>Physicalism</i>, checked against the AQA 7172 specification and set texts (Smart, ‘Sensations and Brain Processes’, 1959; Putnam, ‘The Nature of Mental States’). Reference reading: ‘The Mind/Brain Identity Theory’, <i>Stanford Encyclopedia of Philosophy</i>. Images from the departmental slides. Boxes marked ‘Beyond the spec’ are extension only.</footer>
+</div>
+
+<!-- ============ STOP 0 ============ -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>Is the mind the brain?</h2>
+  <p>Neuroscience has found remarkably tight links between mental states and brain states: damage to particular areas removes particular abilities, drugs that act on the brain change mood, and scans show distinctive activity when people feel pain or see faces. The simplest explanation, many philosophers think, is that mental states <i>are</i> brain states. This is <span class="term" data-t="Mind–brain type identity theory">mind–brain type identity theory</span>. AQA states it precisely: <b>all mental states are identical to brain states (‘ontological’ reduction), although ‘mental state’ and ‘brain state’ are not synonymous (so not an ‘analytic’ reduction).</b></p>
+  <p>The theory was developed in the 1950s by U.T. Place and J.J.C. Smart, partly in response to the problems of behaviourism. Behaviourism had trouble with inner episodes such as sensations; identity theory says that these inner episodes are real, and are processes in the brain. Its appeal is simplicity: one kind of thing, the physical, and no mystery about how mind and body interact, since the mind is part of the body. Its challenge is to explain how something as apparently subjective as a pain could be the very same thing as a pattern of neural activity – and whether creatures with very different brains could share the same mental states.</p>
+  <div class="thesis"><b>The structure of the topic.</b> Stop 1 explains the thesis, including identity, types and tokens. Stop 2 explains why it is an ontological, not analytic, reduction – the key idea behind Smart’s replies. Stop 3 applies the dualist arguments. Stop 4 covers multiple realisability, the objection that led to functionalism.</div>
+  <h3>Choose where to go</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <div class="card"><h4>The big question</h4><p>Is every type of mental state identical with a type of brain state?</p></div>
+  <div class="card"><h4>How to use this tour</h4><p>Learning it for the first time? Go through the stops in order. Revising? Jump to a stop, or go straight to <b>Revise</b> for the summary and quiz. Dotted words are in the glossary: tap one to see its meaning.</p></div>
+  <div class="card"><h4>Spec checklist</h4><p>✓ All mental states are identical to brain states<br>✓ Ontological, not analytic, reduction<br>✓ Dualist arguments applied to identity theory<br>✓ Issues providing the type identities: multiple realisability</p></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 1 ============ -->
+<template id="s-thesis">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · The thesis</div>
+  <h2>Sensations are brain processes</h2>
+  <p>The handout gives the key thesis: sensations and experiences are identical to brain processes. If I have a sensation of yellow, that experience is identical to a physical event in my brain. As Smart puts it, sensations are</p>
+  <blockquote>‘nothing over and above brain processes’.<cite>J.J.C. Smart, ‘Sensations and Brain Processes’ (1959)</cite></blockquote>
+  <h3>Strict identity</h3>
+  <p>The claim is one of <span class="term" data-t="Strict identity">strict identity</span>: not that sensations are caused by, or correlated with, brain processes, but that they are one and the same thing. Strict identity is an <span class="term" data-t="Ontological reduction">ontological</span> claim – about what exists. It obeys <span class="term" data-t="Leibniz’s law">Leibniz’s law</span>: if A is identical to B, then whatever properties A has, B has. If Cicero is six feet tall, so is Tully. The handout compares it with lightning, which just <i>is</i> an electrical discharge.</p>
+  <div class="resp"><span class="tag">Identity, not correlation</span><p>Correlation – found in Spinoza and Leibniz – is the idea that two phenomena always occur together. Size and shape are correlated but not identical. Identity theorists say correlation is not enough: if pain and a brain state always go together, the simplest explanation is that they are one thing described in two ways.</p></div>
+  <h3>Types and tokens</h3>
+  <p>A <span class="term" data-t="Token">token</span> is a particular instance; a <span class="term" data-t="Type">type</span> is a kind. In ‘the cat sat on the mat’, there are two tokens of the word-type ‘the’.</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Type identity</span><p>Each <i>type</i> of mental state is identical with a <i>type</i> of brain state. Pain (the kind) = C-fibre firing (the kind). This is the theory on the specification. It is a strong claim: any creature in pain must have firing C-fibres.</p></div>
+    <div class="resp"><span class="tag">Token identity</span><p>Each particular mental event is identical with some particular physical event – my present experience of writing these letters is identical to the brain process happening now – but different tokens of the same mental type may be different types of physical event.</p></div>
+  </div>
+  <p class="note">‘C-fibre firing’ is philosophers’ shorthand for whatever brain state pain turns out to be; real pain processing is more complex.</p>
+  <h3>The motivation: simplicity</h3>
+  <p>Smart’s main argument is an appeal to <span class="term" data-t="Ockham’s razor">Ockham’s razor</span> – do not multiply entities beyond necessity. Science is giving us an increasingly complete physical explanation of the world. It would be strange if sensations were the one thing left over, ‘nomological danglers’ (Smart, borrowing Feigl’s phrase) attached to the physical world by laws of their own. If the identity theory can explain everything dualism explains, it should be preferred because it is simpler.</p>
+  <div class="argbox"><span class="tag">The argument from simplicity in standard form</span>
+  <ol class="list">
+    <li>Mental states and brain states are systematically correlated. <span class="note">(Neuroscientific evidence.)</span></li>
+    <li>The correlation can be explained either by identity (one thing) or by dualism (two things lawfully connected).</li>
+    <li>The identity explanation is simpler and fits our scientific picture of the world. <span class="note">(No extra substances, properties or psychophysical laws.)</span></li>
+    <li>If two hypotheses explain the same evidence, we should prefer the simpler. <span class="note">(Ockham’s razor.)</span></li>
+    <li>Therefore, we should accept that mental states are identical to brain states.</li>
+  </ol></div>
+  <div class="resp against"><span class="tag">Objection</span><p>Simplicity only decides between theories that explain the evidence <i>equally well</i>. The dualist claims identity theory does <i>not</i> explain everything – it leaves out qualia (Stop 3). And Ockham’s razor is a methodological rule, not proof of what exists.</p></div>
+  <h3>Avoiding a category mistake</h3>
+  <p>Smart borrows Ryle’s idea: to think there must be something to sensations over and above brain processes is like thinking there is something more to Oxford University than its buildings, students, staff, administration and constitution. Identity theory also inherits behaviourism’s solution to the interaction problem – there is nothing non-physical to interact – while allowing that sensations are real inner events.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Strict identity</dt><dd>A and B are one and the same thing.</dd><dt>Type / token</dt><dd>A kind / a particular instance of that kind.</dd><dt>Ockham’s razor</dt><dd>Do not multiply entities beyond necessity.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 2 ============ -->
+<template id="s-ontological">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · The key distinction</div>
+  <h2>Ontological, not analytic, reduction</h2>
+  <p>The specification stresses that identity theory is an <span class="term" data-t="Ontological reduction">ontological</span> reduction, not an <span class="term" data-t="Analytic reduction">analytic</span> one. This distinction is what separates it from hard behaviourism, and it is the key to Smart’s replies to objections.</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Analytic reduction</span><p>A claim about <b>meaning</b>: mental terms mean the same as physical terms. ‘Pain’ would be synonymous with ‘C-fibre firing’. Hard behaviourism is an analytic reduction. Known a priori, by analysing concepts.</p></div>
+    <div class="resp"><span class="tag">Ontological reduction</span><p>A claim about <b>what exists</b>: the thing referred to by ‘pain’ is the same thing as the thing referred to by ‘C-fibre firing’, though the terms differ in meaning. Discovered a posteriori, by science.</p></div>
+  </div>
+  <h3>Two concepts, one thing</h3>
+  <svg viewBox="0 0 640 220" role="img" aria-label="Diagram: the concepts 'morning star' and 'evening star' both point to Venus; the concepts 'pain' and 'C-fibre firing' both point to one brain state.">
+    <rect width="640" height="220" rx="14" fill="#fffaf7"/>
+    <g font-family="Nunito Sans,sans-serif" font-size="14">
+      <rect x="20" y="24" width="140" height="38" rx="8" fill="#fbe3d6"/><text x="90" y="48" text-anchor="middle" fill="#8a3f1c">‘morning star’</text>
+      <rect x="20" y="82" width="140" height="38" rx="8" fill="#fbe3d6"/><text x="90" y="106" text-anchor="middle" fill="#8a3f1c">‘evening star’</text>
+      <circle cx="250" cy="72" r="30" fill="#8a3f1c"/><text x="250" y="77" text-anchor="middle" fill="#fff">Venus</text>
+      <rect x="340" y="24" width="140" height="38" rx="8" fill="#fbe3d6"/><text x="410" y="48" text-anchor="middle" fill="#8a3f1c">‘pain’</text>
+      <rect x="340" y="82" width="140" height="38" rx="8" fill="#fbe3d6"/><text x="410" y="106" text-anchor="middle" fill="#8a3f1c">‘C-fibre firing’</text>
+      <rect x="520" y="46" width="104" height="52" rx="26" fill="#8a3f1c"/><text x="572" y="68" text-anchor="middle" fill="#fff" font-size="12">one brain</text><text x="572" y="84" text-anchor="middle" fill="#fff" font-size="12">state</text>
+      <text x="20" y="170" fill="#5b6070" font-size="13">Two concepts (different meanings) → one referent. The identity is discovered, not deduced from meanings.</text>
+      <text x="20" y="196" fill="#5b6070" font-size="13">Compare: water = H₂O; lightning = electrical discharge; genes = DNA.</text>
+    </g>
+    <g stroke="#8a3f1c" stroke-width="2"><line x1="160" y1="43" x2="222" y2="64"/><line x1="160" y1="101" x2="222" y2="80"/><line x1="480" y1="43" x2="520" y2="66"/><line x1="480" y1="101" x2="520" y2="80"/></g>
+  </svg>
+  <p>The morning star and the evening star are two different concepts, but both denote the same thing, Venus. People knew of the morning star without knowing it was the evening star; the identity was an astronomical discovery. In the same way, I can be acquainted with my sensation of a yellow patch without knowing that it is a brain process, or which brain process it is. So the identity of sensations with brain processes cannot be known a priori – but that does not stop it being true.</p>
+  <h3>A posteriori necessity</h3>
+  <p>The handout describes these as truths known only after empirical research, such as water = H₂O. Once we discovered them, we understood them to be necessary truths about the world. Identity theorists claim the same of mind and brain. (Smart himself described the identity as contingent; the idea that such identities are necessary comes from Kripke – see the margin.)</p>
+  <h3>Smart’s replies to objections</h3>
+  <p>The distinction lets Smart answer a family of objections in ‘Sensations and Brain Processes’. Each has the form: ‘we know something about sensations that we do not know about brain processes, so they are different’.</p>
+  <div class="resp against"><span class="tag">Objection: an illiterate peasant</span><p>Someone can talk perfectly well about their sensations without knowing anything about neurophysiology. So ‘I have a pain’ cannot mean ‘I have such-and-such a brain process’.</p></div>
+  <div class="resp for"><span class="tag">Smart’s reply</span><p>Agreed – it does not <i>mean</i> that. The theory is not an analytic reduction. Someone can talk about lightning without knowing anything about electricity; lightning is still an electrical discharge.</p></div>
+  <div class="resp against"><span class="tag">Objection: different properties</span><p>Even if the <i>things</i> are identical, we pick out the sensation by one property (how it feels) and the brain process by another (its neural features). Then the feeling-property is a non-physical property – property dualism.</p></div>
+  <div class="resp for"><span class="tag">Smart’s reply: topic-neutral analysis</span><p>When I report a sensation I am saying something like ‘there is something going on in me which is like what goes on when I see an orange’. This description is <span class="term" data-t="Topic-neutral">topic-neutral</span>: it says nothing about whether the thing is physical or non-physical. Science can then discover that what fits the description is a brain process. So the way we pick out sensations commits us to no non-physical properties.</p></div>
+  <h3>Evaluation</h3>
+  <p>The ontological/analytic distinction is a real advance on behaviourism: it explains how mental and physical concepts can differ in meaning while referring to the same thing, and so answers the objection that we can know about our sensations without knowing about our brains. The weak point is the topic-neutral analysis. Many critics doubt that ‘something like what goes on when I see an orange’ captures what we mean by a sensation – it seems to leave out its phenomenal character. That is exactly where the dualist arguments strike.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Analytic reduction</dt><dd>Mental terms mean the same as physical terms.</dd><dt>Ontological reduction</dt><dd>Mental things are physical things, though the terms differ in meaning.</dd><dt>A posteriori</dt><dd>Known through experience or empirical investigation.</dd><dt>Topic-neutral</dt><dd>Neither physical nor non-physical in what it says.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 3 ============ -->
+<template id="s-dualist">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · Issue 1</div>
+  <h2>Dualist arguments applied to identity theory</h2>
+  <p>Every dualist argument from 3.4.2 can be aimed at identity theory. The handout covers four.</p>
+  <h3>1 · The conceivability argument</h3>
+  <p>Descartes argued that we can conceive of mind and body separately, and anything conceivable is possible; so mind and body are distinct. Applied here: I can conceive of pain without C-fibre firing, so pain ≠ C-fibre firing.</p>
+  <div class="resp for"><span class="tag">Identity theorist’s reply</span><p>Conceivability does not imply possibility – I can conceive of flying to the moon unaided. Since the identity is a posteriori, we should expect it to be conceivable that it fails, just as it was once conceivable that water is not H₂O. At most, the argument shows we cannot know a priori that mind and brain are identical – which identity theory already accepts.</p></div>
+  <h3>2 · Zombies and Mary</h3>
+  <p>A zombie is physically identical to me, so has all my brain states, but lacks consciousness. If zombies are possible, conscious states are not identical to brain states. Mary knows all the facts about brain states in colour vision, but learns something new on seeing red; so facts about experience are not facts about brain states.</p>
+  <div class="resp for"><span class="tag">Identity theorist’s reply</span><p>This is Chalmers’ ‘type-B materialism’ – the most common form, which identifies phenomenal states with physical states on the model of water/H₂O. Zombies are conceivable but impossible; Mary gains new knowledge of an old fact, under a new (phenomenal) concept. The identity theorist uses the ontological/analytic distinction again.</p></div>
+  <div class="resp against"><span class="tag">Chalmers’ counter</span><p>The water case is not analogous. Someone who knew all the physical facts could deduce that water is H₂O, but could not deduce what experience is like. So there is an explanatory gap between brain and qualia that does not exist for water.</p></div>
+  <h3>3 · The location problem</h3>
+  <p>By Leibniz’s law, identical things share all properties. Brain processes have a location – a few centimetres behind your eyes. But a sensation, or a thought, does not seem to have any location; it seems odd to say my thought about Paris is 3 cm from my ear. So sensations are not brain processes.</p>
+  <div class="argbox"><span class="tag">The location objection in standard form</span>
+  <ol class="list">
+    <li>Brain processes have a spatial location.</li>
+    <li>Sensations and thoughts do not have a spatial location. <span class="note">(It makes no sense to ask where a thought is.)</span></li>
+    <li>If A = B, A and B share all properties. <span class="note">(Leibniz’s law.)</span></li>
+    <li>Therefore, sensations and thoughts are not brain processes.</li>
+  </ol></div>
+  <div class="resp for"><span class="tag">Smart’s replies</span><p>(1) He is not identifying the yellow of an after-image with a brain process; he is identifying the <i>experience of having</i> an after-image, which can be located. (2) Our sense that sensations have no location is an intuition, and intuitions are not a reliable guide to knowledge. Talk of thoughts having a location seems odd only because our concepts were developed before neuroscience. Once the identity is established, it would make sense to say a thought is located where the brain process is – just as it sounded odd before the discovery to say that lightning was a flow of electrons.</p></div>
+  <h3>4 · The indivisibility argument</h3>
+  <p>Brain processes can be divided; the mind cannot (Descartes). So, by Leibniz’s law, the mind is not the brain.</p>
+  <div class="resp for"><span class="tag">Reply</span><p>As in substance dualism: not all physical properties are divisible (room temperature), and the mind can be divided in some sense – psychologically, and perhaps literally in split-brain cases.</p></div>
+  <h3>Evaluation</h3>
+  <p>Identity theory has good replies to the conceivability, location and indivisibility arguments, all built on the same insight: an a posteriori identity can be true even though our concepts make it seem false. The zombie and Mary arguments are harder, because they claim that consciousness is special – that, unlike water, its nature is revealed in how it feels, so there is no hidden nature for science to discover. Whether this is true is the deepest question in the module.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Location problem</dt><dd>Brain processes are located; mental states seem not to be.</dd><dt>Explanatory gap</dt><dd>The apparent impossibility of explaining why a brain state feels the way it does.</dd><dt>Type-B materialism</dt><dd>Mind–brain identity as a posteriori, like water/H₂O.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 4 ============ -->
+<template id="s-multiple">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · Issue 2</div>
+  <h2>Multiple realisability</h2>
+  <p>The specification describes this as an issue with <b>providing the type identities</b>. Type identity theory says that each type of mental state is identical with one type of brain state: pain = C-fibre firing. Then any creature in pain must have C-fibres firing. But this seems false.</p>
+  <h3>Putnam’s objection</h3>
+  <p>In ‘The Nature of Mental States’ (set text), Hilary Putnam argues that the identity theorist’s hypothesis is ambitious: it must specify a single physical-chemical state such that <i>any</i> organism – mammal, reptile, mollusc, perhaps alien – is in pain if and only if its brain is in that state. We are sure that animals, and possibly extraterrestrials, can feel pain, and they have very different brains from ours. An octopus has a radically different nervous system, yet it seems to feel pain. (Paraphrased from Putnam.)</p>
+  <p>The handout uses Putnam’s comparison of eyes: human eyes and octopus eyes are very different structures, but both are realisations of an eye. A mental state, like an eye, seems to be defined by what it does, not what it is made of. This is <span class="term" data-t="Multiple realisability">multiple realisability</span>: the same mental state can be realised by different physical states.</p>
+  <div class="argbox"><span class="tag">The multiple realisability objection in standard form</span>
+  <ol class="list">
+    <li>If type identity theory is true, then every creature in pain is in the same type of brain state (e.g. C-fibre firing). <span class="note">(The thesis: pain = one brain-state type.)</span></li>
+    <li>Creatures with very different brains – octopuses, reptiles, possible aliens or robots – can be in pain. <span class="note">(Behavioural and evolutionary evidence; conceivability for aliens.)</span></li>
+    <li>Creatures with very different brains are not in the same type of brain state. <span class="note">(Different neural architecture and chemistry.)</span></li>
+    <li>Therefore, type identity theory is false.</li>
+  </ol></div>
+  <h3>Responses</h3>
+  <div class="resp for"><span class="tag">Response 1: species-specific identities</span><p>The handout notes the identity theorist may reply that there are different kinds of pain – ‘dog pain’, ‘human pain’ – each identical with a different brain state. David Lewis took this route: pain is identical with whatever physical state occupies the pain role <i>in a given population</i>. Pain-in-humans is one brain state; pain-in-octopuses is another. Each identity is still a type identity, but relative to a species.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>As the handout replies, all these states share the essential feature of being pain. If ‘pain’ picks out something common to humans and octopuses, it cannot be identical with a brain state that only humans have. Lewis’s solution also risks the absurdity that the word ‘pain’ is ambiguous. And within a species there may be variation: brains are plastic, and after a stroke other areas can take over functions, so even the same person may realise the same state in different ways over time.</p></div>
+  <div class="resp for"><span class="tag">Response 2: abstract or fine-grained types</span><p>Perhaps at the right level of description – the information-processing pattern rather than the specific neurons – human and octopus pain <i>are</i> the same brain-state type. Neuroscience also tends to find that similar functions are realised by similar structures, so multiple realisation may be less common than Putnam assumed.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>If the ‘type’ is described so abstractly that any system with the right pattern qualifies, the theory has become functionalism – mental states are defined by their role, not their physical make-up.</p></div>
+  <h3>Evaluation</h3>
+  <p>Multiple realisability is widely regarded as the decisive objection to type identity theory, and it led directly to functionalism. Its strength comes from a very plausible premise: that pain in an octopus, or in an intelligent alien, is genuinely pain. Species-specific identities save the letter of the theory but give up its spirit, because they deny that there is one thing that all pains have in common. <b>A fair judgement: identity theory is probably true of token mental states – each particular pain is some particular physical event – but type identity theory is too ‘chauvinistic’ to be the full account of what mental states are.</b></p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Multiple realisability</dt><dd>One mental state can be realised by different physical states.</dd><dt>Realise</dt><dd>To be the physical state that implements a mental state in a system.</dd><dt>Chauvinism</dt><dd>Wrongly denying minds to creatures unlike us.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ REVISE ============ -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>Is the mind identical to the brain?</h2>
+  <h3>Overall evaluation</h3>
+  <p>Identity theory has three great strengths: it is simple, it fits the neuroscientific evidence, and it solves the interaction problem while allowing sensations to be real inner events. Its distinction between ontological and analytic reduction gives powerful replies to objections from conceivability, location and our ignorance of neurophysiology. The zombie and Mary arguments remain contested: everything depends on whether the mind–brain identity is relevantly like water/H₂O. But multiple realisability is a serious problem for the <i>type</i> version. A sustained judgement: <b>the identity theory is right that each mental event is a physical event, but wrong that each type of mental state is a single type of brain state; the evidence of mental states in creatures with different brains points towards functionalism.</b></p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Thesis:</b> all mental states are identical to brain states (Place, Smart). Sensations are ‘nothing over and above’ brain processes.</li>
+    <li><b>Strict identity:</b> one thing, obeying Leibniz’s law; not correlation.</li>
+    <li><b>Type vs token:</b> kinds identical vs particular instances identical.</li>
+    <li><b>Ontological, not analytic:</b> different meanings, same referent (morning/evening star; water/H₂O; lightning). Discovered a posteriori.</li>
+    <li><b>Smart’s replies:</b> peasant objection → not a claim about meaning; property objection → topic-neutral analysis.</li>
+    <li><b>Dualist arguments:</b> conceivability, zombies, Mary (type-B reply; Chalmers’ explanatory-gap counter); location; indivisibility.</li>
+    <li><b>Multiple realisability (Putnam):</b> octopus, aliens; species-specific identities (Lewis) → ‘but it is all pain’.</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Is mind–brain type identity theory true?</b><br>1. Thesis; ontological not analytic reduction.<br>2. Simplicity argument.<br>3. Dualist arguments → a posteriori identity reply → explanatory gap → judge.<br>4. Multiple realisability → species-specific identities → ‘it is all pain’ → judge.<br>5. Conclusion: token identity survives; type identity fails.</p></div>
+</aside></div>
+</template>
+
+<!-- ============ GLOSSARY ============ -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>For 3-mark questions, learn these definitions precisely – one accurate sentence is better than a vague paragraph.</p></div></aside></div>
+</template>
+
+<script>
+
+var GLOSS=[
+ ["Mind–brain type identity theory","AQA: all mental states are identical to brain states (ontological reduction), although ‘mental state’ and ‘brain state’ are not synonymous (not analytic reduction).","h"],
+ ["Strict identity","The relation of being one and the same thing; identical things share all properties.","h"],
+ ["Leibniz’s law","If A and B are identical, every property of A is a property of B and vice versa.","h"],
+ ["Correlation","Two phenomena regularly occurring together, without being the same thing.","h"],
+ ["Type","A kind or class of thing (pain in general).","h"],
+ ["Token","A particular instance of a type (this pain, now).","h"],
+ ["Type identity","Each type of mental state is identical with a type of brain state.","h"],
+ ["Token identity","Each particular mental event is identical with some particular physical event.","h"],
+ ["Ontological reduction","The claim that the things referred to by one set of terms are the very things referred to by another set, though the terms differ in meaning.","h"],
+ ["Analytic reduction","The claim that one set of terms means the same as another set (as in hard behaviourism).","t"],
+ ["A posteriori","Known through experience or empirical investigation.","t"],
+ ["A posteriori necessary truth","A necessary truth that can only be discovered empirically, e.g. water is H₂O.","h"],
+ ["Ockham’s razor","The principle that entities should not be multiplied beyond necessity; prefer the simpler explanation.","t"],
+ ["Nomological dangler","Smart’s term (from Feigl) for something linked to the physical world only by special laws of its own, as dualists take sensations to be.","t"],
+ ["Topic-neutral","Smart: a description of a sensation that does not say whether it is physical or non-physical.","t"],
+ ["Location problem","Brain processes have a location but mental states seem not to, so by Leibniz’s law they are not identical.","h"],
+ ["Explanatory gap","The apparent impossibility of explaining why a physical state feels the way it does.","t"],
+ ["Type-B materialism","Chalmers’ label for physicalism that treats mind–brain identity as a posteriori, like water/H₂O.","h"],
+ ["Multiple realisability","The claim that one type of mental state can be realised by different types of physical state in different creatures.","h"],
+ ["Realisation","The relation between a mental state and the physical state that implements it in a given system.","t"],
+ ["Species-specific identity","Lewis: a mental state is identical with whatever physical state occupies its role in a given population.","h"],
+ ["Chauvinism","Ned Block’s term for a theory that wrongly denies mental states to creatures physically unlike us.","b"],
+ ["Rigid designator","Kripke: a term that refers to the same thing in every possible world (e.g. a proper name, ‘water’).","b"]
+];
+var STOPS=[["start","Start here"],["thesis","The thesis"],["ontological","Ontological reduction"],["dualist","Dualist arguments"],["multiple","Multiple realisability"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["thesis","Stop 1","Sensations are brain processes","Strict identity, types and tokens, simplicity."],
+ ["ontological","Stop 2","Ontological, not analytic","Two concepts, one thing – and Smart’s replies."],
+ ["dualist","Stop 3","Dualist arguments applied","Conceivability, zombies, Mary, location."],
+ ["multiple","Stop 4","Multiple realisability","Can an octopus be in pain?"]
+];
+var STRETCH={
+ "start":[
+  ["Place’s original paper","U.T. Place’s ‘Is Consciousness a Brain Process?’ (1956) came first. Place argued that the identity is a scientific hypothesis, to be settled by evidence, rather than a matter of definition, and that the ‘phenomenological fallacy’ is to think that when we describe an experience we describe properties of an inner screen.","Paraphrased; Place (1956)"],
+  ["Australian materialism","Identity theory is sometimes called ‘Australian materialism’: Place and Smart worked at Adelaide in the 1950s, and David Armstrong developed a closely related ‘central-state materialism’ in Sydney.","Paraphrased; see ‘The Mind/Brain Identity Theory’, <i>Stanford Encyclopedia of Philosophy</i>"]],
+ "thesis":[
+  ["Davidson’s anomalous monism","Donald Davidson defended token identity without type identity: every mental event is a physical event, but there are no strict laws linking mental types to physical types. This is one of the main non-reductive physicalist positions.","Paraphrased; Davidson, ‘Mental Events’ (1970)"],
+  ["Pain is not just C-fibres","Neuroscientists point out that pain involves several kinds of nerve fibre and many brain areas. Philosophers use ‘C-fibres’ only as a placeholder; it is not a real scientific identity.","Paraphrased; see Puccetti, ‘The Great C-Fiber Myth’ (1977)"]],
+ "ontological":[
+  ["Kripke against identity theory","Saul Kripke argued that if pain = C-fibre firing, the identity must be necessary. But unlike water and H₂O, we cannot explain away the apparent possibility of pain without C-fibres: whatever feels like pain is pain. So, he argued, the identity theory is false.","Paraphrased; Kripke, <i>Naming and Necessity</i> (1980), Lecture III"],
+  ["Frege’s sense and reference","The morning star/evening star example comes from Gottlob Frege, who distinguished a term’s sense (its mode of presentation) from its reference (what it picks out). Identity theory relies on this distinction.","Paraphrased; Frege, ‘On Sense and Reference’ (1892)"]],
+ "dualist":[
+  ["Levine’s explanatory gap","Joseph Levine coined ‘explanatory gap’: even if pain is C-fibre firing, we cannot see why C-fibre firing should feel like <i>that</i>. Unlike Chalmers, Levine thought this was a problem for our understanding, not proof of dualism.","Paraphrased; Levine, ‘Materialism and Qualia: The Explanatory Gap’ (1983)"],
+  ["Smart’s eight objections","Smart’s 1959 paper is structured around replies to eight objections, including the location objection and the ‘illiterate peasant’ objection. Reading his replies is excellent exam preparation.","Paraphrased; Smart, ‘Sensations and Brain Processes’ (1959)"]],
+ "multiple":[
+  ["Is multiple realisation real?","William Bechtel and Jennifer Mundale argued that neuroscience actually individuates brain areas by function across species, so human and animal brain states can count as the same type at the right grain. Multiple realisation may be overstated.","Paraphrased; Bechtel and Mundale, ‘Multiple Realizability Revisited’ (1999)"],
+  ["Kim’s local reductions","Jaegwon Kim proposed that psychology may only allow species- or structure-specific reductions, and that ‘pain’ may not pick out a single natural kind at all – a position close to Lewis’s.","Paraphrased; Kim, ‘Multiple Realization and the Metaphysics of Reduction’ (1992)"]],
+ "revise":[
+  ["Where next","Two routes lead from here. Eliminative materialism says folk-psychological states may not map onto brain states at all. Functionalism says mental states are defined by their roles, which can be multiply realised.","Cross-link within the AQA course"]]
+};
+var QS={
+ "thesis":["What is mind–brain type identity theory?","Explain the difference between type identity and token identity.","Explain the identity theory and the argument from simplicity for it.","Is the identity theory the simplest and best account of mental states?"],
+ "ontological":["What is the difference between ontological and analytic reduction?","Explain how the morning star/evening star example supports identity theory.","Explain why mind–brain identity theory is an ontological and not an analytic reduction.","Can a mental state be identical to a brain state if the concepts differ in meaning?"],
+ "dualist":["State the location problem for identity theory.","Explain how the identity theorist responds to the conceivability argument.","Explain how dualist arguments can be applied to mind–brain type identity theory.","Do dualist arguments defeat identity theory?"],
+ "multiple":["What is multiple realisability?","Explain why multiple realisability is a problem for type identity theory.","Explain the multiple realisability objection and one response to it.","Does multiple realisability refute mind–brain type identity theory?"]
+};
+var QUIZ=[
+ ["State AQA’s definition of mind–brain type identity theory.","All mental states are identical to brain states (ontological reduction), though ‘mental state’ and ‘brain state’ are not synonymous (not analytic reduction)."],
+ ["Who developed identity theory?","U.T. Place and J.J.C. Smart."],
+ ["What is the difference between identity and correlation?","Identity: one and the same thing. Correlation: two things that regularly occur together."],
+ ["What is the difference between a type and a token?","A type is a kind (pain); a token is a particular instance (this pain)."],
+ ["Give an example of an a posteriori identity.","Water = H₂O; morning star = evening star; lightning = electrical discharge."],
+ ["Why is identity theory not an analytic reduction?","‘Pain’ and ‘brain state’ do not mean the same; the identity is discovered empirically."],
+ ["What is Smart’s topic-neutral analysis?","A sensation report says ‘something is going on in me like what goes on when…’, which does not commit to its being physical or non-physical."],
+ ["What is the location problem?","Brain processes are located but mental states seem not to be – so by Leibniz’s law they are not identical."],
+ ["What is multiple realisability?","The same mental state can be realised by different physical states in different creatures."],
+ ["What is the species-specific response, and the reply to it?","Pain is identical to different brain states in different species (Lewis); reply: they are all pain, so pain is not any one brain state."]
+];
+
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src'+(x[2]==="b"?" b":"")+'">'+(x[2]==="h"?"Departmental handout":x[2]==="b"?"Beyond the spec":"From the tour text")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>

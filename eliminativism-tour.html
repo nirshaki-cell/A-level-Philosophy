@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Eliminative Materialism Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#fbe3d6; --ink:#8a3f1c;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#fbe3d6}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#d6efdf}
+.stretch h4{color:#245c3c}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#fdf5f0}
+details.resp summary{cursor:pointer}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+
+/* mind tours additions */
+.resp.against{border-left-color:#f1b796}
+.gloss .src.b{color:#245c3c}
+.argbox{border:1px solid var(--line);border-radius:12px;padding:16px 20px 6px;margin:18px 0;background:#fffaf7}
+.argbox .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--ink)}
+.argbox ol{margin-top:8px}
+.ai{font-size:.8rem;color:var(--muted)}
+.band img{max-height:320px;object-fit:cover}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+</head>
+<body>
+<!--TITLE:Eliminative Materialism Tour-->
+<div class="wrap">
+  <a class="back" href="#">← Metaphysics of Mind</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 2 · Spec 3.4.3</span>
+      <h1>Eliminative materialism</h1>
+      <p>What if our everyday understanding of the mind is simply false? Take the tour: folk psychology as a theory, the Churchlands’ case for elimination, and the three issues on the specification – certainty, predictive power and self-refutation.</p>
+    </div>
+    <img src="img/mind-em-01.jpg" alt="Infographic: a drawing of a brain labelled with words like belief, desire and hope, beside the title 'Our common-sense understanding of the mind is deeply wrong'.">
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Text adapted from the departmental handouts <i>Eliminative Materialism</i> and the <i>Eliminative Materialism Revision Table</i>, checked against the AQA 7172 specification and set texts (Paul Churchland, ‘Eliminative Materialism and the Propositional Attitudes’ (1981), §2; Patricia Churchland, <i>Brain-Wise</i> (2002)). Reference reading: ‘Eliminative Materialism’, <i>Stanford Encyclopedia of Philosophy</i>. Infographics are from the departmental slide deck <i>The End of Belief</i>, which was AI-generated (NotebookLM): they are used as visual summaries, and their wording has not been independently verified. Boxes marked ‘Beyond the spec’ are extension only.</footer>
+</div>
+
+<!-- ============ STOP 0 ============ -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>Do beliefs and desires exist?</h2>
+  <p>Every day you explain and predict what people do by attributing beliefs and desires to them. She took an umbrella because she <i>believed</i> it would rain and <i>wanted</i> to stay dry. This way of thinking is so natural that it hardly seems like a theory at all. <span class="term" data-t="Eliminative materialism">Eliminative materialism</span> claims that it is a theory – and a false one. AQA puts it this way: <b>some or all common-sense (‘folk-psychological’) mental states/properties do not exist, and our common-sense understanding is radically mistaken</b>, as defended by Patricia Churchland and Paul Churchland.</p>
+  <p>Notice how this differs from identity theory. The identity theorist says that pain, belief and desire are real and turn out to be brain states – they are <i>reduced</i>. The eliminativist says that some of these categories may not correspond to anything in the brain at all, and will be <i>eliminated</i> as neuroscience matures, as ‘phlogiston’ and ‘the luminiferous aether’ were eliminated from science. The question matters because, if eliminativism is right, the picture of ourselves on which ethics, law, psychology and everyday life depend would need radical revision. If it is wrong, we need to say why our common-sense psychology deserves protection that other folk theories did not get.</p>
+  <div class="thesis"><b>The structure of the topic.</b> Stop 1 explains folk psychology and why the Churchlands call it a theory. Stop 2 gives their case for thinking it false. Stops 3–5 take the three issues on the specification in turn.</div>
+  <h3>Choose where to go</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <div class="card"><h4>The big question</h4><p>Is our common-sense understanding of the mind radically mistaken, so that some or all folk-psychological states do not exist?</p></div>
+  <div class="card"><h4>How to use this tour</h4><p>Learning it for the first time? Go through the stops in order. Revising? Jump to a stop, or go straight to <b>Revise</b> for the summary and quiz. Dotted words are in the glossary: tap one to see its meaning.</p></div>
+  <div class="card"><h4>Spec checklist</h4><p>✓ The thesis (Patricia and Paul Churchland)<br>✓ Our certainty about our mental states takes priority<br>✓ Folk psychology has good predictive and explanatory power<br>✓ Eliminative materialism is self-refuting</p></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 1 ============ -->
+<template id="s-folk">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · The target</div>
+  <h2>Folk psychology as a theory</h2>
+  <figure><img src="img/mind-em-02.jpg" alt="Infographic: input 'sees rain', a box labelled folk psychology containing a belief, a desire and a thought, and output 'takes umbrella'."><figcaption>Folk psychology as an input–output theory. <span class="ai">Departmental AI-generated infographic.</span></figcaption></figure>
+  <h3>What folk psychology is</h3>
+  <p><span class="term" data-t="Folk psychology">Folk psychology</span> is the label the Churchlands give to our everyday beliefs and theories about human action and thought. It holds that human beings have thoughts, feelings and reasons – <span class="term" data-t="Propositional attitude">propositional attitudes</span> with <span class="term" data-t="Intentionality">intentionality</span> – that they act on and because of their beliefs, and that we can predict and explain large swathes of human behaviour by appealing to these facts.</p>
+  <p>The handout quotes Louise Antony (spelled ‘Anthony’ in the handout) on how striking it is that we think, and that by attributing thought to other people we can predict and explain their behaviour in myriad and immensely useful ways. She identifies four elements of folk psychology:</p>
+  <ul class="list">
+    <li>the capacity to deliberate;</li>
+    <li>the capacity to conceive of things we want or believe will happen (intentional inexistence);</li>
+    <li>that our actions appear to be a function of how we take the world to be;</li>
+    <li>the power to predict what other people are going to do.</li>
+  </ul>
+  <p><span class="term" data-t="Psychological realism">Psychological realists</span> believe these elements exist and can be studied scientifically.</p>
+  <h3>Why call it a theory?</h3>
+  <p>Paul Churchland argues that, however old it is, folk psychology is in the final analysis an <b>empirical theory</b>: it uses posits (beliefs, desires) and laws to explain and predict observations. An example of a folk-psychological law: if someone desires X and believes that the best way to get X is by doing Y, then (barring other conditions) they will tend to do Y. This is sometimes called the <span class="term" data-t="Theory-theory">‘theory-theory’</span> of folk psychology. Because it is a theory, it is open to revision – and, Churchland claims, to elimination.</p>
+  <div class="argbox"><span class="tag">The structure of the eliminativist argument</span>
+  <ol class="list">
+    <li>Folk psychology is an empirical theory. <span class="note">(It has posits and laws, and is used to explain and predict.)</span></li>
+    <li>The posits of a theory exist only if the theory is (approximately) true. <span class="note">(Phlogiston did not exist because phlogiston theory was false.)</span></li>
+    <li>Folk psychology is false, and will not be smoothly reduced to neuroscience. <span class="note">(The Churchlands’ case – Stop 2.)</span></li>
+    <li>Therefore, the posits of folk psychology – beliefs, desires, perhaps qualia – do not exist.</li>
+  </ol></div>
+  <h3>Revisability: no self-authenticating experiences</h3>
+  <p>Churchland holds that all our beliefs are <span class="term" data-t="Theory-laden">theoretic</span>: even a simple belief like ‘I am seeing an apple’ must cohere with what else we know, especially science. There is no foundation of knowledge – no self-authenticating experience. If our beliefs do not fit together, we must revise either the belief or the theory. This is why eliminativism is called <span class="term" data-t="Revisionary">revisionary</span>: it allows even our most cherished intuitions to be debated and, if necessary, abandoned.</p>
+  <div class="resp"><span class="tag">Wittgenstein’s question</span><p>The handout cites a story told by Tim Crane: Wittgenstein is said to have asked why people used to think the sun went round the earth. ‘Because it looks as if it does,’ a student replied. ‘And how would it look if the earth went round the sun?’ Exactly the same. Perhaps the mind seems not to be the brain for the same reason. (The story is reported, not documented in Wittgenstein’s writings.)</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Folk psychology</dt><dd>Our common-sense theory explaining behaviour by beliefs, desires and other mental states.</dd><dt>Elimination vs reduction</dt><dd>Discarding a theory’s posits vs identifying them with something more basic.</dd><dt>Revisionary</dt><dd>Allowing even basic intuitions to be revised.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 2 ============ -->
+<template id="s-case">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · The case for elimination</div>
+  <h2>Why folk psychology might really be false</h2>
+  <p>Your set text is section 2 of Paul Churchland’s ‘Eliminative Materialism and the Propositional Attitudes’ (1981), titled ‘Why folk psychology might (really) be false’. He gives three main reasons (paraphrased).</p>
+  <figure><img src="img/mind-em-04.jpg" alt="Infographic: explanatory impotence, stagnation and poor inductive record, beside a sketch graph in which physics and biology rise steeply over time while folk psychology stays flat."><figcaption>The Churchlands’ three charges. The graph is a sketch to show the idea, not real data. <span class="ai">Departmental AI-generated infographic.</span></figcaption></figure>
+  <h3>1 · Explanatory failure</h3>
+  <p>Folk psychology cannot explain a huge range of central mental phenomena: sleep, mental illness, perception and perceptual illusions, memory, learning, and differences in intelligence. A good theory of the mind should explain these; folk psychology is largely silent.</p>
+  <h3>2 · Stagnation</h3>
+  <p>Folk psychology has made no significant progress over thousands of years. The way we explain behaviour by beliefs and desires is essentially the way the ancient Greeks did. Successful sciences develop; folk psychology has stood still.</p>
+  <h3>3 · Failure to integrate with science</h3>
+  <p>Folk psychology does not fit easily into our current best science – neuroscience, evolutionary biology, physics. Its categories do not map onto the categories that the sciences of the brain are developing.</p>
+  <figure><img src="img/mind-em-05.jpg" alt="Infographic: a sentence diagram 'The cat is on the mat' beside a network of neurons, illustrating that the brain's architecture does not resemble sentence structure."><figcaption>The ‘syntactic mismatch’: beliefs seem sentence-like, but the brain is a network of spiking neurons. <span class="ai">Departmental AI-generated infographic.</span></figcaption></figure>
+  <h3>The lesson of history</h3>
+  <p>Scientific progress sometimes <i>eliminates</i> rather than refines. The handout gives examples: Ptolemaic astronomy and Aristotelian physics were abandoned after Galileo and Newton; the aether, caloric fluid and ‘vital force’ were dropped as physics and biology advanced. Churchland notes that people once objected to the claim that we are moving eastwards at around a thousand miles an hour on the grounds that it is wholly incompatible with our subjective impressions. Our impressions turned out to be wrong. Churchland says the speculative and revisable character of our common-sense framework is plainly evident from the lessons of history (paraphrased from his 2007 paper, quoted in the handout).</p>
+  <figure><img src="img/mind-em-03.jpg" alt="Infographic contrasting ontologically conservative change (light identified with electromagnetic radiation) and ontologically radical change (phlogiston eliminated)."><figcaption>Retention versus elimination: light was identified with electromagnetic radiation, but phlogiston was found not to exist. <span class="ai">Departmental AI-generated infographic.</span></figcaption></figure>
+  <h3>Qualia and intentionality</h3>
+  <p>The handout explains how the Churchlands attack the two features philosophers say cannot be reduced (3.4.1):</p>
+  <ul class="list">
+    <li><b>Qualia.</b> Neuroscience can predict and explain how sensations are produced, even describing seemingly impossible colour experiences – a vivid blue as dark as the darkest black – before anyone has them. That we cannot know what an experience is like without having it does not show it is non-physical. I cannot know what giving birth is like without giving birth, but giving birth is a purely physical process.</li>
+    <li><b>Intentionality.</b> It is hard to see how a physical organ, the product of evolution and chance, could be intrinsically ‘about’ anything. It would be better to see brain states as the products of causal relations with the world. When we know enough, we may see that belief-attributions serve moderately well at predicting a narrow range of phenomena from a parochial perspective, but badly represent what is really going on (paraphrased; Churchland, as quoted in the handout).</li>
+  </ul>
+  <h3>Some or all?</h3>
+  <p>AQA says ‘some or all’. Paul Churchland’s main target is the propositional attitudes. Others (Dennett, more recently ‘illusionists’) target qualia. Patricia Churchland’s neurophilosophy emphasises that our folk concepts – of memory, emotion, the self – will be revised, split or replaced as we learn how the brain works, and that it is an empirical question how much survives.</p>
+  <figure><img src="img/mind-em-11.jpg" alt="Infographic: a spectrum from full retention (reduction) through revisionary materialism to full elimination."><figcaption>Not all-or-nothing: the fate of folk psychology may lie anywhere between reduction and elimination. <span class="ai">Departmental AI-generated infographic.</span></figcaption></figure>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Stagnation</dt><dd>Lack of theoretical progress over time.</dd><dt>Ontologically radical change</dt><dd>A theory change in which the old posits are found not to exist.</dd><dt>Neurophilosophy</dt><dd>Philosophy of mind informed by neuroscience (Patricia Churchland).</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 3 ============ -->
+<template id="s-certainty">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · Issue 1</div>
+  <h2>Our certainty about our mental states takes priority</h2>
+  <p>AQA’s first issue: <b>our certainty about the existence of our mental states takes priority over other considerations</b>. Descartes argued that ‘I think’ is the one thing I cannot doubt. Whatever science says, I know for certain that I am now thinking, feeling and believing. No scientific theory could be more certain than that – so if a theory says beliefs do not exist, so much the worse for the theory. The handout states it as the charge that eliminativism is <span class="term" data-t="Counter-intuitive">counter-intuitive</span>: learning that the earth goes round the sun is one thing; being told we do not think, or have beliefs, is quite another.</p>
+  <div class="argbox"><span class="tag">The objection in standard form</span>
+  <ol class="list">
+    <li>I am more certain that I have beliefs, desires and experiences than I am of any scientific theory. <span class="note">(Introspection; the cogito.)</span></li>
+    <li>When a theory conflicts with something more certain than the theory, we should reject the theory. <span class="note">(Principle of rational belief.)</span></li>
+    <li>Eliminative materialism conflicts with my belief that I have beliefs, desires and experiences. <span class="note">(The thesis.)</span></li>
+    <li>Therefore, we should reject eliminative materialism.</li>
+  </ol></div>
+  <h3>Responses</h3>
+  <div class="resp for"><span class="tag">Response 1: introspection is theory-laden</span><p>Churchland denies there are self-authenticating experiences. When I introspect and find ‘a belief’, I am applying the concepts of folk psychology to what I find; introspection is as <span class="term" data-t="Theory-laden">theory-laden</span> as perception. The sun really does <i>look</i> as if it goes round the earth; that seemed certain too. So the apparent certainty of introspection is just the certainty of a deeply entrenched theory.</p></div>
+  <div class="resp for"><span class="tag">Response 2: historical precedent</span><p>Very specific concepts in science – Ptolemaic astronomy, the aether, caloric, vital force – were abandoned once shown to be wrong. There is no reason our most cherished beliefs about the mind should be exempt.</p></div>
+  <div class="resp for"><span class="tag">Response 3: what is not being denied</span><p>Churchland does not deny that mental phenomena and experiences occur. He denies that our folk concepts give the best description of them. What we call a belief is something real but far more complex, and one day we may have a better language to describe what is happening.</p></div>
+  <div class="resp against"><span class="tag">Counter-response</span><p>The historical analogy may not transfer. Abandoning the aether did not require giving up the very faculty – reasoning, believing – used to evaluate the new theory. Abandoning belief itself looks like a different, perhaps self-undermining, kind of revision (Stop 5). And for experiences, the illusion/reality distinction seems to collapse: if it seems to me that I am in pain, then I am in pain. An illusion of experience would itself be an experience.</p></div>
+  <h3>Evaluation</h3>
+  <p>This objection is strongest for conscious experiences and weakest for propositional attitudes. It is hard to see how I could be wrong that I am in pain; it is much easier to see how I could be wrong about the <i>nature</i> of what I call ‘my belief that p’ – whether it is a discrete, sentence-like state. So the certainty objection works best against eliminativism about qualia, and least against Paul Churchland’s main target.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Counter-intuitive</dt><dd>Conflicting with strongly held common-sense beliefs.</dd><dt>Theory-laden</dt><dd>Shaped by the concepts of a background theory.</dd><dt>Self-authenticating</dt><dd>Guaranteeing its own truth just by occurring.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 4 ============ -->
+<template id="s-predict">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · Issue 2</div>
+  <h2>Folk psychology has good predictive and explanatory power</h2>
+  <figure><img src="img/mind-em-08.jpg" alt="Infographic: a network of people with predictions such as 'A will go to the meeting', illustrating the predictive power of folk psychology."><figcaption>We predict each other’s behaviour all day, with remarkable success. <span class="ai">Departmental AI-generated infographic.</span></figcaption></figure>
+  <p>AQA’s second issue: <b>folk psychology has good predictive and explanatory power, and so is the best hypothesis</b>. Louise Antony argues that without folk psychology it is hard to see how we could function, make sense of the world or go about our daily lives. We predict that a friend will arrive at the station because she said she would and wants to see us; we explain a colleague’s anger by his belief that he was insulted. These predictions are right far more often than chance. And the science of psychology – and arguably the social sciences generally – is built on these concepts.</p>
+  <div class="argbox"><span class="tag">The objection in standard form</span>
+  <ol class="list">
+    <li>Folk psychology successfully predicts and explains a vast range of human behaviour. <span class="note">(Everyday experience; Antony.)</span></li>
+    <li>A theory that successfully predicts and explains a vast range of phenomena, better than any rival, is the best hypothesis and is probably (approximately) true. <span class="note">(Inference to the best explanation.)</span></li>
+    <li>No rival theory – including current neuroscience – predicts and explains everyday human behaviour as well. <span class="note">(Neuroscience cannot yet predict who will turn up to dinner.)</span></li>
+    <li>Therefore, folk psychology is probably approximately true, and its posits exist.</li>
+  </ol></div>
+  <h3>Responses</h3>
+  <div class="resp for"><span class="tag">Response 1: usefulness is not truth</span><p>Folk psychology may be the best <i>practical</i> tool we currently have for navigating other people while still being, scientifically, a weak and false theory. Ptolemaic astronomy predicted eclipses well for centuries. Newtonian mechanics still predicts very well, yet strictly it is false.</p></div>
+  <div class="resp for"><span class="tag">Response 2: success is narrow</span><p>The predictive success is real but confined to a narrow range: everyday behaviour of ordinary adults in familiar circumstances. Beyond this – mental illness, brain damage, sleep, learning, animals – folk psychology fails (Stop 2). Physics predicts with far greater precision, and there is no reason a mature neuroscience could not do better.</p></div>
+  <div class="resp against"><span class="tag">Counter-response</span><p>The comparison with Ptolemy cuts both ways: its successes were explained by its successor, which preserved them. A successor to folk psychology would need to explain why belief–desire predictions work so well – and the simplest explanation is that there really are states playing the roles of beliefs and desires. That would be reduction or revision, not elimination.</p></div>
+  <figure><img src="img/mind-em-07.jpg" alt="Infographic comparing theory-theory, simulation theory and mental fictionalism."><figcaption>Is folk psychology a theory at all? Simulation theory and fictionalism say no. <span class="ai">Departmental AI-generated infographic.</span></figcaption></figure>
+  <div class="resp for"><span class="tag">A different reply: folk psychology is not a theory</span><p>Some philosophers deny premise 1 of the eliminativist argument (Stop 1). On <b>simulation theory</b>, we understand others not by applying a theory but by imagining ourselves in their situation. If folk psychology is not a theory, it cannot be falsified like one, and scientific findings about the brain are not directly relevant to it.</p></div>
+  <h3>Evaluation</h3>
+  <p>Predictive success alone does not prove truth, as the history of science shows. But the eliminativist owes us an explanation of <i>why</i> a false theory works so well. The most likely outcome, many philosophers think, lies on a spectrum: folk psychology will be partly vindicated and partly revised, as the concept of ‘light’ survived but changed, rather than eliminated like phlogiston.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Predictive power</dt><dd>A theory’s ability to forecast observations correctly.</dd><dt>Inference to the best explanation</dt><dd>Accepting the hypothesis that best explains the evidence.</dd><dt>Simulation theory</dt><dd>We understand others by imaginatively simulating them, not by theory.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 5 ============ -->
+<template id="s-refute">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 5 · Issue 3</div>
+  <h2>Eliminative materialism is self-refuting</h2>
+  <figure><img src="img/mind-em-06.jpg" alt="Infographic: asserting eliminative materialism requires believing it, which means beliefs exist, which makes it false; below, the eliminativist rebuttal that this begs the question."><figcaption>The self-refutation objection and the eliminativist rebuttal. <span class="ai">Departmental AI-generated infographic.</span></figcaption></figure>
+  <p>AQA’s third issue: <b>the articulation of eliminative materialism as a theory is self-refuting</b>. The handout calls this the single biggest problem. If eliminativism is to change our minds, the change must be a change of mind <i>about</i> something. But eliminativism denies that intentionality and the propositional attitudes are real. If there are no beliefs, and no content to mental states, what is eliminativism even saying?</p>
+  <div class="argbox"><span class="tag">The self-refutation objection in standard form</span>
+  <ol class="list">
+    <li>To assert a theory sincerely is to express a belief that it is true. <span class="note">(What assertion is.)</span></li>
+    <li>Eliminativists assert eliminative materialism. <span class="note">(They write books arguing for it.)</span></li>
+    <li>So eliminativists believe eliminative materialism is true. <span class="note">(From 1, 2.)</span></li>
+    <li>If anyone believes anything, beliefs exist. <span class="note">(Trivially.)</span></li>
+    <li>If beliefs exist, eliminative materialism (about belief) is false.</li>
+    <li>Therefore, if eliminative materialism is asserted, it is false.</li>
+  </ol></div>
+  <h3>Lynne Rudder Baker: ‘Cognitive Suicide’</h3>
+  <p>The handout explains Baker’s argument that unless we attribute content to some mental states, we must give up three conditions that make any argument – including eliminativism – possible:</p>
+  <ul class="list">
+    <li><b>Rational justification.</b> If thoughts have no content, are not about anything, there can be no evidence for or against any argument.</li>
+    <li><b>Assertion.</b> To assert ‘it is the case that X’, what we say must have content. Without content we can neither affirm nor deny anything.</li>
+    <li><b>Truth and falsehood.</b> If a brain state does not represent anything, it falls outside truth and falsehood altogether.</li>
+  </ul>
+  <p>So propositional attitudes are the bedrock of any argument. To deny them is to make a claim with content – and so to affirm what is denied. They look like a <span class="term" data-t="Condition for the possibility of X">condition for the possibility</span> of any thinking at all.</p>
+  <h3>Responses</h3>
+  <div class="resp for"><span class="tag">Response 1: the objection begs the question</span><p>The objection assumes that asserting, arguing and being justified must be understood in terms of beliefs and content – that is, it assumes folk psychology. But that is exactly what is in dispute. Patricia Churchland compares a vitalist who argues: ‘The anti-vitalist says there is no vital spirit. If he is right, he is not alive. So he is talking nonsense.’ The vitalist begs the question by assuming that life requires vital spirit. Likewise, a future neuroscience may explain what we now call ‘asserting a theory’ without positing beliefs. (Paraphrased; a similar vitalist analogy is given in Patricia Churchland’s <i>Neurophilosophy</i>, 1986.)</p></div>
+  <div class="resp against"><span class="tag">Baker’s counter</span><p>Until such replacement concepts are actually supplied, the eliminativist has no way to state, argue for or assert their theory. Promising a future theory that will do the work of ‘content’ and ‘truth’ is not the same as having one. And any replacement that plays the role of content – letting states be accurate or inaccurate, evidence for or against – would just be content under another name.</p></div>
+  <div class="resp for"><span class="tag">Response 2: eliminate only some states</span><p>A modest eliminativist could keep representation and truth, but deny that representations are sentence-like ‘beliefs’ and ‘desires’ as folk psychology pictures them. Brain states could represent the world in a quite different format (say, patterns of activation across neural networks) and still be true or false. This avoids self-refutation but weakens the thesis.</p></div>
+  <h3>Evaluation</h3>
+  <p>The vitalist analogy shows that the objection is not a knock-down refutation: it relies on the assumption that the only possible account of assertion and justification is the folk-psychological one. But Baker’s point stands that the eliminativist cannot currently say what their theory is, since any statement of it uses the concepts it rejects. <b>A fair judgement: full eliminativism about content is probably self-undermining, but more modest eliminativism – that beliefs and desires as folk psychology conceives them will be replaced by better representational categories – survives the objection.</b></p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Self-refuting</dt><dd>A claim whose assertion guarantees its falsity.</dd><dt>Begging the question</dt><dd>Assuming what is in dispute.</dd><dt>Condition for the possibility</dt><dd>What must hold for something to occur at all.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ REVISE ============ -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>Is our common-sense understanding of the mind radically mistaken?</h2>
+  <h3>Overall evaluation</h3>
+  <p>The Churchlands are right that folk psychology functions like a theory, that it has real explanatory gaps, and that history shows even entrenched common-sense frameworks can be overturned. Their argument depends, however, on folk psychology being false <i>and</i> irreducible – and both are contested. The certainty objection is strongest against eliminating conscious experience and weakest against eliminating sentence-like beliefs. The predictive power objection shows that eliminativists owe an explanation of folk psychology’s success, which points towards revision rather than elimination. The self-refutation objection is not decisive, as the vitalist analogy shows, but it does show that the eliminativist cannot currently state their view without using the concepts they reject. A sustained judgement: <b>radical eliminativism – that there are no contentful mental states at all – is not credible, but the modest claim that folk-psychological categories will be significantly revised by neuroscience is plausible and may well be true.</b></p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Thesis:</b> some or all folk-psychological mental states do not exist; common-sense understanding radically mistaken (Patricia and Paul Churchland).</li>
+    <li><b>Elimination, not reduction:</b> like phlogiston, caloric, the aether, vital force.</li>
+    <li><b>Folk psychology as theory:</b> posits + laws (desire X, believe Y gets X → do Y); open to revision; no self-authenticating experiences.</li>
+    <li><b>Three charges (Paul Churchland 1981):</b> explanatory failure (sleep, mental illness, learning, memory); stagnation; failure to integrate with science.</li>
+    <li><b>Issue 1 – certainty:</b> reply: introspection is theory-laden; history; not denying the phenomena.</li>
+    <li><b>Issue 2 – predictive power:</b> reply: usefulness ≠ truth; narrow success. Counter: why does it work so well?</li>
+    <li><b>Issue 3 – self-refutation:</b> Baker (justification, assertion, truth). Reply: begs the question (vitalist analogy). Counter: no replacement yet supplied.</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Is eliminative materialism self-refuting?</b><br>1. Thesis; define folk psychology and elimination.<br>2. The Churchlands’ case in brief.<br>3. Self-refutation in standard form + Baker.<br>4. Begging the question (vitalist) → no replacement supplied → judge.<br>5. Modest eliminativism → conclusion.</p></div>
+</aside></div>
+</template>
+
+<!-- ============ GLOSSARY ============ -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>For 3-mark questions, learn these definitions precisely – one accurate sentence is better than a vague paragraph.</p></div></aside></div>
+</template>
+
+<script>
+
+var GLOSS=[
+ ["Eliminative materialism","AQA: some or all common-sense (folk-psychological) mental states/properties do not exist and our common-sense understanding is radically mistaken (Patricia and Paul Churchland).","h"],
+ ["Folk psychology","Our everyday, common-sense theory that explains and predicts behaviour by attributing beliefs, desires and other mental states.","h"],
+ ["Propositional attitude","A mental state, such as a belief or desire, directed at a state of affairs (e.g. believing that it is raining).","h"],
+ ["Intentionality","The ‘aboutness’ or directedness of mental states.","h"],
+ ["Intentional inexistence","The capacity of a mental state to be about something that need not exist.","h"],
+ ["Qualia","The subjective, qualitative ‘feel’ of conscious experience (AQA: intrinsic, non-intentional, introspectively accessible phenomenal properties).","h"],
+ ["Psychological realism","The view that the entities posited by folk psychology genuinely exist and can be studied scientifically.","h"],
+ ["Theory-theory","The view that folk psychology is a theory, with posits and laws, used to explain and predict behaviour.","t"],
+ ["Simulation theory","The view that we understand others by imaginatively putting ourselves in their place, not by applying a theory.","t"],
+ ["Elimination","The abandonment of a theory’s posits as non-existent (e.g. phlogiston).","t"],
+ ["Reduction","The identification of a theory’s posits with something more basic (e.g. light with electromagnetic radiation).","t"],
+ ["Revisionary","Holding that even our most basic beliefs and intuitions can be revised or abandoned in the light of better theory.","h"],
+ ["Theory-laden","Shaped by the concepts of a background theory; Churchland says perception and introspection are theory-laden.","t"],
+ ["Self-authenticating experience","An experience whose occurrence alone guarantees the truth of the belief it gives rise to; eliminativists deny any exist.","h"],
+ ["Counter-intuitive","Conflicting with strongly held common-sense beliefs.","h"],
+ ["Stagnation","Paul Churchland’s charge that folk psychology has made no significant progress in thousands of years.","t"],
+ ["Self-refutation","A theory refutes itself if asserting it guarantees that it is false.","t"],
+ ["Cognitive Suicide","Lynne Rudder Baker’s argument that denying contentful mental states undermines justification, assertion and truth.","h"],
+ ["Begging the question","Assuming, in an argument, the very thing that is in dispute.","t"],
+ ["Condition for the possibility of X","What must be true for X to exist or occur at all.","h"],
+ ["Neurophilosophy","Patricia Churchland’s programme of philosophy of mind informed by neuroscience.","t"],
+ ["Illusionism","The view that phenomenal consciousness, as we conceive it, is an introspective illusion (e.g. Keith Frankish).","b"],
+ ["Connectionism","An approach modelling cognition as patterns of activation across networks of simple units, rather than manipulating sentence-like symbols.","b"]
+];
+var STOPS=[["start","Start here"],["folk","Folk psychology"],["case","The case for elimination"],["certainty","Certainty"],["predict","Predictive power"],["refute","Self-refutation"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["folk","Stop 1","Folk psychology as a theory","What exactly is being eliminated?"],
+ ["case","Stop 2","Why folk psychology might be false","Explanatory failure, stagnation, poor integration."],
+ ["certainty","Stop 3","Certainty takes priority","Can I really be wrong that I believe?"],
+ ["predict","Stop 4","Predictive power","Why does a ‘false’ theory work so well?"],
+ ["refute","Stop 5","Self-refutation","Must the eliminativist believe their theory?"]
+];
+var STRETCH={
+ "start":[
+  ["Early eliminativists","Before the Churchlands, Paul Feyerabend and Richard Rorty proposed that mental terms might disappear like ‘demons’ from medicine. Rorty’s version is sometimes called the ‘disappearance theory’.","Paraphrased; Rorty, ‘Mind–Body Identity, Privacy, and Categories’ (1965)"],
+  ["Fodor’s warning","Jerry Fodor, a defender of folk psychology, wrote that if commonsense psychology were to collapse, it would be beyond comparison the greatest intellectual catastrophe in the history of our species.","Paraphrased; Fodor, <i>Psychosemantics</i> (1987), preface"]],
+ "folk":[
+  ["Sellars and the myth of Jones","Wilfrid Sellars told a ‘myth’ in which a genius, Jones, invents the theory of inner thoughts to explain his fellows’ behaviour. The story is an ancestor of the idea that folk psychology is a theory.","Paraphrased; Sellars, ‘Empiricism and the Philosophy of Mind’ (1956)"],
+  ["Is introspection reliable?","Psychologists have found that people often confidently misreport the causes of their own behaviour. This supports the Churchlands’ claim that introspection is not infallible.","Paraphrased; Nisbett and Wilson, ‘Telling More Than We Can Know’ (1977)"]],
+ "case":[
+  ["Connectionism and elimination","Ramsey, Stich and Garon argued that if the brain works like a connectionist network, with information spread across connections, there may be no discrete states corresponding to individual beliefs – which would support eliminativism.","Paraphrased; Ramsey, Stich and Garon, ‘Connectionism, Eliminativism and the Future of Folk Psychology’ (1990)"],
+  ["Chimerical colours","Paul Churchland used a neural model of colour vision to predict colour experiences outside the normal range – such as a blue as dark as black – which can be produced as after-images. This is the example in the handout.","Paraphrased; Churchland, ‘Chimerical Colors’ (2005)"]],
+ "certainty":[
+  ["Quining qualia and illusionism","Dennett argued the folk concept of qualia is confused; Keith Frankish’s ‘illusionism’ claims phenomenal consciousness is an introspective illusion. These extend eliminativism from beliefs to experience.","Paraphrased; Dennett (1988); Frankish, ‘Illusionism as a Theory of Consciousness’ (2016)"],
+  ["Searle against illusionism","John Searle argues that where consciousness is concerned the appearance is the reality: if it consciously seems to me that I am in pain, then I am. This is the ‘collapse of the illusion/reality distinction’ point.","Paraphrased; Searle, <i>The Mystery of Consciousness</i> (1997)"]],
+ "predict":[
+  ["Dennett’s intentional stance","Dennett argues that belief–desire talk is a stance we take towards systems whose behaviour it predicts well. Beliefs are real in the way centres of gravity are real – as patterns, not hidden inner objects. This is a middle path between realism and elimination.","Paraphrased; Dennett, ‘Real Patterns’ (1991)"],
+  ["Stich changes his mind","Stephen Stich defended eliminativism in 1983 but later argued that the debate may be ill-founded, because there is no principled way to decide when a theory is false enough for its terms to fail to refer.","Paraphrased; Stich, <i>Deconstructing the Mind</i> (1996)"]],
+ "refute":[
+  ["Baker’s book","Lynne Rudder Baker develops the argument at length in <i>Saving Belief</i>, which includes a chapter on the threat of ‘cognitive suicide’ and defends the reality of belief against eliminativism.","Paraphrased; Baker, <i>Saving Belief</i> (1987)"],
+  ["Pragmatic, not logical","Many philosophers note that the objection shows eliminativism is <i>pragmatically</i> self-defeating (asserting it is odd) rather than <i>logically</i> self-contradictory (it could be true while no one asserts it).","Paraphrased; see ‘Eliminative Materialism’, <i>Stanford Encyclopedia of Philosophy</i>"]],
+ "revise":[
+  ["Where next: functionalism","Functionalism offers a way to keep folk psychology: mental states are defined by their roles, which brains realise. It is the main rival to eliminativism among physicalists.","Cross-link within the AQA course"]]
+};
+var QS={
+ "folk":["What is folk psychology?","Explain why the Churchlands regard folk psychology as a theory.","Explain the thesis of eliminative materialism and how it differs from identity theory.","Is folk psychology a theory?"],
+ "case":["Give two reasons Paul Churchland gives for thinking folk psychology is false.","Explain how the history of science is used to support eliminative materialism.","Explain the Churchlands’ arguments that folk psychology might be false.","Is our common-sense understanding of the mind radically mistaken?"],
+ "certainty":["What is meant by saying eliminative materialism is counter-intuitive?","Explain the claim that our certainty about our own mental states takes priority over other considerations.","Explain the objection from certainty and the eliminativist response that introspection is theory-laden.","Does our certainty about our own minds refute eliminative materialism?"],
+ "predict":["What is meant by the predictive power of folk psychology?","Explain why folk psychology’s predictive power is an objection to eliminative materialism.","Explain the predictive power objection and how an eliminativist might respond.","Does the success of folk psychology show that it is true?"],
+ "refute":["What does it mean to say a theory is self-refuting?","Explain Baker’s claim that eliminative materialism is ‘cognitive suicide’.","Explain the self-refutation objection to eliminative materialism and a response to it.","Is eliminative materialism self-refuting?"]
+};
+var QUIZ=[
+ ["State AQA’s definition of eliminative materialism.","Some or all common-sense (folk-psychological) mental states/properties do not exist and our common-sense understanding is radically mistaken."],
+ ["Who are the main defenders?","Patricia Churchland and Paul Churchland."],
+ ["How does elimination differ from reduction?","Reduction identifies posits with something more basic (light = EM radiation); elimination says they do not exist (phlogiston)."],
+ ["Give a folk-psychological law.","If someone desires X and believes doing Y is the best way to get X, they will (other things equal) tend to do Y."],
+ ["Give Paul Churchland’s three reasons folk psychology might be false.","Explanatory failure (sleep, mental illness, learning, memory); stagnation; failure to integrate with other sciences."],
+ ["What is the eliminativist reply to the certainty objection?","Introspection is theory-laden; there are no self-authenticating experiences; entrenched ‘certainties’ have been overturned before."],
+ ["What is the reply to the predictive power objection?","Usefulness is not truth (Ptolemy predicted eclipses); its success is narrow."],
+ ["What are Baker’s three conditions?","Rational justification, assertion, and truth/falsehood – all require content."],
+ ["What is the vitalist analogy?","Arguing that the anti-vitalist cannot be alive (because life needs vital spirit) begs the question – as does assuming assertion needs beliefs."],
+ ["Which version of eliminativism best survives the objections?","Modest eliminativism: folk-psychological categories will be revised or replaced by better representational ones, without denying content altogether."]
+];
+
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src'+(x[2]==="b"?" b":"")+'">'+(x[2]==="h"?"Departmental handout":x[2]==="b"?"Beyond the spec":"From the tour text")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>

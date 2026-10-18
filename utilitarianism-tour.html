@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Utilitarianism Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#d6efdf; --ink:#245c3c;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#d6efdf}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#ece0f5}
+.stretch h4{color:#5a2f78}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#ece0f5;color:#5a2f78;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#f5fbf7}
+details.resp summary{cursor:pointer}
+.bspec{display:inline-block;margin-left:8px;font-size:.7rem;font-weight:600;letter-spacing:.08em;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;vertical-align:middle}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="#">← Moral Philosophy</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 1 · Spec 3.2.1</span>
+      <h1>Utilitarianism</h1>
+      <p>The right action is the one that produces the most good. This tour covers what “utility” means and how to maximise it: Bentham’s calculus, Mill’s higher pleasures and his ‘proof’, preference utilitarianism, and act versus rule utilitarianism. It then covers the five issues on the specification.</p>
+    </div>
+    <svg viewBox="0 0 320 220" role="img" aria-label="Diagram: three possible actions, A, B and C, each with a bar showing total pleasure minus pain for everyone affected. Action B has the tallest bar and is marked as the right action.">
+      <rect width="320" height="220" rx="14" fill="#fff"/>
+      <g font-family="Nunito Sans,sans-serif" text-anchor="middle">
+        <text x="160" y="28" font-size="12" fill="#245c3c" font-weight="600">Net happiness for everyone affected</text>
+        <line x1="40" y1="180" x2="290" y2="180" stroke="#5b6070"/>
+        <rect x="62" y="120" width="50" height="60" rx="6" fill="#d6efdf"/>
+        <rect x="137" y="56" width="50" height="124" rx="6" fill="#245c3c"/>
+        <rect x="212" y="146" width="50" height="34" rx="6" fill="#d6efdf"/>
+        <text x="87" y="198" font-size="12" fill="#23262f">Act A</text>
+        <text x="162" y="198" font-size="12" fill="#23262f">Act B</text>
+        <text x="237" y="198" font-size="12" fill="#23262f">Act C</text>
+        <text x="162" y="48" font-size="12" fill="#245c3c" font-weight="600">✓ right act</text>
+      </g>
+    </svg>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Built from the departmental slides <i>Utilitarianism</i> (2024) and Sinnott-Armstrong, ‘Consequentialism’, <i>Stanford Encyclopedia of Philosophy</i> (Winter 2023). Material marked ‘Added to complete the spec’ was not in those sources and should be checked against the set texts. Material marked ‘Beyond the spec’ is extension only. AQA 7172 · Moral Philosophy.</footer>
+</div>
+
+<!-- START -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>Is the right action the one that produces the most happiness?</h2>
+  <p>Utilitarianism is the ethical theory that the right action is the one that maximises <span class="term" data-t="Utility">utility</span>: the greatest balance of good over bad for everyone affected. In its classic form, developed by Jeremy Bentham and John Stuart Mill, the good is happiness, understood as pleasure and the absence of pain. The idea that pleasure is the good is ancient: <span class="term" data-t="Hedonism">hedonism</span> takes its name from the Greek <i>hēdonē</i>, pleasure.</p>
+  <p>Utilitarianism is <span class="term" data-t="Consequentialism">consequentialist</span>. An action is right or wrong because of its <b>outcomes</b>, not because of the kind of action it is or what was promised beforehand. What is wrong with stabbing someone is the injury it causes; a surgeon makes a similar cut, but because the consequences are good, the action is good. Because we cannot change the past, the consequentialist looks only to making the world best in the future.</p>
+  <h3>Why it matters</h3>
+  <p>Utilitarianism offers a single, impartial principle that can be applied to any decision, from personal choices to public policy. Everyone’s happiness counts equally, regardless of race, sex or religion. But it also seems to permit terrible things, such as sacrificing an innocent person if enough others benefit. The question is whether those problems can be answered.</p>
+  <h3>The specification in outline</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">What is utility?</span><p>Bentham’s quantitative hedonism; Mill’s qualitative hedonism and his ‘proof’; non-hedonistic (preference) utilitarianism; act and rule utilitarianism.</p></div>
+    <div class="resp against"><span class="tag">Issues</span><p>Is pleasure the only good (Nozick)? Fairness, rights and the tyranny of the majority; problems of calculation; partiality; integrity and intentions.</p></div>
+  </div>
+  <h3>The tour</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <div class="card"><h4>The big question</h4><p>Is the right action always the one that produces the best consequences for everyone?</p></div>
+  <div class="card"><h4>How to use this tour</h4><p>Stops 1–5 explain the theory. Stops 6–10 cover the issues. Hover over or tap any dotted term for its definition. Cards marked ‘Beyond the spec’ are extension.</p></div>
+  <div class="card"><h4>Set texts</h4><p>Bentham (1789), <i>An Introduction to the Principles of Morals and Legislation</i>, chapters 1 and 4. Mill (1863), <i>Utilitarianism</i>, chapters 1, 2, 4 and 5.</p></div>
+</aside></div>
+</template>
+
+<!-- BENTHAM -->
+<template id="s-bentham">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · What is utility?</div>
+  <h2>Bentham: quantitative hedonistic utilitarianism</h2>
+  <div class="thesis"><b>Bentham:</b> the right action is the one that produces the greatest quantity of pleasure over pain for everyone affected. All pleasures are of the same kind and differ only in amount.</div>
+  <h3>The principle of utility</h3>
+  <blockquote>By the principle of utility is meant that principle which approves or disapproves of every action whatsoever, according to the tendency which it appears to have to augment or diminish the happiness of the party whose interest is in question.<cite>Bentham, <i>Introduction to the Principles of Morals and Legislation</i>, ch. 1</cite></blockquote>
+  <p>The “party whose interest is in question” is not the agent alone but everyone affected by the action. By <b>utility</b> Bentham means the property of an object or action that tends to produce benefit, advantage, pleasure, good or happiness, or to prevent mischief, pain, evil or unhappiness.</p>
+  <h3>A psychological and a normative claim</h3>
+  <p>Bentham opens his book by saying that nature has placed mankind under two sovereign masters, pain and pleasure. This is a <b>psychological</b> claim: humans are motivated by the desire for pleasure and the avoidance of pain. Bentham builds a <b>normative</b> claim on it: because this is how we are, morality should aim at maximising pleasure and minimising pain.</p>
+  <h3>The hedonic (felicific) calculus</h3>
+  <p>Bentham believed the quantity of pleasure an action produces could in principle be measured. In chapter 4 he lists the dimensions on which a pleasure or pain is valued:</p>
+  <ol class="list">
+    <li><b>Intensity</b> – how strong is it?</li>
+    <li><b>Duration</b> – how long does it last?</li>
+    <li><b>Certainty</b> – how likely is it to happen?</li>
+    <li><b>Propinquity</b> – how near or distant in time is it?</li>
+    <li><b>Fecundity</b> – how likely is it to lead to further pleasures?</li>
+    <li><b>Purity</b> – how free is it from being followed by pain?</li>
+    <li><b>Extent</b> – how many people does it affect?</li>
+  </ol>
+  <p class="note">The departmental slides list four of these (certainty, purity, extent, propinquity); the full seven are from Bentham’s chapter 4.</p>
+  <p>Bentham did not expect the calculation to be strictly carried out before every moral judgement. In his words, quoted in the encyclopedia entry, “It is not to be expected that this process should be strictly pursued previously to every moral judgment.” It sets out what makes an act right, and guides us where we have time to think.</p>
+  <h3>Equality and commensurability</h3>
+  <p>Each person’s happiness counts equally, regardless of race, sex or religion. The slogan usually attributed to Bentham is “everybody to count for one, nobody for more than one” (Mill reports it as Bentham’s dictum in <i>Utilitarianism</i>, ch. 5). Bentham also held that all pleasures are <span class="term" data-t="Commensurable">commensurable</span>: they can be measured on one scale. He is reported as saying that, quantity of pleasure being equal, push-pin (a simple children’s game) is as good as poetry.</p>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>Pleasure is the only thing good in itself, and pain the only thing bad in itself. <span class="note">(Psychological hedonism: it is what we all seek.)</span></li>
+    <li>Each person’s pleasure counts equally. <span class="note">(Impartiality.)</span></li>
+    <li>Pleasures differ only in quantity, measured by the seven dimensions of the calculus.</li>
+    <li>Therefore the right action is the one that produces the greatest net quantity of pleasure over pain for all affected.</li>
+  </ol>
+  <div class="resp against"><span class="tag">Objection: a doctrine fit only for swine</span><p>Contemporaries of Bentham and Mill complained that if push-pin is as good as poetry, hedonism lowers human life to the level of animals.</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>A quantitative hedonist can reply that poetry usually does produce more pleasure, because its pleasures are more certain, durable, fecund and pure. Mill takes a different route (Stop 2).</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Exam tip</h4><p>You do not need to memorise all seven criteria word for word, but a 5-mark answer on the calculus should name several and give an example.</p></div>
+  <div class="card"><h4>Common mistake</h4><p>“The greatest happiness for the greatest number” is a misleading summary. The aim is the greatest <b>net</b> happiness, which need not benefit the most people.</p></div>
+</aside></div>
+</template>
+
+<!-- MILL -->
+<template id="s-mill">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · What is utility?</div>
+  <h2>Mill: qualitative hedonism and higher pleasures</h2>
+  <div class="thesis"><b>Mill:</b> pleasures differ in <b>quality</b> as well as quantity. The higher pleasures of the mind are more valuable than the lower pleasures of the body, whatever their amount.</div>
+  <p>Mill worried that Bentham’s view could justify a society of “pigs”, one that preferred an abundance of cheap, easy pleasures to more valuable ones. His solution was to distinguish kinds of pleasure.</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Lower pleasures</span><p>Pleasures of the body alone: eating, drinking, sex, rest. Humans share these with other animals.</p></div>
+    <div class="resp"><span class="tag">Higher pleasures</span><p>Pleasures that involve the mind: the pleasures of the intellect, the feelings and imagination, and the moral sentiments.</p></div>
+  </div>
+  <h3>The test of the competent judges</h3>
+  <p>How do we know which pleasure is higher? Mill’s answer (paraphrased from <i>Utilitarianism</i>, ch. 2): if, of two pleasures, all or almost all of those who have experienced both give a decided preference to one, regardless of any feeling of moral obligation, that one is the more desirable. If they would prefer it even knowing it brings more discontent, and would not give it up for any quantity of the other, it is superior in quality, so far outweighing quantity as to make quantity of small account.</p>
+  <blockquote>It is better to be a human being dissatisfied than a pig satisfied; better to be Socrates dissatisfied than a fool satisfied.<cite>Mill, <i>Utilitarianism</i>, ch. 2</cite></blockquote>
+  <h3>Happiness and the cultivated mind</h3>
+  <p>For Mill, happiness is not a constant thrill but a life of few and passing pains, many and varied pleasures, with the active outweighing the passive, and not expecting more from life than it can give. Mill believed people could be improved through education. A cultivated mind, any mind “to which the fountains of knowledge have been opened”, finds endless interest in nature, art, poetry, history and the ways of humankind. He saw no reason why such mental culture should not be available to everyone in a civilised society.</p>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>Happiness is the only thing desirable as an end. <span class="note">(Mill’s proof, Stop 3.)</span></li>
+    <li>Pleasures differ in quality as well as quantity.</li>
+    <li>The higher-quality pleasure is the one preferred by competent judges who have experienced both. <span class="note">(The competent judges test.)</span></li>
+    <li>Competent judges prefer the pleasures of the mind.</li>
+    <li>Therefore, in maximising happiness, higher pleasures should be given greater weight than lower ones.</li>
+  </ol>
+  <div class="resp against"><span class="tag">Objection: is this still hedonism?</span><p>Moore and others argued that qualitative hedonism is incoherent or not really hedonism. If one pleasure is better than another while giving no more pleasure, something <i>other</i> than pleasure must make it better.</p></div>
+  <div class="resp against"><span class="tag">Objection: the competent judges</span><p>Who counts as competent? Many people who have experienced both opera and football prefer football. Mill’s judges may simply reflect the tastes of educated Victorian gentlemen.</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>Mill can say that people who have lost the capacity for higher pleasures, through circumstance or lack of time, are no longer competent judges, so their preference does not count against him.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Bentham vs Mill</h4><p><b>Bentham:</b> quantity only; push-pin = poetry.<br><b>Mill:</b> quality matters; Socrates dissatisfied beats a fool satisfied.</p></div>
+  <div class="card"><h4>Link</h4><p>The objection that quality smuggles in a non-hedonic standard leads naturally to non-hedonistic utilitarianism (Stop 4).</p></div>
+</aside></div>
+</template>
+
+<!-- PROOF -->
+<template id="s-proof">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · What is utility?</div>
+  <h2>Mill’s ‘proof’ of the greatest happiness principle</h2>
+  <p>In chapter 4 of <i>Utilitarianism</i>, Mill offers a defence of the claim that happiness is the ultimate good. He admits that first principles cannot be proved in the strict sense; what he offers are considerations capable of convincing a rational mind. The argument has three stages.</p>
+  <h3>1. Happiness is desirable</h3>
+  <blockquote>The only proof capable of being given that an object is visible, is that people actually see it. … In like manner, I apprehend, the sole evidence it is possible to produce that anything is desirable, is that people do actually desire it.<cite>Mill, <i>Utilitarianism</i>, ch. 4</cite></blockquote>
+  <h3>2. The general happiness is desirable</h3>
+  <blockquote>No reason can be given why the general happiness is desirable, except that each person, so far as he believes it to be attainable, desires his own happiness.<cite>Mill, <i>Utilitarianism</i>, ch. 4</cite></blockquote>
+  <p>Since each person’s happiness is a good to that person, the general happiness is a good to the aggregate of all persons.</p>
+  <h3>3. Happiness is the only thing desirable</h3>
+  <p>But we seem to desire other things for their own sake too: virtue, truth, justice, money, even our home. Mill’s answer is that these become <b>parts</b> of happiness. Think of taking pleasure in sunbathing by the sea: it is not a means to happiness, it is <i>being</i> happy. Something first desired as a means (money, virtue) can come to be desired as part of what happiness is for us.</p>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>The only evidence that something is desirable is that people actually desire it. <span class="note">(Analogy with visible/audible.)</span></li>
+    <li>Each person desires their own happiness.</li>
+    <li>Therefore each person’s happiness is desirable (a good to that person).</li>
+    <li>Therefore the general happiness is a good to the aggregate of all persons.</li>
+    <li>Whatever else we desire for its own sake, we desire as a part of happiness.</li>
+    <li>Therefore happiness is the only thing desirable as an end.</li>
+  </ol>
+  <div class="resp against"><span class="tag">Objection 1 (Moore): ‘desirable’ is not like ‘visible’</span><p>“Visible” means <i>able to be seen</i>, but “desirable” means <i>worthy of being desired</i>. That people do desire something does not show it is worth desiring. Mill commits the <span class="term" data-t="Naturalistic Fallacy">Naturalistic Fallacy</span>, moving from what is desired (a fact) to what is good (a value).</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>Mill is not claiming to <i>deduce</i> that happiness is worth desiring. His point is that the only <b>evidence</b> we can ever have for what is worth desiring is what people actually desire.</p></div>
+  <div class="resp against"><span class="tag">Objection 2: the composition fallacy</span><p>From “each person’s happiness is good for that person” it does not follow that “the general happiness is good for each person”, any more than “each person loves their own mother” shows that everyone loves everyone’s mother.</p></div>
+  <div class="resp against"><span class="tag">Objection 3: other things are desired for their own sake</span><p>Saying that virtue or love of truth become “parts of happiness” seems to stretch the word happiness until it covers whatever we value. That concedes the pluralist’s point.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Exam tip</h4><p>For 12 marks, set out all three stages in order, using Mill’s visible/desirable analogy and his “parts of happiness” move. Save Moore for a 25-mark evaluation.</p></div>
+  <div class="card"><h4>Link</h4><p>Moore’s objection is the open question argument applied to Mill. See the Meta-ethics tour, Stop 3.</p></div>
+</aside></div>
+</template>
+
+<!-- PREFERENCE -->
+<template id="s-preference">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · What is utility?</div>
+  <h2>Non-hedonistic utilitarianism: preferences</h2>
+  <div class="thesis"><b>Preference utilitarianism:</b> the good to be maximised is not pleasure but the satisfaction of people’s preferences or desires. The right act is the one that maximises preference satisfaction for all affected.</div>
+  <p>Non-hedonistic utilitarians keep the structure of utilitarianism (maximise the good, count everyone equally) but deny that pleasure is the good. The best-known version is <span class="term" data-t="Preference utilitarianism">preference utilitarianism</span>, associated with Peter Singer (and R. M. Hare).</p>
+  <h3>Why prefer preferences?</h3>
+  <ul class="list">
+    <li><b>We want contact with reality.</b> What we prefer is usually not a sensation but a state of affairs: having real friends, actually achieving a goal. Pleasure alone, cut off from reality, does not satisfy those preferences.</li>
+    <li><b>It explains “higher” pleasures</b> in terms of what people prefer, rather than a mysterious quality.</li>
+    <li><b>Preferences can extend beyond our experience.</b> People care about what happens after they die, or about things they will never learn of. These are preferences, not momentary happiness.</li>
+    <li><b>It respects people’s own values.</b> It is because of our deepest preferences that we approve or disapprove of certain pleasures in the first place.</li>
+  </ul>
+  <h3>Smart’s electrode operator</h3>
+  <p>J. J. C. Smart asked us to picture the “voluptuary of the future”: a man with electrodes in his skull, one for each kind of physical pleasure, working a few hours a week and spending the rest stimulating his brain. Is this what all our ethical planning should lead to? Smart thought most of us would say no (paraphrased from the departmental slides; check against Smart’s text). Smart concluded that two utilitarians could recommend very different policies simply because they disagree about what happiness <i>is</i>, and that this is an ultimate difference in attitude.</p>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>What makes an outcome good for someone is that it satisfies their preferences.</li>
+    <li>Each person’s preferences count equally.</li>
+    <li>Therefore the right act is the one that maximises the satisfaction of preferences for all affected.</li>
+  </ol>
+  <div class="resp against"><span class="tag">Objection: bad preferences</span><p>Some preferences are misinformed, crazy, horrendous or trivial. I might prefer to drink a liquid I think is beer that is really acid, or prefer to torture children. Their satisfaction does not seem good.</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>Count only <b>informed</b> or rational preferences, those that would survive full information and reflection. Critics reply that deciding which preferences count may need a prior view of what is good, which makes the theory circular.</p></div>
+  <div class="resp against"><span class="tag">Objection: comparing preferences</span><p>We can find out what one person prefers by what they would choose. But how do we compare the <i>strength</i> of Jones’s preference with Smith’s? Without this, we cannot add preferences up.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Key distinction</h4><p><b>Hedonistic:</b> maximise pleasure (Bentham, Mill).<br><b>Non-hedonistic:</b> maximise something else, such as preference satisfaction (Singer).</p></div>
+  <div class="card"><h4>Note on Mill</h4><p>The departmental slides suggest Mill can be read as non-hedonistic, because quality depends on our attitude to a pleasure. The specification treats Mill as a qualitative <b>hedonist</b>; use that label in the exam and mention the alternative reading only as evaluation.</p></div>
+</aside></div>
+</template>
+
+<!-- ACT / RULE -->
+<template id="s-actrule">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 5 · What is utility?</div>
+  <h2>Act and rule utilitarianism</h2>
+  <div class="pair">
+    <div class="resp"><span class="tag">Act utilitarianism</span><p>An act is right if and only if it produces at least as much net good as any other act available to the agent at that time. Each act is judged directly by its own consequences. Associated with Bentham.</p></div>
+    <div class="resp"><span class="tag">Rule utilitarianism</span><p>An act is right if and only if it conforms to a rule whose general acceptance would produce the best consequences. Acts are judged <b>indirectly</b>, by the consequences of the rule they fall under.</p></div>
+  </div>
+  <h3>Why rules?</h3>
+  <p>Act utilitarianism seems to permit lying, promise-breaking or even killing the innocent whenever this would slightly increase happiness. Rule utilitarianism explains why such acts are wrong: a society that generally accepted rules allowing them would be worse off, through fear, loss of trust and frequent miscalculation.</p>
+  <p>Mill is often read as a rule utilitarian, or at least as leaning that way. He argued that humanity has learned, through experience, which kinds of action tend to promote happiness, and that these “secondary principles” (such as “keep your promises”) should guide us in everyday life rather than fresh calculation each time. <span class="note">(There is scholarly debate about whether Mill was an act or a rule utilitarian; the departmental slides present him as a rule utilitarian.)</span></p>
+  <h3>Strong and weak rule utilitarianism</h3>
+  <ul class="list">
+    <li><b>Strong</b> rule utilitarianism: the rules must always be followed, even when breaking one would produce more happiness in a particular case.</li>
+    <li><b>Weak</b> rule utilitarianism: the rules should generally be followed, but may be broken in exceptional cases where breaking them clearly produces more happiness.</li>
+  </ul>
+  <h3>Argument in standard form (rule utilitarianism)</h3>
+  <ol class="list">
+    <li>The right act is the one that produces the best consequences. <span class="note">(The utilitarian goal.)</span></li>
+    <li>Individuals calculating case by case make frequent errors and undermine trust. <span class="note">(Human fallibility.)</span></li>
+    <li>General acceptance of certain rules (do not kill the innocent, keep promises) produces better consequences over the long run than case-by-case calculation.</li>
+    <li>Therefore the right act is the one that conforms to those rules.</li>
+  </ol>
+  <div class="resp against"><span class="tag">Objection: rule worship</span><p>If the point of a rule is to maximise happiness, why follow it in a case where breaking it would clearly maximise happiness? Smart called this “rule worship”. Strong rule utilitarianism seems to become a form of absolutism, little different from a list of commandments.</p></div>
+  <div class="resp against"><span class="tag">Objection: collapse into act utilitarianism</span><p>If weak rule utilitarianism allows exceptions whenever breaking the rule produces more happiness, it gives the same verdicts as act utilitarianism. And if rules are refined to include every exception (“keep promises, except when…”), they become as complicated as act-by-act calculation.</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>Rule utilitarians focus on the long term: the general practice of following rules is more beneficial than breaking them whenever we think it would help, because we are prone to error and others are watching what we do.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Exam tip</h4><p>Use the act/rule distinction actively when evaluating: many issues (rights, integrity, promises) hit act utilitarianism much harder than rule utilitarianism.</p></div>
+</aside></div>
+</template>
+
+<!-- EXPERIENCE MACHINE -->
+<template id="s-machine">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 6 · Issues</div>
+  <h2>Is pleasure the only good? Nozick’s experience machine</h2>
+  <p>Robert Nozick (<i>Anarchy, State, and Utopia</i>, 1974) asks us to imagine a machine that could give us any experiences we wanted. Plugged in, you would believe you were spending time with friends, winning prizes and achieving your goals. You would experience the greatest balance of pleasure over pain, but none of it would be real: you would actually be floating in a tank. Would you plug in for life?</p>
+  <p>Nozick thinks most of us would not. If pleasure were all that mattered, it would seem irrational to refuse. Since refusing does not seem irrational, pleasure is not the only thing that matters.</p>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>If pleasure were the only intrinsic good, a life on the experience machine would be at least as good as any real life. <span class="note">(It contains as much pleasure.)</span></li>
+    <li>Most people, on reflection, would not plug in, and this choice is not irrational.</li>
+    <li>So people value something beyond pleasure: actually doing things, being a certain kind of person, being in contact with reality.</li>
+    <li>Therefore pleasure is not the only intrinsic good, and hedonistic utilitarianism is false.</li>
+  </ol>
+  <p>The encyclopedia entry adds further examples. Love for one’s partner does not seem to lose value when it brings less pleasure, for instance because they fall ill. Freedom seems valuable even when it causes anxiety. Knowledge of distant galaxies seems valuable whether or not it brings pleasure. And some pleasures, such as a sadist’s, seem to have no value at all.</p>
+  <div class="resp for"><span class="tag">Response 1: preference utilitarianism</span><p>If people prefer real friendships and real achievements, plugging them into the machine would not maximise preference satisfaction. Non-hedonistic utilitarianism survives the objection.</p></div>
+  <div class="resp for"><span class="tag">Response 2: propositional pleasure</span><p>A mother is pleased <i>that</i> her daughter got good grades, and this pleasure exists only if the grades are real. Hedonists who value this kind of pleasure can deny that the machine supplies more of it.</p></div>
+  <div class="resp for"><span class="tag">Response 3: Mill</span><p>Mill could say that the machine gives contentment, not happiness, because happiness involves the active exercise of our higher faculties. Critics reply that this moves Mill further from hedonism.</p></div>
+  <div class="resp against"><span class="tag">Response 4: status quo bias</span><p class="note">Added to complete the spec.</p><p>Some argue our reluctance reflects attachment to our current life rather than a judgement about value. If we were told we were <i>already</i> on the machine, many would not choose to unplug.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Evaluation</h4><p>The experience machine is a powerful objection to <b>hedonistic</b> utilitarianism, but much weaker against preference utilitarianism. Say which version you are attacking.</p></div>
+</aside></div>
+</template>
+
+<!-- RIGHTS -->
+<template id="s-rights">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 7 · Issues</div>
+  <h2>Fairness, liberty, rights and the tyranny of the majority</h2>
+  <p>Utilitarianism adds up happiness across people. It does not ask <i>how</i> happiness is distributed, or whether anyone’s rights are violated, except as these affect the total. This seems to permit serious injustice.</p>
+  <h3>The transplant case</h3>
+  <p>Five patients will die without organ transplants: one needs a heart, one a liver, one a kidney, and so on. A sixth person, in for routine tests, is a tissue match for all five. Killing him and distributing his organs would save five lives. Suppose the source of the organs would stay secret and the doctor would not be caught. Five lives seem to produce more utility than one, so act utilitarianism appears to say the doctor <i>ought</i> to kill him. Most people find this abominable: it overlooks the patient’s right to life.</p>
+  <h3>The tyranny of the majority</h3>
+  <p>If the majority would gain enough pleasure from persecuting a minority, the total happiness might be increased. Utilitarianism seems to sanction the oppression of minorities whenever enough people benefit.</p>
+  <ol class="list">
+    <li>Utilitarianism judges acts only by the total net good they produce.</li>
+    <li>In some cases, violating an individual’s rights or oppressing a minority produces the greatest total good.</li>
+    <li>Therefore utilitarianism requires violating rights in such cases.</li>
+    <li>Violating rights in such cases is wrong.</li>
+    <li>Therefore utilitarianism is false.</li>
+  </ol>
+  <div class="resp for"><span class="tag">Response 1: Mill’s harm principle</span>
+  <blockquote>That the only purpose for which power can be rightfully exercised over any member of a civilised community, against his will, is to prevent harm to others.<cite>Mill, <i>On Liberty</i>, ch. 1</cite></blockquote>
+  <p>Mill argued that protecting individual liberty is itself what best promotes happiness in the long run. Society may not interfere with a person merely because the majority dislikes what they do.</p></div>
+  <div class="resp for"><span class="tag">Response 2: rule utilitarianism</span><p>A rule allowing doctors to take organs from unwilling patients would not maximise utility if generally accepted. Doctors would make mistakes, and patients would be afraid to go to hospital. So rule utilitarianism says the transplant is wrong.</p></div>
+  <div class="resp for"><span class="tag">Response 3: bite the bullet</span><p>Some utilitarians accept that the transplant would be right in this wildly unrealistic case, and argue that our intuitions evolved for normal situations and should not be trusted here.</p></div>
+  <div class="resp for"><span class="tag">Response 4: Mill on justice</span><p class="note">Added to complete the spec.</p><p>In chapter 5 of <i>Utilitarianism</i>, Mill argues that justice is the name for the most important class of social utilities: the security that rights provide is so vital to happiness that rights should be treated as near-absolute.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Evaluation</h4><p>Rule utilitarianism handles the transplant case well. But critics ask why this doctor should be bound by others’ mistakes when he knows, in this case, that he is not mistaken.</p></div>
+</aside></div>
+</template>
+
+<!-- CALCULATION -->
+<template id="s-calc">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 8 · Issues</div>
+  <h2>Problems with calculation</h2>
+  <p>Utilitarianism seems to require us to calculate all the consequences of each act, for every person, for all time. That is impossible.</p>
+  <h3>The problems</h3>
+  <ul class="list">
+    <li><b>Prediction:</b> we cannot know all the consequences of an act, which may stretch indefinitely into the future.</li>
+    <li><b>Measurement:</b> pleasure and pain have no agreed unit. How many units is a toothache?</li>
+    <li><b>Comparison:</b> how can we compare the intensity of one person’s pleasure with another’s, or Mill’s higher pleasures with lower ones?</li>
+    <li><b>Time:</b> in many situations, there is no time to calculate before acting.</li>
+  </ul>
+  <h3>Which beings to include?</h3>
+  <p>Whose happiness counts? Bentham included animals: what matters is whether a being can suffer. But including all sentient beings makes calculation even harder. How do we weigh a cow’s pleasure against a human’s? Should we include future people who do not yet exist, and if so, how many?</p>
+  <ol class="list">
+    <li>Utilitarianism says the right act is the one that maximises net happiness for all affected.</li>
+    <li>To know which act this is, we would need to predict, measure and compare all its consequences for every being affected.</li>
+    <li>We cannot do this.</li>
+    <li>Therefore utilitarianism cannot tell us what to do.</li>
+  </ol>
+  <div class="resp for"><span class="tag">Response 1: criterion, not decision procedure</span><p>Most utilitarians do not offer the principle of utility as a procedure to apply before every act. It is a <b>criterion</b> of what makes an act right. Just as the laws of physics govern a golf ball’s flight without golfers calculating forces, utility can determine which acts are right without our calculating it. Mill said it is a misunderstanding of utilitarianism to think people should fix their minds on the world or society at large.</p></div>
+  <div class="resp for"><span class="tag">Response 2: tendency and experience</span><p>Bentham thought we should do what <i>tends</i> to produce happiness, not what we can prove does. Mill argued that humanity has had its whole history to learn which kinds of action tend to promote happiness; these lessons are stored in common moral rules.</p></div>
+  <div class="resp for"><span class="tag">Response 3: we can still know some things</span><p>We have strong reasons to think torturing children reduces utility even without predicting every consequence. That some cases are hard only shows the limits of moral knowledge.</p></div>
+  <div class="resp against"><span class="tag">Counter-objection</span><p>If we should usually not calculate, utilitarianism stops guiding our actual decisions. And if the criterion depends on actual consequences, someone who acts with care can still turn out to have acted wrongly through bad luck.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Key distinction</h4><p><b>Decision procedure:</b> how we decide what to do.<br><b>Criterion of rightness:</b> what makes an act right. Most utilitarians offer the second.</p></div>
+</aside></div>
+</template>
+
+<!-- PARTIALITY -->
+<template id="s-partial">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 9 · Issues</div>
+  <h2>Issues around partiality</h2>
+  <p>Utilitarianism is <span class="term" data-t="Impartiality">impartial</span>: everyone’s happiness counts equally, including the agent’s own and that of strangers. But ordinary morality says we have special obligations to family and friends, and that it is not wrong to favour them.</p>
+  <h3>Examples</h3>
+  <ul class="list">
+    <li>A burning building contains your mother and a scientist about to cure cancer. You can save only one. Utilitarianism seems to say you should save the scientist. <span class="note">(This example comes from William Godwin. Added to complete the spec.)</span></li>
+    <li>A good friend places more weight on their friends’ welfare than on strangers’. Critics argue utilitarians therefore cannot be good friends.</li>
+    <li>What about breaking a promise to a friend for slightly greater happiness overall? W. D. Ross argued that classic utilitarianism implies we ought to break a promise if this produced only slightly more happiness.</li>
+  </ul>
+  <ol class="list">
+    <li>Utilitarianism requires us to give equal weight to everyone’s happiness.</li>
+    <li>Morality permits, and sometimes requires, us to give special weight to those close to us.</li>
+    <li>Therefore utilitarianism conflicts with morality.</li>
+  </ol>
+  <h3>A related problem: demandingness</h3>
+  <p>If every pound I spend on myself could do more good given to charity, then buying new shoes when my old ones are serviceable seems wrong. Utilitarianism seems to leave no room for personal life, or for <span class="term" data-t="Supererogation">supererogatory</span> acts, those that are good to do but beyond the call of duty.</p>
+  <div class="resp for"><span class="tag">Response 1: partiality maximises happiness</span><p>A world where people care especially for their own families and friends is happier overall than one where everyone is strictly impartial. Rule utilitarianism can endorse partial rules on these grounds.</p></div>
+  <div class="resp for"><span class="tag">Response 2: bite the bullet</span><p>Some utilitarians, such as Peter Singer, accept that we are required to do far more for strangers than ordinary morality admits, and that our intuitions about partiality are not reliable.</p></div>
+  <div class="resp for"><span class="tag">Response 3: Mill on wrongness</span><p>Mill argued that an act is <i>wrong</i> only when it fails to maximise utility and the agent deserves to be punished for it. Failing to give everything to charity may be less than ideal without being wrong.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Evaluation</h4><p>Partiality is a strong objection to <b>act</b> utilitarianism. Rule utilitarianism can explain much of it, but only by making partiality valuable merely as a means to overall happiness, which may not capture why friendship matters.</p></div>
+</aside></div>
+</template>
+
+<!-- INTEGRITY -->
+<template id="s-integrity">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 10 · Issues</div>
+  <h2>Integrity and intentions</h2>
+  <p class="note">Added to complete the spec. Williams’ examples are not in the source materials; they are summarised from his ‘A Critique of Utilitarianism’ (in Smart and Williams, <i>Utilitarianism: For and Against</i>, 1973). Check against the text.</p>
+  <h3>Moral integrity: Bernard Williams</h3>
+  <p>Utilitarianism treats people as channels through which good consequences flow. It does not matter <i>who</i> brings about an outcome, only what the outcome is. Williams argued that this ignores <b>moral integrity</b>: our deepest commitments and projects, which make us who we are.</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">George</span><p>A chemist opposed to chemical weapons is offered a job in a weapons laboratory. If he refuses, someone else will take it and pursue the work more zealously. Utilitarianism says George should take the job.</p></div>
+    <div class="resp"><span class="tag">Jim</span><p>Jim arrives in a village where an army captain is about to shoot twenty villagers. The captain offers: if Jim shoots one, the other nineteen go free. Utilitarianism says, obviously, Jim should shoot one.</p></div>
+  </div>
+  <p>Williams’ point is not necessarily that the utilitarian answer is wrong, but that utilitarianism makes it <i>obvious</i>, ignoring the fact that it would be Jim doing the killing, and that we are each specially responsible for what <i>we</i> do rather than what others do.</p>
+  <h3>Intentions and motives</h3>
+  <p>Utilitarianism judges actions by their consequences, not their motives. An action done from an evil motive that happens to produce the greatest happiness is the right action. An action done with good intentions that turns out badly is wrong.</p>
+  <p>The encyclopedia gives a case. Alice buys a bus ticket home for a runaway teenager. The bus crashes and the runaway is killed. If actual consequences decide, Alice acted wrongly. Many think this result is absurd.</p>
+  <div class="resp for"><span class="tag">Response 1: separate the act from the agent</span><p>Mill held that the motive has nothing to do with the morality of the action, though much to do with the worth of the agent. Alice did the wrong thing, but she is blameless because her motives were good.</p></div>
+  <div class="resp for"><span class="tag">Response 2: expected consequences</span><p>Make rightness depend on the foreseeable or likely consequences, not the actual ones. Then Alice acted rightly.</p></div>
+  <div class="resp for"><span class="tag">Response 3 (integrity): integrity has utility</span><p>People who keep their deepest commitments tend to produce better outcomes over time; rule utilitarianism can build this in.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Evaluation</h4><p>The separation of act from agent is a good reply to the intentions objection. The integrity objection is harder: any utilitarian reply still treats integrity as valuable only because it produces happiness.</p></div>
+</aside></div>
+</template>
+
+<!-- REVISE -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>Is utilitarianism the right account of morality?</h2>
+  <h3>Overall evaluation</h3>
+  <p>Utilitarianism’s great strength is its impartial concern for everyone’s welfare, and its claim that consequences matter is hard to deny. Bentham’s quantitative hedonism is clear but crude; Mill’s higher pleasures answer the “swine” objection but strain hedonism, and the experience machine shows that pleasure is not all we value. Preference utilitarianism avoids that problem but struggles with bad and incomparable preferences. The calculation objection is largely answered by treating utility as a criterion of rightness, not a decision procedure. The deepest problems concern rights, partiality and integrity: act utilitarianism seems to permit the transplant, demands complete impartiality, and treats agents as channels for good outcomes. Rule utilitarianism answers many of these cases, but at the risk of rule worship or collapse into act utilitarianism. A sustained judgement: <b>utilitarianism is right that consequences matter morally, but no version yet shows that they are all that matters; rights and personal commitments seem to have a weight that utilitarianism can only explain indirectly.</b></p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Consequentialism:</b> rightness depends only on consequences. <b>Utilitarianism:</b> maximise utility, counting everyone equally.</li>
+    <li><b>Bentham:</b> quantitative hedonism; principle of utility; hedonic calculus (7 criteria); push-pin and poetry.</li>
+    <li><b>Mill:</b> higher and lower pleasures; competent judges; Socrates dissatisfied.</li>
+    <li><b>Mill’s proof:</b> desired → desirable; general happiness; other goods as parts of happiness. Moore’s objection; composition fallacy.</li>
+    <li><b>Preference utilitarianism (Singer):</b> maximise preference satisfaction; bad and incomparable preferences.</li>
+    <li><b>Act vs rule:</b> judge each act vs judge the rule; strong and weak; rule worship; collapse.</li>
+    <li><b>Issues:</b> experience machine; transplant and tyranny of the majority (harm principle); calculation and which beings (criterion vs procedure); partiality and demandingness; integrity (Williams) and intentions (Alice).</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Is act utilitarianism correct?</b><br>1. Thesis; define act utilitarianism and utility.<br>2. Strength: impartiality → calculation objection → criterion reply → judge.<br>3. Rights: transplant → rule utilitarianism → collapse → judge.<br>4. Integrity: Jim → integrity has utility → judge.<br>5. Conclusion that follows from your judgements.</p></div>
+</aside></div>
+</template>
+
+<!-- GLOSSARY -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>For 3-mark questions, learn these definitions precisely: one accurate sentence is better than a vague paragraph.</p></div></aside></div>
+</template>
+
+<script>
+var GLOSS=[
+ ["Utilitarianism","The theory that the right action is the one that maximises utility for all affected.","t"],
+ ["Consequentialism","The view that whether an act is right depends only on its consequences.","t"],
+ ["Utility","The property of an action or object that tends to produce benefit, pleasure or happiness, or prevent pain (Bentham).","t"],
+ ["Hedonism","The view that pleasure is the only intrinsic good and pain the only intrinsic bad.","t"],
+ ["Principle of utility","Bentham: approve or disapprove of every action according to its tendency to increase or decrease the happiness of those affected.","t"],
+ ["Hedonic calculus","Bentham’s method of measuring pleasure by intensity, duration, certainty, propinquity, fecundity, purity and extent.","t"],
+ ["Commensurable","Measurable on a single common scale.","t"],
+ ["Higher pleasures","Mill: pleasures of the intellect, feelings, imagination and moral sentiments.","t"],
+ ["Lower pleasures","Mill: pleasures of the body, shared with other animals.","t"],
+ ["Competent judges","Mill: those who have experienced both of two pleasures, whose preference shows which is higher.","t"],
+ ["Naturalistic Fallacy","Moore: identifying goodness with a natural property, e.g. inferring ‘desirable’ from ‘desired’.","t"],
+ ["Preference utilitarianism","The view that the right act maximises the satisfaction of preferences for all affected.","t"],
+ ["Act utilitarianism","An act is right if it produces at least as much net good as any alternative.","t"],
+ ["Rule utilitarianism","An act is right if it conforms to a rule whose general acceptance would produce the best consequences.","t"],
+ ["Strong rule utilitarianism","The rules must always be followed.","t"],
+ ["Weak rule utilitarianism","The rules may be broken in exceptional cases where doing so clearly produces more good.","t"],
+ ["Rule worship","Smart’s charge: following a rule even when breaking it would produce more good.","t"],
+ ["Experience machine","Nozick’s thought experiment: a machine giving any pleasurable experience, which most would refuse.","t"],
+ ["Tyranny of the majority","The oppression of a minority justified by the greater happiness of the majority.","t"],
+ ["Harm principle","Mill: power may rightly be exercised over someone against their will only to prevent harm to others.","t"],
+ ["Impartiality","Giving equal weight to everyone’s interests, including one’s own.","t"],
+ ["Supererogation","Acts that are good to do but beyond the call of duty.","t"],
+ ["Integrity","Williams: being true to one’s own deepest commitments and projects.","t"],
+ ["Criterion of rightness","What makes an act right, as opposed to a procedure for deciding what to do.","t"]
+];
+var STOPS=[["start","Start here"],["bentham","Bentham"],["mill","Mill: higher pleasures"],["proof","Mill’s proof"],["preference","Preferences"],["actrule","Act & rule"],["machine","Experience machine"],["rights","Rights & majority"],["calc","Calculation"],["partial","Partiality"],["integrity","Integrity & intentions"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["bentham","Stop 1","Bentham","The principle of utility and the calculus."],
+ ["mill","Stop 2","Mill’s higher pleasures","Quality as well as quantity."],
+ ["proof","Stop 3","Mill’s ‘proof’","From desired to desirable."],
+ ["preference","Stop 4","Preference utilitarianism","Beyond pleasure: Singer and Smart."],
+ ["actrule","Stop 5","Act and rule","Judging acts or judging rules."],
+ ["machine","Stop 6","The experience machine","Is pleasure the only good?"],
+ ["rights","Stop 7","Rights and the majority","Transplants and tyranny."],
+ ["calc","Stop 8","Calculation","Can we add up happiness?"],
+ ["partial","Stop 9","Partiality","Family, friends and strangers."],
+ ["integrity","Stop 10","Integrity and intentions","Jim, George and Alice."],
+ ["revise","Revise","Summary and quiz","Evaluation, recap, retrieval."],
+ ["glossary","A–Z","Glossary","Every key term."]
+];
+var STRETCH={
+ "start":[["Classic utilitarianism is many claims","Classic utilitarianism combines many separate claims: that only consequences matter, only actual consequences, only pleasure and pain, only the best outcome, the total for everyone counted equally. Most can be accepted or rejected independently, and dropping one or more gives a different theory, often called ‘consequentialism’.","Sinnott-Armstrong, ‘Consequentialism’, SEP §1"],["Henry Sidgwick","Alongside Bentham and Mill, the third classic utilitarian is Henry Sidgwick (<i>The Methods of Ethics</i>, 1907), who wrote that the end which gives the criterion of rightness need not always be the end at which we consciously aim.","Sinnott-Armstrong, ‘Consequentialism’, SEP §1, §4"]],
+ "bentham":[["Pleasure is not just the absence of pain","Hedonism is less simple than it looks: pleasure is distinct from the absence of pain, because people sometimes feel neither, and sometimes both at once.","Sinnott-Armstrong, ‘Consequentialism’, SEP §3"]],
+ "mill":[["Is qualitative hedonism coherent?","Mill’s qualitative hedonism has been charged with being incoherent and with not counting as hedonism at all, a criticism going back to Moore (1903).","Sinnott-Armstrong, ‘Consequentialism’, SEP §3"]],
+ "preference":[["Pluralist and perfectionist consequentialism","Some consequentialists reject any single good. Moore’s ‘ideal utilitarianism’ counts beauty and knowledge as well as pleasure; others add friendship, freedom, justice or virtue. Perfectionist consequentialism, with Aristotelian roots, aims at states that make a life good. Sen and Nussbaum focus on capabilities.","Sinnott-Armstrong, ‘Consequentialism’, SEP §3"],["Total vs average","Classic utilitarianism maximises total happiness. But then creating huge numbers of barely happy people could beat a smaller, very happy population. Averaging avoids this but has problems of its own.","Sinnott-Armstrong, ‘Consequentialism’, SEP §3"]],
+ "actrule":[["Obedience vs acceptance","‘What if everyone broke the rule “have children”?’ would be a disaster, yet not having children is not wrong. So rule consequentialists ask instead what would happen if a rule were generally <i>accepted</i>, or everyone were <i>permitted</i> to act a certain way.","Sinnott-Armstrong, ‘Consequentialism’, SEP §5"],["Other indirect theories","Motive consequentialism judges acts by the consequences of their motives; virtue consequentialism treats a trait as a virtue if it tends to produce good consequences.","Sinnott-Armstrong, ‘Consequentialism’, SEP §5"]],
+ "rights":[["Agent-relative consequentialism","Some consequentialists allow that an outcome can be better from an observer’s point of view but worse from the agent’s, because it includes a killing <i>by him</i>. This lets them say the doctor should not perform the transplant.","Sinnott-Armstrong, ‘Consequentialism’, SEP §5"]],
+ "calc":[["Self-effacing, not self-refuting","If utilitarianism tells most people not to use it as a decision procedure, is it self-refuting? Parfit argued not: a criterion can be ‘self-effacing’. The best criterion for a good investment is total return, but the best procedure may be to buy an index fund.","Sinnott-Armstrong, ‘Consequentialism’, SEP §4"],["Actual, foreseeable or intended?","Bob fails to notice rotten meat; Carol notices but serves it anyway; their son Don does not know rotten meat is harmful. Whether each acts wrongly depends on whether rightness turns on actual, foreseen, foreseeable, intended or likely consequences.","Sinnott-Armstrong, ‘Consequentialism’, SEP §4"]],
+ "proof":[["Is ‘good’ always ‘good for’ something?","Following Geach, Judith Jarvis Thomson argued that ‘good’ is attributive: a good poison is not simply good. If so, it makes no sense to call a total of happiness ‘good’ without saying good for whom or in what respect. Consequentialists reply that ‘good’ also has a predicative use.","Sinnott-Armstrong, ‘Consequentialism’, SEP §3"]],
+ "machine":[["Organic unities","Moore held that the value of a whole cannot always be found by adding up the values of its parts. A criminal’s punishment may add pain, yet the combination of crime and punishment may be better than crime alone. This challenges the simple adding-up at the heart of classic utilitarianism.","Sinnott-Armstrong, ‘Consequentialism’, SEP §3"]],
+ "integrity":[["Agent-neutrality","Classic utilitarianism is agent-neutral: whether one outcome is better than another does not depend on whose perspective it is judged from. Williams’ objection targets exactly this feature, and some philosophers argue a theory need not be agent-neutral to count as consequentialist.","Sinnott-Armstrong, ‘Consequentialism’, SEP §1–2"]],
+ "partial":[["Satisficing and scalar consequentialism","To limit demandingness, satisficing consequentialism says we need only do <i>enough</i> good; progressive consequentialism, that we must make things better; scalar consequentialism drops ‘right’ and ‘wrong’ and ranks acts as better or worse.","Sinnott-Armstrong, ‘Consequentialism’, SEP §6"]]
+};
+var QS={
+ "start":["What is consequentialism?","Explain what is meant by ‘utility’.","Explain what is meant by ‘maximising utility’ in utilitarianism.","Is utilitarianism the correct account of moral rightness?"],
+ "bentham":["What is meant by the principle of utility?","Explain Bentham’s hedonic calculus.","Explain Bentham’s quantitative hedonistic utilitarianism.","Is Bentham right that only the quantity of pleasure matters?"],
+ "mill":["What is a higher pleasure, according to Mill?","Explain Mill’s distinction between higher and lower pleasures.","Explain Mill’s qualitative hedonistic utilitarianism.","Does Mill’s distinction between higher and lower pleasures succeed?"],
+ "proof":["What is Mill’s ‘proof’ trying to show?","Explain one objection to Mill’s ‘proof’.","Explain Mill’s ‘proof’ of the greatest happiness principle.","Does Mill succeed in proving that happiness is the only good?"],
+ "preference":["What is preference utilitarianism?","Explain why preference utilitarianism is a form of non-hedonistic utilitarianism.","Explain preference utilitarianism and how it differs from hedonistic utilitarianism.","Is preference utilitarianism better than hedonistic utilitarianism?"],
+ "actrule":["What is rule utilitarianism?","Explain the difference between act and rule utilitarianism.","Explain act and rule utilitarianism, including strong and weak rule utilitarianism.","Is rule utilitarianism better than act utilitarianism?"],
+ "machine":["What is Nozick’s experience machine?","Explain how the experience machine challenges hedonistic utilitarianism.","Explain the experience machine and how utilitarians might respond.","Is pleasure the only good?"],
+ "rights":["What is meant by the ‘tyranny of the majority’?","Explain how utilitarianism might conflict with individual rights.","Explain the objection that utilitarianism fails to respect fairness and individual liberty/rights.","Can utilitarianism adequately account for individual rights?"],
+ "calc":["Explain one problem with calculating utility.","Explain the problem of which beings to include in the utilitarian calculation.","Explain the problems of calculation for utilitarianism and how utilitarians might respond.","Do problems with calculation make utilitarianism unworkable?"],
+ "partial":["What is meant by partiality?","Explain why partiality is a problem for utilitarianism.","Explain the issues around partiality for utilitarianism.","Can utilitarianism allow us to favour family and friends?"],
+ "integrity":["What does Williams mean by ‘integrity’?","Explain the objection that utilitarianism ignores the intentions of the individual.","Explain Williams’ objection that utilitarianism ignores moral integrity.","Does utilitarianism ignore the moral integrity and intentions of the individual?"]
+};
+var QUIZ=[
+ ["Why is utilitarianism a consequentialist theory?","It judges acts right or wrong only by their consequences."],
+ ["Name four criteria of Bentham’s hedonic calculus.","Any four of: intensity, duration, certainty, propinquity, fecundity, purity, extent."],
+ ["What is Mill’s competent judges test?","The higher pleasure is the one preferred by those who have experienced both."],
+ ["What is Moore’s objection to Mill’s proof?","‘Desirable’ means worthy of being desired, not able to be desired, so desire does not prove value."],
+ ["How does preference utilitarianism avoid the experience machine?","People prefer real friendships and achievements, so plugging in would not satisfy their preferences."],
+ ["What is the difference between strong and weak rule utilitarianism?","Strong: rules must always be followed. Weak: rules may be broken in exceptional cases."],
+ ["What is the ‘collapse’ objection to rule utilitarianism?","If rules may be broken whenever this maximises utility, rule utilitarianism gives the same verdicts as act utilitarianism."],
+ ["How does rule utilitarianism handle the transplant case?","A rule permitting such transplants would not maximise utility if generally accepted, so the transplant is wrong."],
+ ["What is the difference between a criterion of rightness and a decision procedure?","A criterion says what makes acts right; a decision procedure is how we decide what to do."],
+ ["What is Williams’ point in the Jim case?","Utilitarianism makes it obvious that Jim should shoot, ignoring that he would be the one killing."]
+];
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src">'+(x[2]==="h"?"From the slide glossary":"Course definition")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+
+</script>
+</body>
+</html>

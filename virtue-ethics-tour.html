@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Virtue Ethics Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#d6efdf; --ink:#245c3c;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#d6efdf}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#ece0f5}
+.stretch h4{color:#5a2f78}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#ece0f5;color:#5a2f78;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#f5fbf7}
+details.resp summary{cursor:pointer}
+.bspec{display:inline-block;margin-left:8px;font-size:.7rem;font-weight:600;letter-spacing:.08em;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;vertical-align:middle}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="#">← Moral Philosophy</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 1 · Spec 3.2.1</span>
+      <h1>Aristotelian virtue ethics</h1>
+      <p>Aristotle doesn’t start by asking “what should I do?” He asks “how should I live, and what kind of person should I be?” This tour follows the <i>Nicomachean Ethics</i>: eudaimonia, the function argument, virtue as a disposition, habituation and the mean, voluntary action and practical wisdom. It then covers the four issues on the specification and goes beyond them.</p>
+    </div>
+    <svg viewBox="0 0 320 220" role="img" aria-label="Diagram of the doctrine of the mean for fear and confidence: cowardice (deficiency) on the left, courage (the mean) in the centre, rashness (excess) on the right.">
+      <rect width="320" height="220" rx="14" fill="#fff"/>
+      <g font-family="Nunito Sans,sans-serif" text-anchor="middle">
+        <text x="160" y="30" font-size="12" fill="#245c3c" font-weight="600">Feeling: confidence in the face of danger</text>
+        <line x1="30" y1="110" x2="290" y2="110" stroke="#5b6070" stroke-width="2"/>
+        <circle cx="55" cy="110" r="9" fill="#fbe3d6" stroke="#8a3f1c"/>
+        <circle cx="265" cy="110" r="9" fill="#fbe3d6" stroke="#8a3f1c"/>
+        <circle cx="160" cy="110" r="14" fill="#245c3c"/>
+        <text x="55" y="88" font-size="12" fill="#8a3f1c">Cowardice</text>
+        <text x="55" y="140" font-size="11" fill="#5b6070">deficiency</text>
+        <text x="160" y="84" font-size="13" fill="#245c3c" font-weight="600">Courage</text>
+        <text x="160" y="146" font-size="11" fill="#5b6070">the mean</text>
+        <text x="265" y="88" font-size="12" fill="#8a3f1c">Rashness</text>
+        <text x="265" y="140" font-size="11" fill="#5b6070">excess</text>
+        <text x="160" y="190" font-size="11" fill="#5b6070">right time · right object · right people · right motive · right way</text>
+      </g>
+    </svg>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Built from the departmental slides <i>Aristotle’s ethics I–II</i>, <i>Aristotle on action</i> and <i>Nicomachean Ethics Books 6, 7 and 10</i>, and Kraut, ‘Aristotle’s Ethics’, <i>Stanford Encyclopedia of Philosophy</i>. Quotations from the <i>Nicomachean Ethics</i> are from W. D. Ross’s translation, with Bekker references (e.g. 1094a1). Material marked ‘Added’ was not in those sources and should be checked. Material marked ‘Beyond the spec’ is extension only. AQA 7172 · Moral Philosophy.</footer>
+</div>
+
+<!-- START -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>What is it to live well?</h2>
+  <p>Utilitarianism and Kantian ethics are theories of <i>right action</i>. Aristotle’s ethics is <b>agent-centred</b>: its first question is not “what should I do?” but “what kind of person should I be, and how should I live?” People, more than actions, are the primary subject of moral evaluation, and people can become more or less virtuous over time.</p>
+  <p>Aristotle (384–322 BC) wrote two ethical treatises, the <i>Nicomachean Ethics</i> and the <i>Eudemian Ethics</i>; the titles were added later, perhaps because they were edited by his son Nicomachus and his friend Eudemus. The <i>Nicomachean Ethics</i> is the set text.</p>
+  <h3>Why it matters</h3>
+  <p>For Aristotle, ethics is not a theoretical discipline. We study what the good is not simply for the sake of knowing it, but so that we can achieve it: so that we can actually live well. His answer, that a good life consists in developing and exercising excellent character and reason, remains one of the most influential ideas in ethics.</p>
+  <blockquote>For it is the mark of an educated man to look for precision in each class of things just so far as the nature of the subject admits.<cite>Aristotle, <i>Nicomachean Ethics</i> I.3, 1094b24</cite></blockquote>
+  <p>Don’t expect mathematical rules from ethics. Aristotle warns from the start that ethics is true “for the most part”, and requires judgement.</p>
+  <h3>The specification in outline</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">The theory</span><p>Eudaimonia as the final end and its relation to pleasure; the function argument; virtues as dispositions; habituation, the skill analogy and feelings; the doctrine of the mean; voluntary, involuntary and non-voluntary action; practical wisdom.</p></div>
+    <div class="resp against"><span class="tag">Issues</span><p>Clear guidance; clashing virtues; circularity of virtuous acts and persons; whether a virtue must contribute to eudaimonia, and the individual’s good vs moral good.</p></div>
+  </div>
+  <h3>The tour</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <div class="card"><h4>Set text</h4><p>Aristotle, <i>Nicomachean Ethics</i>: Books 1 (1–5, 7–10, 13), 2 (1–7), 3 (1–5), 5, 6 (1, 2, 5, 8, 9, 12, 13), 7 (12–13), 10 (1–8).</p></div>
+  <div class="card"><h4>How to use this tour</h4><p>Stops 1–7 explain the theory. Stops 8–11 cover the issues. Stops 12–13 are extension. Hover over or tap any dotted term for its definition.</p></div>
+</aside></div>
+</template>
+
+<!-- GOOD -->
+<template id="s-good">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · Book I</div>
+  <h2>The good and eudaimonia as the final end</h2>
+  <blockquote>Every art and every inquiry, and similarly every action and pursuit, is thought to aim at some good; and for this reason the good has rightly been declared to be that at which all things aim.<cite>Aristotle, <i>Nicomachean Ethics</i> I.1, 1094a1–3</cite></blockquote>
+  <p>Aristotle’s search is for <i>to agathon</i>, the good for human beings. Every activity aims at an <b>end</b> (<i>telos</i>), something “for the sake of which” it is done. And ends form a hierarchy: we make books for the sake of studying, study for the sake of knowledge; we exercise for the sake of health.</p>
+  <h3>The highest good</h3>
+  <p>If every end were sought for the sake of another, the chain would go on forever and desire would be empty and vain. So there must be a <b>final end</b>, the highest good, which has three features:</p>
+  <ol class="list">
+    <li>It is desirable for its own sake.</li>
+    <li>It is never desirable for the sake of something else.</li>
+    <li>All other goods are desirable for its sake.</li>
+  </ol>
+  <p>Aristotle thinks everyone agrees on its name: <span class="term" data-t="Eudaimonia">eudaimonia</span>, or “living well” (<i>eu zên</i>). Honour, pleasure, reason and virtue we choose partly for themselves, but also for the sake of eudaimonia; no one chooses eudaimonia for the sake of anything else. It is also <b>self-sufficient</b>: on its own it makes life desirable and lacking in nothing.</p>
+  <h3>Eudaimonia is not happiness</h3>
+  <ul class="list">
+    <li><b>Happiness</b> is a psychological state that comes and goes. <b>Eudaimonia</b> is an objective condition of a whole life.</li>
+    <li>Eudaimonia is not a state of mind but an <b>activity</b>: living and faring well.</li>
+    <li>“Flourishing” is often a better translation. The word combines <i>eu</i> (well) and <i>daimon</i> (spirit), but Aristotle treats it as simply meaning “living well”.</li>
+  </ul>
+  <blockquote>For one swallow does not make a summer, nor does one day; and so too one day, or a short time, does not make a man blessed and happy.<cite>Aristotle, <i>Nicomachean Ethics</i> I.7, 1098a18–20</cite></blockquote>
+  <h3>Eudaimonia and pleasure</h3>
+  <p>Aristotle considers three popular lives: the life of <b>pleasure</b>, the life of <b>politics</b> (honour) and the life of <b>contemplation</b>. The life devoted to bodily pleasure is dismissed as fit for cattle. Pleasure cannot be the final end, because what counts as truly pleasant must be judged by a standard other than pleasure itself: the judgement of the virtuous person.</p>
+  <p>But Aristotle is not against pleasure. A eudaimon life will be pleasant, and the best pleasures are those that accompany virtuous activity. In Book X he defines pleasure as something that “completes” an activity, like the bloom on the cheek of youth. The virtuous person takes pleasure in acting virtuously; someone who resents being generous is not yet generous.</p>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>Every action aims at some good. <span class="note">(1094a1.)</span></li>
+    <li>Some goods are pursued for the sake of others, forming a hierarchy.</li>
+    <li>The hierarchy cannot go on forever, or desire would be empty.</li>
+    <li>So there is a final good, desired for itself, for whose sake everything else is desired.</li>
+    <li>Eudaimonia alone fits this description.</li>
+    <li>Therefore eudaimonia is the highest good for human beings.</li>
+  </ol>
+</div>
+<aside>
+  <div class="card"><h4>Utilitarian comparison</h4><p>Like Mill, Aristotle thinks that our pursuit of pleasure is a sign that pleasure is good. Unlike Mill, he denies that it is the only good: virtue, wisdom and contemplation are good too.</p></div>
+  <div class="card"><h4>Exam tip</h4><p>For a 5-mark question on eudaimonia, give the three features of the final end and explain why eudaimonia is not just pleasure or happiness.</p></div>
+</aside></div>
+</template>
+
+<!-- FUNCTION -->
+<template id="s-function">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · Book I</div>
+  <h2>The function argument</h2>
+  <p>Saying that the good is eudaimonia is a platitude. To find out what it consists in, Aristotle asks: what is the <span class="term" data-t="Function (ergon)">function</span> (<i>ergon</i>) of a human being?</p>
+  <p>The function of a thing is its characteristic activity, what makes it the kind of thing it is. The function of a pen is to write; a good pen writes well. A flautist, a sculptor and every artist has a function, and their good lies in performing it well. So too with the eye, the hand and the foot. Is it plausible that a human being alone has no function?</p>
+  <h3>What is distinctively human?</h3>
+  <ul class="list">
+    <li><b>Life</b> (nutrition and growth) is shared with plants.</li>
+    <li><b>Perception</b> is shared with horses, oxen and every animal.</li>
+    <li>What remains is an active life of the element that has a <b>rational principle</b>: the capacity to reason and to be guided by reason.</li>
+  </ul>
+  <blockquote>Human good turns out to be activity of soul in accordance with virtue, and if there are more than one virtue, in accordance with the best and most complete.<cite>Aristotle, <i>Nicomachean Ethics</i> I.7, 1098a16–18</cite></blockquote>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>A thing’s good consists in performing its function well. <span class="note">(The pen, the flautist.)</span></li>
+    <li>Human beings have a function. <span class="note">(The eye and the hand have functions; so must the whole.)</span></li>
+    <li>The human function is the activity of the soul in accordance with reason. <span class="note">(Life and perception are shared.)</span></li>
+    <li>To perform a function well is to perform it in accordance with the relevant <span class="term" data-t="Virtue (aretē)">virtue</span> (excellence).</li>
+    <li>Therefore the human good is the activity of the soul in accordance with virtue, over a complete life.</li>
+  </ol>
+  <h3>Virtues and function</h3>
+  <p>This links virtue directly to function. A virtue (<i>aretē</i>) is an excellence: the quality that makes something perform its function well. A sharp knife has the virtue of a knife. Human virtues are the qualities that make us reason and live well. Aristotle divides them into <b>intellectual virtues</b>, of the reasoning part of the soul, and <b>moral virtues</b> (virtues of character), of the part that can listen to reason: our desires and feelings.</p>
+  <div class="resp against"><span class="tag">Objection 1: do humans have a function?</span><p>Pens and eyes have functions because they were designed or serve a larger whole. Without a designer, human beings need not have a function at all (a criticism often associated with existentialists).</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>Aristotle’s “function” need not imply a designer. It means the characteristic activity that makes something the kind of thing it is. Biology can tell us what flourishing is for a tiger; human nature can do the same for us.</p></div>
+  <div class="resp against"><span class="tag">Objection 2: distinctive is not the same as good</span><p>Humans are also distinctively capable of cruelty, lying and making nuclear weapons. Why think what is distinctive is what is best?</p></div>
+  <div class="resp against"><span class="tag">Objection 3: reason could serve bad ends</span><p>A brilliant swindler reasons excellently. The function argument seems to show that we should reason well, not that we should be just or kind.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Link</h4><p>The function argument grounds a naturalist account of goodness. See the Meta-ethics tour, Stop 1.</p></div>
+</aside></div>
+</template>
+
+<!-- VIRTUE -->
+<template id="s-virtue">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · Book II</div>
+  <h2>Virtues as character traits</h2>
+  <p>What kind of thing is a virtue? Aristotle argues by elimination. There are three things in the soul: <b>passions</b>, <b>faculties</b> and <b>states of character</b>.</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Not passions</span><p>Passions are feelings such as anger, fear, desire and pity. Simply having a feeling does not make you good or bad, and we do not choose our feelings. But we are praised or blamed for our virtues and vices.</p></div>
+    <div class="resp"><span class="tag">Not faculties</span><p>Faculties are capacities to feel, such as being capable of anger. We have them by nature; we are not praised or blamed for them.</p></div>
+  </div>
+  <p>So virtues must be <span class="term" data-t="Disposition (hexis)">states of character</span> (<i>hexeis</i>): settled dispositions, acquired by habit, “in virtue of which we stand well or badly with reference to the passions”. If we feel anger too violently or too weakly, we stand badly; if moderately, we stand well.</p>
+  <h3>Aristotle’s definition</h3>
+  <blockquote>Virtue, then, is a state of character concerned with choice, lying in a mean, i.e. the mean relative to us, this being determined by a rational principle, and by that principle by which the man of practical wisdom would determine it.<cite>Aristotle, <i>Nicomachean Ethics</i> II.6, 1106b36–1107a2</cite></blockquote>
+  <p>Unpack this carefully: virtue is (1) a <b>disposition</b>, not a feeling or action; (2) concerned with <b>choice</b>; (3) a <b>mean</b> between excess and deficiency (Stop 5); (4) the mean <b>relative to us</b>, not arithmetical; (5) fixed by <b>reason</b>, as the person of <b>practical wisdom</b> would fix it (Stop 7).</p>
+  <h3>Virtue is not just knowledge</h3>
+  <p>By calling virtue a <i>hexis</i>, Aristotle rejects the view found in Plato’s early dialogues that virtue is nothing but a kind of knowledge and vice nothing but ignorance. Knowing what is good is not enough; we must be trained to <i>feel</i> and <i>want</i> the right things.</p>
+  <h3>Four kinds of character</h3>
+  <ul class="list">
+    <li><b>The virtuous person</b> wants to do what is right, does it, and takes pleasure in it.</li>
+    <li><b>The continent</b> (<i>enkratic</i>) person feels contrary desires but acts rightly.</li>
+    <li><b>The incontinent</b> (<i>akratic</i>) person knows what is right but gives in to desire.</li>
+    <li><b>The vicious person</b> wants the wrong things and acts on them without regret.</li>
+  </ul>
+</div>
+<aside>
+  <div class="card"><h4>Kant comparison</h4><p>Kant gives most moral worth to the person who does right <i>against</i> their inclinations. Aristotle ranks that person (the continent) <i>below</i> the virtuous person, whose feelings agree with reason.</p></div>
+  <div class="card"><h4>Exam tip</h4><p>“Outline and explain Aristotle’s idea of a character trait” (12) — set out the argument by elimination, then the definition.</p></div>
+</aside></div>
+</template>
+
+<!-- HABIT -->
+<template id="s-habit">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · Book II</div>
+  <h2>Habituation, the skill analogy and feelings</h2>
+  <p>Intellectual virtues are mostly acquired through teaching. Moral virtues come about through <span class="term" data-t="Habituation">habit</span> (<i>ethos</i>), which is why the word “ethical” comes from it. We are not virtuous by nature, nor against nature: nature gives us the capacity, and habit perfects it.</p>
+  <h3>The skill analogy</h3>
+  <blockquote>Men become builders by building and lyre-players by playing the lyre; so too we become just by doing just acts, temperate by doing temperate acts, brave by doing brave acts.<cite>Aristotle, <i>Nicomachean Ethics</i> II.1, 1103a34–b2</cite></blockquote>
+  <p>Virtue is like a skill (<i>technē</i>). We learn it by practising, under guidance; we begin by imitating, make mistakes, are corrected, and gradually acquire the disposition until it becomes second nature. As with skills, doing it badly makes us worse: bad builders come from building badly.</p>
+  <blockquote>It makes no small difference, then, whether we form habits of one kind or of another from our very youth; it makes a very great difference, or rather all the difference.<cite>Aristotle, <i>Nicomachean Ethics</i> II.1, 1103b23–25</cite></blockquote>
+  <h3>Where the analogy breaks down</h3>
+  <p>Aristotle notes an important difference. A product of skill is judged by its result: a good house is a good house, whatever the builder’s state of mind. But for an act to be truly virtuous, the agent must also be in a certain condition when acting:</p>
+  <ol class="list">
+    <li>they must <b>know</b> what they are doing;</li>
+    <li>they must <b>choose</b> the act, and choose it <b>for its own sake</b>;</li>
+    <li>the act must spring from a <b>firm and unchangeable character</b>.</li>
+  </ol>
+  <h3>The importance of feelings</h3>
+  <p>Virtue concerns feelings as well as actions. We can feel fear, confidence, appetite, anger and pity too much or too little, and both are bad.</p>
+  <blockquote>But to feel them at the right times, with reference to the right objects, towards the right people, with the right motive, and in the right way, is what is both intermediate and best, and this is characteristic of virtue.<cite>Aristotle, <i>Nicomachean Ethics</i> II.6, 1106b21–23</cite></blockquote>
+  <p>Pleasure and pain are signs of character. Someone who abstains from bodily pleasures and enjoys doing so is temperate; someone who is annoyed by it is self-indulgent. That is why, following Plato, Aristotle says we should be brought up from childhood to delight in and be pained by the things we ought.</p>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>Moral virtues are not given by nature. <span class="note">(A stone cannot be trained to fly upwards.)</span></li>
+    <li>We acquire skills by practising them. <span class="note">(Builders, lyre-players.)</span></li>
+    <li>Moral virtue is acquired in the same way: by repeatedly doing virtuous acts, under guidance, until it becomes a settled disposition.</li>
+    <li>Therefore moral education is a matter of habituation from youth.</li>
+  </ol>
+</div>
+<aside>
+  <div class="card"><h4>Key point</h4><p>The skill analogy explains <b>how</b> we acquire virtue. Its disanalogy explains <b>what</b> virtue is: a matter of choice, motive and stable character, not just output.</p></div>
+</aside></div>
+</template>
+
+<!-- MEAN -->
+<template id="s-mean">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 5 · Book II</div>
+  <h2>The doctrine of the mean</h2>
+  <p>A virtue is a <span class="term" data-t="Doctrine of the mean">mean</span> between two vices, one of excess and one of deficiency. Just as too much or too little food or exercise destroys health, while the right amount produces it, so too with feelings and actions.</p>
+  <h3>The mean relative to us</h3>
+  <p>The mean is not an arithmetical average. If ten pounds of food is too much and two too little, the trainer will not simply prescribe six: that may be too little for the wrestler Milo and too much for a beginner. The mean is “relative to us”: right for this person, in this situation.</p>
+  <blockquote>So, too, any one can get angry—that is easy—or give or spend money; but to do this to the right person, to the right extent, at the right time, with the right motive, and in the right way, that is not for every one, nor is it easy.<cite>Aristotle, <i>Nicomachean Ethics</i> II.9, 1109a26–29</cite></blockquote>
+  <h3>Applying the mean to particular virtues</h3>
+  <table class="doubt" style="width:100%;border-collapse:collapse;font-size:.95rem">
+    <thead><tr style="text-align:left;border-bottom:2px solid #d6efdf"><th style="padding:8px">Sphere</th><th style="padding:8px">Deficiency</th><th style="padding:8px">Mean (virtue)</th><th style="padding:8px">Excess</th></tr></thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #dbe4ee"><td style="padding:8px">Fear and confidence</td><td style="padding:8px">Cowardice</td><td style="padding:8px"><b>Courage</b></td><td style="padding:8px">Rashness</td></tr>
+      <tr style="border-bottom:1px solid #dbe4ee"><td style="padding:8px">Bodily pleasures</td><td style="padding:8px">Insensibility</td><td style="padding:8px"><b>Temperance</b></td><td style="padding:8px">Self-indulgence</td></tr>
+      <tr style="border-bottom:1px solid #dbe4ee"><td style="padding:8px">Giving money</td><td style="padding:8px">Meanness</td><td style="padding:8px"><b>Liberality</b></td><td style="padding:8px">Prodigality</td></tr>
+      <tr style="border-bottom:1px solid #dbe4ee"><td style="padding:8px">Honour (great)</td><td style="padding:8px">Undue humility</td><td style="padding:8px"><b>Proper pride</b></td><td style="padding:8px">Vanity</td></tr>
+      <tr style="border-bottom:1px solid #dbe4ee"><td style="padding:8px">Anger</td><td style="padding:8px">Inirascibility</td><td style="padding:8px"><b>Good temper</b></td><td style="padding:8px">Irascibility</td></tr>
+      <tr style="border-bottom:1px solid #dbe4ee"><td style="padding:8px">Truth about oneself</td><td style="padding:8px">Mock modesty</td><td style="padding:8px"><b>Truthfulness</b></td><td style="padding:8px">Boastfulness</td></tr>
+      <tr><td style="padding:8px">Amusement</td><td style="padding:8px">Boorishness</td><td style="padding:8px"><b>Ready wit</b></td><td style="padding:8px">Buffoonery</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Names follow Ross’s translation of II.7; other translations use different words.</p>
+  <h3>Three important clarifications</h3>
+  <ul class="list">
+    <li><b>Not moderation.</b> The mean is not always a middling amount. Great anger at a great injustice may be exactly right.</li>
+    <li><b>Not symmetrical.</b> One extreme is often closer to the mean: rashness is more like courage than cowardice is. We should steer away from the extreme we are naturally inclined to, “as people do in straightening sticks that are bent”.</li>
+    <li><b>Some actions have no mean.</b> Adultery, theft, murder, spite, shamelessness and envy are bad in themselves; there is no right amount or right time to commit adultery.</li>
+  </ul>
+  <h3>Not a decision procedure</h3>
+  <p>The doctrine of the mean is not meant to be a procedure for making decisions. It helps show what is attractive about the virtues and systematise which qualities are virtues. What is actually “intermediate” in a given situation must be discerned by practical wisdom (Stop 7).</p>
+</div>
+<aside>
+  <div class="card"><h4>Exam tip</h4><p>Always give an example with all three positions (deficiency, mean, excess), and stress “relative to us”.</p></div>
+</aside></div>
+</template>
+
+<!-- RESPONSIBILITY -->
+<template id="s-resp">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 6 · Book III</div>
+  <h2>Moral responsibility: voluntary and involuntary action</h2>
+  <p>Virtue concerns feelings and actions, and we are praised or blamed only for those that are <b>voluntary</b>. So Aristotle needs an account of when we are responsible.</p>
+  <h3>Three categories</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">Voluntary</span><p>The origin of the action is in the agent, who knows the particular circumstances. Can be praised or blamed.</p></div>
+    <div class="resp against"><span class="tag">Involuntary</span><p>Done (1) under <b>compulsion</b>, where the origin is external and the agent contributes nothing, like being carried off by the wind; or (2) through <b>ignorance</b> of particulars, and afterwards <b>regretted</b>. Not blamed; pitied or pardoned.</p></div>
+  </div>
+  <div class="resp"><span class="tag">Non-voluntary</span><p>Done through ignorance but <b>not regretted</b> afterwards. The agent didn’t know what they were doing, but isn’t sorry either. Aristotle gives it a separate name because the agent does not show the pain that would make it clearly involuntary.</p></div>
+  <h3>Mixed actions</h3>
+  <p>Some actions are done under pressure: a captain throws cargo overboard in a storm to save the ship. In the abstract, no one would choose this; in the circumstances, it is chosen. Aristotle says such actions are “mixed” but more like voluntary ones, since the origin of the movement is in the agent.</p>
+  <h3>Acting in ignorance vs acting from ignorance</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">In ignorance (blameable)</span><p>A drunk person doesn’t fully understand what they are doing. But their ignorance results from their choice to get drunk, so they are responsible.</p></div>
+    <div class="resp"><span class="tag">From ignorance (excusable)</span><p>Accidentally treading on someone’s foot: you know people have feet, but not where theirs was. The ignorance of the particular is not your fault.</p></div>
+  </div>
+  <h3>Choice and deliberation</h3>
+  <p>Not everything voluntary is <span class="term" data-t="Choice (prohairesis)">chosen</span>. Children and animals act voluntarily, but not by choice. Choice is the result of <b>deliberation</b>: reasoning about the means to an end within our power. We deliberate not about ends but about how to achieve them, as a doctor does not deliberate whether to heal but how.</p>
+  <h3>Aristotle vs Socrates: are bad people responsible?</h3>
+  <p>Socrates held that no one does wrong willingly: all wrongdoing comes from ignorance of the good, so bad action is involuntary. Aristotle disagrees:</p>
+  <ol class="list">
+    <li>Where it is in our power to act, it is also in our power not to act. So if doing good is up to us, so is doing bad.</li>
+    <li>We encourage and deter people with praise, blame and punishment, which only makes sense for what is in their power.</li>
+    <li>Bad people became bad through their own choices, like the drunk. Their ignorance of the good is itself blameworthy.</li>
+    <li>If bad actions were involuntary, good actions would be too: an absurd result.</li>
+  </ol>
+  <p>Aristotle concedes, however, that as character hardens it becomes harder to change. Like someone who has thrown a stone, we cannot take it back once released, but it was in our power to throw it.</p>
+</div>
+<aside>
+  <div class="card"><h4>Exam tip</h4><p>Practise the slide questions: “Explain Aristotle’s distinction between voluntary and involuntary action” (12) and “Explain Aristotle’s theory of choice and deliberation” (5).</p></div>
+</aside></div>
+</template>
+
+<!-- PHRONESIS -->
+<template id="s-phronesis">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 7 · Book VI</div>
+  <h2>Practical wisdom (phronesis)</h2>
+  <p><span class="term" data-t="Phronesis">Phronesis</span>, practical wisdom, is the intellectual virtue that connects virtues, actions and reasons. It is the capacity to understand what is needed in a particular situation in light of a general understanding of what is good.</p>
+  <h3>What practical wisdom involves</h3>
+  <ol class="list">
+    <li>A general conception of what is good and bad, and how this relates to eudaimonia.</li>
+    <li>Perception of what feelings, choices and actions a particular situation requires.</li>
+    <li>The capacity to deliberate well.</li>
+    <li>The capacity to act on that deliberation.</li>
+  </ol>
+  <h3>How deliberation goes wrong</h3>
+  <ul class="list">
+    <li>We deliberate towards the <b>wrong end</b>. A clever swindler deliberates well about means, but this is mere cleverness, not wisdom.</li>
+    <li>We have the right end but choose the <b>wrong means</b>.</li>
+    <li>We take <b>too long</b>, or fail to deliberate at all.</li>
+  </ul>
+  <h3>Virtue and practical wisdom need each other</h3>
+  <p>Aristotle says that virtue makes the goal right, and practical wisdom makes the means right. Without virtue, practical wisdom degenerates into mere cleverness; without practical wisdom, good dispositions are blind. He distinguishes <b>natural virtue</b>, inborn tendencies such as being naturally brave or gentle, which children and animals can have, from <b>full virtue</b>, which requires practical wisdom. Natural virtue without wisdom can be harmful, like a strong body moving without sight.</p>
+  <p>This is why acting virtuously is not just doing what a virtuous person would do. Someone could imitate a virtuous act. To be truly virtuous you must act for the right end, for its own sake, with informed deliberation. Compare having a good diet because it is forced on you with choosing and sticking to one: only the second shows virtue.</p>
+  <h3>No rule book</h3>
+  <p>It is difficult if not impossible to give a general set of rules for how to live. We must grasp, almost intuitively, how to manage each situation. This does not make morality relative, but it does require a flexible, open attitude of mind. Practical wisdom cannot simply be taught; it is developed through experience, which is why young people may be good at mathematics but are rarely practically wise.</p>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>Virtue is a disposition to hit the mean in feelings and actions. <span class="note">(Stop 5.)</span></li>
+    <li>The mean is relative to the situation and cannot be fixed by general rules.</li>
+    <li>So hitting the mean requires the ability to perceive what each situation requires and deliberate well about it.</li>
+    <li>That ability is practical wisdom.</li>
+    <li>Therefore full virtue requires practical wisdom.</li>
+  </ol>
+</div>
+<aside>
+  <div class="card"><h4>Key line</h4><p>The definition of virtue (Stop 3) ends: “determined … by that principle by which the man of practical wisdom would determine it”. That is where phronesis enters.</p></div>
+</aside></div>
+</template>
+
+<!-- GUIDANCE -->
+<template id="s-guidance">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 8 · Issues</div>
+  <h2>Does virtue ethics give clear enough guidance?</h2>
+  <p>Utilitarianism offers the principle of utility; Kant offers the categorical imperative. What does Aristotle offer someone who wants to know what to do? “Do what the virtuous person would do” and “hit the mean” seem too vague. What is the right amount of anger, or courage, in this situation?</p>
+  <ol class="list">
+    <li>A satisfactory ethical theory should tell us how to act.</li>
+    <li>Aristotle tells us to act as the virtuous person would, hitting the mean as practical wisdom determines.</li>
+    <li>But this gives no clear guidance, especially to someone who lacks virtue and practical wisdom.</li>
+    <li>Therefore Aristotle’s ethics is not a satisfactory ethical theory.</li>
+  </ol>
+  <div class="resp against"><span class="tag">The problem deepens</span><p>Phronesis requires a correct upbringing and some natural virtue. So the people most in need of guidance are the ones least able to get it from the theory.</p></div>
+  <div class="resp for"><span class="tag">Response 1: wrong expectation</span><p>Aristotle warns that ethics admits only as much precision as its subject allows (1094b24). Real moral situations are too varied for rules; any rule-based theory needs judgement too, to apply its rules.</p></div>
+  <div class="resp for"><span class="tag">Response 2: a theory of persons, not acts</span><p>Aristotle describes the virtuous person, not a procedure. An adult who still needs a rule book shows a lack of virtue; the virtuous person is self-sufficient, their own guide. Guidance comes from who we are, not from rules.</p></div>
+  <div class="resp for"><span class="tag">Response 3: degrees of virtue</span><p>Our knowledge of the good comes in degrees. Most of us have some virtue and can ask what a courageous or honest person would do. Role models and the virtues themselves (be honest, be kind) give real guidance.</p></div>
+  <div class="resp for"><span class="tag">Response 4: Hursthouse’s v-rules</span><p class="note">Added: Hursthouse is not in the source materials.</p><p>Rosalind Hursthouse argued that each virtue generates a rule (“do what is honest”) and each vice a prohibition (“do not do what is cruel”). These “v-rules” give as much guidance as other theories.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Evaluation</h4><p>Response 2 is the most distinctively Aristotelian, but it may simply concede the objection: if the theory doesn’t aim to guide action, critics say it is incomplete.</p></div>
+</aside></div>
+</template>
+
+<!-- CLASH -->
+<template id="s-clash">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 9 · Issues</div>
+  <h2>Clashing and competing virtues</h2>
+  <p>What if virtues seem to point in different directions? Justice says punish the offender; mercy says forgive. Honesty says tell your friend the truth about their work; kindness says spare their feelings. Loyalty says protect my friend; justice says report him. This is like Kant’s problem of clashing duties.</p>
+  <ol class="list">
+    <li>A virtuous person has all the virtues.</li>
+    <li>In some situations, different virtues require incompatible actions.</li>
+    <li>Virtue ethics gives no way of deciding which virtue takes priority.</li>
+    <li>Therefore virtue ethics cannot resolve such conflicts.</li>
+  </ol>
+  <div class="resp for"><span class="tag">Response 1: the unity of the virtues</span><p>Aristotle denies that virtues genuinely conflict. Because every full virtue requires practical wisdom, and practical wisdom is one, someone who has practical wisdom has all the virtues together. Phronesis lets them display the right amount of each in a single act.</p></div>
+  <div class="resp for"><span class="tag">Response 2: conflicts are only apparent</span><p>Being merciful does not mean failing to be just. The truly just person knows when mercy is appropriate; the truly honest person knows how and when to tell a hard truth kindly. The conflict arises only if virtues are treated as rigid rules.</p></div>
+  <div class="resp for"><span class="tag">Response 3: flexibility is a strength</span><p>There are no absolute rules: we decide in context, which leaves a wider range of good actions open than Kant imagines. Kant must say which duty wins; Aristotle can say what the situation needs.</p></div>
+  <div class="resp against"><span class="tag">Counter-objection</span><p>Saying “practical wisdom will see what to do” describes the solution without supplying it. And some dilemmas, such as Sophie’s choice, may have no right answer at all; a virtuous person may be left with remorse whatever they do.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Exam tip</h4><p>The slide asks: “Explain the objection from conflicting virtues” (5). Give two virtues, a concrete case, and why it seems to leave the agent stuck.</p></div>
+</aside></div>
+</template>
+
+<!-- CIRCULARITY -->
+<template id="s-circle">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 10 · Issues</div>
+  <h2>The circularity objection</h2>
+  <p>Aristotle defines virtuous acts and virtuous persons in terms of each other:</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">A virtuous act</span><p>is one that a virtuous person would do, in the way they would do it.</p></div>
+    <div class="resp"><span class="tag">A virtuous person</span><p>is one who does virtuous acts, from a settled character.</p></div>
+  </div>
+  <p>This seems circular: neither definition tells us what the other means. Worse, if we become virtuous by doing virtuous acts (Stop 4), but virtuous acts are only those done by virtuous people, it seems no one could ever <i>become</i> virtuous. You would have to be born virtuous.</p>
+  <ol class="list">
+    <li>A virtuous act is defined as what a virtuous person would do.</li>
+    <li>A virtuous person is defined as someone who does virtuous acts.</li>
+    <li>So neither concept is explained independently.</li>
+    <li>Therefore the theory gives no informative account of either, and cannot explain how virtue is acquired.</li>
+  </ol>
+  <h3>Aristotle’s own solution</h3>
+  <p>Aristotle raises this puzzle himself in II.4. His answer depends on a distinction:</p>
+  <ul class="list">
+    <li>Acts can be virtuous <b>in a weak sense</b>: they are the kind of thing a virtuous person would do (they are <i>in accordance with</i> virtue). A learner can do these by imitation and instruction.</li>
+    <li>Acts are virtuous <b>in the full sense</b> only when done as the virtuous person does them: knowingly, chosen for their own sake, from a firm character.</li>
+  </ul>
+  <p>We become virtuous by doing acts virtuous in the first sense, until the disposition forms and we can do them in the second sense. The skill analogy works the same way: you can play a correct scale before you are a musician.</p>
+  <div class="resp for"><span class="tag">Response 2: the circle is not vicious</span><p>Virtuous acts and the virtuous person are connected, but each is also anchored independently: in the virtues themselves (courage, justice), in the doctrine of the mean, and ultimately in eudaimonia and the human function.</p></div>
+  <div class="resp against"><span class="tag">Counter-objection</span><p>The anchors are themselves vague. The mean is fixed “by the person of practical wisdom”, which brings the circle back.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Evaluation</h4><p>The weak/full distinction is a strong reply to the acquisition worry. The deeper worry, that “virtue” is never defined except by reference to the virtuous person, needs the function argument to break it.</p></div>
+</aside></div>
+</template>
+
+<!-- EUDAIMONIA & MORAL GOOD -->
+<template id="s-egoism">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 11 · Issues</div>
+  <h2>Must a virtue contribute to eudaimonia? The individual’s good and moral good</h2>
+  <p>For Aristotle, virtues are traits that enable <i>me</i> to flourish. That raises two linked problems.</p>
+  <h3>1. Must a trait contribute to eudaimonia to be a virtue?</h3>
+  <p>Some traits we admire, such as self-sacrifice, may make a person’s own life go worse. A soldier who dies for his comrades, or a whistle-blower who loses everything, does not seem to flourish. Conversely, a ruthless person may lack compassion yet seem to flourish. If virtues are defined by their contribution to the agent’s eudaimonia, either these are not virtues, or eudaimonia is the wrong test.</p>
+  <h3>2. Is the individual’s good the same as moral good?</h3>
+  <p>Aristotle’s ethics seems <b>egoistic</b>: the reason to be virtuous is that it is good for me. But morality seems to be about others. Why should my flourishing coincide with treating others well?</p>
+  <ol class="list">
+    <li>Aristotle defines virtues as traits that contribute to the agent’s own eudaimonia.</li>
+    <li>Some morally admirable traits do not contribute to the agent’s eudaimonia, and some immoral agents seem to flourish.</li>
+    <li>Therefore Aristotle’s account of virtue does not match moral virtue.</li>
+  </ol>
+  <div class="resp for"><span class="tag">Response 1: humans are social animals</span><p>For Aristotle, a human being is a political animal. Flourishing is impossible alone; justice, friendship and generosity are partly what a good human life consists in. A ruthless person may be rich, but cannot have real friendship or the pleasure of fine action, so does not truly flourish.</p></div>
+  <div class="resp for"><span class="tag">Response 2: noble self-sacrifice</span><p>Aristotle argues (IX.8) that the good person will give up money, honour and even life for friends and country, taking for himself the greater share of what is noble (<i>kalon</i>). He would rather have a short period of intense pleasure than a long one of mild enjoyment. Self-sacrifice can be the highest expression of a flourishing character.</p></div>
+  <div class="resp for"><span class="tag">Response 3: proper self-love</span><p>Aristotle distinguishes bad self-love, grasping for wealth and power, from good self-love, the love of virtue. If egoism means acting rightly by consulting one’s self-interest properly understood, Aristotle can be called an egoist without this being a criticism.</p></div>
+  <div class="resp against"><span class="tag">Counter-objection: moral luck</span><p>Aristotle admits that eudaimonia needs external goods, such as friends, wealth, health and good looks, and can be ruined by great misfortune, as with King Priam of Troy. So flourishing depends partly on luck, and virtue alone is not enough for it.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Evaluation</h4><p>Response 1 is the key move: if human nature is social, the gap between my good and others’ good narrows. But it relies on a contestable picture of human nature, and moral luck leaves some gap.</p></div>
+</aside></div>
+</template>
+
+<!-- BEYOND 1 -->
+<template id="s-friends">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 12 · Beyond the spec</div>
+  <h2>Friendship, contemplation and the best life</h2>
+  <h3>Friendship</h3>
+  <blockquote>For without friends no one would choose to live, though he had all other goods.<cite>Aristotle, <i>Nicomachean Ethics</i> VIII.1, 1155a5–6</cite></blockquote>
+  <p>Aristotle devotes two whole books (VIII–IX) to friendship (<i>philia</i>). He distinguishes three kinds, based on what the friends love in each other:</p>
+  <ul class="list">
+    <li><b>Friendships of utility</b>: each is useful to the other, as with business partners. They dissolve when the usefulness ends.</li>
+    <li><b>Friendships of pleasure</b>: each enjoys the other’s company, common among the young. They change as tastes change.</li>
+    <li><b>Friendships of virtue</b>: each loves the other for their character and wishes them well for their own sake. These are rare, take time, and last.</li>
+  </ul>
+  <p>The good person relates to a friend as to “another self”. This helps answer the egoism objection (Stop 11): the virtuous person’s flourishing includes caring for others for their own sake.</p>
+  <h3>Contemplation: the highest eudaimonia (Book X)</h3>
+  <p>In Book X, Aristotle compares the political life and the philosophical life, and argues that the life devoted to <i>theoria</i>, contemplation of the highest and eternal things, is best. Contemplation:</p>
+  <ol class="list">
+    <li>exercises the best thing in us, reason, on the best objects;</li>
+    <li>can be carried on more continuously than any other activity;</li>
+    <li>is the most pleasant activity;</li>
+    <li>is the most self-sufficient, loved for its own sake;</li>
+    <li>is a form of leisure, the end for whose sake we work;</li>
+    <li>is the activity we share with the divine.</li>
+  </ol>
+  <p>The life of the practically virtuous citizen is happy “in a secondary degree”. Scholars debate whether Aristotle’s two accounts of eudaimonia, the life of moral virtue and the life of contemplation, are consistent.</p>
+  <h3>Akrasia (Book VII)</h3>
+  <p>Aristotle investigates <i>akrasia</i> (incontinence, “lack of mastery”): acting against one’s better judgement through feeling. He distinguishes two forms: <b>impetuosity</b>, acting on passion without deliberating, and <b>weakness</b>, deliberating correctly but failing to stick to it.</p>
+</div>
+<aside>
+  <div class="card"><h4>Exam use</h4><p>The slides include a 12-mark question on contemplation as the highest form of eudaimonia. Use this stop to answer it.</p></div>
+</aside></div>
+</template>
+
+<!-- BEYOND 2 -->
+<template id="s-situ">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 13 · Beyond the spec</div>
+  <h2>The Good Samaritan experiment and situationism</h2>
+  <p>Virtue ethics assumes that people have stable character traits that reliably shape how they act. Some psychologists and philosophers have challenged this.</p>
+  <h3>The Good Samaritan experiment</h3>
+  <p class="note">Added detail: the study by Darley and Batson (1973) is described on the slides without its authors.</p>
+  <p>Trainee ministers were asked to walk to another building to give a talk; some were told they were late. On the way they passed a man slumped in a doorway, apparently in need of help. Those in a hurry were far less likely to stop, even when the talk they were giving was on the parable of the Good Samaritan.</p>
+  <p>The conclusion drawn from this kind of research is that we have a strong bias toward explaining behaviour by people’s internal traits, but dispositional factors are relatively weak predictors of what we do, while apparently trivial situational factors play powerful roles.</p>
+  <ol class="list">
+    <li>Virtue ethics assumes people have robust character traits that reliably determine their actions.</li>
+    <li>Experiments suggest behaviour is driven much more by situational factors than by character.</li>
+    <li>Therefore robust character traits may not exist, or be very rare, and virtue ethics rests on a false psychology.</li>
+  </ol>
+  <div class="resp for"><span class="tag">Response 1: virtue is rare</span><p>Aristotle never said most people are virtuous. He says virtue is difficult and rare. The experiments show that most people are not fully virtuous, which Aristotle already believed.</p></div>
+  <div class="resp for"><span class="tag">Response 2: practical wisdom includes perception</span><p>Part of practical wisdom is noticing what a situation requires. The hurried students may not have perceived the man’s need. Developing virtue includes learning to see.</p></div>
+  <div class="resp for"><span class="tag">Response 3: habituation matters even more</span><p>If situations shape behaviour, that strengthens Aristotle’s emphasis on upbringing, good laws and good communities.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Exam tip</h4><p>The slides ask for a 12-mark explanation of “the Good Samaritan objection”. Set out the experiment, the conclusion, and why it threatens the idea of stable virtues.</p></div>
+</aside></div>
+</template>
+
+<!-- REVISE -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>Is Aristotle right about how to live?</h2>
+  <h3>Overall evaluation</h3>
+  <p>Aristotle’s ethics captures what the other theories miss: the moral importance of character, feelings and a whole life, and the fact that real moral situations need judgement rather than formulas. The function argument grounds virtue in human nature, though it is open to the charge that “distinctive” is not the same as “good”. The doctrine of the mean is illuminating as an account of what virtues are, not as a decision procedure. The guidance objection is real, but partly rests on expecting a precision Aristotle explicitly denies is possible; clashing virtues are handled by the unity of the virtues through practical wisdom, and the circularity worry by the distinction between acts in accordance with virtue and acts from virtue. The hardest issue is the link between the agent’s own flourishing and moral goodness: Aristotle’s social picture of human nature narrows the gap but moral luck and self-sacrifice leave some of it open. A sustained judgement: <b>Aristotle offers the most plausible account of moral character and moral education, but needs supplementing with clearer principles for hard cases and a fuller account of why we owe things to strangers.</b></p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Agent-centred:</b> how should I live? what kind of person should I be?</li>
+    <li><b>The good:</b> everything aims at some good; the final end is eudaimonia: self-sufficient, an activity over a whole life. Not mere pleasure; pleasure completes virtuous activity.</li>
+    <li><b>Function argument:</b> human function = activity of soul in accordance with reason; human good = activity of soul in accordance with virtue.</li>
+    <li><b>Virtue:</b> a state of character (not passion or faculty), concerned with choice, in a mean relative to us, fixed by practical wisdom.</li>
+    <li><b>Habituation:</b> we become just by doing just acts; skill analogy and its limits; feelings matter.</li>
+    <li><b>Mean:</b> between excess and deficiency; relative to us; not moderation; some acts have no mean.</li>
+    <li><b>Responsibility:</b> voluntary, involuntary (force, ignorance + regret), non-voluntary (no regret); in vs from ignorance; choice and deliberation; against Socrates.</li>
+    <li><b>Phronesis:</b> perceiving what the situation needs; natural vs full virtue.</li>
+    <li><b>Issues:</b> guidance; clashing virtues; circularity; eudaimonia and moral good.</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Does Aristotelian virtue ethics give sufficiently clear guidance?</b><br>1. Thesis; define virtue and phronesis.<br>2. Objection: “act as the virtuous person would” is vague → precision reply → judge.<br>3. Clashing virtues → unity of the virtues → judge.<br>4. Compare with utilitarianism and Kant: do they really do better? → judge.<br>5. Conclusion.</p></div>
+</aside></div>
+</template>
+
+<!-- GLOSSARY -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>Learn the Greek terms with their meanings: examiners reward precise use of <i>eudaimonia</i>, <i>ergon</i>, <i>aretē</i>, <i>hexis</i> and <i>phronesis</i>.</p></div></aside></div>
+</template>
+
+<script>
+var GLOSS=[
+ ["Eudaimonia","Flourishing or living well: the final end of human life, an activity over a whole life.","t"],
+ ["Final end","An end desired for itself, never for the sake of anything else, and for whose sake all else is desired.","t"],
+ ["Telos","An end or goal for the sake of which something is done.","t"],
+ ["Function (ergon)","The characteristic activity of a thing, which makes it the kind of thing it is.","t"],
+ ["Virtue (aretē)","An excellence: the quality that makes something perform its function well.","t"],
+ ["Moral virtue","An excellence of character, concerning feelings and actions, acquired by habit.","t"],
+ ["Intellectual virtue","An excellence of reason, such as practical or theoretical wisdom, acquired mostly by teaching.","t"],
+ ["Disposition (hexis)","A settled state of character, acquired by habit, in virtue of which we stand well or badly towards our feelings.","t"],
+ ["Passion","A feeling such as anger, fear or pity.","t"],
+ ["Faculty","A natural capacity, e.g. the capacity to feel anger.","t"],
+ ["Habituation","Acquiring a disposition by repeatedly performing the relevant actions.","t"],
+ ["Skill analogy","Virtue is acquired like a skill, by practice; but unlike a skill it requires the right motive and stable character.","t"],
+ ["Doctrine of the mean","Virtue lies at a mean between a vice of excess and a vice of deficiency, relative to us.","t"],
+ ["Voluntary action","An action whose origin is in the agent, who knows the particular circumstances.","t"],
+ ["Involuntary action","An action done under compulsion or through ignorance, and regretted.","t"],
+ ["Non-voluntary action","An action done through ignorance but not regretted.","t"],
+ ["Choice (prohairesis)","Deliberate desire for something in our power, following deliberation.","t"],
+ ["Deliberation","Reasoning about the means to an end that is within our power.","t"],
+ ["Phronesis","Practical wisdom: perceiving what a situation requires and deliberating well towards the good.","t"],
+ ["Natural virtue","An inborn tendency to behave well, without practical wisdom.","t"],
+ ["Full virtue","Virtue combined with practical wisdom.","t"],
+ ["Akrasia","Incontinence or weakness of will: acting against one’s better judgement through feeling.","t"],
+ ["Enkrateia","Continence: acting rightly despite contrary desires.","t"],
+ ["Kalon","The noble or fine: what the virtuous person aims at.","t"],
+ ["Theoria","Contemplation: the activity of theoretical wisdom, the highest form of eudaimonia.","t"],
+ ["Philia","Friendship or love; of utility, pleasure, or virtue.","t"],
+ ["Unity of the virtues","The view that whoever has practical wisdom has all the virtues together.","t"],
+ ["Situationism","The view that situations predict behaviour better than character traits.","t"]
+];
+var STOPS=[["start","Start here"],["good","Eudaimonia"],["function","Function"],["virtue","Virtue"],["habit","Habituation"],["mean","The mean"],["resp","Responsibility"],["phronesis","Phronesis"],["guidance","Guidance"],["clash","Clashing virtues"],["circle","Circularity"],["egoism","Eudaimonia & morality"],["friends","Friendship & contemplation"],["situ","Situationism"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["good","Stop 1","Eudaimonia","The final end."],
+ ["function","Stop 2","The function argument","What is the human ergon?"],
+ ["virtue","Stop 3","Virtue as character","Not passion, not faculty."],
+ ["habit","Stop 4","Habituation","We become just by doing just acts."],
+ ["mean","Stop 5","The mean","Between excess and deficiency."],
+ ["resp","Stop 6","Responsibility","Voluntary and involuntary."],
+ ["phronesis","Stop 7","Practical wisdom","Seeing what is needed."],
+ ["guidance","Stop 8","Guidance","Does it tell us what to do?"],
+ ["clash","Stop 9","Clashing virtues","Justice vs mercy."],
+ ["circle","Stop 10","Circularity","Virtuous acts and persons."],
+ ["egoism","Stop 11","Eudaimonia and morality","My good and the moral good."],
+ ["friends","Stop 12","Friendship & contemplation","Beyond the spec."],
+ ["situ","Stop 13","Situationism","Beyond the spec: the Good Samaritan."],
+ ["revise","Revise","Summary and quiz","Evaluation, recap, retrieval."],
+ ["glossary","A–Z","Glossary","Every key term."]
+];
+var STRETCH={
+ "start":[["Aristotle’s audience","Aristotle says that to benefit from his lectures one must already have been brought up in good habits (1095b4–6). Unlike Plato in the <i>Republic</i>, he is not trying to convince a moral sceptic that justice is worthwhile.","Kraut, ‘Aristotle’s Ethics’, SEP §3.1"]],
+ "good":[["Pleasure as unimpeded activity","In Book VII Aristotle says pleasure is not a process but an ‘unimpeded activity of a natural state’ (1153a7–17). Virtuous activity is impeded without enough external goods, which is one reason eudaimonia needs them.","Kraut, SEP §8"]],
+ "function":[["Aristotle against Plato’s Forms","Aristotle aims at conclusions like Plato’s, that our good lies in the rule of reason, but without Plato’s metaphysics. He rejects the Form of the Good, and the idea that virtue requires mastering mathematics and the sciences.","Kraut, SEP §3.2"]],
+ "virtue":[["The traditional virtues and the sceptic","Even granting that living well means exercising some excellences, why think these are the <i>traditional</i> virtues such as justice and temperance? Aristotle owes an account of why precisely these qualities are central to a good life.","Kraut, SEP §3.1"]],
+ "mean":[["The fine (kalon)","A well-executed project that expresses the virtues is not only advantageous but <i>kalon</i>: fine or beautiful, like a well-proportioned artefact. The young learner must develop a love of the <i>kalon</i> and aversion to the shameful.","Kraut, SEP §5.1"]],
+ "phronesis":[["Why are virtuous people rare?","Clear thinking about the best goals of life and how to achieve them is rare, because the human psyche is ‘not a hospitable environment’ for these insights. That is why even a good political community needs laws and punishment.","Kraut, SEP §4"]],
+ "egoism":[["Was Aristotle an egoist?","If egoism means you will act rightly by consulting your self-interest properly understood, Aristotle fits. But if it means you should maximise your own good, as consequentialists maximise the general good, the label fits much less well.","Kraut, SEP §9"]],
+ "friends":[["Two treatments of pleasure","Pleasure is discussed twice in the <i>Nicomachean Ethics</i>, in VII.11–14 and X.1–5. Book VII is the same text as a book of the <i>Eudemian Ethics</i>; no one knows why the editor kept both.","Kraut, SEP §8"],["Continence and incontinence","The enkratic person feels passions contrary to reason but acts rightly; the akratic gives in. Neither is as blameworthy as vice or as praiseworthy as virtue.","Kraut, SEP §7"]],
+ "habit":[["Beyond childhood virtue","Habituation gives us only a ‘low-grade form of virtue’. As adults we must reflect on and systematise our childhood enthusiasms into a coherent plan of life, which is why we need ethical theory.","Kraut, SEP §3.1"]],
+ "resp":[["The first ethical treatises","Aristotle’s ethical works were a remarkable innovation: no one had written ethical treatises before. Plato discusses happiness, virtue, voluntariness, pleasure and friendship, but never brings them together as one systematic subject.","Kraut, SEP §1"]],
+ "clash":[["The good person as ‘standard and measure’","Aristotle says the virtuous person ‘sees the truth in each case, being as it were a standard and measure of them’ (1113a32–3). This is not mysterious insight: the good person is good at deliberating, and can explain the reasons for what they do.","Kraut, SEP §5.2"]],
+ "circle":[["Like medicine and navigation","There can be no series of rules, however complicated, that solves every practical problem. Aristotle thinks the same is true of crafts such as medicine and navigation (1104a7–10). The circle between act and person reflects this: the standard is the skilled practitioner.","Kraut, SEP §5.2"]],
+ "situ":[["Why external goods matter","Aristotle holds that someone friendless, childless, powerless and weak will have few opportunities for virtuous activity (1099a31–b6). Circumstances shape how virtue is expressed, a point situationists might welcome.","Kraut, SEP §2"]],
+ "guidance":[["Not a decision procedure","The doctrine of the mean is not intended as a procedure for making decisions. It shows what is attractive about the virtues and helps systematise them.","Kraut, SEP §5.2"]]
+};
+var QS={
+ "start":["What is meant by agent-centred ethics?","Explain why Aristotle says ethics cannot be precise.","Explain Aristotle’s virtue ethics.","Is Aristotelian virtue ethics the best normative theory?"],
+ "good":["What is eudaimonia?","Explain the relationship between eudaimonia and pleasure.","Explain Aristotle’s account of eudaimonia as the final end.","Is eudaimonia the final end of human life?"],
+ "function":["What is meant by ‘function’ (ergon)?","Explain the relationship between virtues and function.","Explain Aristotle’s function argument.","Does Aristotle’s function argument succeed?"],
+ "virtue":["What is a virtue, according to Aristotle?","Explain why Aristotle thinks virtues are not passions or faculties.","Outline and explain Aristotle’s idea of a character trait.","Are virtues character traits?"],
+ "habit":["What is habituation?","Explain the skill analogy.","Explain the role of education/habituation and feelings in the development of moral character.","Can virtue be acquired through habituation?"],
+ "mean":["What is the doctrine of the mean?","Explain the doctrine of the mean with reference to one virtue.","Explain the doctrine of the mean and its application to particular virtues.","Is the doctrine of the mean a good account of virtue?"],
+ "resp":["What is a non-voluntary action?","Explain Aristotle’s theory of choice and deliberation.","Explain Aristotle’s distinction between voluntary, involuntary and non-voluntary actions.","Are bad people responsible for their actions?"],
+ "phronesis":["What is phronesis?","Explain the difference between natural virtue and full virtue.","Outline and explain Aristotle’s understanding of phronesis.","Is practical wisdom necessary for virtue?"],
+ "guidance":["Explain one reason virtue ethics is said to lack guidance.","Explain how Aristotle might respond to the guidance objection.","Outline and explain the objection from guidance.","Can Aristotelian virtue ethics give sufficiently clear guidance about how to act?"],
+ "clash":["What is meant by clashing virtues?","Explain the objection from conflicting virtues.","Explain the issue of clashing virtues and Aristotle’s response.","Can Aristotle solve the problem of clashing virtues?"],
+ "circle":["State the circularity objection.","Explain Aristotle’s distinction between acts in accordance with virtue and acts from virtue.","Outline and explain the circularity objection.","Is Aristotle’s account of virtue viciously circular?"],
+ "egoism":["What is meant by moral luck?","Explain why Aristotle’s ethics may seem egoistic.","Explain the issue of whether a trait must contribute to eudaimonia to be a virtue.","Is the good for the individual the same as moral good?"],
+ "friends":["Name the three kinds of friendship.","Explain why Aristotle thinks contemplation is the highest activity.","Outline and explain Aristotle’s claim that theoretical contemplation is the highest form of eudaimonia.","Is the contemplative life the best life?"],
+ "situ":["What is situationism?","Explain the Good Samaritan experiment.","Outline and explain the Good Samaritan objection.","Does situationism undermine virtue ethics?"]
+};
+var QUIZ=[
+ ["What three features does the final end have?","Desired for itself, never for the sake of something else, and everything else is desired for its sake."],
+ ["Why is eudaimonia not the same as happiness?","Happiness is a passing psychological state; eudaimonia is an objective activity of living well over a whole life."],
+ ["What is the human function?","Activity of the soul in accordance with reason."],
+ ["Why are virtues not passions?","We do not choose our passions, and simply having them does not make us good or bad."],
+ ["Complete: ‘we become just by…’","‘…doing just acts.’"],
+ ["What does ‘the mean relative to us’ mean?","The right amount for this person in this situation, not an arithmetical average (Milo)."],
+ ["Name an action with no mean.","Any of: adultery, theft, murder; or the feelings spite, shamelessness, envy."],
+ ["What is the difference between involuntary and non-voluntary action?","Both are done through ignorance; the involuntary is regretted, the non-voluntary is not."],
+ ["How does Aristotle answer the circularity objection?","Learners do acts in accordance with virtue by imitation; these build the disposition to act from virtue."],
+ ["What are Aristotle’s three kinds of friendship?","Utility, pleasure and virtue."]
+];
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src">'+(x[2]==="h"?"From the slide glossary":"Course definition")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+
+</script>
+</body>
+</html>

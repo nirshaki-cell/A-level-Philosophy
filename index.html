@@ -1,0 +1,153 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Advanced Level Philosophy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+/* Layout: quiet centred header with four module tiles; each module page repeats the tile pattern for its spec sub-topics */
+:root{
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff;
+  --epi:#cfe3f7; --epi-ink:#1f4f7a;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding-block:clamp(40px,8vw,88px);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{text-align:center;display:grid;gap:12px;margin-bottom:clamp(32px,6vw,56px)}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{margin:0;font-weight:300;font-size:clamp(2rem,5.5vw,3.4rem);line-height:1.15;text-wrap:balance}
+.lede{margin:0 auto;max-width:60ch;color:var(--muted)}
+.tuition{justify-self:center;margin-top:4px;background:var(--card);border:1px solid #dde4ee;border-radius:999px;font-size:.92rem;max-width:100%}
+.tuition[open]{border-radius:14px}
+.tuition summary{cursor:pointer;list-style:none;padding:8px 18px;font-weight:600;color:var(--fg)}
+.tuition summary::-webkit-details-marker{display:none}
+.tuition summary::after{content:" ▾";color:var(--muted)}
+.tuition[open] summary::after{content:" ▴"}
+.tuition summary:focus-visible{outline:3px solid var(--fg);outline-offset:3px;border-radius:999px}
+.tuition .body{padding:0 18px 14px;color:var(--muted)}
+.tuition a{color:var(--epi-ink);font-weight:600;overflow-wrap:anywhere}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:900px){.grid,.grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.grid,.grid.three{grid-template-columns:1fr}}
+.epi{--tint:var(--epi);--ink:var(--epi-ink)} .mor{--tint:var(--mor);--ink:var(--mor-ink)}
+.god{--tint:var(--god);--ink:var(--god-ink)} .mind{--tint:var(--mind);--ink:var(--mind-ink)}
+.tile{display:flex;flex-direction:column;gap:10px;min-height:220px;padding:24px;border-radius:14px;
+  text-decoration:none;color:var(--ink);background:var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+a:focus-visible{outline:3px solid var(--ink,var(--fg));outline-offset:3px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85;font-variant-numeric:tabular-nums}
+.tile h2{margin:0;font-weight:400;font-size:1.45rem;line-height:1.25}
+.tile p{margin:0;font-size:.95rem}
+.tile .go{margin-top:auto;font-size:.9rem;font-weight:600}
+.tile.sm{min-height:170px;background:var(--card);border-top:6px solid var(--tint)}
+.tile.sm h2{font-size:1.25rem;color:var(--fg)}
+.tile.sm p{color:var(--muted)}
+footer{margin-top:48px;text-align:center;font-size:.85rem;color:var(--muted)}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;gap:12px;margin-bottom:32px}
+.band .spec{color:inherit}
+.band .q{margin:0;max-width:62ch;font-size:1.1rem}
+.tour{display:block;width:100%;height:600px;border:0;background:transparent}
+.soon{background:var(--card);border-radius:14px;padding:28px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+</style>
+
+<div id="app"></div>
+
+<script>
+var MODULES=[
+ {id:"epistemology",cls:"epi",paper:"Paper 1",spec:"3.1",title:"Epistemology",
+  home:"What is knowledge, and how do we come to have it?",
+  q:"What is knowledge, where does it come from, and how much can we really know?",
+  subs:[
+   ["what-is-knowledge","3.1.1","What is knowledge?","Is knowledge justified true belief, and what happens after Gettier?"],
+   ["perception","3.1.2","Perception as a source of knowledge","Direct realism, indirect realism and Berkeley's idealism."],
+   ["reason","3.1.3","Reason as a source of knowledge","Innatism and the intuition and deduction thesis, with empiricist replies."],
+   ["limits-of-knowledge","3.1.4","The limits of knowledge","Philosophical scepticism and the responses to it."]]},
+ {id:"moral-philosophy",cls:"mor",paper:"Paper 1",spec:"3.2",title:"Moral Philosophy",
+  home:"How should we act, and what are moral claims?",
+  q:"What makes an action right or wrong, and are there moral facts at all?",
+  subs:[
+   ["utilitarianism","3.2.1","Utilitarianism","Right action as maximising utility: Bentham, Mill and beyond."],
+   ["kantian-ethics","3.2.1","Kantian deontological ethics","Duty, the good will and the categorical imperative."],
+   ["virtue-ethics","3.2.1","Aristotelian virtue ethics","Eudaimonia, character and the doctrine of the mean."],
+   ["applied-ethics","3.2.2","Applied ethics","Stealing, simulated killing, eating animals and telling lies."],
+   ["meta-ethics","3.2.3","Meta-ethics","Moral realism and anti-realism: are there moral facts?"]]},
+ {id:"metaphysics-of-god",cls:"god",paper:"Paper 2",spec:"3.3",title:"Metaphysics of God",
+  home:"Is the concept of God coherent, and can God's existence be proved?",
+  q:"Is the idea of God coherent, can God's existence be proved, and can we speak meaningfully about God?",
+  subs:[
+   ["concept-of-god","3.3.1","The concept and nature of 'God'","The divine attributes and whether they are coherent."],
+   ["ontological","3.3.2","Ontological arguments","Proving God's existence from the concept of God alone."],
+   ["teleological","3.3.2","Teleological arguments","Arguing from order and purpose in the world to a designer."],
+   ["cosmological","3.3.2","Cosmological arguments","Arguing from causation and contingency to a first cause."],
+   ["problem-of-evil","3.3.2","The problem of evil","Can God's attributes be reconciled with evil?"],
+   ["religious-language","3.3.3","Religious language","Is talk about God meaningful, factual or neither?"]]},
+ {id:"metaphysics-of-mind",cls:"mind",paper:"Paper 2",spec:"3.4",title:"Metaphysics of Mind",
+  home:"What is the mind, and how does it relate to the body?",
+  q:"What makes something a mental state, and is the mind anything over and above the physical?",
+  subs:[
+   ["what-is-mind","3.4.1","What do we mean by 'mind'?","Phenomenal properties, qualia and intentionality."],
+   ["substance-dualism","3.4.2","Substance dualism","Descartes' case that the mind is a distinct substance."],
+   ["property-dualism","3.4.2","Property dualism","Zombies, Mary, and properties the physical cannot capture."],
+   ["behaviourism","3.4.3","Philosophical behaviourism","Mental states as behaviour or behavioural dispositions."],
+   ["identity-theory","3.4.3","Mind–brain type identity theory","Mental states are identical to brain states."],
+   ["eliminative-materialism","3.4.3","Eliminative materialism","Folk psychology is false and some mental states do not exist."],
+   ["functionalism","3.4.4","Functionalism","Mental states defined by their functional roles."]]}
+];
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+function home(){
+  return '<div class="wrap"><header><span class="spec">AQA A-level Philosophy · 7172</span><h1>Advanced Level Philosophy</h1>'+
+  '<p class="lede">Learn each topic from the ground up, or jump straight to arguments, objections and exam practice.</p>'+
+  '<details class="tuition"><summary>Get philosophy tuition</summary><div class="body">Email: <a href="mailto:nirshaki@googlemail.com">nirshaki@googlemail.com</a><br>or <a href="mailto:mohiniqavi@hotmail.com">mohiniqavi@hotmail.com</a></div></details></header>'+
+  '<nav class="grid" aria-label="Modules">'+MODULES.map(function(m){
+    return '<a class="tile '+m.cls+'" href="#'+m.id+'"><span class="paper">'+m.paper+'</span><h2>'+esc(m.title)+'</h2><p>'+esc(m.home)+'</p><span class="go">Open module →</span></a>';
+  }).join("")+'</nav><footer>Modules follow the order of the AQA 7172 specification.</footer></div>';
+}
+function band(m,spec,title,q){
+  return '<div class="band"><span class="spec">'+m.paper+' · Spec '+spec+'</span><h1>'+esc(title)+'</h1>'+(q?'<p class="q">'+esc(q)+'</p>':'')+'</div>';
+}
+function module(m){
+  var cols=m.subs.length%3===0||m.subs.length===5||m.subs.length===7?" three":"";
+  return '<div class="wrap '+m.cls+'"><a class="back" href="#home">← All modules</a>'+band(m,m.spec,m.title,m.q)+
+  '<nav class="grid'+cols+'" aria-label="Topics">'+m.subs.map(function(s){
+    return '<a class="tile sm" href="#'+m.id+'--'+s[0]+'"><span class="paper">Spec '+s[1]+'</span><h2>'+esc(s[2])+'</h2><p>'+esc(s[3])+'</p><span class="go">Open topic →</span></a>';
+  }).join("")+'</nav></div>';
+}
+var EMBED={"moral-philosophy--applied-ethics":"applied-ethics-tour.html","moral-philosophy--virtue-ethics":"virtue-ethics-tour.html","moral-philosophy--kantian-ethics":"kant-tour.html","moral-philosophy--utilitarianism":"utilitarianism-tour.html","moral-philosophy--meta-ethics":"metaethics-tour.html","epistemology--limits-of-knowledge":"scepticism-tour.html","epistemology--reason":"reason-tour.html","epistemology--what-is-knowledge":"knowledge-tour.html","epistemology--perception":"perception-tour.html","metaphysics-of-god--concept-of-god":"concept-god-tour.html","metaphysics-of-god--ontological":"ontological-tour.html","metaphysics-of-god--teleological":"teleological-tour.html","metaphysics-of-god--cosmological":"cosmological-tour.html","metaphysics-of-god--religious-language":"religious-language-tour.html","metaphysics-of-god--problem-of-evil":"evil-tour.html","metaphysics-of-mind--what-is-mind":"mind-intro-tour.html","metaphysics-of-mind--substance-dualism":"substance-dualism-tour.html","metaphysics-of-mind--property-dualism":"property-dualism-tour.html","metaphysics-of-mind--behaviourism":"behaviourism-tour.html","metaphysics-of-mind--identity-theory":"identity-theory-tour.html","metaphysics-of-mind--eliminative-materialism":"eliminativism-tour.html","metaphysics-of-mind--functionalism":"functionalism-tour.html"};
+function topic(m,s){
+  var key=m.id+'--'+s[0];
+  if(EMBED[key]) return '<div class="wrap '+m.cls+'"><a class="back" href="#'+m.id+'">← '+esc(m.title)+'</a><iframe class="tour" id="tour" title="'+esc(s[2])+'" src="'+EMBED[key]+'"></iframe></div>';
+  return '<div class="wrap '+m.cls+'"><a class="back" href="#'+m.id+'">← '+esc(m.title)+'</a>'+band(m,s[1],s[2],s[3])+
+  '<div class="soon">The full page for this topic is being written. It will cover the big question, key terms, explanation, formal arguments, objections and responses, evaluation, exam practice, a revision summary and a quick check quiz.</div></div>';
+}
+function render(){
+  var h=(location.hash||"").slice(1),out=home(),parts=h.split("--");
+  MODULES.forEach(function(m){
+    if(parts[0]===m.id){
+      out=module(m);
+      if(parts[1]) m.subs.forEach(function(s){ if(s[0]===parts[1]) out=topic(m,s); });
+    }
+  });
+  document.getElementById("app").innerHTML=out; window.scrollTo(0,0);
+}
+/* Fit the topic frame to its content: collapse it first so a short section never inherits a long one's height */
+function fitTour(f,fallback){
+  try{var d=f.contentDocument;if(!d||!d.body)throw 0;
+    var y=window.scrollY;f.style.height="0px";
+    var h=Math.max(d.body.scrollHeight,d.documentElement.scrollHeight);
+    f.style.height=(h||fallback||600)+"px";window.scrollTo(0,y);
+    if(!f._ro&&window.ResizeObserver){f._ro=new ResizeObserver(function(){
+      var n=d.body.scrollHeight;if(Math.abs(n-f.offsetHeight)>4)fitTour(f);});f._ro.observe(d.body);}
+  }catch(err){if(fallback)f.style.height=fallback+"px";}
+}
+window.addEventListener("message",function(e){var f=document.getElementById("tour");
+  if(f&&e.source===f.contentWindow&&e.data&&e.data.tourHeight){fitTour(f,e.data.tourHeight);
+    if(e.data.jump)f.scrollIntoView();}});
+window.addEventListener("hashchange",render); render();
+</script>
+
+</body></html>

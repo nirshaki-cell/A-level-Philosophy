@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Property Dualism Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#fbe3d6; --ink:#8a3f1c;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#fbe3d6}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#d6efdf}
+.stretch h4{color:#245c3c}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#fdf5f0}
+details.resp summary{cursor:pointer}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+
+/* mind tours additions */
+.resp.against{border-left-color:#f1b796}
+.gloss .src.b{color:#245c3c}
+.argbox{border:1px solid var(--line);border-radius:12px;padding:16px 20px 6px;margin:18px 0;background:#fffaf7}
+.argbox .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--ink)}
+.argbox ol{margin-top:8px}
+.ai{font-size:.8rem;color:var(--muted)}
+.band img{max-height:320px;object-fit:cover}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+</head>
+<body>
+<!--TITLE:Property Dualism Tour-->
+<div class="wrap">
+  <a class="back" href="#">← Metaphysics of Mind</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 2 · Spec 3.4.2</span>
+      <h1>Property dualism</h1>
+      <p>One substance, two kinds of property? Take the tour: what property dualism claims, Chalmers’ zombies, Jackson’s Mary, the responses to each, and the issues facing epiphenomenalism.</p>
+    </div>
+    <img src="img/mind-brain-icon.jpg" alt="A simple line drawing of a brain on a pale background.">
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Text adapted from the departmental handouts <i>Property Dualism</i>, <i>The Zombie Argument</i>, <i>The Knowledge Argument</i>, <i>Physicalism</i> and <i>Conceivability and possibility</i>, checked against the AQA 7172 specification and set texts (Chalmers, <i>The Conscious Mind</i> ch. 1 and ‘Consciousness and its place in nature’ §§2–3; Jackson, ‘Epiphenomenal Qualia’). Images from the departmental slides. Boxes marked ‘Beyond the spec’ are extension only.</footer>
+</div>
+
+<!-- ============ STOP 0 ============ -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>Are some mental properties non-physical?</h2>
+  <p>Substance dualism says the mind is a separate thing. Most philosophers today reject that: as far as we can tell, there is no soul, only the brain. But accepting that there is only one kind of <span class="term" data-t="Substance">substance</span> does not settle everything. A brain has physical properties – it weighs about 1.4 kg, it contains neurons firing at certain rates. Does it also have properties that are <i>not</i> physical, such as the felt redness of seeing a tomato or the hurtfulness of pain? AQA defines <span class="term" data-t="Property dualism">property dualism</span> as the view that <b>there are at least some mental properties that are neither reducible to nor supervenient upon physical properties.</b></p>
+  <p>The question matters because physicalism is the dominant view in philosophy and science. If even one property of experience is non-physical, then a complete physics – knowing the position and state of every particle – would still leave something out. The two arguments on the specification, David Chalmers’ <i>zombie argument</i> and Frank Jackson’s <i>knowledge argument</i>, both aim to show exactly this, using the <span class="term" data-t="Qualia">qualia</span> you met in 3.4.1.</p>
+  <div class="thesis"><b>The structure of the topic.</b> Stop 1 explains the thesis, supervenience and the two kinds of property dualism. Stops 2 and 3 cover the zombie argument and the knowledge argument, each with the three responses on the specification. Stop 4 covers the issues facing epiphenomenalist dualism. The issues facing dualism in general – other minds and Ryle’s category mistake – are in the substance dualism tour and apply here too.</div>
+  <h3>Choose where to go</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <div class="card"><h4>The big question</h4><p>Are there mental properties that are neither reducible to nor supervenient upon physical properties?</p></div>
+  <div class="card"><h4>How to use this tour</h4><p>Learning it for the first time? Go through the stops in order. Revising? Jump to a stop, or go straight to <b>Revise</b> for the summary and quiz. Dotted words are in the glossary: tap one to see its meaning.</p></div>
+  <div class="card"><h4>Spec checklist</h4><p>✓ The thesis of property dualism<br>✓ Zombie argument (Chalmers) + three responses<br>✓ Knowledge/Mary argument (Jackson) + ability, acquaintance and new knowledge/old fact responses<br>✓ Epiphenomenalism: introspective self-knowledge; phenomenology; natural selection</p></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 1 ============ -->
+<template id="s-thesis">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · The thesis</div>
+  <h2>One substance, two kinds of property</h2>
+  <p>The departmental slides put the key thesis like this: there is only one category of substance, physical substance, but there are two categories of properties, physical and mental. As regards consciousness, the mind needs the brain as a physical substance in order to exist. But the brain has both physical properties, such as its size and weight, and mental properties, such as being elated or seeing a bright colour. Property dualism is an umbrella term covering several theories.</p>
+  <h3>Reduction and supervenience</h3>
+  <p>To understand AQA’s definition, you need two technical terms.</p>
+  <p>A property is <span class="term" data-t="Reduction">reducible</span> to physical properties if it is identical to them, or can be fully explained by them – as the temperature of a gas is just the mean kinetic energy of its molecules.</p>
+  <p>One set of properties <span class="term" data-t="Supervenience">supervenes</span> on another if there can be no difference in the first without a difference in the second. Jaegwon Kim states it like this (as quoted in the departmental handout):</p>
+  <blockquote>‘if any system s instantiates a mental property M at t, there necessarily exists a physical property P such that s instantiates P at t, and necessarily anything instantiating P at any time instantiates M at that time.’<cite>Jaegwon Kim, as quoted in the departmental handout <i>Physicalism</i></cite></blockquote>
+  <p>The handout’s example is a pointillist painting: its aesthetic properties and what it depicts exist in virtue of the dots, their places and their colours. Two paintings with exactly the same dots in the same places could not differ in what they depict.</p>
+  <div class="thesis"><b>Why both words?</b> Physicalism is the view that everything is physical <i>or supervenes on the physical</i> (3.4.3). So it is not enough for a property dualist to say that mental properties are not reducible – some physicalists (non-reductive physicalists) agree with that. To be a genuine dualist, you must claim that some mental properties do not even supervene on the physical: fix all the physical facts, and the mental facts could still be different. That is exactly what the zombie argument tries to show.</div>
+  <h3>Two kinds of property dualism</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">1 · Interactionist</span><p>There is a two-way interaction between the physical world and mental properties. If I take a medicine, it affects my mental properties; if I have the mental property of feeling hungry, it may cause me to go to the kitchen. Mental properties are <i>causally efficacious</i>.</p></div>
+    <div class="resp"><span class="tag">2 · Epiphenomenalist</span><p>There is only a one-way interaction: the physical world can affect mental properties, but mental properties cannot cause anything physical. Qualia are by-products of brain activity. Frank Jackson defended this in ‘Epiphenomenal Qualia’ (1982).</p></div>
+  </div>
+  <figure class="side"><img src="img/mind-byproduct.jpg" alt="A poster reading 'The mind is a by-product of the brain' with a brain drawn between the words."><figcaption><b><span class="term" data-t="Epiphenomenalism">Epiphenomenalism</span>.</b> Like steam from a train’s engine, or the whistle, qualia are produced by the machine but do not drive it.</figcaption></figure>
+  <p>The handout quotes Jackson stating that he will defend the view that certain properties of certain mental states – those he calls qualia – are such that their possession or absence makes no difference to the physical world. Why would anyone accept this? Because it is a way of respecting the <span class="term" data-t="Causal closure of the physical">causal closure of the physical</span> while still holding that qualia are non-physical. The interactionist property dualist faces the same empirical interaction problem as Descartes.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Property dualism</dt><dd>Some mental properties are neither reducible to nor supervenient upon physical properties.</dd><dt>Supervenience</dt><dd>No difference in A without a difference in B.</dd><dt>Epiphenomenal</dt><dd>Caused, but causing nothing physical.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 2 ============ -->
+<template id="s-zombie">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · Argument 1</div>
+  <h2>The philosophical zombies argument (Chalmers)</h2>
+  <h3>The hard problem</h3>
+  <p>Chalmers distinguishes ‘easy’ and ‘hard’ problems of consciousness. The easy problems concern how a system reports information, discriminates stimuli and controls behaviour; there is no obvious obstacle to explaining these in neurobiological or computational terms. The hard problem is the problem of experience: there is something it is like to be a human being. Experience is clearly associated with physical processes, but why do those processes not take place ‘in the dark’, with no accompanying experience at all? (Paraphrased from the handout’s quotations of Chalmers.)</p>
+  <h3>What is a zombie?</h3>
+  <p>A <span class="term" data-t="Philosophical zombie">philosophical zombie</span> is not a film monster. It is a being that is physically identical to a conscious human – molecule for molecule – and so behaves identically, but lacks consciousness entirely. From the third-person point of view it is indistinguishable from you: it says ‘I love the smell of coffee’ and winces at pain. But there is nothing it is like to be a zombie. A <i>zombie world</i> is a physical duplicate of our world with no consciousness anywhere in it.</p>
+  <p>Chalmers does not claim zombies exist. He claims they are <span class="term" data-t="Conceivability">conceivable</span>: we can coherently imagine them, and there is no contradiction in the idea that reveals itself even on reflection.</p>
+  <div class="argbox"><span class="tag">The zombie argument in standard form (from the handout)</span>
+  <ol class="list">
+    <li>It is conceivable that there be zombies. <span class="note">(We can coherently imagine a physical duplicate without experience; no contradiction appears.)</span></li>
+    <li>If it is conceivable that there be zombies, it is metaphysically possible that there be zombies. <span class="note">(Ideal, careful conceivability is a guide to possibility.)</span></li>
+    <li>If it is metaphysically possible that there be zombies, then consciousness is not physical. <span class="note">(Physicalism requires that physical facts fix all facts; if a world physically like ours could lack consciousness, physical facts do not fix consciousness – it does not supervene.)</span></li>
+    <li>Therefore, consciousness is not physical.</li>
+  </ol></div>
+  <p>The underlying idea: we cannot know a priori, just by inspecting our concepts, that the physical facts entail the facts about experience. The concept of the physical and the concept of experience do not entail one another. Chalmers infers that the things themselves are ontologically distinct.</p>
+  <h3>Response 1: a zombie world is not conceivable</h3>
+  <div class="resp against"><span class="tag">Attack premise 1 (Chalmers calls this ‘type-A materialism’)</span><p>It seems to us that we can conceive of a zombie, but what we are really thinking of is incoherent – like thinking that 2 + 2 = 5 without noticing the error. If we fully understood what consciousness is (for example, a complex set of functional or behavioural capacities), we would see that a being physically and functionally identical to us must be conscious. Dennett is a prominent example. Notice that if behaviourism or functionalism is true, a zombie <i>would</i> be a contradiction, since it has all the relevant behaviour and functions.</p></div>
+  <div class="resp for"><span class="tag">Reply</span><p>This seems to deny the datum. When we imagine a zombie, we are not overlooking a hidden contradiction; we are imagining the physical story without the experiential one, and nothing in the physical story seems to demand experience. The burden is on the type-A physicalist to show the contradiction.</p></div>
+  <h3>Response 2: what is conceivable may not be metaphysically possible</h3>
+  <div class="resp against"><span class="tag">Attack premise 2 (‘type-B materialism’)</span><p>Zombies are conceivable but not possible. Compare water and H₂O: the concept <i>water</i> is different from the concept <i>H₂O</i>, so we can conceive of water that is not H₂O; but since they are in fact the same, it is metaphysically impossible. Likewise, the concept <i>pain</i> differs from the concept of a brain state, so zombies are conceivable – yet if pain is that brain state, zombies are impossible. This lets the physicalist acknowledge the deep epistemic gap while keeping a materialist worldview.</p></div>
+  <div class="resp for"><span class="tag">Chalmers’ reply</span><p>The analogy fails. If someone knew every physical fact about the world, they could work out the facts about water (that the stuff in our rivers is H₂O). But someone could know every physical fact about the brain and still not know what experience is like. So there is no epistemic gap between the physical truth and the truth about water analogous to the gap with consciousness. Physics only gives a ‘structural-dynamic’ description; consciousness cannot be captured that way.</p></div>
+  <h3>Response 3: what is metaphysically possible tells us nothing about the actual world</h3>
+  <div class="resp against"><span class="tag">Attack premise 3</span><p>Even if a zombie world is possible, that only shows that in <i>some</i> possible world physical duplicates of us lack consciousness. It does not follow that in the actual world consciousness is anything over and above the physical. Perhaps in our world consciousness is physical, though it might not have been. Physicalism, on this view, is a contingent truth about our world.</p></div>
+  <div class="resp for"><span class="tag">Reply</span><p>Physicalism is usually understood as the claim that the physical facts <i>necessitate</i> all the facts – that any world physically like ours is like ours in every respect. A zombie world is precisely a world physically like ours that differs. So if zombies are possible, physicalism as normally defined is false. The responder must redefine physicalism, which may seem like changing the subject.</p></div>
+  <h3>Evaluation</h3>
+  <p>The zombie argument is valid, and its third premise is secure if physicalism is a thesis about necessitation. The debate therefore turns on premises 1 and 2. Type-A responses are bold but have to deny what most people find obvious. Type-B responses are more popular: they accept the conceivability and deny the possibility. Chalmers’ reply – that the water case involves no comparable gap – is strong, but the type-B physicalist can answer that consciousness is special only because our phenomenal concepts are special (see the new knowledge/old fact response to Mary, Stop 3). <b>A reasonable judgement is that the zombie argument shows that consciousness cannot be derived a priori from physics, but does not establish that consciousness is non-physical, because we lack an independent reason to trust the move from conceivability to possibility in this case.</b></p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Philosophical zombie</dt><dd>A physical (and behavioural) duplicate of a conscious being that lacks consciousness.</dd><dt>Hard problem</dt><dd>Why physical processing is accompanied by experience.</dd><dt>Type-A / type-B</dt><dd>Physicalists who deny zombies are conceivable / deny they are possible.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 3 ============ -->
+<template id="s-mary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · Argument 2</div>
+  <h2>The knowledge argument (Jackson’s Mary)</h2>
+  <p>Frank Jackson’s ‘Epiphenomenal Qualia’ (1982) aims to refute physicalism by showing that physical information is incomplete. He says there are certain features of bodily sensations and perceptual experiences that no amount of purely physical information includes – the hurtfulness of pains, the itchiness of itches, the experience of tasting a lemon or seeing the sky. (Paraphrased from the handout’s quotation.)</p>
+  <h3>The thought experiment</h3>
+  <p>Mary is a brilliant scientist who, for whatever reason, is forced to investigate the world from a black-and-white room via a black-and-white television monitor. She specialises in the neurophysiology of vision and acquires all the physical information there is about what goes on when we see ripe tomatoes or the sky and use words like ‘red’ and ‘blue’. She knows exactly which wavelengths stimulate the retina, and exactly how this produces, via the central nervous system, the utterance ‘The sky is blue’. Then she is released, or given a colour monitor. Jackson writes:</p>
+  <blockquote>‘It seems just obvious that she will learn something about the world and our visual experience of it.’<cite>Frank Jackson, ‘Epiphenomenal Qualia’ (1982), as quoted in the departmental handout</cite></blockquote>
+  <div class="argbox"><span class="tag">The knowledge argument in standard form</span>
+  <ol class="list">
+    <li>Before her release, Mary knows all the physical facts about colour vision. <span class="note">(Stipulated in the thought experiment.)</span></li>
+    <li>On her release, Mary learns something new about colour vision – what it is like to see red. <span class="note">(Intuition: it seems ‘just obvious’.)</span></li>
+    <li>If Mary learns something new, then she did not know all the facts before her release. <span class="note">(What is learned is a new fact.)</span></li>
+    <li>So there are facts about colour vision that are not physical facts. <span class="note">(From 1–3.)</span></li>
+    <li>Therefore, physicalism is false: there are non-physical properties of experience (qualia).</li>
+  </ol></div>
+  <h3>Two clarifications from Jackson</h3>
+  <ul class="list">
+    <li><b>It is not Nagel’s argument.</b> Nagel says we cannot know what it is like to be a bat. Jackson’s point is not about what it is like to <i>be</i> Mary, but that there is a property of experience of which physical knowledge leaves us ignorant.</li>
+    <li><b>It is about other people’s experiences.</b> Physicalists can accept that Mary does not know what it would be like for <i>her</i> to see red. The key is that on release she realises how impoverished her conception of the mental life of <i>others</i> has been all along.</li>
+  </ul>
+  <h3>Response 1: ability knowledge (Lewis)</h3>
+  <div class="resp against"><span class="tag">Attack premise 3</span><p>David Lewis argues that Mary does not gain new propositional knowledge (knowledge <i>that</i>); she gains <span class="term" data-t="Ability knowledge">ability knowledge</span> (knowledge <i>how</i>). Knowing what it is like to see red is the possession of abilities: to remember, imagine and recognise red. That is knowing how, not knowing that. Since she learns no new fact, the argument does not show there are non-physical facts.</p></div>
+  <div class="resp for"><span class="tag">Replies</span><p>(1) Seeing red gives Mary new abilities, but that does not seem to be all: she also comes to know something new about other people’s experiences, which looks like a fact. (2) Ability and knowing what it is like can come apart. Someone unable to imagine red could still know what seeing red is like when they see it; and as Hume’s missing shade of blue suggests, one might imagine a colour without ever having seen it.</p></div>
+  <h3>Response 2: acquaintance knowledge (Churchland; Conee)</h3>
+  <div class="resp against"><span class="tag">Attack premise 3</span><p>Jackson confuses <span class="term" data-t="Propositional knowledge">propositional knowledge</span> – knowledge by description – with <span class="term" data-t="Acquaintance knowledge">acquaintance knowledge</span>, a distinction from Russell’s <i>The Problems of Philosophy</i> (1912), which you met in epistemology. Knowing that red is a certain wavelength is knowing <i>about</i> red; having seen red is being acquainted with it. Mary gains acquaintance with a property she already knew all about. Patricia Churchland makes this objection in the departmental handout.</p></div>
+  <div class="resp for"><span class="tag">Replies</span><p>(1) Jackson can say it does not matter what <i>type</i> of knowledge is gained; the question is whether Mary knew <i>everything</i> before, and she did not. (2) Acquaintance seems to bring propositional knowledge with it: to know what it is to see red is to know <i>that seeing red is like this</i>. That is learning a new fact.</p></div>
+  <h3>Response 3: new knowledge, old fact (Tye)</h3>
+  <div class="resp against"><span class="tag">Attack the move from 3 to 4</span><p>Mary does gain new propositional knowledge – but it is knowledge of a physical fact she already knew in a different way. Compare: you can know that Hesperus is bright and not know that Phosphorus is bright, though they are the same planet. Michael Tye’s version (as set out in the handout):</p>
+  <ol class="list">
+    <li>Phenomenal character (e.g. phenomenal blueness) is a physical property of experience.</li>
+    <li>To know what it is like to have an experience with that character requires acquiring <span class="term" data-t="Phenomenal concept">phenomenal concepts</span>.</li>
+    <li>What it is for an organism to gain phenomenal concepts can be described in physical terms.</li>
+    <li>A subject can get phenomenal concepts only by having the relevant experiences.</li>
+    <li>So on release Mary gains knowledge of phenomenal characters under phenomenal concepts – new knowledge, but of an old (physical) fact.</li>
+  </ol></div>
+  <div class="resp for"><span class="tag">Reply</span><p>If there are two ways of knowing one fact, there must be two different <i>modes of presentation</i> – ways the fact is given to us. Hesperus and Phosphorus are presented by different physical properties (seen in the evening, seen in the morning). So what physical property presents the experience to Mary under the phenomenal concept? If it is a non-physical quale, dualism returns at the level of the mode of presentation.</p></div>
+  <h3>Evaluation</h3>
+  <p>The ability response is elegant but seems to leave something out: Mary’s new insight into other people looks factual. The acquaintance response risks conceding that acquaintance brings new propositional knowledge. The new knowledge/old fact response is the strongest, because it grants Jackson’s intuition while denying his conclusion – but it depends on a story about phenomenal concepts that dualists argue smuggles qualia back in. Notably, Jackson himself later abandoned the argument and became a physicalist. <b>A fair judgement is that the knowledge argument shows that physical knowledge, acquired from the third-person point of view, does not give the first-person knowledge of what experience is like; it does not clearly show that what is known in the first-person way is a non-physical fact.</b></p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Propositional knowledge</dt><dd>Knowing that p.</dd><dt>Ability knowledge</dt><dd>Knowing how to do something.</dd><dt>Acquaintance knowledge</dt><dd>Direct awareness of something.</dd><dt>Phenomenal concept</dt><dd>A concept of an experience acquired by having it.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 4 ============ -->
+<template id="s-epi">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · Issues facing epiphenomenalism</div>
+  <h2>Can qualia really do nothing?</h2>
+  <p>Epiphenomenalism avoids the interaction problem by denying that mental properties cause anything physical. The specification names three challenges this creates. (The departmental slides add two more – it leads to the problem of other minds, and it may make a category mistake – which are covered for dualism in general.)</p>
+  <h3>1 · The challenge from introspective self-knowledge</h3>
+  <p>When I introspect, I come to know that I am in pain, and I report it: ‘I am in pain.’ The report is a physical event. If my pain-quale causes nothing physical, then it does not cause my belief or my report. But then my report that I have qualia would be exactly the same even if I had none – my zombie twin says the same thing. So how can I <i>know</i> I have qualia?</p>
+  <div class="argbox"><span class="tag">The self-knowledge challenge in standard form</span>
+  <ol class="list">
+    <li>If epiphenomenalism is true, qualia do not cause any physical events.</li>
+    <li>My beliefs and reports about my qualia are (realised by) physical events.</li>
+    <li>So my qualia do not cause my beliefs or reports about them. <span class="note">(From 1, 2.)</span></li>
+    <li>Knowledge requires that a belief be appropriately connected – e.g. causally – to what it is about. <span class="note">(A plausible condition on knowledge.)</span></li>
+    <li>Therefore, if epiphenomenalism is true, I cannot know that I have qualia.</li>
+  </ol></div>
+  <div class="resp for"><span class="tag">Response</span><p>Perhaps my knowledge of my qualia is not causal but constitutive: I know my experience by being acquainted with it, not by being caused to believe something about it. The quale is <i>part of</i> the experience in which I know it. The cost is that this knowledge can make no difference to anything I say or do – including writing papers defending epiphenomenalism.</p></div>
+  <h3>2 · The challenge from the phenomenology of our mental life</h3>
+  <p>Our mental life seems, from the inside, to involve causal connections. Psychological: my belief that it is raining and my desire to stay dry together lead me to decide to take an umbrella. Psycho-physical: my pain makes me cry out. The slides put it like this: it is supposed to be just obvious that the hurtfulness of pain is partly responsible for the subject seeking to avoid pain, saying ‘it hurts’ and so on. If epiphenomenalism is true, our intuition that we have gone to the kitchen at least partly because we felt hungry is false.</p>
+  <div class="resp for"><span class="tag">Response</span><p>Experienced causation is not proof of causation. Hume argued we never perceive causal connections, only constant conjunction. A regular correlation between pain and avoidance would look exactly like causation from the inside, even if both are effects of a common brain cause – as the falling barometer and the storm are both effects of falling air pressure.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>This makes our whole mental life systematically misleading. It is not just one belief that is false; it is the pervasive sense that what we feel matters to what we do. A theory that requires this has a high cost and should be accepted only if nothing better is available.</p></div>
+  <h3>3 · The challenge from natural selection</h3>
+  <figure class="side"><img src="img/mind-evolution.jpg" alt="Illustration of the evolution of apes into humans in two rows of silhouettes."><figcaption><b>Evolution.</b> Traits are selected because of what they do. A trait that does nothing cannot be selected for.</figcaption></figure>
+  <p>According to Darwinism, traits that evolve over time are those conducive to survival. Qualia probably evolved: they are widespread among animals and seem closely tied to survival (pain is horrible, food tastes good). But if qualia cannot affect the physical world, they cannot affect behaviour, so they cannot help an organism survive or reproduce. Then natural selection cannot explain why we have them.</p>
+  <div class="argbox"><span class="tag">The evolutionary challenge in standard form</span>
+  <ol class="list">
+    <li>Qualia are products of evolution by natural selection.</li>
+    <li>Natural selection only selects traits that affect an organism’s chances of survival and reproduction.</li>
+    <li>A trait can only affect those chances by having physical effects (on behaviour).</li>
+    <li>If epiphenomenalism is true, qualia have no physical effects.</li>
+    <li>Therefore, if epiphenomenalism is true, natural selection cannot explain qualia.</li>
+  </ol></div>
+  <div class="resp for"><span class="tag">Jackson’s response</span><p>Not every evolved trait is selected for its own sake. Some are by-products of traits that are useful. Jackson’s example is the polar bear’s heavy coat: the coat is a by-product of genes selected because they produce a <i>warm</i> coat; its heaviness is a disadvantage. Likewise, qualia may be by-products of the brain processes that were selected for. So premise 1 is true only in a weak sense, and premise 2 does not apply.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>The by-product reply does not explain the striking fit between qualia and survival – why the brain state that makes us avoid damage feels <i>bad</i> rather than pleasant or neutral. On epiphenomenalism, it would have made no difference if pain felt like tickles. The match looks like a remarkable coincidence.</p></div>
+  <h3>Evaluation</h3>
+  <p>Epiphenomenalism is the price property dualism pays for respecting causal closure, and it is a heavy one. The self-knowledge challenge is the most serious, since it seems to make the epiphenomenalist’s own belief in qualia unjustified – the very belief the theory exists to protect. The evolutionary challenge can be partly met by the by-product reply, but not the fit between qualia and function. <b>A sustained judgement: interactionist property dualism faces the interaction problem; epiphenomenalist property dualism faces these three challenges; so even if the zombie and Mary arguments worked, property dualism would be left in a difficult position about what qualia do.</b></p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Epiphenomenalism</dt><dd>Mental properties are caused by physical events but cause nothing physical.</dd><dt>Phenomenology</dt><dd>How our mental life seems from the inside.</dd><dt>By-product</dt><dd>A trait that comes with a selected trait but was not itself selected for.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ REVISE ============ -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>Is property dualism true?</h2>
+  <h3>Overall evaluation</h3>
+  <p>Property dualism improves on substance dualism by accepting that there is only one kind of substance, but it faces a dilemma about what mental properties do. Its two arguments both trade on an epistemic gap between physical and phenomenal knowledge. The zombie argument moves from that gap to a metaphysical conclusion via the claim that conceivability implies possibility; type-B physicalists deny that step. The knowledge argument moves from the gap via the claim that Mary learns a new <i>fact</i>; the ability, acquaintance and new knowledge/old fact responses each deny that step in different ways, and the third is strongest. A sustained judgement: <b>both arguments succeed in showing that consciousness cannot be known through physical description alone, but neither shows conclusively that consciousness is non-physical; and the epiphenomenalism that property dualists must adopt to respect causal closure undercuts our knowledge of qualia. Property dualism is best seen as the strongest statement of a problem, not yet a convincing solution.</b></p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Thesis:</b> some mental properties are neither reducible to nor supervenient upon physical properties. One substance, two kinds of property.</li>
+    <li><b>Supervenience (Kim):</b> no mental difference without a physical difference. Physicalism = everything is physical or supervenes on it.</li>
+    <li><b>Interactionist vs epiphenomenalist</b> property dualism (Jackson 1982).</li>
+    <li><b>Zombies (Chalmers):</b> conceivable → possible → consciousness not physical. Responses: not conceivable (type A); conceivable ≠ possible (type B, water/H₂O); possible ≠ actual.</li>
+    <li><b>Mary (Jackson):</b> knows all physical facts; learns something new; so physicalism false. Responses: ability (Lewis); acquaintance (Russell’s distinction; Churchland); new knowledge/old fact (Tye, phenomenal concepts).</li>
+    <li><b>Epiphenomenalism’s issues:</b> introspective self-knowledge; phenomenology of mental causation; natural selection (polar bear by-product reply).</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Does the knowledge argument show that physicalism is false?</b><br>1. Thesis; define physicalism and property dualism.<br>2. Set out Mary in standard form.<br>3. Ability response → new facts about others → judge.<br>4. New knowledge/old fact → mode of presentation reply → judge.<br>5. Conclusion: an epistemic gap, not (yet) an ontological one.</p></div>
+</aside></div>
+</template>
+
+<!-- ============ GLOSSARY ============ -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>For 3-mark questions, learn these definitions precisely – one accurate sentence is better than a vague paragraph.</p></div></aside></div>
+</template>
+
+<script>
+
+var GLOSS=[
+ ["Property dualism","AQA: there are at least some mental properties that are neither reducible to nor supervenient upon physical properties.","h"],
+ ["Substance","That which stays the same through changes in its properties.","h"],
+ ["Reduction","Showing that one set of properties is identical to, or fully explained by, another (e.g. temperature as mean kinetic energy).","t"],
+ ["Supervenience","A supervenes on B if there can be no difference in A without a difference in B (Kim’s definition).","h"],
+ ["Physicalism","Everything is physical or supervenes upon the physical.","h"],
+ ["Non-reductive physicalism","Mental properties supervene on physical properties but are not identical to them.","h"],
+ ["Interactionist property dualism","Non-physical mental properties and physical properties causally affect each other.","h"],
+ ["Epiphenomenalism","Mental properties are caused by physical events but have no physical effects.","h"],
+ ["Causal closure of the physical","Every physical event has a sufficient physical cause.","h"],
+ ["Qualia","Intrinsic and non-intentional phenomenal properties that are introspectively accessible (AQA).","h"],
+ ["Hard problem of consciousness","Chalmers: the problem of why and how physical processes give rise to experience.","h"],
+ ["Easy problems of consciousness","Chalmers: explaining reporting, discrimination and control of behaviour in functional or neural terms.","h"],
+ ["Philosophical zombie","A being physically identical to a conscious being but lacking consciousness entirely.","h"],
+ ["Conceivability","Being coherently thinkable, with no contradiction revealed even on reflection.","t"],
+ ["Metaphysical possibility","Could really have been the case, given the natures of things (true in some possible world).","t"],
+ ["Type-A materialism","Chalmers’ label for physicalists who deny that zombies are really conceivable.","h"],
+ ["Type-B materialism","Physicalists who accept that zombies are conceivable but deny they are possible (mind–brain identity as a posteriori, like water/H₂O).","h"],
+ ["Type-C materialism","Physicalists who think the epistemic gap is real now but closable in principle.","h"],
+ ["Knowledge argument","Jackson’s Mary argument: a complete physical knower learns something new on seeing colour, so physicalism is false.","h"],
+ ["Propositional knowledge","Knowing that something is the case; knowledge of facts.","h"],
+ ["Ability knowledge","Knowing how to do something; Lewis: the abilities to remember, imagine and recognise.","h"],
+ ["Acquaintance knowledge","Direct knowledge of something through experience (Russell).","h"],
+ ["New knowledge / old fact","Mary gains new knowledge, but of a physical fact she already knew in a different way (Tye).","h"],
+ ["Phenomenal concept","A concept of an experience that can only be acquired by having that kind of experience.","h"],
+ ["Mode of presentation","The way in which a thing or fact is given to a thinker (e.g. Venus as the evening star).","t"],
+ ["By-product","A trait that is inherited alongside a selected trait but was not itself selected for.","t"],
+ ["Russellian monism","The view that consciousness is constituted by the intrinsic properties of fundamental physical entities, which physics does not describe.","b"]
+];
+var STOPS=[["start","Start here"],["thesis","The thesis"],["zombie","Zombies"],["mary","Mary"],["epi","Epiphenomenalism"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["thesis","Stop 1","One substance, two properties","Reduction, supervenience and the two kinds of property dualism."],
+ ["zombie","Stop 2","The zombie argument","Could there be a physical duplicate of you with no experience?"],
+ ["mary","Stop 3","The knowledge argument","What does Mary learn when she leaves the room?"],
+ ["epi","Stop 4","Issues for epiphenomenalism","Self-knowledge, phenomenology and evolution."]
+];
+var STRETCH={
+ "start":[
+  ["Emergentism","British emergentists such as C.D. Broad held that mental properties ‘emerge’ from complex physical systems with new causal powers that cannot be predicted from the parts. This is a form of interactionist property dualism.","Paraphrased; Broad, <i>The Mind and Its Place in Nature</i> (1925)"],
+  ["Chalmers’ own options","In ‘Consciousness and its place in nature’ (a set text), Chalmers concludes that the most plausible views are interactionist dualism, epiphenomenalism or a form of Russellian monism, and leans towards the last.","Paraphrased; Chalmers (2003), and the departmental handout"]],
+ "thesis":[
+  ["Kim’s exclusion argument","Jaegwon Kim argued that non-reductive views face a version of the empirical interaction problem: if every physical effect already has a sufficient physical cause, an irreducible mental cause is ‘excluded’ – it has nothing left to do.","Paraphrased; Kim, <i>Physicalism, or Something Near Enough</i> (2005)"],
+  ["Huxley’s steam whistle","T.H. Huxley compared consciousness to the steam whistle of a locomotive: produced by the engine’s working, but with no influence on it. This is the classic statement of epiphenomenalism.","Paraphrased; Huxley, ‘On the Hypothesis that Animals Are Automata’ (1874)"]],
+ "zombie":[
+  ["Two-dimensional semantics","Chalmers defends premise 2 with a technical framework (‘two-dimensional semantics’) designed to explain why water/H₂O is an exception: there the conceivability is of a different kind. This is graduate-level material, but it is his main reply to type-B physicalists.","Paraphrased; Chalmers, <i>The Conscious Mind</i> (1996), ch. 2–4"],
+  ["Zombies and behaviour","Critics note an odd consequence: your zombie twin writes exactly the same books about consciousness as Chalmers. If its words are produced without experience, why think Chalmers’ words are produced <i>by</i> his?","Paraphrased; see ‘Zombies’, <i>Stanford Encyclopedia of Philosophy</i>"]],
+ "mary":[
+  ["Jackson changes his mind","From the late 1990s Jackson rejected the knowledge argument and became a physicalist, arguing that our intuition that Mary learns something non-physical is mistaken.","Paraphrased; Jackson, ‘Mind and Illusion’ (2003)"],
+  ["Dennett’s blue banana","Daniel Dennett argues we cannot really imagine knowing <i>all</i> the physical facts. Given a blue banana as a trick, a truly omniscient Mary would immediately say, ‘That’s blue – bananas are yellow.’","Paraphrased; Dennett, <i>Consciousness Explained</i> (1991)"],
+  ["Who first proposed the ability reply?","The ability hypothesis was developed by Laurence Nemirow (1980) and David Lewis (‘What Experience Teaches’, 1988). The acquaintance hypothesis is associated with Earl Conee (1994).","See ‘Qualia: The Knowledge Argument’, <i>Stanford Encyclopedia of Philosophy</i>"]],
+ "epi":[
+  ["The polar bear","Jackson’s by-product reply comes from ‘Epiphenomenal Qualia’ itself: the polar bear’s coat is heavy as a side effect of being warm, and having a heavy coat is not conducive to survival.","Paraphrased; Jackson (1982), §IV"],
+  ["The paradox of phenomenal judgement","Chalmers concedes that on his view our judgements about consciousness would be the same even if consciousness were absent. He calls this the paradox of phenomenal judgement and argues it is strange but not fatal.","Paraphrased; Chalmers, <i>The Conscious Mind</i> (1996), ch. 5"]],
+ "revise":[
+  ["Where next: physicalism","If neither form of dualism is convincing, perhaps everything is physical. The next tours examine three physicalist theories and functionalism – each of which must answer the zombie and Mary arguments.","Cross-link within the AQA course"]]
+};
+var QS={
+ "thesis":["What is property dualism?","Explain the difference between interactionist and epiphenomenalist property dualism.","Explain the concepts of reduction and supervenience and how they are used to define property dualism.","Is property dualism more plausible than substance dualism?"],
+ "zombie":["What is a philosophical zombie?","Explain why the conceivability of zombies is thought to support property dualism.","Explain Chalmers’ zombie argument for property dualism.","Does the zombie argument show that physicalism is false?"],
+ "mary":["Outline the Mary thought experiment.","Explain the ability knowledge response to the knowledge argument.","Explain Jackson’s knowledge argument and the ‘new knowledge/old fact’ response.","Does the knowledge argument succeed?"],
+ "epi":["What is epiphenomenalism?","Explain the challenge to epiphenomenalism from natural selection.","Explain the challenges posed to epiphenomenalist dualism by introspective self-knowledge and the phenomenology of our mental life.","Is epiphenomenalism a coherent position?"]
+};
+var QUIZ=[
+ ["State AQA’s definition of property dualism.","There are at least some mental properties that are neither reducible to nor supervenient upon physical properties."],
+ ["Why must a property dualist deny supervenience, not just reduction?","Non-reductive physicalists accept irreducibility; only denying supervenience distinguishes dualism from physicalism."],
+ ["What is a philosophical zombie?","A molecule-for-molecule physical duplicate of a conscious being that lacks consciousness."],
+ ["State the zombie argument in three premises.","Zombies are conceivable; if conceivable, metaphysically possible; if possible, consciousness is not physical – so consciousness is not physical."],
+ ["What is Chalmers’ reply to the water/H₂O analogy?","Complete physical knowledge would let you deduce the water facts, but not the facts about experience – there is no comparable epistemic gap."],
+ ["What does Mary know before her release?","All the physical information about colour vision."],
+ ["What is Lewis’s response?","Mary gains ability knowledge – to remember, imagine and recognise red – not new propositional knowledge."],
+ ["What is the acquaintance knowledge response?","Mary becomes acquainted with a property she already knew all about by description; no new fact."],
+ ["What is the new knowledge/old fact response?","Mary gains new propositional knowledge, under a phenomenal concept, of a physical fact she already knew in a different way."],
+ ["Give the three challenges to epiphenomenalism on the specification.","Introspective self-knowledge; the phenomenology of mental causation; natural selection/evolution."],
+ ["What is Jackson’s polar bear reply?","Qualia may be by-products of selected brain processes, as a polar bear’s heavy coat is a by-product of a warm one."]
+];
+
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src'+(x[2]==="b"?" b":"")+'">'+(x[2]==="h"?"Departmental handout":x[2]==="b"?"Beyond the spec":"From the tour text")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>

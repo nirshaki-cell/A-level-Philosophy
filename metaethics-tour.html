@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Meta-ethics Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#d6efdf; --ink:#245c3c;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#d6efdf}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#ece0f5}
+.stretch h4{color:#5a2f78}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#ece0f5;color:#5a2f78;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#f5fbf7}
+details.resp summary{cursor:pointer}
+.bspec{display:inline-block;margin-left:8px;font-size:.7rem;font-weight:600;letter-spacing:.08em;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;vertical-align:middle}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="#">← Moral Philosophy</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 1 · Spec 3.2.3</span>
+      <h1>Meta-ethics</h1>
+      <p>When you say “torture is wrong”, are you stating a fact, expressing a feeling or giving a command? This tour covers moral realism (naturalism, non-naturalism, Moore and Hume) and moral anti-realism (Mackie’s error theory, Ayer’s emotivism and Hare’s prescriptivism), and ends with the issues that anti-realism faces.</p>
+    </div>
+    <svg viewBox="0 0 320 220" role="img" aria-label="Diagram: a two-by-two grid. Columns are cognitivist and non-cognitivist; rows are realist and anti-realist. Naturalism and non-naturalism sit in realist–cognitivist; error theory in anti-realist–cognitivist; emotivism and prescriptivism in anti-realist–non-cognitivist; the realist–non-cognitivist box is empty.">
+      <rect width="320" height="220" rx="14" fill="#fff"/>
+      <g font-family="Nunito Sans,sans-serif" text-anchor="middle">
+        <text x="140" y="26" font-size="12" fill="#245c3c" font-weight="600">Cognitivist</text>
+        <text x="250" y="26" font-size="12" fill="#245c3c" font-weight="600">Non-cognitivist</text>
+        <text x="44" y="82" font-size="12" fill="#245c3c" font-weight="600">Realist</text>
+        <text x="44" y="162" font-size="12" fill="#245c3c" font-weight="600">Anti-realist</text>
+        <rect x="88" y="38" width="104" height="80" rx="10" fill="#d6efdf"/>
+        <rect x="198" y="38" width="104" height="80" rx="10" fill="#f1f6fb" stroke="#dbe4ee"/>
+        <rect x="88" y="124" width="104" height="80" rx="10" fill="#ece0f5"/>
+        <rect x="198" y="124" width="104" height="80" rx="10" fill="#fbe3d6"/>
+        <text x="140" y="74" font-size="12" fill="#245c3c">Naturalism</text>
+        <text x="140" y="92" font-size="12" fill="#245c3c">Non-naturalism</text>
+        <text x="250" y="82" font-size="12" fill="#5b6070">—</text>
+        <text x="140" y="160" font-size="12" fill="#5a2f78">Error theory</text>
+        <text x="140" y="176" font-size="11" fill="#5a2f78">(Mackie)</text>
+        <text x="250" y="154" font-size="12" fill="#8a3f1c">Emotivism (Ayer)</text>
+        <text x="250" y="174" font-size="12" fill="#8a3f1c">Prescriptivism</text>
+        <text x="250" y="190" font-size="11" fill="#8a3f1c">(Hare)</text>
+      </g>
+    </svg>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Built from the departmental slides <i>Emotivism: Ayer and Stevenson</i>, <i>Prescriptivism: R. M. Hare</i> and <i>Error Theory: J. L. Mackie</i>, and Sayre-McCord, ‘Metaethics’, <i>Stanford Encyclopedia of Philosophy</i> (Spring 2023). Material marked ‘Added to complete the spec’ was not in those sources and should be checked against the set texts. Material marked ‘Beyond the spec’ is extension only. AQA 7172 · Moral Philosophy.</footer>
+</div>
+
+<!-- START -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>What are we doing when we make moral judgements?</h2>
+  <p>Normative ethics, which covers utilitarianism, Kantian ethics and virtue ethics, asks <i>what</i> is right or wrong. <span class="term" data-t="Meta-ethics">Meta-ethics</span> steps back and asks what moral judgements <i>are</i>. When you say “torture is wrong”, it looks like “the kettle is hot”: a claim about how things are, which could be true or false. But no one has ever seen, measured or weighed <i>wrongness</i>. So perhaps you are really expressing a feeling, or telling people what to do.</p>
+  <p>The stakes are high. If moral claims cannot be true, it is unclear how anyone can be <i>right</i> in a moral disagreement, or how abolishing slavery could count as moral progress rather than just a change.</p>
+  <h3>Two separate questions</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">The language question</span><p>When we make a moral judgement, are we expressing a <b>belief</b>? <b>Yes</b> = <span class="term" data-t="Cognitivism">cognitivism</span>: moral judgements are <span class="term" data-t="Truth-apt">truth-apt</span>. <b>No</b> = <span class="term" data-t="Non-cognitivism">non-cognitivism</span>: they express attitudes such as emotions or commands.</p></div>
+    <div class="resp"><span class="tag">The reality question</span><p>Are there mind-independent moral properties or facts? <b>Yes</b> = <span class="term" data-t="Moral realism">moral realism</span>. <b>No</b> = <span class="term" data-t="Moral anti-realism">moral anti-realism</span>.</p></div>
+  </div>
+  <p>Keep these apart. The key case is <b>Mackie</b>: he is a <b>cognitivist</b> (moral judgements express beliefs) and an <b>anti-realist</b> (those beliefs are all false). The grid at the top of this page shows where each theory sits.</p>
+  <h3>Where do moral principles come from?</h3>
+  <p>The specification asks you to consider three possible origins:</p>
+  <ul class="list">
+    <li><b>Reason.</b> Moral truths can be grasped by rational reflection, as in mathematics. Kant held that the demands of morality can be known <i>a priori</i>; intuitionists claim basic moral truths are self-evident.</li>
+    <li><b>Emotion/attitudes.</b> Morality originates in feeling. Hume argued that reason alone cannot motivate; Ayer’s emotivism develops this.</li>
+    <li><b>Society.</b> Moral principles are human creations shaped by a community’s way of life. In Plato’s <i>Republic</i>, Glaucon suggests justice is a convention people accept because it secures peace and stability; Mackie’s argument from relativity draws on this idea.</li>
+  </ul>
+  <p>The debate is ancient. In Book I of the <i>Republic</i>, Thrasymachus argues that justice is whatever is in the interest of the stronger, a human invention used by the powerful. Socrates replies that justice provides independent and eternal standards against which human practices can be judged. That is an early clash between anti-realism and realism.</p>
+  <h3>The tour</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <div class="card"><h4>The big question</h4><p>Are there moral facts – and if not, what is moral language for?</p></div>
+  <div class="card"><h4>How to use this tour</h4><p>Stops 1–4 cover <b>moral realism</b> and the problems it faces. Stops 5–9 cover <b>anti-realism</b>: Mackie, Ayer and Hare. Stop 10 covers the issues for anti-realism. Hover over or tap any dotted term to see its definition.</p></div>
+  <div class="card"><h4>Exam lens</h4><p>For every theory, be ready to say two things: is it <b>cognitivist</b> or <b>non-cognitivist</b>, and is it <b>realist</b> or <b>anti-realist</b>? Many weak answers mix these up.</p></div>
+</aside></div>
+</template>
+
+<!-- NATURALISM -->
+<template id="s-naturalism">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · Moral realism</div>
+  <h2>Moral naturalism</h2>
+  <div class="thesis"><b>Naturalism:</b> moral properties are real, and they are identical to natural properties of the world, of the kind science could investigate.</div>
+  <p>If there are moral facts, what <i>kind</i> of facts are they? The naturalist’s answer is that they are ordinary natural facts. Naturalist accounts identify moral properties with unproblematic natural features of the world: for example, with what is pleasant, with what satisfies someone’s desire, or with what conforms to social rules that are in force. Naturalism is <b>cognitivist</b> (moral judgements express beliefs) and <b>realist</b> (some of those beliefs are true).</p>
+  <h3>Two naturalist theories on the specification</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">Naturalist utilitarianism (Bentham)</span><p>“Good” = pleasure and the absence of pain. Whether an action is right then becomes an empirical question about its consequences for happiness. Bentham’s hedonic calculus treats pleasure as measurable.</p></div>
+    <div class="resp"><span class="tag">Naturalist virtue ethics</span><p>“Good” is understood in terms of human flourishing (<i>eudaimonia</i>). What counts as a virtue is fixed by facts about what kind of creatures humans are and what helps them flourish.</p></div>
+  </div>
+  <h3>Why naturalism appeals</h3>
+  <p>Naturalism makes morality <b>non-mysterious</b>. Moral facts become no more puzzling than facts about what is legal or polite. It also avoids two burdens that non-naturalism carries: explaining how strange moral properties fit into the natural world, and explaining how we could learn about them. There is no special puzzle about what we are trying to discover, or about what would count as evidence.</p>
+  <h3>The difficulty</h3>
+  <p>In saying something is good, right or virtuous, we seem to be saying something <i>more than</i> (or at least different from) describing its natural features. And no amount of empirical investigation seems, on its own and without some moral assumption, to settle a moral question. Hume and Moore turn this worry into two famous arguments (Stops 2 and 3).</p>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>Moral judgements express beliefs about the properties of actions, characters or states of affairs. <span class="note">(Cognitivism: we argue about them and call them true.)</span></li>
+    <li>The only properties we have good reason to believe in are natural properties. <span class="note">(The success of science; economy.)</span></li>
+    <li>Some moral judgements are true. <span class="note">(Realism: “torturing for fun is wrong” seems true.)</span></li>
+    <li>Therefore moral properties are natural properties, e.g. goodness = what maximises pleasure.</li>
+  </ol>
+  <div class="resp against"><span class="tag">Objection: naturalism misses what is distinctive about morality</span><p>Moral judgements seem necessarily connected to reasons for action. “This is red”, even if true, gives no one a reason to do anything. “This is good” seems to give everyone at least some reason to promote it. A purely natural property seems only contingently connected to reasons.</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>A naturalist virtue ethicist can reply that facts about human flourishing <i>are</i> facts about what gives creatures like us reasons. If humans need education to flourish, that is an objective reason to study.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Key idea</h4><p>Naturalism trades <b>economy</b> (nothing added to our picture of the world) against <b>authority</b> (moral claims may lose their special force).</p></div>
+  <div class="card"><h4>Link</h4><p>Revisit the Utilitarianism and Virtue Ethics topics: Bentham’s principle of utility and Aristotle’s function argument are the naturalist roots here.</p></div>
+</aside></div>
+</template>
+
+<!-- HUME -->
+<template id="s-hume">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · Issues for realism</div>
+  <h2>Hume: is–ought, the Fork and motivation</h2>
+  <p>The specification lists three challenges from Hume. Each one hits a different kind of realism.</p>
+  <h3>1. The is–ought gap</h3>
+  <p>Hume observed that writers on morality often move from statements about what <i>is</i> the case to statements about what <i>ought</i> to be, without explaining how. There is substantial debate about exactly what he meant. On the common reading, his point is that no set of claims about plain matters of fact <b>entails</b> an evaluative claim.</p>
+  <ol class="list">
+    <li>A valid argument cannot contain in its conclusion anything not present in its premises. <span class="note">(A principle of logic.)</span></li>
+    <li>Purely factual premises contain no evaluative (“ought”) content. <span class="note">(By definition.)</span></li>
+    <li>Therefore no purely factual premises can validly yield an evaluative conclusion.</li>
+    <li>Therefore every valid argument for an “ought” must include or presuppose at least one evaluative premise.</li>
+  </ol>
+  <p><b>Example:</b> “She is in pain, so something bad is happening” presupposes the hidden premise <i>pain is bad</i>, and that premise is not itself a plain matter of fact.</p>
+  <p><b>Why it threatens naturalism:</b> if “good” just <i>meant</i> “pleasant”, then “this is pleasant, so it is good” would be a valid move from fact to value. Hume’s gap suggests it is not.</p>
+  <h3>2. Hume’s Fork and Ayer’s verification principle</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">Relations of ideas</span><p>True by definition and known <i>a priori</i>, e.g. “all vixens are female foxes”.</p></div>
+    <div class="resp"><span class="tag">Matters of fact</span><p>Known through experience, <i>a posteriori</i>, e.g. “the solar system has eight planets”.</p></div>
+  </div>
+  <p>Ayer’s <span class="term" data-t="Verification principle">verification principle</span> develops this: a statement is meaningful only if it is analytic or empirically verifiable. A <b>non-natural</b> moral property is neither true by definition nor detectable by experience, so on this test claims about it are literally meaningless. This is a direct challenge to non-naturalism (see Stop 7).</p>
+  <h3>3. Moral judgements are not beliefs</h3>
+  <p class="note">Added to complete the spec. This argument was not in the source materials; it is a paraphrase of Hume’s <i>Treatise</i>, Book III, Part 1. Check it against the set text.</p>
+  <ol class="list">
+    <li>Moral judgements can motivate us to act. <span class="note">(We avoid what we judge wrong.)</span></li>
+    <li>Beliefs alone cannot motivate action; motivation also needs a desire or passion. <span class="note">(Knowing a fire is hot moves you only if you care about not being burnt.)</span></li>
+    <li>Therefore moral judgements are not (merely) beliefs.</li>
+  </ol>
+  <p>If this argument is sound, it supports <b>non-cognitivism</b> and counts against <i>every</i> cognitivist theory, realist or not.</p>
+  <div class="resp for"><span class="tag">Response to the motivation argument</span><p>A cognitivist can deny premise 1 in its strong form: someone can sincerely judge that something is wrong and feel no pull at all (the amoralist). If so, moral judgements are only <i>contingently</i> motivating, just as ordinary beliefs are when combined with desires.</p></div>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-hume.jpg" alt="Portrait of David Hume wearing a red cap and brown coat" loading="lazy"><figcaption><b>David Hume</b>Allan Ramsay, 1766. Set text: <i>A Treatise of Human Nature</i>, Book III, Part 1 · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Which argument hits what?</h4><p><b>Is–ought:</b> naturalism.<br><b>Fork / verification:</b> non-naturalism.<br><b>Motivation:</b> all cognitivism.</p></div>
+</aside></div>
+</template>
+
+<!-- MOORE -->
+<template id="s-moore">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · Moral realism</div>
+  <h2>Moore’s open question argument</h2>
+  <div class="thesis"><b>Moore’s claim:</b> no naturalist definition can capture what we mean by “good”. Goodness is a simple, indefinable, <b>non-natural</b> property.</div>
+  <p>G. E. Moore (<i>Principia Ethica</i>, 1903) offered a simple test. Take any naturalist definition, say “good = pleasant”. Someone who fully understands the words can still sensibly ask: <i>“I know this is pleasant, but is it good?”</i> That question is <b>open</b>: asking it shows no confusion. Compare <i>“I know this is pleasant, but is it pleasant?”</i> That question is <b>closed</b>, and asking it shows you have misunderstood. If “good” meant “pleasant”, the first question would be as pointless as the second. It is not, so “good” does not mean “pleasant”. The same test can be run on any proposed natural property.</p>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>If “good” meant natural property N, then “X is N, but is X good?” would be a closed question. <span class="note">(Definitions close questions: “Is a bachelor unmarried?”)</span></li>
+    <li>For every natural property N, “X is N, but is X good?” is an open question. <span class="note">(Test each candidate: pleasure, desire, social approval.)</span></li>
+    <li>Therefore “good” does not mean any natural property.</li>
+    <li>Therefore goodness is a simple, indefinable, non-natural property.</li>
+  </ol>
+  <p>Moore called the mistake of identifying goodness with a natural property the <span class="term" data-t="Naturalistic Fallacy">Naturalistic Fallacy</span>. Note that Moore accepted it might <i>turn out</i> that everything pleasant is good. His point is only that this cannot be settled by definition, on conceptual grounds.</p>
+  <p>The argument struck most people at the time as decisive, and it gave non-naturalism a new lease of life (Stop 4).</p>
+  <div class="resp against"><span class="tag">Objection: water and H₂O</span><p>Thinking that a liquid is water is different from thinking it is H₂O; someone can intelligibly ask “this is water, but is it H₂O?” Yet water <i>is</i> H₂O. So a difference between two thoughts does not establish a difference between two properties. The open question shows only that the <b>concepts</b> differ. Goodness could still turn out to <i>be</i> a natural property, discovered rather than defined.</p></div>
+  <div class="resp for"><span class="tag">Response on Moore’s behalf</span><p>Water = H₂O was discovered empirically. It is unclear what empirical discovery could show that goodness = pleasure, since any such “discovery” seems to need an evaluative premise (Hume’s is–ought gap).</p></div>
+  <div class="resp against"><span class="tag">Objection: the non-cognitivist reading</span><p>Non-cognitivists agree the question is always open, but say Moore drew the wrong conclusion. It is open not because “good” names a non-natural property, but because it names <b>no property at all</b>: calling something good expresses an attitude, and you can admit something is pleasant without taking that stance.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Exam tip</h4><p>For 5 marks, give the steps in order: the target (reductive definitions), the test with an example, why the question is open, and the conclusion.</p></div>
+  <div class="card"><h4>Evaluation</h4><p>The open question argument is probably weaker than Moore thought, because the water/H₂O reply shows it confuses concepts with properties. Hume’s is–ought gap is harder for the naturalist to dismiss.</p></div>
+</aside></div>
+</template>
+
+<!-- NON-NATURALISM -->
+<template id="s-intuition">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · Moral realism</div>
+  <h2>Non-naturalism and intuitionism</h2>
+  <div class="thesis"><b>Non-naturalism:</b> moral properties are real and objective, but they are not natural. They cannot be reduced to anything science studies. <b>Intuitionism:</b> we know basic moral truths through rational intuition.</div>
+  <p>Non-naturalists hold that moral properties are real but are not part of the natural world. Intuitionists (Moore and, later, W. D. Ross) claim that basic moral truths are <b>self-evident</b> to a mature, reflective mind, in the way basic mathematical truths are. On this view moral knowledge is not based on the senses, but it is on as secure a footing as our knowledge of mathematics or of fundamental concepts such as causation and necessity.</p>
+  <h3>Why non-naturalism appeals</h3>
+  <p>It keeps both what moral thought shares with other thought and what makes it distinctive. Like other judgements, moral judgements attribute properties to things. What makes them distinctive is the <b>authority</b> of the properties they attribute: properties that tell us what to do.</p>
+  <h3>Two burdens</h3>
+  <p>Non-naturalism must explain (i) how moral properties fit in with familiar natural properties, and (ii) how we are able to learn anything about them. Properties that fall outside the causal order seem metaphysically dubious, and it would be a mystery how we could ever reliably learn about them if they existed.</p>
+  <div class="resp for"><span class="tag">Response: companions in guilt</span><p>Mathematics, possibility and necessity, and concepts such as causation are also not detected by the senses, yet we do not doubt that we know about them. If moral properties are no worse off than these respected fields, the burdens are not fatal.</p></div>
+  <div class="resp against"><span class="tag">Objection: moral disagreement</span><p>If moral truths were self-evident, why do equally intelligent, informed and sincere people disagree so deeply? If peers reach different conclusions, how can either regard themselves as justified?</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>Apparent peers may not be real peers: some may lack relevant evidence, be subject to distorting influences, or fail to give their evidence its proper weight.</p></div>
+  <div class="resp against"><span class="tag">Objection: verification</span><p>By Ayer’s verification principle (Stop 2), statements about non-natural properties are neither analytic nor empirically verifiable, and so are meaningless.</p></div>
+  <p>Mackie’s error theory (Stops 5–6) accepts the non-naturalist’s picture of what moral claims <i>mean</i>, then turns these burdens into arguments that no such properties exist.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key term</h4><p><b>Sui generis</b>: of its own kind. Non-naturalists think moral properties are <i>sui generis</i>, not reducible to anything else.</p></div>
+  <div class="card"><h4>Look ahead</h4><p>Mackie’s “epistemological queerness” is aimed squarely at intuitionism: he says “a special sort of intuition” is a lame answer.</p></div>
+</aside></div>
+</template>
+
+<!-- MACKIE 1 -->
+<template id="s-mackie">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 5 · Moral anti-realism</div>
+  <h2>Mackie’s error theory and the argument from relativity</h2>
+  <div class="thesis"><b>Error theory:</b> moral judgements express beliefs about objective moral properties, but no such properties exist. So every positive moral judgement is false: the whole practice rests on a mistake.</div>
+  <p>J. L. Mackie (<i>Ethics: Inventing Right and Wrong</i>, 1977) agrees with the realist about what moral language <i>means</i>: when we say “torture is wrong”, we are trying to state an objective fact. He simply denies there are any such facts. His position is like the atheist’s position on talk about God’s will: the claims rest on a failed presupposition, so they cannot be true.</p>
+  <div class="resp against"><span class="tag">Common mistake</span><p>Error theory is <b>cognitivist</b>. Mackie denies the moral <i>properties</i>, not that moral judgements express beliefs. The AQA specification lists error theory as “cognitivist”. (The departmental slide that calls it non-cognitive is mistaken on this point.)</p></div>
+  <h3>What would objective values be like?</h3>
+  <p class="note">A teaching summary, not Mackie’s own numbered list.</p>
+  <ol class="list">
+    <li>They could be <b>known</b>: if torture is objectively wrong, I can know it.</li>
+    <li>Moral claims would have <b>truth-value</b>.</li>
+    <li>They would be <b>independent of what we want or choose</b>.</li>
+    <li>They would be about a <b>mind-independent world</b>.</li>
+    <li>They would be part of the <b>“fabric of the world”</b> (Mackie’s phrase).</li>
+  </ol>
+  <p>Crucially, they would also be <b>intrinsically action-guiding</b>: knowing them would by itself give you a reason to act.</p>
+  <h3>The argument from relativity</h3>
+  <blockquote>The argument from relativity has as its premise the well-known variation in moral codes from one society to another and from one period to another, and also the differences in moral beliefs between different groups and classes within a complex community.<cite>Mackie, <i>Ethics: Inventing Right and Wrong</i>, ch. 1</cite></blockquote>
+  <p>Mackie does <b>not</b> argue “people disagree, so there is no truth”. His is an <b>inference to the best explanation</b>. The variation is better explained by people’s participation in different ways of life than by their perceiving objective values more or less accurately. In his example, he says the causal connection “seems to be mainly that way round”: people approve of monogamy because they participate in a monogamous way of life, rather than participating in it because they approve of monogamy.</p>
+  <ol class="list">
+    <li>Moral codes vary widely across societies and periods. <span class="note">(Observation.)</span></li>
+    <li>This variation is better explained by different ways of life than by perception of objective values. <span class="note">(The monogamy example.)</span></li>
+    <li>If objective values existed, we would expect the kind of convergence we find where people perceive an objective reality.</li>
+    <li>Therefore the best explanation is that there are no objective moral values.</li>
+  </ol>
+  <div class="resp for"><span class="tag">Response 1: disagreement is not proof</span><p>Different scientific hypotheses do not show there is no scientific truth. One culture may be closer to the moral truth than the others, or none may yet be correct.</p></div>
+  <div class="resp for"><span class="tag">Response 2: shared core values</span><p>Beneath surface variation, cultures may share the same basic principles, for example that rules apply to everyone, or that if you benefit from a society you should follow its rules. The variation lies in how these principles are applied.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Set text</h4><p>Mackie (1977), <i>Ethics: Inventing Right and Wrong</i>, chapter 1, sections 8 and 9.</p></div>
+  <div class="card"><h4>Evaluation</h4><p>The relativity argument is Mackie’s weaker card: it rests on a contested claim about the direction of explanation, and shared core values offer a plausible reply.</p></div>
+</aside></div>
+</template>
+
+<!-- MACKIE 2 -->
+<template id="s-queer">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 6 · Moral anti-realism</div>
+  <h2>The arguments from queerness</h2>
+  <h3>Metaphysical queerness</h3>
+  <blockquote>If there were objective values, then they would be entities or qualities or relations of a very strange sort, utterly different from anything else in the universe.<cite>Mackie, <i>Ethics: Inventing Right and Wrong</i>, ch. 1</cite></blockquote>
+  <p>Ordinary properties such as mass, shape and colour just <i>are</i>; they tell no one what to do. An objective value would have “to-be-pursuedness” built into it. How could a fact about the world, on its own, place a demand on us? This is linked to the <span class="term" data-t="Fact/value distinction">fact/value distinction</span>: describing how the world is, is not the same as wanting it to be a certain way.</p>
+  <ol class="list">
+    <li>Objective moral values would have to be intrinsically action-guiding.</li>
+    <li>Nothing else in the universe is like this; natural properties are motivationally inert.</li>
+    <li>So objective values would be utterly unlike anything else that exists.</li>
+    <li>It is more reasonable to deny that such “queer” entities exist.</li>
+    <li>Therefore there are probably no objective moral values.</li>
+  </ol>
+  <div class="resp for"><span class="tag">Response</span><p>“Queer” does not mean “non-existent”. Physics and chemistry will never reveal moral properties, but numbers are not physical properties either, and we accept them. Alternatively, moral facts might be objective facts about psychology: if humans need education to flourish, that is an objective reason to study. These are sometimes called <b>normative facts</b>.</p></div>
+  <h3>Epistemological queerness</h3>
+  <blockquote>Correspondingly, if we were aware of them, it would have to be by some special faculty of moral perception or intuition, utterly different from our ordinary ways of knowing everything else.<cite>Mackie, <i>Ethics: Inventing Right and Wrong</i>, ch. 1</cite></blockquote>
+  <p>Mackie adds that “a special sort of intuition” is a lame answer, but it is the one the clear-headed objectivist is compelled to resort to.</p>
+  <ol class="list">
+    <li>If objective values existed, we would need some way of knowing them.</li>
+    <li>They cannot be known by the senses or by analysing concepts alone.</li>
+    <li>So knowing them would require a special faculty of intuition, unlike any other way of knowing.</li>
+    <li>We have no good reason to believe in such a faculty.</li>
+    <li>Therefore we have no good reason to believe in objective values.</li>
+  </ol>
+  <div class="resp for"><span class="tag">Response: companions in guilt</span><p>Empiricism also struggles to explain how we know about substance, cause, number and identity, so morality is not uniquely problematic. Moral truths might be known through <i>a priori</i> reflection that gives synthetic knowledge, as Kant held about our knowledge of duty.</p></div>
+  <div class="resp against"><span class="tag">Mackie’s reply</span><p>Some of these other concepts may also need to be reconsidered or given up. Critics answer that giving up causation or number is far too high a price, so the argument proves too much.</p></div>
+  <h3>Why do we believe in objective values? Patterns of objectification</h3>
+  <p>If there are no objective values, why does everyone talk as if there are? Mackie draws on Hume’s remark that the mind has a “great propensity to spread itself on external objects”. We <b>project</b> our attitudes onto the world. Mackie compares this to the <span class="term" data-t="Pathetic fallacy">pathetic fallacy</span>: if a fungus fills us with disgust, we may be inclined to ascribe to the fungus itself a non-natural quality of foulness. Social pressure reinforces the habit, because society functions better when people treat moral rules as objective and binding.</p>
+</div>
+<aside>
+  <div class="card"><h4>Metaphysical vs epistemological</h4><p><b>Metaphysical:</b> objective values would be strange <i>things</i>.<br><b>Epistemological:</b> we would need a strange <i>faculty</i> to know them.</p></div>
+  <div class="card"><h4>Evaluation</h4><p>Metaphysical queerness is Mackie’s strongest argument, because it identifies exactly what is odd about objective values: their built-in authority. Companions in guilt is the strongest reply.</p></div>
+</aside></div>
+</template>
+
+<!-- AYER -->
+<template id="s-ayer">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 7 · Moral anti-realism</div>
+  <h2>Ayer’s emotivism</h2>
+  <div class="thesis"><b>Emotivism:</b> moral judgements do not express beliefs; they express emotions of approval or disapproval and aim to arouse similar feelings in others. They have no truth-value.</div>
+  <p>Emotivism is <b>non-cognitive</b>. Moral judgements are attempts to fit the world to our minds, not our minds to the world. A. J. Ayer (<i>Language, Truth and Logic</i>, 1936; 2nd edition 1946) was a logical positivist, and his emotivism follows from the verification principle.</p>
+  <h3>The verification principle</h3>
+  <p>There are only two kinds of meaningful statement: <span class="term" data-t="Analytic statement">analytic</span> statements, true by definition, and <span class="term" data-t="Synthetic statement">synthetic</span> statements, verifiable at least in principle by experience. A sentence that is neither is not false but <b>literally meaningless</b>.</p>
+  <h3>Applying it to ethics</h3>
+  <p>“Stealing is wrong” is not analytic, because denying it is not self-contradictory. Nor is it an empirical hypothesis, because no observation could confirm or refute it. So moral judgements are not literally significant. Ayer concludes that they are expressions of emotion, which can be neither true nor false.</p>
+  <p>His best-known example, paraphrased from <i>Language, Truth and Logic</i>, chapter 6: if I say to someone “you acted wrongly in stealing that money”, I state nothing more than if I had simply said “you stole that money”. Adding that the action is wrong makes no further statement about it; I am simply <span class="term" data-t="Evincing">evincing</span> my moral disapproval. It is as if I had said “you stole that money” in a peculiar tone of horror, or written it with some special exclamation marks added.</p>
+  <p>This is why emotivism is nicknamed the <b>“boo/hurrah” theory</b>: “stealing is wrong” ≈ “Stealing – boo!”</p>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>A statement is meaningful (truth-apt) only if it is analytic or empirically verifiable. <span class="note">(The verification principle.)</span></li>
+    <li>Moral judgements are not analytic. <span class="note">(Denying them is not self-contradictory.)</span></li>
+    <li>Moral judgements are not empirically verifiable. <span class="note">(No observation adds “wrongness” to the fact of stealing.)</span></li>
+    <li>Therefore moral judgements are not truth-apt.</li>
+    <li>But moral judgements are used meaningfully in some sense: to express feeling and to influence others.</li>
+    <li>Therefore moral judgements are expressions of emotion.</li>
+  </ol>
+  <h3>Emotivism is not subjectivism</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">Subjectivism (cognitivist)</span><p>“Racism is wrong” <i>means</i> “I (or most people) disapprove of racism”, which is true if the disapproval exists.</p></div>
+    <div class="resp"><span class="tag">Emotivism (non-cognitivist)</span><p>“Racism is wrong” <i>reports</i> nothing at all; it <i>expresses</i> disapproval.</p></div>
+  </div>
+  <p>Ayer rejected subjectivism: it is not self-contradictory to say that some actions which are generally approved of are not right. If “right” meant “generally approved of”, that sentence would contradict itself.</p>
+  <p><b>Disagreement:</b> on Ayer’s view, apparent moral disputes are really disputes about <b>facts</b>, such as the agent’s motive, the circumstances or the consequences. Once the facts are agreed, if attitudes still differ, argument has run out.</p>
+  <div class="resp against"><span class="tag">Objection: the verification principle fails its own test</span><p>“A statement is meaningful only if it is analytic or empirically verifiable” is itself neither analytic nor verifiable, so by its own standard it is meaningless.</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>Ayer came to treat the principle as a proposed definition rather than a factual claim. In any case, emotivism can be defended without it, for example through Hume’s motivation argument.</p></div>
+  <div class="resp against"><span class="tag">Objection: moral reasoning (the Frege–Geach problem)</span><p>“Lying is wrong; if lying is wrong, getting your brother to lie is wrong; so getting your brother to lie is wrong” is valid. But inside the “if” clause, no one is expressing disapproval. If “lying is wrong” means different things in the two premises, the argument equivocates. Emotivism struggles to explain why it is valid.</p></div>
+  <div class="resp against"><span class="tag">Objection: argument becomes manipulation</span><p>If moral claims only express and arouse feelings, moral argument is no different from advertising. Yet we distinguish good moral reasons from mere persuasion.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Set texts</h4><p>Ayer (1946), <i>Language, Truth and Logic</i>, chapters 1 and 6; Ayer (1973), <i>The Central Questions of Philosophy</i>, pp. 22–29.</p></div>
+  <div class="card"><h4>Evaluation</h4><p>Emotivism explains why moral judgements motivate and why disagreement persists, but it struggles with moral <b>reasoning</b>: a “boo” is hard to use as a premise.</p></div>
+</aside></div>
+</template>
+
+<!-- STEVENSON -->
+<template id="s-stevenson">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 8 · Beyond the spec</div>
+  <h2>Stevenson: emotive and descriptive meaning</h2>
+  <p class="note">C. L. Stevenson is not named in the AQA specification. This stop is extension material, but it gives you useful evaluation points about emotivism.</p>
+  <p>Stevenson developed a more sophisticated emotivism. Many words, such as “steal”, “honest” and “respect”, have both <span class="term" data-t="Descriptive meaning">descriptive meaning</span> (they describe facts) and <span class="term" data-t="Emotive meaning">emotive meaning</span> (positive or negative connotations). To call someone honest is both to describe her behaviour and to praise it.</p>
+  <h3>Descriptive and dynamic uses of language</h3>
+  <p>Stevenson distinguished <b>descriptive</b> from <span class="term" data-t="Dynamic use of language">dynamic</span> uses of language. The distinction depends on the speaker’s purpose, and the two uses are often mixed. “I want you to close the door” partly describes what I want, but its main purpose is to get you to close the door.</p>
+  <p>On Stevenson’s view, moral terms are mainly dynamic. There is always some element of description in an ethical judgement, but their major use is not to indicate facts but to <b>create an influence</b>: they recommend an interest in something, rather than state that the interest already exists.</p>
+  <h3>The word “good”</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">Descriptive</span><p>A good computer is fast, reliable and easy to use. Shared criteria mean we communicate real information.</p></div>
+    <div class="resp"><span class="tag">Dynamic</span><p>“This is a good computer” also says, in effect: <i>“I like this computer – you should too!”</i></p></div>
+  </div>
+  <div class="resp for"><span class="tag">Advantage</span><p>Stevenson explains why moral judgements seem at once factual <i>and</i> emotive. He also allows a real kind of disagreement, “disagreement in attitude”, like two people disagreeing about where to eat.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Exam use</h4><p>Use Stevenson in a 25-mark essay to show that emotivism can answer the charge that it ignores the descriptive content of moral words.</p></div>
+</aside></div>
+</template>
+
+<!-- HARE -->
+<template id="s-hare">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 9 · Moral anti-realism</div>
+  <h2>Hare’s prescriptivism</h2>
+  <div class="thesis"><b>Prescriptivism:</b> moral judgements are non-cognitive. Their function is to command and to recommend: they are <b>universalisable prescriptions</b> that guide action.</div>
+  <p>R. M. Hare (<i>The Language of Morals</i>, 1952; <i>Freedom and Reason</i>, 1963) asked what moral words are <i>for</i>. His answer: they guide action. To say “stealing is wrong” is not to describe stealing, nor just to vent disapproval. It is to prescribe “do not steal”, and to commit yourself to that rule for everyone in relevantly similar situations.</p>
+  <h3>Two types of prescription</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">Imperatives</span><p>“Do not steal.” If I accept it, I will act in accordance with it.</p></div>
+    <div class="resp"><span class="tag">Value judgements</span><p>“Honesty is good.” With “good” and “bad” we <span class="term" data-t="Commending">commend</span> or condemn, and commending is tied to guidance.</p></div>
+  </div>
+  <p>For Hare, when we commend or condemn anything, it is always in order, at least indirectly, to guide choices: our own or other people’s, now or in the future. Saying an exhibition is very good is appropriate where someone, such as a tourist, might be guided in deciding what to do.</p>
+  <h3>The strawberry</h3>
+  <p>Suppose “S is a good strawberry” just <i>meant</i> “S is a strawberry and S is sweet, firm, red and large”. Then we could not say, as we often do, that a strawberry is good <i>because</i> it is sweet, firm and so on: that would amount to “it is sweet because it is sweet”. So “good” cannot simply mean its descriptive features. Describing something is different from what we <i>do</i> with that description.</p>
+  <h3>Meaning and criteria of application</h3>
+  <p>The <span class="term" data-t="Criteria of application">criteria of application</span> of “good” vary from object to object: a good knife is sharp and durable; a good strawberry is sweet and firm. But its <b>meaning</b> stays constant: it is always commendation. That is its primary meaning.</p>
+  <h3>The logic of “good”: universalisability</h3>
+  <p>Because “good” is applied by criteria, it must be applied consistently. If my knife and your knife are qualitatively identical, they are either both good or both bad. In morality: if I judge it wrong for you to steal in a situation, I must judge it wrong for anyone, including me, in a relevantly similar situation.</p>
+  <ul class="list">
+    <li><b>Prescriptive:</b> it commends and guides action.</li>
+    <li><b>Descriptive:</b> it has criteria of application.</li>
+    <li><b>Universalisable:</b> like cases must be judged alike.</li>
+  </ul>
+  <p>Moral standards are not objective; they are <b>adopted</b>. You take them on without being compelled to. This is what makes Hare an anti-realist.</p>
+  <h3>Argument in standard form</h3>
+  <ol class="list">
+    <li>The primary function of moral language is to guide action. <span class="note">(The tourist example.)</span></li>
+    <li>Language whose primary function is to guide action is prescriptive, not descriptive. <span class="note">(The strawberry example.)</span></li>
+    <li>Prescriptions are neither true nor false. <span class="note">(Commands cannot be true or false.)</span></li>
+    <li>Moral words are applied according to criteria, so they must be applied consistently.</li>
+    <li>Therefore moral judgements are universalisable prescriptions without truth-value.</li>
+  </ol>
+  <h3>Why moral reasoning is rational</h3>
+  <ol class="list">
+    <li>We can ask for the <b>reasons</b> behind someone’s moral judgement.</li>
+    <li>We can and should expect <b>consistency</b>: if stealing is wrong in one situation, it is wrong in a relevantly similar one.</li>
+    <li>We can <b>infer</b> one judgement from another: if it is wrong to kill an innocent person, it is wrong to kill an innocent person in war.</li>
+  </ol>
+  <h3>Objections (Warnock)</h3>
+  <p class="note">Beyond the spec. These objections come from the departmental slides and are attributed to G. J. Warnock; a precise text reference is still to be added.</p>
+  <div class="resp against"><span class="tag">Objection 1: moral language does far more than prescribe</span><p>Moral language can also be used to exhort, to confess and to complain. Hare picks out only one use.</p></div>
+  <div class="resp for"><span class="tag">Hare’s response</span><p>Moral language can do many things, but its fundamental feature is that, if we sincerely accept a moral judgement, it should show up in behaviour. If “torture is wrong”, then I should never torture.</p></div>
+  <div class="resp against"><span class="tag">Warnock’s counter</span><p>Moral language is not the only language that guides action. If I say I like Marmite, the logic of that is that on some occasions I actually eat it. Advertising guides action too. So Hare has not shown what makes moral language <i>distinctive</i>.</p></div>
+  <div class="resp against"><span class="tag">Objection 2: consistency is not objectivity</span><p>Hare’s marks of rationality show only that moral reasoning must be consistent. Because standards are <i>adopted</i>, we could have adopted entirely different ones, and a fanatic who consistently universalises a vile principle passes the test.</p></div>
+  <div class="resp against"><span class="tag">Objection 3: weakness of will</span><p>If sincerely accepting “I ought to do X” means acting on it, how can anyone sincerely judge they ought to do something and then fail to do it? Yet weakness of will (<i>akrasia</i>) seems common.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Set text</h4><p>Hare (1952), <i>The Language of Morals</i>, chapters 1, 5, 7 and 10.2.</p></div>
+  <div class="card"><h4>Evaluation</h4><p>Hare gives non-cognitivism a genuine <b>logic</b> through universalisability, which emotivism lacked. But by making standards <i>adopted</i>, he struggles to explain why some moral views are better than others.</p></div>
+</aside></div>
+</template>
+
+<!-- ISSUES -->
+<template id="s-issues">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 10 · Issues for anti-realism</div>
+  <h2>Language, progress and nihilism</h2>
+  <p class="note">The supplied sources cover these issues only in part (Hare on rationality; the encyclopedia entry on quasi-realism and disagreement). The rest is standard A-level material, added to complete the spec.</p>
+  <h3>1. Can anti-realism account for how we use moral language?</h3>
+  <ul class="list">
+    <li><b>Reasoning.</b> Cognitivists explain it easily: moral claims are true or false, so logic applies. That includes Mackie, since his moral claims are false but still truth-apt. Non-cognitivists struggle with the Frege–Geach problem (Stop 7). Hare does best among them, because universalisability gives moral talk a logic.</li>
+    <li><b>Persuading.</b> Emotivism and prescriptivism explain persuasion well: on their view, moral language exists <i>to</i> influence. The worry is that persuasion then looks no different from manipulation.</li>
+    <li><b>Disagreeing.</b> If “abortion is wrong” only expresses an attitude, opposite claims do not contradict each other, any more than “I like tea” and “I don’t” do. Ayer accepts this: genuine disputes are about facts. Stevenson offers “disagreement in attitude”.</li>
+  </ul>
+  <h3>2. The problem of moral progress</h3>
+  <ol class="list">
+    <li>Some changes in moral views are genuine moral progress. <span class="note">(The abolition of slavery.)</span></li>
+    <li>Progress requires a standard against which views can become better. <span class="note">(Otherwise it is mere change.)</span></li>
+    <li>Anti-realism denies any mind-independent moral standard.</li>
+    <li>Therefore anti-realism cannot account for moral progress.</li>
+  </ol>
+  <div class="resp for"><span class="tag">Anti-realist responses</span><p><b>Emotivism:</b> progress can be progress in <i>factual</i> beliefs (e.g. correcting false beliefs about racial difference), which then changes attitudes. <b>Prescriptivism:</b> progress can be greater <i>consistency</i>: if it is wrong to enslave me, it is wrong to enslave anyone. <b>Error theory:</b> progress can be judged from the standpoint of our own current values, or premise 1 can be rejected.</p></div>
+  <h3>3. Does anti-realism become nihilism?</h3>
+  <ul class="list">
+    <li><b>Error theory</b> comes closest, since every positive moral claim is false. But Mackie does not conclude that we should stop being moral. His book is subtitled <i>Inventing Right and Wrong</i>: we can and should <i>construct</i> moral rules, because social life needs them.</li>
+    <li><b>Emotivism</b> is not nihilism. It does not say “nothing is wrong”, which would itself be a moral claim. We still have our moral attitudes.</li>
+    <li><b>Prescriptivism</b> insists that moral reasoning is rational and constrained by universalisability, so it is not true that “anything goes”.</li>
+  </ul>
+  <p>The deeper worry is about <b>authority</b>: even if we keep moral talk, anti-realism may remove the sense that morality binds us whether we like it or not.</p>
+  <div class="resp for"><span class="tag">Quasi-realism (beyond the spec)</span><p>Some expressivists argue that once you sincerely hold “lying is wrong”, you may also say “it is true that lying is wrong” or “it is a fact that lying is wrong”, because these are different ways of saying the same thing. If that works, the anti-realist can keep all the realist-sounding talk, grounded in attitudes rather than in features of the world.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Grid task</h4><p>Make a 3×3 grid: Mackie, Ayer and Hare against language, progress and nihilism. Write one sentence in each box.</p></div>
+  <div class="card"><h4>Evaluation</h4><p>Moral progress is the hardest issue: consistency explains some progress, but not changes in basic values themselves.</p></div>
+</aside></div>
+</template>
+
+<!-- REVISE -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>Are there moral facts?</h2>
+  <h3>Overall evaluation</h3>
+  <p>Naturalism wins on economy, but Hume’s is–ought gap shows that facts alone never settle values, and Moore’s open question argument presses the same point, though the water/H₂O reply weakens Moore. Non-naturalism captures the authority of moral claims, but at the cost of properties and a faculty of intuition that look, in Mackie’s word, “queer”. Error theory takes the realist’s account of meaning seriously and draws the honest conclusion, but the companions-in-guilt reply suggests its reasoning proves too much, and it must say that almost all our moral beliefs are false. Emotivism explains motivation and persistent disagreement but cannot make sense of moral reasoning. Hare’s prescriptivism restores a logic to moral talk, but consistency is not correctness. A sustained judgement: <b>the queerness arguments make it hard to believe in robust, non-natural moral facts, but no anti-realist theory fully explains moral reasoning and progress. The strongest position may be one that, like Hare, takes moral reasoning seriously while explaining moral authority without “queer” properties.</b></p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Cognitivism vs non-cognitivism:</b> do moral judgements express beliefs? <b>Realism vs anti-realism:</b> are there mind-independent moral facts?</li>
+    <li><b>Origins:</b> reason (Kant, intuitionism), emotion (Hume, Ayer), society (Glaucon, Mackie).</li>
+    <li><b>Naturalism:</b> moral properties = natural properties (Bentham: pleasure; virtue ethics: flourishing).</li>
+    <li><b>Hume:</b> no “ought” from “is”; the Fork and verification; beliefs alone cannot motivate.</li>
+    <li><b>Moore:</b> open question argument; the Naturalistic Fallacy; goodness is non-natural. Reply: water/H₂O.</li>
+    <li><b>Intuitionism:</b> self-evident moral truths; companions in guilt; the problem of disagreement.</li>
+    <li><b>Mackie:</b> cognitivist anti-realist; relativity (monogamy); metaphysical and epistemological queerness; objectification (fungus).</li>
+    <li><b>Ayer:</b> verification principle; evincing disapproval (stealing money); not subjectivism; self-refutation; Frege–Geach.</li>
+    <li><b>Hare:</b> prescribe and commend; strawberry; meaning vs criteria; universalisability; Warnock’s objections.</li>
+    <li><b>Issues:</b> reasoning, persuasion and disagreement; moral progress; nihilism.</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Is moral realism true?</b><br>1. Thesis; define realism and anti-realism.<br>2. Naturalism → is–ought / open question → water/H₂O → judge.<br>3. Non-naturalism → Mackie’s queerness → companions in guilt → judge.<br>4. Anti-realist alternatives → reasoning and progress problems → judge.<br>5. Conclusion that follows from your judgements.</p></div>
+</aside></div>
+</template>
+
+<!-- GLOSSARY -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>For 3-mark questions, learn these definitions precisely: one accurate sentence is better than a vague paragraph.</p></div></aside></div>
+</template>
+
+<script>
+var GLOSS=[
+ ["Meta-ethics","The branch of ethics examining the meaning and status of moral language, not what is right or wrong.","h"],
+ ["Normative ethics","The study of what we ought to do (e.g. utilitarianism, Kantian ethics).","t"],
+ ["Cognitivism","The view that moral judgements express beliefs and so are truth-apt.","t"],
+ ["Non-cognitivism","The view that moral judgements do not express beliefs and cannot be true or false.","h"],
+ ["Truth-apt","Capable of being true or false.","t"],
+ ["Truth-value","The property of a statement being either true or false.","h"],
+ ["Moral realism","The view that there are mind-independent moral properties or facts.","t"],
+ ["Moral anti-realism","The view that there are no mind-independent moral properties or facts.","t"],
+ ["Moral naturalism","The view that moral properties are identical to natural properties that could be studied empirically.","t"],
+ ["Moral non-naturalism","The view that moral properties are real but not natural, and cannot be reduced to natural properties.","t"],
+ ["Intuitionism","The view that basic moral truths are self-evident and known by rational intuition.","t"],
+ ["Open question argument","Moore: “X is N, but is X good?” is always an open question, so “good” cannot mean any natural property N.","t"],
+ ["Naturalistic Fallacy","Moore’s name for the mistake of identifying goodness with a natural property.","t"],
+ ["Is–ought gap","Hume: no set of purely factual premises entails an evaluative conclusion.","t"],
+ ["Hume’s Fork","The division of knowledge into relations of ideas (analytic, a priori) and matters of fact (synthetic, a posteriori).","t"],
+ ["Verification principle","Ayer: a statement is meaningful only if it is analytic or empirically verifiable.","h"],
+ ["Analytic statement","A statement true or false purely by the definitions of its words.","h"],
+ ["Synthetic statement","A statement whose truth depends on empirical facts about the world.","h"],
+ ["Error theory","Moral judgements express beliefs about objective moral properties, but none exist, so the beliefs are systematically false.","t"],
+ ["Argument from relativity","Mackie: variation in moral codes is better explained by different ways of life than by perception of objective values.","t"],
+ ["Argument from queerness","Mackie: objective values would be metaphysically and epistemologically strange, unlike anything else.","t"],
+ ["Fact/value distinction","The idea that describing how the world is differs from prescribing how it ought to be.","t"],
+ ["Patterns of objectification","Mackie: we project our moral attitudes onto the world and mistake them for objective qualities.","t"],
+ ["Pathetic fallacy","Reading our feelings into the objects that cause them.","t"],
+ ["Emotivism","A non-cognitive theory that moral judgements express emotions rather than beliefs, and have no truth-value.","h"],
+ ["Evincing","Ayer’s term for expressing or displaying an emotion, rather than describing or stating it.","h"],
+ ["Subjectivism","The view that moral statements are made true by what people (individually or collectively) approve of.","h"],
+ ["Emotive meaning","The part of a word’s meaning that expresses or arouses feeling (Stevenson).","h"],
+ ["Descriptive meaning","The part of a word’s meaning that conveys factual information (Stevenson).","h"],
+ ["Dynamic use of language","Stevenson’s term for language used to influence attitudes or behaviour, not just to describe.","h"],
+ ["Prescriptivism","A non-cognitive theory that moral judgements are universalisable prescriptions that guide action.","t"],
+ ["Commending","Using value words such as “good” to guide choices, one’s own or others’ (Hare).","t"],
+ ["Criteria of application","The descriptive standards for applying “good” to a kind of thing (Hare).","t"],
+ ["Universalisability","If I judge X right, I must judge any relevantly similar case the same way.","t"],
+ ["Moral nihilism","The view that nothing is morally right or wrong.","t"],
+ ["Quasi-realism","An expressivist project that tries to earn the right to talk of moral truth on non-cognitivist foundations.","t"]
+];
+var STOPS=[["start","Start here"],["naturalism","Naturalism"],["hume","Hume"],["moore","Moore"],["intuition","Intuitionism"],["mackie","Mackie: relativity"],["queer","Mackie: queerness"],["ayer","Ayer"],["stevenson","Stevenson"],["hare","Hare"],["issues","Issues"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["naturalism","Stop 1","Moral naturalism","Moral facts as natural facts."],
+ ["hume","Stop 2","Hume’s challenges","Is–ought, the Fork and motivation."],
+ ["moore","Stop 3","Moore’s open question","Is goodness indefinable?"],
+ ["intuition","Stop 4","Non-naturalism","Intuitionism and its burdens."],
+ ["mackie","Stop 5","Mackie: error theory","The argument from relativity."],
+ ["queer","Stop 6","Mackie: queerness","Strange things, strange knowing."],
+ ["ayer","Stop 7","Ayer’s emotivism","Boo and hurrah."],
+ ["stevenson","Stop 8","Stevenson","Beyond the spec: emotive meaning."],
+ ["hare","Stop 9","Hare’s prescriptivism","Commanding and commending."],
+ ["issues","Stop 10","Issues for anti-realism","Language, progress, nihilism."],
+ ["revise","Revise","Summary and quiz","Evaluation, recap, retrieval."],
+ ["glossary","A–Z","Glossary","Every key term."]
+];
+var STRETCH={
+ "start":[["Sayre-McCord on why meta-ethics matters","If the assumptions behind moral thought turn out to be suspect, then not only is our understanding of morality compromised, but our sense that morality is important may well disappear too.","Sayre-McCord, ‘Metaethics’, SEP §1"]],
+ "naturalism":[["Glaucon’s convention","Glaucon’s account of morality as a mutually advantageous convention makes it non-mysterious, but struggles with the idea that moral principles are universal: conventions differ from place to place and seem to need some convention-independent standard to justify them.","Sayre-McCord, ‘Metaethics’, SEP §3"]],
+ "hume":[["Internalism: judgement and motivation","Many philosophers think that sincerely judging something good means having at least some motivation to promote it, even if that motivation can be overridden. Non-cognitivists, who see moral judgement as expressing a motivating attitude, find this connection easy to explain. Some naturalist cognitivists have to say that a person could sincerely make a moral judgement and be entirely unmoved by it.","Sayre-McCord, ‘Metaethics’, SEP §6"],["What did Hume mean?","There is substantial scholarly debate about exactly what Hume meant by the is–ought passage, and about whether he was right. Treat the ‘no ought from an is’ reading as the standard interpretation, not the only one.","Sayre-McCord, ‘Metaethics’, SEP §4"]],
+ "mackie":[["The Euthyphro problem","Could God be the source of objective values? Plato’s <i>Euthyphro</i> raises the difficulty: if God commands what is good because it is good, the standard exists independently of God; if it is good only because God commands it, it is unclear why those commands have authority. Appealing to God’s power to punish or to God’s role as creator does not by itself establish legitimate authority.","Sayre-McCord, ‘Metaethics’, SEP §2"],["Thrasymachus and Glaucon","Long before Mackie, Plato’s <i>Republic</i> presented morality as a human creation: Thrasymachus as a tool of the powerful, Glaucon as a mutually advantageous convention. If Glaucon is right, someone who could break the rules undetected would have no reason to keep them.","Sayre-McCord, ‘Metaethics’, SEP §1, §6"]],
+ "stevenson":[["Two strands of non-cognitivism","Non-cognitivists have focused on two things: the attitudes that moral claims express, and what people are <i>doing</i> when they make them, namely influencing others and guiding action. Stevenson’s ‘dynamic’ use belongs to the second strand. Many think the expressive idea goes to the heart of the matter, with the directive use secondary.","Sayre-McCord, ‘Metaethics’, SEP §4"]],
+ "hare":[["Is prescription secondary?","Some expressivists argue that concentrating on the directive or prescriptive use of moral language can at best be secondary; what matters most is the attitude a moral judgement expresses. That would make Hare’s focus on prescribing the less fundamental part of the non-cognitivist story.","Sayre-McCord, ‘Metaethics’, SEP §4"],["Kant: morality from rational agency","Kant argued that moral demands, though neither obvious nor universally accepted, can be known <i>a priori</i>: the concept of a rational agent itself grounds the requirement to treat oneself and others always as ends and never solely as means. Compare Hare’s attempt to find rational constraints, through universalisability, without moral facts.","Sayre-McCord, ‘Metaethics’, SEP §5"]],
+ "moore":[["Concepts vs properties","Many think the open question argument shows that moral <i>thinking</i> is distinctive, but that Moore was wrong to infer from this to the nature of the <i>properties</i> we attribute.","Sayre-McCord, ‘Metaethics’, SEP §4"]],
+ "intuition":[["Moral knowing-how","Much of morality seems to be a matter of knowing <i>how</i> to respond to the needs of others, not just knowing <i>that</i> something is the case. A plausible moral epistemology must cover both.","Sayre-McCord, ‘Metaethics’, SEP §5"]],
+ "queer":[["Error theory and atheism","The error theorist’s position about morality parallels the atheist’s about God’s will: both say the thoughts involve a failed presupposition. Each must show both that the presupposition is really there and that it is untenable.","Sayre-McCord, ‘Metaethics’, SEP §4"]],
+ "ayer":[["Quasi-realism","Recent expressivists aim to explain, on non-cognitivist foundations, why moral language has all the trappings of realism: talk of truth and facts ‘comes cheap’.","Sayre-McCord, ‘Metaethics’, SEP §4"]],
+ "issues":[["Cognitivism vs non-cognitivism: a common challenge","Cognitivism easily explains how moral thought is continuous with other thought, but struggles to explain what is distinctive about it; non-cognitivism has the opposite problem.","Sayre-McCord, ‘Metaethics’, SEP §4"]]
+};
+var QS={
+ "start":["What is moral anti-realism?","Explain the difference between cognitivism and non-cognitivism.","Explain the three possible origins of moral principles.","Are there mind-independent moral facts?"],
+ "naturalism":["What is moral naturalism?","Explain how utilitarianism can be understood as a form of moral naturalism.","Explain moral naturalism, with reference to utilitarianism and virtue ethics.","Is moral naturalism correct?"],
+ "hume":["What is Hume’s is–ought gap?","Explain Hume’s argument that moral judgements are not beliefs.","Explain how Hume’s is–ought gap and Hume’s Fork challenge moral realism.","Can an ‘ought’ be derived from an ‘is’?"],
+ "moore":["What is the Naturalistic Fallacy?","Explain Moore’s open question argument.","Explain how Moore’s open question argument challenges moral naturalism.","Does Moore’s open question argument defeat moral naturalism?"],
+ "intuition":["What is intuitionism?","Explain one problem for moral non-naturalism.","Explain moral non-naturalism, including intuitionism.","Is moral non-naturalism defensible?"],
+ "mackie":["What is the key idea of error theory?","Explain Mackie’s argument from relativity.","Explain Mackie’s error theory.","Does moral disagreement show there are no objective moral values?"],
+ "queer":["What does Mackie mean by ‘queerness’?","Explain the difference between metaphysical and epistemological queerness.","Explain Mackie’s arguments from queerness and his account of patterns of objectification.","Do Mackie’s arguments from queerness succeed?"],
+ "ayer":["What is emotivism?","Explain why Ayer’s emotivism is not subjectivism.","Outline and explain the emotive theory of meta-ethics developed by A. J. Ayer.","Is emotivism the best account of moral language?"],
+ "stevenson":["What is emotive meaning?","Explain Stevenson’s distinction between descriptive and dynamic uses of language.","Outline and explain the emotive theory of meta-ethics developed by Stevenson (extension).","Does Stevenson improve on Ayer’s emotivism?"],
+ "hare":["What is prescriptivism?","Explain Hare’s distinction between the meaning of ‘good’ and its criteria of application.","Explain Hare’s prescriptivism.","Is prescriptivism a convincing account of moral language?"],
+ "issues":["What is moral nihilism?","Explain the problem of moral progress for anti-realism.","Explain how anti-realists account for moral reasoning, persuading and disagreeing.","Does moral anti-realism lead to nihilism?"]
+};
+var QUIZ=[
+ ["Is Mackie a cognitivist or a non-cognitivist?","A cognitivist: moral judgements express beliefs. He is an anti-realist because he thinks those beliefs are all false."],
+ ["State Moore’s open question argument in one sentence.","For any natural property N, “X is N, but is X good?” remains open, so “good” cannot mean N."],
+ ["What is the hidden premise in “it causes pain, so it’s bad”?","Pain is bad."],
+ ["How does the water/H₂O example respond to Moore?","Two terms can differ in meaning yet pick out the same property, so an open question does not prove goodness is non-natural."],
+ ["What is the ‘direction of causation’ point in Mackie’s relativity argument?","People approve of a practice because they live that way of life (monogamy), not the other way round."],
+ ["What does the fungus example illustrate?","Projection: we read our disgust into the fungus as ‘foulness’, as we read attitudes into actions as ‘wrongness’."],
+ ["What are the two kinds of meaningful statement for Ayer?","Analytic statements and empirically verifiable synthetic statements."],
+ ["Why is emotivism not subjectivism?","Subjectivism says moral claims report approval (and can be true); emotivism says they express it and are not truth-apt."],
+ ["What does Hare’s strawberry example show?","“Good” cannot just mean its descriptive features, because we say a strawberry is good because it has them."],
+ ["What is Warnock’s point about Marmite?","Non-moral language also guides action, so action-guidance does not make moral language distinctive."]
+];
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src">'+(x[2]==="h"?"From the slide glossary":"Course definition")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+
+</script>
+</body>
+</html>

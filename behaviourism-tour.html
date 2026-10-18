@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Behaviourism Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#fbe3d6; --ink:#8a3f1c;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#fbe3d6}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#d6efdf}
+.stretch h4{color:#245c3c}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#fdf5f0}
+details.resp summary{cursor:pointer}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+
+/* mind tours additions */
+.resp.against{border-left-color:#f1b796}
+.gloss .src.b{color:#245c3c}
+.argbox{border:1px solid var(--line);border-radius:12px;padding:16px 20px 6px;margin:18px 0;background:#fffaf7}
+.argbox .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--ink)}
+.argbox ol{margin-top:8px}
+.ai{font-size:.8rem;color:var(--muted)}
+.band img{max-height:320px;object-fit:cover}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+</head>
+<body>
+<!--TITLE:Behaviourism Tour-->
+<div class="wrap">
+  <a class="back" href="#">← Metaphysics of Mind</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 2 · Spec 3.4.3</span>
+      <h1>Philosophical behaviourism</h1>
+      <p>Is talk about minds really talk about behaviour? Take the tour: physicalism and supervenience, Hempel’s hard behaviourism, Ryle’s soft behaviourism, and the four issues on the specification.</p>
+    </div>
+    <img src="img/mind-third-person.jpg" alt="A person seen from behind watching people walking and playing in a park.">
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Text adapted from the departmental handouts <i>Behaviourism</i> and <i>Physicalism</i>, checked against the AQA 7172 specification and set texts (Hempel, ‘The Logical Analysis of Psychology’; Ryle, <i>The Concept of Mind</i> chs 1, 2, 5, 6; Putnam). Images from the departmental slides. Boxes marked ‘Beyond the spec’ are extension only.</footer>
+</div>
+
+<!-- ============ STOP 0 ============ -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>Are mental states just behaviour?</h2>
+  <p>Think about how you know that your friend is happy, or angry, or in pain. You watch what they do and listen to what they say. Philosophical <span class="term" data-t="Philosophical behaviourism">behaviourism</span> takes this seriously: it claims that statements about mental states are really statements about <i>behaviour</i> – what people do, and what they would do in various circumstances. On this view, to say that Paul has toothache is not to report a hidden, private event; it is to say something about how Paul behaves and is disposed to behave.</p>
+  <p>Behaviourism is the first of the <span class="term" data-t="Physicalism">physicalist</span> theories on the specification. It was attractive in the mid-twentieth century for three reasons: it promised to make psychology a respectable science, since behaviour can be publicly observed; it dissolved the problem of other minds, since minds are not hidden; and it avoided the interaction problem, since there is no ghostly mind to interact with the body. It is no longer widely held, but its failures taught philosophers exactly what a theory of mind must do, and it leads directly into identity theory and functionalism.</p>
+  <div class="thesis"><b>Philosophical, not psychological.</b> Psychological (or methodological) behaviourism, associated with J.B. Watson and B.F. Skinner, is a way of doing psychology by studying only behaviour. Philosophical (or analytical) behaviourism is a claim about the <i>meaning</i> of mental terms. This tour is about the second.</div>
+  <h3>Choose where to go</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <div class="card"><h4>The big question</h4><p>Can propositions about mental states be analysed as propositions about behaviour or behavioural dispositions?</p></div>
+  <div class="card"><h4>How to use this tour</h4><p>Learning it for the first time? Go through the stops in order. Revising? Jump to a stop, or go straight to <b>Revise</b> for the summary and quiz. Dotted words are in the glossary: tap one to see its meaning.</p></div>
+  <div class="card"><h4>Spec checklist</h4><p>✓ Physicalism: everything is physical or supervenes on the physical<br>✓ Hard behaviourism (Hempel)<br>✓ Soft behaviourism (Ryle)<br>✓ Dualist arguments applied<br>✓ Distinctness of mental states from behaviour (super-spartans, perfect actors)<br>✓ Circularity; multiple realisability in behaviour<br>✓ Asymmetry of self-knowledge</p></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 1 ============ -->
+<template id="s-physicalism">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · Background</div>
+  <h2>Physicalism and supervenience</h2>
+  <p>AQA defines <span class="term" data-t="Physicalism">physicalism</span> as the view that <b>everything is physical or supervenes upon the physical</b> – and this includes properties, events, objects and any substance(s) that exist. The handout adds that it used to be called materialism; modern versions say ‘physical’ because physics now includes things like fields and energy that are not ‘matter’ in the old sense. Any part of existence that can be thought of in non-physical terms – consciousness, moral or aesthetic properties – is, in the final analysis, identified with or grounded in more basic physical properties.</p>
+  <h3>Supervenience</h3>
+  <p>A set of properties A <span class="term" data-t="Supervenience">supervenes</span> on a set of properties B when there can be no difference in A without a difference in B. If you and your exact physical duplicate are physically identical, then (if the mental supervenes on the physical) you must be mentally identical too. The handout’s example is a pointillist painting: what it depicts and its beauty exist in virtue of the dots and their colours.</p>
+  <h3>Reductive and non-reductive physicalism</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">Reductive</span><p>Mental properties are identical with physical properties – nothing over and above them. Identity theory is the clearest example; the handout also counts eliminative materialism. Hard behaviourism reduces mental <i>language</i> to physical language.</p></div>
+    <div class="resp"><span class="tag">Non-reductive</span><p>Mental properties supervene on physical properties but are not identical with them. Kim’s three ingredients: supervenience, irreducibility and mental causation. The handout counts soft behaviourism and functionalism as non-reductive.</p></div>
+  </div>
+  <div class="thesis"><b>Why supervenience matters.</b> Supervenience is the minimum a physicalist needs. It is what the zombie argument denies (3.4.2): a zombie world is physically identical to ours but mentally different, so if it is possible, the mental does not supervene on the physical.</div>
+  <h3>Where behaviourism fits</h3>
+  <p>Behaviourism is a physicalist theory because behaviour is physical – bodily movements and dispositions to move. It is unusual because it is primarily a theory of <i>meaning</i>: it tells us what mental words mean. If that analysis is right, then there is nothing for mental words to refer to except behaviour and dispositions, and dualism is not false so much as confused.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Physicalism</dt><dd>Everything is physical or supervenes upon the physical.</dd><dt>Supervenience</dt><dd>No A-difference without a B-difference.</dd><dt>Reductive</dt><dd>Claims identity, not just dependence.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 2 ============ -->
+<template id="s-hard">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · The first version</div>
+  <h2>Hard behaviourism (Hempel)</h2>
+  <p>AQA: <b>all propositions about mental states can be reduced without loss of meaning to propositions that exclusively use the language of physics to talk about bodily states/movements.</b> This is Carl Hempel’s view in ‘The Logical Analysis of Psychology’ (1935, revised 1949), one of your set texts.</p>
+  <h3>The background: verificationism</h3>
+  <p>In the 1920s and 30s the Vienna Circle developed the <span class="term" data-t="Verification principle">verification principle</span>: the meaning of a proposition is given by the conditions of its verification. If there is no way, even in principle, of verifying a statement, it is meaningless. You met this principle in A.J. Ayer’s attack on religious language (3.3.3). The handout’s example: ‘the temperature in the laboratory is 23.4°C’ means that if you looked at the thermometer you would see the mercury at a certain mark. We could translate every statement about temperature into statements about thermometer readings without loss of meaning.</p>
+  <p>The problem for psychology is this. If ‘John is angry’ means that John has some private inner feeling which no one else can verify, it would be meaningless, and psychology would not be a science. Hempel, who thought psychology was meaningful, concluded that psychological statements must be translatable into statements that can be publicly verified.</p>
+  <h3>Paul’s toothache</h3>
+  <p>Hempel takes the proposition ‘Paul has a toothache’ and asks under what circumstances it would be verified. He gives test sentences such as (paraphrased from the handout): (a) Paul weeps and makes gestures of such-and-such kinds; (b) asked what is the matter, Paul utters the words ‘I have a toothache’; (c) closer examination reveals a decayed tooth with exposed pulp; (d) Paul’s blood pressure, digestive processes and reaction speeds show such-and-such changes; (e) such-and-such processes occur in Paul’s central nervous system.</p>
+  <p>The meaning of ‘Paul has a toothache’ just <i>is</i> the conjunction of these physical test sentences. As Hempel puts it, psychology is an integral part of physics.</p>
+  <div class="argbox"><span class="tag">Hempel’s argument in standard form</span>
+  <ol class="list">
+    <li>The meaning of a proposition is given by the conditions of its verification. <span class="note">(Verification principle.)</span></li>
+    <li>Propositions about mental states are meaningful. <span class="note">(Psychology is a genuine science.)</span></li>
+    <li>The only publicly verifiable conditions for a mental proposition are physical: bodily movements, physiological and neural states. <span class="note">(Private inner states cannot be publicly verified.)</span></li>
+    <li>Therefore, propositions about mental states mean the same as propositions about physical bodily states and movements – they can be translated into the language of physics without loss of meaning.</li>
+  </ol></div>
+  <h3>Feigning pain</h3>
+  <p>Hempel considers the obvious objection: Paul might pretend to have toothache. He replies that a pretender would satisfy only <i>some</i> of the test conditions, and that a more penetrating examination, which in principle could include events in the central nervous system, would reveal the pretence.</p>
+  <h3>Problems specific to hard behaviourism</h3>
+  <div class="resp against"><span class="tag">The verification principle</span><p>The principle has well-known problems (3.3.3): it is not itself verifiable, so by its own standard it is meaningless; it is unclear what ‘verifiable in principle’ means; and it makes large areas of knowledge meaningless. If premise 1 goes, Hempel’s argument goes with it.</p></div>
+  <div class="resp against"><span class="tag">Not really behaviourism</span><p>Hempel’s test sentences include facts about blood pressure and the central nervous system. That makes his view more like an early identity theory than a pure behaviourism: he has had to bring in inner physical states to cope with pretence.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Hard behaviourism</dt><dd>Mental propositions translate without loss into the language of physics.</dd><dt>Verification principle</dt><dd>A proposition’s meaning is its method of verification.</dd><dt>Test sentence</dt><dd>A physical statement whose truth would verify a mental claim.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 3 ============ -->
+<template id="s-soft">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · The second version</div>
+  <h2>Soft behaviourism (Ryle)</h2>
+  <p>AQA: <b>propositions about mental states are propositions about behavioural dispositions</b> – propositions that use ordinary language. This is Gilbert Ryle’s view in <i>The Concept of Mind</i> (1949).</p>
+  <h3>How it differs from hard behaviourism</h3>
+  <ol class="list">
+    <li>It places great emphasis on <span class="term" data-t="Disposition">dispositions</span>.</li>
+    <li>It does not claim that mental language can be translated into the language of physics; the analysis is in ordinary language about what people would do.</li>
+    <li>It is not driven by the verification principle. Its motivation is Ryle’s view that Cartesian dualism makes a <span class="term" data-t="Category mistake">category mistake</span> (see the substance dualism tour).</li>
+  </ol>
+  <h3>Dispositions</h3>
+  <p>A disposition is a tendency for something to happen, or for someone to do something, in certain circumstances. Salt is <i>soluble</i>: it will dissolve if put in water (unless the water is already saturated). Glass is <i>brittle</i>: it will shatter if struck. A disposition can be present even when it is not being shown – a sugar lump in the bowl is soluble now. Dispositional statements are <span class="term" data-t="Hypothetical (statement)">hypothetical</span>: ‘if such-and-such happened, then so-and-so would happen’.</p>
+  <p>Ryle applies this to the mind. To believe that the ice is thin is to be disposed, among other things, to skate warily, to warn others and to say ‘the ice is thin’ if asked. All things being equal, if someone believes they are looking at a red apple and you ask them what they see, they will tend to say ‘a red apple’ – unless there is a specific reason not to.</p>
+  <h3>Single-track and multi-track</h3>
+  <p>Solubility is a <span class="term" data-t="Single-track disposition">single-track</span> disposition: there is one thing it predicts. Mental states are <span class="term" data-t="Multi-track disposition">multi-track</span>: they can show up in many different ways depending on circumstances and other beliefs. If I see a jackal running towards me, whether I run, stand still or back away slowly depends on whether I have a gun, what I have been told, how big the jackal is, and so on. This is why, for Ryle, mental language cannot be translated without remainder into a list of physical behaviours.</p>
+  <div class="argbox"><span class="tag">Ryle’s position in standard form</span>
+  <ol class="list">
+    <li>Treating mental terms as names of inner, non-physical episodes is a category mistake. <span class="note">(The ‘ghost in the machine’ critique.)</span></li>
+    <li>We successfully apply mental terms to others on the basis of what they do and would do. <span class="note">(We learn and use mental words in public contexts.)</span></li>
+    <li>What we track in applying mental terms is how people are disposed to behave in various circumstances. <span class="note">(Analysis of examples: belief, vanity, intelligence.)</span></li>
+    <li>Therefore, propositions about mental states are propositions about multi-track behavioural dispositions.</li>
+  </ol></div>
+  <h3>Mental causation without a ghost</h3>
+  <p>Behaviourism has an elegant answer to the interaction problem. A disposition does not cause behaviour in the way one event causes another; it <i>explains</i> it. The rock caused the window to shatter; the glass’s brittleness explains why it shattered. Likewise, ‘he ran because he was afraid’ explains his running by citing a disposition, not by citing a ghostly push. So the mental can explain behaviour without raising the problems of causation that plagued substance dualism.</p>
+  <div class="resp for"><span class="tag">Strengths of behaviourism</span><p>It avoids the interaction problem; it solves the problem of other minds (we can observe minds in behaviour); it explains how we learn mental words; and it fits a scientific, public picture of persons.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Soft behaviourism</dt><dd>Mental propositions are propositions about behavioural dispositions.</dd><dt>Disposition</dt><dd>A tendency to behave in certain ways in certain circumstances.</dd><dt>Multi-track</dt><dd>Manifested in many different ways depending on circumstances.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 4 ============ -->
+<template id="s-distinct">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · Issues 1 and 2</div>
+  <h2>Dualist arguments, super-spartans and perfect actors</h2>
+  <h3>Issue 1: dualist arguments applied to behaviourism</h3>
+  <p>The handout reminds you that you can use the zombie and knowledge arguments against behaviourism. Both are aimed at any physicalist theory, but behaviourism is especially vulnerable.</p>
+  <ul class="list">
+    <li><b>Zombies.</b> A zombie behaves exactly as we do and has all our behavioural dispositions, yet lacks consciousness. If zombies are even conceivable, then mental states cannot <i>mean</i> behavioural dispositions, because then a zombie would be conscious by definition.</li>
+    <li><b>Mary.</b> Mary knows all the behavioural facts about colour vision – every disposition to say ‘red’ – yet still seems to learn what seeing red is like. So the behavioural facts leave something out.</li>
+    <li><b>Conceivability.</b> Descartes can conceive of his mind existing without any body, and therefore without any behaviour. If behaviourism is true, this should be as contradictory as a soluble substance that would not dissolve in any circumstances. It does not seem contradictory.</li>
+    <li><b>The hard problem.</b> Behaviourism may help with the ‘easy problem’ – a third-person theory of what minds do – but it says nothing about what it is like to be afraid or to be a bat (Nagel). The handout says the behaviourist must either deny the puzzle can be answered or deny they seek to answer it.</li>
+  </ul>
+  <div class="resp for"><span class="tag">Behaviourist reply</span><p>These arguments assume that we can make sense of mental states apart from behaviour. Ryle would say this is the category mistake again: we only think zombies are conceivable because we picture a hidden inner light switched off. If mental concepts are behavioural concepts, the zombie is a contradiction (this is Chalmers’ ‘type-A’ response).</p></div>
+  <h3>Issue 2: the distinctness of mental states from behaviour</h3>
+  <p>The deepest objection is that mental states and behaviour can come apart <i>in both directions</i>.</p>
+  <div class="pair">
+    <div class="resp against"><span class="tag">Mental state without behaviour</span><p><b>Super-spartans</b> (Hilary Putnam). Imagine a community of people who, through training and practice over generations, have learned to suppress all pain behaviour. They feel pain, but show no sign of it – they do not wince, groan or even report it, and are not disposed to. Ex hypothesi they feel pain. So pain cannot be pain behaviour or a disposition to it.</p></div>
+    <div class="resp against"><span class="tag">Behaviour without mental state</span><p><b>Perfect actors.</b> A perfect actor (or a convincing pretender) can produce all the behaviour associated with pain – wincing, groaning, saying ‘it hurts’ – without feeling any pain at all. So pain behaviour is not sufficient for pain.</p></div>
+  </div>
+  <div class="argbox"><span class="tag">The super-spartan objection in standard form</span>
+  <ol class="list">
+    <li>If behaviourism is true, being in pain is (or necessarily involves) being disposed to pain behaviour. <span class="note">(The thesis.)</span></li>
+    <li>It is conceivable that super-spartans feel pain while lacking any disposition to pain behaviour. <span class="note">(Putnam’s thought experiment.)</span></li>
+    <li>If being in pain were being disposed to pain behaviour, the super-spartan case would be contradictory. <span class="note">(From 1.)</span></li>
+    <li>The case is not contradictory. <span class="note">(We understand it perfectly well.)</span></li>
+    <li>Therefore, behaviourism is false.</li>
+  </ol></div>
+  <div class="resp for"><span class="tag">Responses</span><p><b>Hempel:</b> the super-spartan is not in pain if they fail the test conditions – especially the physiological and neural ones. <b>Ryle:</b> the super-spartan still has <i>some</i> pain dispositions: they would report pain under a truth drug, or to a trusted doctor, or if their training lapsed. And the actor lacks some: they would stop when the curtain falls, and would not take painkillers.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>Hempel’s reply concedes that pain is an inner state, which is no longer behaviourism. Ryle’s reply works only by adding more and more circumstances – which leads straight into the circularity problem (Stop 5). And Putnam can simply stipulate that the super-spartans have no such dispositions at all; the case is still intelligible.</p></div>
+  <h3>Evaluation</h3>
+  <p>The super-spartan and perfect actor cases show that the connection between mental states and behaviour is not one of meaning. A mental state is something that normally <i>causes</i> behaviour, but which can be present without it and absent despite it. This was a major reason why philosophers moved to identity theory (the mental state is the inner cause) and functionalism (the mental state is defined by its typical causes and effects).</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Super-spartan</dt><dd>Putnam’s imagined person who feels pain but has no disposition to show it.</dd><dt>Perfect actor</dt><dd>Someone who shows all pain behaviour without feeling pain.</dd><dt>Ex hypothesi</dt><dd>By the terms of the hypothesis.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 5 ============ -->
+<template id="s-define">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 5 · Issue 3</div>
+  <h2>Defining mental states: circularity and multiple realisability</h2>
+  <p>If behaviourism is true, it should be possible to give a behavioural analysis of each mental state. The specification names two reasons why this looks impossible.</p>
+  <h3>(a) Circularity</h3>
+  <p>A good definition cannot use the term it is defining. ‘Trees are tall woody plants with leaves – and other trees’ is useless because ‘tree’ appears in the definition. Now try to define a belief behaviourally. Does believing it will rain mean being disposed to take an umbrella? Only if you also <i>want</i> to stay dry, and <i>believe</i> the umbrella will keep you dry, and do not <i>want</i> to get wet for fun. Every behavioural definition of one mental state has to mention other mental states. So mental states cannot be analysed purely in terms of behaviour.</p>
+  <div class="argbox"><span class="tag">The circularity objection in standard form</span>
+  <ol class="list">
+    <li>Behaviourism claims that mental terms can be analysed in terms of behaviour (or dispositions) alone.</li>
+    <li>What a person is disposed to do given one mental state depends on their other mental states. <span class="note">(Belief + desire together produce behaviour; the umbrella example.)</span></li>
+    <li>So any adequate analysis of a mental state must refer to other mental states. <span class="note">(From 2.)</span></li>
+    <li>An analysis that uses mental terms is not an analysis in terms of behaviour alone; it is circular. <span class="note">(Definition of circularity.)</span></li>
+    <li>Therefore, behaviourism cannot provide the analyses it claims.</li>
+  </ol></div>
+  <div class="resp for"><span class="tag">Responses</span><p>Ryle could say he never promised closed definitions; mental concepts are open-textured. He could also argue (as the handout suggests) that in some sense all our definitions are circular, since every concept is understood through its relations to others.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>If no definition of a mental state can be given, behaviourism has abandoned its central claim – that mental talk is <i>really</i> behavioural talk – and we lose sight of what the mental state is. Functionalism later embraced the circularity, defining states by their relations to inputs, outputs <i>and other mental states</i> together.</p></div>
+  <h3>(b) Multiple realisability of mental states in behaviour</h3>
+  <p>One mental state can be expressed in an indefinitely large number of different behaviours, and one behaviour can express many different mental states.</p>
+  <ul class="list">
+    <li><b>One state, many behaviours.</b> Fear of a jackal might show itself as running, freezing, shooting, backing away or shouting – depending on circumstances. No finite list captures ‘being afraid’; the definition would be infinitely long.</li>
+    <li><b>One behaviour, many states.</b> I may run towards my dog because I love it, or because I am worried it is hurt, or because I want to stop it running into the road.</li>
+    <li><b>Across people.</b> If you and I respond differently to the same jackal, behaviourism seems to say we are in different mental states, though both of us are afraid.</li>
+  </ul>
+  <h3>Evaluation</h3>
+  <p>These two problems are connected: Ryle introduced multi-track dispositions and ‘all things being equal’ clauses to cope with multiple realisability, but specifying what ‘all things being equal’ means requires mentioning other mental states, which produces circularity. This is a decisive objection to behaviourism <i>as an analysis</i>. Its lasting lesson is that mental states form a <b>holistic</b> system: a belief only produces behaviour together with desires and other beliefs.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Circular definition</dt><dd>A definition that uses the term being defined.</dd><dt>Multiple realisability</dt><dd>One mental state can be realised in many different ways (here, in behaviour).</dd><dt>Holism</dt><dd>Mental states only make sense in relation to each other.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 6 ============ -->
+<template id="s-asym">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 6 · Issue 4</div>
+  <h2>The asymmetry of self-knowledge</h2>
+  <figure class="side"><img src="img/mind-first-person.jpg" alt="A first-person view of one's own feet on a bed looking towards a window."><figcaption><b>From the inside.</b> I know I am in pain without watching myself wince.</figcaption></figure>
+  <p>We seem to have special access to our own mental states. They are, at least to a large degree, <b>private</b> to us, and our knowledge of them is <b>immediate</b>: I know I am in pain without having to infer it from my own behaviour. With other people it is different: my access to their mental states is indirect, through their behaviour, it must be inferred, and it cannot be fully trusted.</p>
+  <p>If behaviourism is true, this asymmetry should not exist. If being in pain means being disposed to pain behaviour, then I would have to find out that I am in pain in the same way I find out about you – by observing behaviour. But that is absurd. A behaviourist joke makes the point: two behaviourists make love, and afterwards one says to the other, ‘That was great for you – how was it for me?’</p>
+  <div class="argbox"><span class="tag">The asymmetry objection in standard form</span>
+  <ol class="list">
+    <li>If behaviourism is true, my knowledge of my mental states is gained in the same way as my knowledge of other people’s: by observing behaviour. <span class="note">(Mental states are behavioural dispositions.)</span></li>
+    <li>I know my own mental states directly and immediately, without observing my behaviour. <span class="note">(Introspection; I do not infer my pain from my groans.)</span></li>
+    <li>I know others’ mental states only indirectly, by observing their behaviour.</li>
+    <li>So my knowledge of my own mental states is not gained in the same way as my knowledge of others’. <span class="note">(From 2, 3.)</span></li>
+    <li>Therefore, behaviourism is false.</li>
+  </ol></div>
+  <div class="resp for"><span class="tag">Ryle’s response</span><p>The asymmetry is one of degree, not kind. I have better access to my own dispositions because I am always present to observe myself, I can attend to my own unspoken thoughts (which Ryle treats as silent talking to oneself), and I have a lifetime of evidence about my own behaviour. And we are sometimes wrong about ourselves: others may see that we are jealous or angry before we do, and a therapist may understand your emotions better than you.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>Being better placed to observe yourself does not explain <i>non-inferential</i> knowledge. When I am in pain I do not reason from evidence at all. And being occasionally wrong about complex emotions (jealousy) is compatible with having direct access to simple sensations (pain, seeing red). The asymmetry seems strongest exactly where phenomenal properties are involved – which is where behaviourism has least to say.</p></div>
+  <h3>Evaluation</h3>
+  <p>Ryle’s response has force for complex, dispositional states like vanity or jealousy, where self-deception is common and others can know us better than we know ourselves. It has much less force for sensations. The asymmetry objection therefore reinforces the main lesson of this topic: behaviourism is most plausible for intentional, dispositional states such as belief and character traits, and least plausible for conscious experiences with phenomenal character.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Asymmetry</dt><dd>A difference in kind between how I know my mind and how I know yours.</dd><dt>Non-inferential</dt><dd>Known directly, not reasoned to from evidence.</dd><dt>Privacy</dt><dd>Being accessible only to the subject.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ REVISE ============ -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>Is philosophical behaviourism true?</h2>
+  <h3>Overall evaluation</h3>
+  <p>Behaviourism has real strengths: it avoids the interaction problem, dissolves the problem of other minds, and captures something true about how we learn and apply mental words. Hard behaviourism depends on the discredited verification principle and has to bring in neural states to cope with pretence. Soft behaviourism is more subtle, but the super-spartan and perfect actor cases show that mental states and behaviour can come apart in both directions; every attempt to define a mental state behaviourally either fails to cover multiple realisations or becomes circular; and the asymmetry of self-knowledge shows that we know our own sensations in a way behaviourism cannot explain. A sustained judgement: <b>behaviourism is false as an account of what mental states are, because mental states are inner causes of behaviour, not behaviour itself; but it was right that mental states are tied to behaviour and that they form a holistic system – insights that functionalism keeps.</b></p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Physicalism:</b> everything is physical or supervenes on the physical. Reductive vs non-reductive.</li>
+    <li><b>Hard (Hempel):</b> mental propositions translate without loss into physics-language about bodily states/movements. Verificationism; Paul’s toothache test sentences.</li>
+    <li><b>Soft (Ryle):</b> mental propositions are about behavioural dispositions in ordinary language. Single- vs multi-track; brittleness explains, rock causes.</li>
+    <li><b>Dualist arguments applied:</b> zombies, Mary, conceivability, the hard problem.</li>
+    <li><b>Distinctness:</b> super-spartans (Putnam) – pain without behaviour; perfect actors – behaviour without pain.</li>
+    <li><b>Defining:</b> circularity (belief needs desire); multiple realisability in behaviour (jackal).</li>
+    <li><b>Asymmetry:</b> I know my mind directly, yours by inference. Ryle: difference of degree.</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Is soft behaviourism a convincing account of mental states?</b><br>1. Thesis; define soft vs hard behaviourism.<br>2. Strengths: interaction, other minds.<br>3. Super-spartans → Ryle’s ‘some dispositions remain’ → circularity → judge.<br>4. Asymmetry → degree, not kind → fails for sensations → judge.<br>5. Conclusion: right about holism and behaviour, wrong about what mental states are.</p></div>
+</aside></div>
+</template>
+
+<!-- ============ GLOSSARY ============ -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>For 3-mark questions, learn these definitions precisely – one accurate sentence is better than a vague paragraph.</p></div></aside></div>
+</template>
+
+<script>
+
+var GLOSS=[
+ ["Physicalism","AQA: everything is physical or supervenes upon the physical (properties, events, objects and any substances).","h"],
+ ["Supervenience","A supervenes on B if there can be no difference in A without a difference in B.","h"],
+ ["Reductive physicalism","Mental properties are identical with physical properties.","h"],
+ ["Non-reductive physicalism","Mental properties supervene on but are not identical with physical properties (Kim: supervenience, irreducibility, mental causation).","h"],
+ ["Philosophical behaviourism","The view that propositions about mental states are propositions about behaviour or behavioural dispositions.","t"],
+ ["Methodological behaviourism","A way of doing psychology that studies only observable behaviour (Watson, Skinner); not a claim about the meaning of mental terms.","t"],
+ ["Hard behaviourism","AQA: all propositions about mental states can be reduced without loss of meaning to propositions in the language of physics about bodily states/movements (Hempel).","h"],
+ ["Soft behaviourism","AQA: propositions about mental states are propositions about behavioural dispositions, using ordinary language (Ryle).","h"],
+ ["Verification principle","The meaning of a proposition is given by the conditions of its verification (Vienna Circle).","h"],
+ ["Logical positivism","The movement of the Vienna Circle, which held that only analytic and empirically verifiable statements are meaningful.","t"],
+ ["Test sentence","Hempel: a physical statement describing a circumstance that would verify a psychological claim.","t"],
+ ["Disposition","A tendency for something to happen, or for someone to do something, in certain circumstances (e.g. solubility).","h"],
+ ["Hypothetical (statement)","An ‘if…then…’ statement about what would happen in certain circumstances.","h"],
+ ["Single-track disposition","A disposition with one manifestation (salt dissolving in water).","h"],
+ ["Multi-track disposition","A disposition that can be manifested in many different ways depending on circumstances.","h"],
+ ["Category mistake","Ryle: presenting facts as if they belonged to one logical category when they belong to another.","t"],
+ ["Super-spartans","Putnam’s imagined people who feel pain but have no disposition to pain behaviour.","t"],
+ ["Perfect actor","Someone who exhibits all pain behaviour without being in pain.","t"],
+ ["Circularity","Defining a term using that same term (or terms that presuppose it).","h"],
+ ["Multiple realisability (in behaviour)","One mental state can be expressed in many different behaviours, and one behaviour can express many mental states.","h"],
+ ["Asymmetry of self-knowledge","I know my own mental states directly and non-inferentially, but others’ only by inference from behaviour.","h"],
+ ["Non-inferential knowledge","Knowledge not reasoned to from evidence.","t"],
+ ["Holism (of the mental)","The view that mental states only produce behaviour, and only have their identity, in combination with other mental states.","t"],
+ ["Beetle in a box","Wittgenstein’s example suggesting that a private inner object plays no role in the meaning of public words.","b"]
+];
+var STOPS=[["start","Start here"],["physicalism","Physicalism"],["hard","Hard behaviourism"],["soft","Soft behaviourism"],["distinct","Spartans & actors"],["define","Defining states"],["asym","Asymmetry"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["physicalism","Stop 1","Physicalism and supervenience","The framework for every physicalist theory."],
+ ["hard","Stop 2","Hard behaviourism","Hempel: psychology as part of physics."],
+ ["soft","Stop 3","Soft behaviourism","Ryle: mental states as dispositions."],
+ ["distinct","Stop 4","Mental states vs behaviour","Dualist arguments, super-spartans, perfect actors."],
+ ["define","Stop 5","Defining mental states","Circularity and multiple realisability."],
+ ["asym","Stop 6","The asymmetry problem","Why do I know my mind differently?"]
+];
+var STRETCH={
+ "start":[
+  ["Skinner’s radical behaviourism","B.F. Skinner went further than methodological behaviourism, arguing that inner mental causes are explanatory fictions and that behaviour should be explained by reinforcement history alone. Chomsky’s 1959 review of Skinner’s <i>Verbal Behavior</i> is often credited with turning psychology towards cognitive science.","Paraphrased; Chomsky, ‘A Review of B.F. Skinner’s <i>Verbal Behavior</i>’ (1959)"],
+  ["Wittgenstein’s beetle","Imagine everyone has a box with a ‘beetle’ in it, but no one can look in anyone else’s box. The word ‘beetle’ could still be used – but the thing in the box would drop out as irrelevant. Wittgenstein is often read as a behaviourist, though he denied it.","Paraphrased; Wittgenstein, <i>Philosophical Investigations</i> §293, §307"]],
+ "physicalism":[
+  ["Hempel’s dilemma","What does ‘physical’ mean? If it means ‘described by current physics’, physicalism is probably false, since current physics is incomplete. If it means ‘described by a future, complete physics’, it is empty, since we do not know what that will include. This puzzle is named after Carl Hempel.","Paraphrased; see ‘Physicalism’, <i>Stanford Encyclopedia of Philosophy</i>"],
+  ["Origin of ‘supervenience’","The handout notes the term was developed in Oxford in the 1950s; R.M. Hare used it in ethics (moral properties supervene on natural ones) before Davidson and Kim applied it to the mind.","Paraphrased; departmental handout; Hare, <i>The Language of Morals</i> (1952)"]],
+ "hard":[
+  ["Hempel recants","Hempel later abandoned the strict verificationism behind his 1935 paper, accepting that theoretical terms in science cannot be fully translated into observation sentences.","Paraphrased; see ‘Carl Hempel’, <i>Stanford Encyclopedia of Philosophy</i>"],
+  ["Carnap’s physicalism","Rudolf Carnap, another member of the Vienna Circle, defended the same thesis in ‘Psychology in Physical Language’ (1932). Hempel’s paper is a clear summary of this shared Vienna Circle view.","Paraphrased; Carnap (1932)"]],
+ "soft":[
+  ["Ryle on knowing how","Ryle argues that intelligence is mainly ‘knowing how’, displayed in skilled performance, not an inner act of consulting rules. A clown’s clever stumbling is a single performance done intelligently, not two events – a thought and a stumble.","Paraphrased; Ryle, <i>The Concept of Mind</i>, ch. 2"],
+  ["Was Ryle a behaviourist?","Ryle admitted his view would be labelled behaviourism, but he allowed some mental episodes – such as silent thinking – that are not dispositions. Scholars debate how far he was a behaviourist at all.","Paraphrased; Ryle, <i>The Concept of Mind</i>, ch. 10; see ‘Gilbert Ryle’, <i>Stanford Encyclopedia of Philosophy</i>"]],
+ "distinct":[
+  ["Putnam’s ‘Brains and Behavior’","The super-spartans first appear in Putnam’s ‘Brains and Behavior’ (1963). Putnam also imagined ‘X-worlders’ who talk about pain but never show pain behaviour at all, to press the same point.","Paraphrased; Putnam, ‘Brains and Behavior’ (1963)"],
+  ["Dispositions need grounds","David Armstrong argued that a disposition like brittleness must have a ‘categorical basis’ – a molecular structure that explains it. Applied to the mind, the basis of a mental disposition is a brain state – which leads to identity theory.","Paraphrased; Armstrong, <i>A Materialist Theory of the Mind</i> (1968)"]],
+ "define":[
+  ["Geach and Chisholm","The circularity objection is usually credited to Peter Geach and Roderick Chisholm in the 1950s: a belief only issues in behaviour given desires, and vice versa.","Paraphrased; Geach, <i>Mental Acts</i> (1957); Chisholm, <i>Perceiving</i> (1957)"],
+  ["The Ramsey–Lewis method","David Lewis showed how to turn circularity into a virtue: define all the mental terms at once, by their place in a whole network of causes and effects. This is the logical core of functionalism.","Paraphrased; Lewis, ‘Psychophysical and Theoretical Identifications’ (1972)"]],
+ "asym":[
+  ["Silent soliloquy","Ryle explains much self-knowledge by our overhearing our own ‘silent soliloquies’ – thinking as talking to oneself without speaking aloud. Critics ask how this is observation of behaviour.","Paraphrased; Ryle, <i>The Concept of Mind</i>, ch. 6"],
+  ["Behaviourist humour","The ‘how was it for me?’ joke is a long-standing piece of philosophy folklore; its origin cannot be verified.","Origin unverified"]],
+ "revise":[
+  ["Where next: identity theory","If mental states are the inner causes of behaviour, what are those causes? Identity theorists answered: brain states. Smart’s 1959 paper is your next set text.","Cross-link within the AQA course"]]
+};
+var QS={
+ "physicalism":["What is physicalism?","Explain the concept of supervenience, using an example.","Explain the difference between reductive and non-reductive physicalism.","Is physicalism true?"],
+ "hard":["What is hard behaviourism?","Explain Hempel’s analysis of ‘Paul has a toothache’.","Explain hard behaviourism and its basis in the verification principle.","Is hard behaviourism a plausible account of mental states?"],
+ "soft":["What is a behavioural disposition?","Explain the difference between hard and soft behaviourism.","Explain Ryle’s soft behaviourism, including the idea of multi-track dispositions.","Is soft behaviourism more plausible than hard behaviourism?"],
+ "distinct":["What are Putnam’s super-spartans?","Explain how the perfect actor is an objection to behaviourism.","Explain how the distinctness of mental states from behaviour is a problem for philosophical behaviourism.","Does the super-spartan thought experiment refute behaviourism?"],
+ "define":["What is meant by circularity in a definition?","Explain why behavioural definitions of mental states are circular.","Explain the problems behaviourism faces in defining mental states satisfactorily.","Can mental states be defined in terms of behaviour?"],
+ "asym":["What is the asymmetry of self-knowledge?","Explain how the asymmetry of self-knowledge challenges behaviourism.","Explain the asymmetry objection to behaviourism and a behaviourist response.","Can behaviourism account for self-knowledge?"]
+};
+var QUIZ=[
+ ["Define physicalism (AQA).","Everything is physical or supervenes upon the physical."],
+ ["What is supervenience?","No difference in A without a difference in B."],
+ ["Define hard behaviourism.","All propositions about mental states can be reduced without loss of meaning to propositions in the language of physics about bodily states/movements."],
+ ["Which principle motivates Hempel?","The verification principle: a proposition’s meaning is given by its conditions of verification."],
+ ["Define soft behaviourism.","Propositions about mental states are propositions about behavioural dispositions, in ordinary language."],
+ ["What is the difference between single- and multi-track dispositions?","Single-track: one manifestation (solubility). Multi-track: many possible manifestations depending on circumstances."],
+ ["How does behaviourism handle mental causation?","Dispositions explain behaviour (like brittleness) rather than causing it as a separate event."],
+ ["What are super-spartans meant to show?","Pain can exist without pain behaviour or dispositions – so pain is not behaviour."],
+ ["What is the circularity objection?","Behavioural analyses of a mental state must mention other mental states (belief needs desire)."],
+ ["What is the asymmetry objection?","I know my mental states directly, but others’ by inference; behaviourism implies I should know mine by observing my behaviour."],
+ ["Give one dualist argument that can be applied to behaviourism.","Zombies: behaviourally identical but not conscious, so mental states are not behaviour (also Mary, conceivability)."]
+];
+
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src'+(x[2]==="b"?" b":"")+'">'+(x[2]==="h"?"Departmental handout":x[2]==="b"?"Beyond the spec":"From the tour text")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>

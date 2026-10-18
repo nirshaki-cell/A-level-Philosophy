@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Functionalism Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#fbe3d6; --ink:#8a3f1c;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#fbe3d6}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#d6efdf}
+.stretch h4{color:#245c3c}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#fdf5f0}
+details.resp summary{cursor:pointer}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+
+/* mind tours additions */
+.resp.against{border-left-color:#f1b796}
+.gloss .src.b{color:#245c3c}
+.argbox{border:1px solid var(--line);border-radius:12px;padding:16px 20px 6px;margin:18px 0;background:#fffaf7}
+.argbox .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--ink)}
+.argbox ol{margin-top:8px}
+.ai{font-size:.8rem;color:var(--muted)}
+.band img{max-height:320px;object-fit:cover}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+</head>
+<body>
+<!--TITLE:Functionalism Tour-->
+<div class="wrap">
+  <a class="back" href="#">← Metaphysics of Mind</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 2 · Spec 3.4.4</span>
+      <h1>Functionalism</h1>
+      <p>What if a mental state is defined by what it does, not what it is made of? Take the tour: Putnam’s functionalism, its advantages, and the three issues on the specification – inverted qualia, Block’s China brain and Mary applied to function.</p>
+    </div>
+    <svg viewBox="0 0 320 220" role="img" aria-label="Diagram: an input arrow (tissue damage) leads to a central state box labelled pain, which leads to outputs (wincing, wanting it to stop) and links to other mental states.">
+      <rect width="320" height="220" rx="14" fill="#fff"/>
+      <rect x="115" y="78" width="90" height="60" rx="12" fill="#8a3f1c"/>
+      <text x="160" y="113" text-anchor="middle" font-size="16" fill="#fff" font-family="Nunito Sans,sans-serif">Pain</text>
+      <g font-family="Nunito Sans,sans-serif" font-size="11" fill="#23262f">
+        <rect x="10" y="88" width="80" height="40" rx="8" fill="#fbe3d6"/><text x="50" y="105" text-anchor="middle">Input:</text><text x="50" y="119" text-anchor="middle">tissue damage</text>
+        <rect x="230" y="40" width="80" height="40" rx="8" fill="#fbe3d6"/><text x="270" y="57" text-anchor="middle">Output:</text><text x="270" y="71" text-anchor="middle">wincing</text>
+        <rect x="230" y="136" width="80" height="40" rx="8" fill="#fbe3d6"/><text x="270" y="153" text-anchor="middle">Other states:</text><text x="270" y="167" text-anchor="middle">wanting it to stop</text>
+      </g>
+      <g stroke="#8a3f1c" stroke-width="2.5" fill="none"><line x1="90" y1="108" x2="113" y2="108"/><line x1="205" y1="95" x2="230" y2="65"/><line x1="205" y1="122" x2="230" y2="152"/></g>
+      <text x="16" y="208" font-size="12" fill="#5b6070" font-family="Nunito Sans,sans-serif">A mental state is defined by its causal role</text>
+    </svg>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Text adapted from the departmental handouts <i>Functionalism</i>, <i>Functionalism quotes</i>, <i>David Lewis’ philosophy of mind</i> and <i>The Hard Problem of Consciousness</i>, checked against the AQA 7172 specification and set texts (Putnam, ‘The Nature of Mental States’; Block, ‘Troubles with Functionalism’, §§1–2; Jackson, ‘Epiphenomenal Qualia’). Images from the departmental slides. Boxes marked ‘Beyond the spec’ are extension only.</footer>
+</div>
+
+<!-- ============ STOP 0 ============ -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>Is a mental state defined by what it does?</h2>
+  <p>Think of what makes something a <i>mousetrap</i>. Mousetraps can be made of wood and springs, plastic and glue, or a bucket and a ramp. What makes them all mousetraps is not what they are made of but what they do: catch mice. <span class="term" data-t="Functionalism">Functionalism</span> says mental states are like this. AQA’s definition: <b>all mental states can be characterised in terms of functional roles which can be multiply realised.</b> To be in pain is to be in a state that is typically caused by bodily damage, and typically causes distress, the desire for it to stop, and wincing or crying out. Whatever plays that role – neurons in a human, something very different in an octopus or a robot – is pain.</p>
+  <p>Functionalism emerged in the 1960s, above all in the work of Hilary Putnam, as a response to the problems of behaviourism and identity theory. It keeps behaviourism’s link between mind and behaviour, but treats mental states as real inner causes; it keeps identity theory’s physicalism, but allows that the same mental state can be realised in different physical ways. It is probably the most widely held theory of mind among philosophers and cognitive scientists, and it underlies the idea that a computer could, in principle, have a mind. The question is whether a role can capture everything about a mental state – especially what it is like to be in it.</p>
+  <div class="thesis"><b>The structure of the topic.</b> Stop 1 explains functionalism and functional roles. Stop 2 sets out its advantages over behaviourism and identity theory. Stops 3–5 cover the three issues on the specification, all of which concern qualia.</div>
+  <h3>Choose where to go</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <div class="card"><h4>The big question</h4><p>Can all mental states be characterised in terms of multiply realisable functional roles?</p></div>
+  <div class="card"><h4>How to use this tour</h4><p>Learning it for the first time? Go through the stops in order. Revising? Jump to a stop, or go straight to <b>Revise</b> for the summary and quiz. Dotted words are in the glossary: tap one to see its meaning.</p></div>
+  <div class="card"><h4>Spec checklist</h4><p>✓ Functional roles, multiply realisable<br>✓ Inverted qualia<br>✓ Functional duplicate with no mentality/qualia (Block’s China thought experiment)<br>✓ Knowledge/Mary argument applied to functional facts</p></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 1 ============ -->
+<template id="s-roles">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · The theory</div>
+  <h2>Functional roles</h2>
+  <p>The handout defines functionalism as the theory that mental properties, such as being in pain, can be identified with functional states. A <span class="term" data-t="Functional state">functional state</span> is one with specific inputs and specific outputs, where the outputs can be behaviour and/or other mental states. What a mental state <i>is</i>, is what it <i>does</i>: it is active, not static.</p>
+  <h3>Putnam’s hypothesis</h3>
+  <p>In ‘The Nature of Mental States’ (set text), Putnam writes:</p>
+  <blockquote>‘I propose the hypothesis that pain, or the state of being in pain, is a functional state of a whole organism.’<cite>Hilary Putnam, ‘The Nature of Mental States’ (1967/1975), as quoted in the departmental handout</cite></blockquote>
+  <p>Putnam spells this out (as summarised in the handout): all organisms capable of feeling pain are probabilistic automata; every organism capable of feeling pain has a certain type of functional organisation; an organism cannot be broken down into parts that are separately organisms with this organisation; and for every organism there is a subset of sensory inputs such that it is in pain when and only when some of its inputs are in that subset. The point is that it is the <i>whole organism</i> that is in pain, not its parts, and pain is explained by its role in the organism’s functional organisation.</p>
+  <h3>What is a function?</h3>
+  <p>The handout notes that ‘function’ is a mathematical term brought into philosophy by Frege. A function takes an input (from its <i>domain</i>) and gives an output (in its <i>range</i>). ‘Plus’ takes 2 and 2 and gives 4. In the same way, a mental state takes inputs – damaged nerve fibres – and yields outputs – certain behaviour and further mental states. The function explains <i>why</i>, given the nerve damage, those outputs follow.</p>
+  <h3>Software and hardware</h3>
+  <p>The handout’s analogy: a computer has software, where the functions are specified, and hardware that runs it. Different computers with different hardware can run the same program. Likewise, different animals with different ‘hardware’ (brains) can run the same ‘software’ (mental states). The mind is to the brain as software is to hardware.</p>
+  <div class="pair">
+    <figure class="tile portrait wide"><img src="img/mind-brain-glow.jpg" alt="A glowing human brain."><figcaption><b>One realiser</b>Neurons in a human brain.</figcaption></figure>
+    <figure class="tile portrait wide"><img src="img/mind-brain-icon.jpg" alt="A simple line drawing of a brain."><figcaption><b>Another realiser?</b>Different hardware, same role.</figcaption></figure>
+  </div>
+  <h3>Multiple realisability</h3>
+  <p>Because a mental state is defined by its role, it can be realised by many different physical states – this is <span class="term" data-t="Multiple realisability">multiple realisability</span>. Putnam compares the human eye and the octopus eye: very different structures that perform the same function. The handout adds <span class="term" data-t="Convergent evolution">convergent evolution</span>: unrelated species in similar environments evolve similar features (the thylacine, or Tasmanian tiger, looked like a dog though it was a marsupial), because the environment demands similar functions.</p>
+  <div class="argbox"><span class="tag">Putnam’s argument for functionalism in standard form</span>
+  <ol class="list">
+    <li>Creatures with very different physical make-ups (humans, octopuses, possible aliens) can be in the same mental state, e.g. pain. <span class="note">(Multiple realisability; animal behaviour and evolution.)</span></li>
+    <li>So mental states cannot be identical with any one type of physical state. <span class="note">(Against identity theory.)</span></li>
+    <li>Mental states are not merely behaviour or dispositions to behave. <span class="note">(Super-spartans; against behaviourism.)</span></li>
+    <li>What creatures in the same mental state share is a functional organisation: states with the same causal relations to inputs, outputs and other states. <span class="note">(The best explanation of 1–3.)</span></li>
+    <li>Therefore, mental states are functional states.</li>
+  </ol></div>
+  <h3>Dualism or physicalism?</h3>
+  <p>Functionalism is officially neutral. Putnam notes that functional states are not incompatible with dualism, although the hypothesis is mechanistic. In principle, a non-physical state could play a functional role. In practice, most functionalists are physicalists: they think the realisers of functional roles in our world are all physical.</p>
+  <h3>Two versions (Lewis)</h3>
+  <p>The handout distinguishes <span class="term" data-t="Role functionalism">role functionalists</span>, who identify pain with what is common to everyone in a state that plays the pain role, from <span class="term" data-t="Realiser functionalism">realiser functionalists</span>, who identify pain in a given creature with whatever physical state plays the role in that creature’s kind. David Lewis, if he counted as a functionalist, was a realiser functionalist: pain in humans is a neural state; pain in Martians might be something quite different.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Functional role</dt><dd>A state’s typical causes (inputs), effects (outputs) and relations to other states.</dd><dt>Realisation</dt><dd>The physical state that plays a role in a given system.</dd><dt>Multiple realisability</dt><dd>One role, many possible realisers.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 2 ============ -->
+<template id="s-advantages">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · Why functionalism?</div>
+  <h2>The advantages of functionalism</h2>
+  <p>The handout gives two main advantages: functionalism makes sense of multiple realisability (unlike identity theory) and of the distinctness of mental states from behaviour (unlike behaviourism).</p>
+  <h3>Better than identity theory</h3>
+  <p>Identity theory says pain is a specific type of brain process, so any animal or alien in pain must have that very brain process. Since we think, very plausibly, that animals and other creatures with very different brains can feel pain, identity theory looks implausible. Functionalism lets pain be realised by different brain states in different creatures, because what makes it pain is its role.</p>
+  <h3>Better than behaviourism</h3>
+  <p>Functionalism can explain why an organism in pain may not produce its usual outputs. Putnam describes the pain role as partly characterised by the fact that the sense organs responsible for the inputs are organs whose function is to detect damage to the body. But this does not mean the organism will always avoid the damaging condition; it will avoid it <i>unless</i> not avoiding it leads to a more valued goal. (Paraphrased from the quotation in the handout.) So the super-spartan, or the person hiding from a violent mob who keeps quiet despite pain, is still in pain: the state is playing its role, but other states (the desire not to be discovered) override the usual output.</p>
+  <div class="resp for"><span class="tag">Further strengths</span>
+  <ul class="list">
+    <li><b>Mental causation.</b> Mental states are real inner causes of behaviour, not just dispositions – and since their realisers are physical, there is no interaction problem.</li>
+    <li><b>Circularity embraced.</b> Behaviourism was embarrassed by having to mention other mental states in its definitions. Functionalism defines mental states <i>together</i>, by their relations to inputs, outputs and one another – the holism becomes part of the theory.</li>
+    <li><b>Explanation, not just correlation.</b> Being in pain, as a functional state, explains certain behaviour rather than merely being correlated with it.</li>
+    <li><b>Fits cognitive science and AI.</b> It explains how psychology can be an autonomous science studying the ‘software’ independently of neuroscience, and allows that artificial systems might have minds.</li>
+  </ul></div>
+  <h3>The theme of the objections</h3>
+  <p>Notice that all three issues on the specification concern <span class="term" data-t="Qualia">qualia</span>. Functionalism is at its best on intentional states such as belief and desire, which are naturally understood in terms of their role in reasoning and action. The objections claim that phenomenal properties are <i>not</i> captured by role: you could have the role with different qualia (Stop 3), with no qualia (Stop 4), or know all about the role without knowing the qualia (Stop 5).</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Chauvinism</dt><dd>Denying minds to creatures unlike us (identity theory’s problem).</dd><dt>Holism</dt><dd>Defining mental states together, by their relations to one another.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 3 ============ -->
+<template id="s-inverted">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · Issue 1</div>
+  <h2>Inverted qualia</h2>
+  <figure class="side"><img src="img/mind-rose.jpg" alt="A deep red rose with green leaves."><figcaption><b>Red or green?</b> You and I both call this rose ‘red’ and its leaves ‘green’. Could your experience of the petals be like my experience of the leaves?</figcaption></figure>
+  <p>Imagine that when you look at the sky you have the experience I have when I look at a ripe tomato, and vice versa: our colour qualia are systematically <span class="term" data-t="Inverted qualia">inverted</span>. Because we grew up in the same linguistic community, you learned to call the sky ‘blue’ and tomatoes ‘red’, just as I did. We make the same discriminations, sort colours the same way, stop at red lights and say ‘what a lovely blue sky’. We are <span class="term" data-t="Functional duplicate">functionally identical</span>: the same inputs (the same wavelengths) produce the same outputs. Yet our experiences differ. So mental properties cannot be functional properties.</p>
+  <div class="argbox"><span class="tag">The inverted qualia argument in standard form</span>
+  <ol class="list">
+    <li>It is possible for two people to be functionally identical while their colour qualia are inverted. <span class="note">(Conceivability of the scenario; nothing in our behaviour would reveal it.)</span></li>
+    <li>If functionalism is true, functionally identical people have identical mental states. <span class="note">(Mental states just are functional states.)</span></li>
+    <li>People with inverted qualia do not have identical mental states. <span class="note">(Their experiences differ in what they are like.)</span></li>
+    <li>Therefore, functionalism is false – at least for phenomenal properties.</li>
+  </ol></div>
+  <p>The departmental slides note that there may be real cases: some people with unusual colour vision (‘pseudo-normal’ vision) might have red and green sensations reversed while behaving normally, though this would be difficult if not impossible to prove. (The handout’s figure for how common this is has not been verified here.)</p>
+  <h3>Responses</h3>
+  <div class="resp for"><span class="tag">Response 1: no perfect functional duplicate (Patricia Churchland)</span><p>The handout gives Patricia Churchland’s response: if inverted qualia occurred, it would not follow that there was functional duplication. Our responses to colour are not exhausted by naming. People would respond differently to identical paintings: one finds a sunset warm, another cold. Colour experiences have rich connections to emotion, memory and association, so a difference in qualia would show up somewhere in function. Colour space is also asymmetrical – there are more distinguishable shades of some hues than others – so a simple swap would be detectable.</p></div>
+  <div class="resp for"><span class="tag">Response 2: conceivable but not possible</span><p>Inverted qualia appear conceivable, but it does not follow that they are possible. If functionalism is true, the scenario is impossible, just as water without hydrogen is. This brings in the familiar question of what conceivability shows (see the zombie argument).</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>Response 1 only blocks <i>simple</i> inversions. We can imagine a more subtle transformation that preserves all the asymmetries and associations – or an inversion in a creature whose colour space is symmetrical. And the defender of Response 2 needs an independent reason to think the scenario is impossible; otherwise it simply assumes functionalism.</p></div>
+  <div class="resp for"><span class="tag">Response 3: a hybrid theory</span><p>The handout notes a proposal to mix functionalism with identity theory: the functional role explains why I can respond to colours, but the <i>qualia themselves</i> are explained by the physical, neural properties of the system. Inverted qualia would then be possible only with a physical difference in the brain – compatible with physicalism, though not pure functionalism.</p></div>
+  <h3>Evaluation</h3>
+  <p>The inverted qualia argument is persuasive because it seems obvious that what it is like to see red is not the same as what seeing red does. Churchland’s reply shows that real-life inversions would probably be detectable, but the argument only needs possibility. The hybrid response is honest: it concedes that functional role does not fix qualia, but keeps physicalism. That concession is significant – it means functionalism alone is not a complete theory of mind.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Inverted qualia</dt><dd>Systematically swapped experiences in functionally identical subjects.</dd><dt>Functional duplicate</dt><dd>A system with exactly the same functional organisation as another.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 4 ============ -->
+<template id="s-china">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · Issue 2</div>
+  <h2>Block’s China thought experiment</h2>
+  <p>The second issue is the possibility of a functional duplicate with <b>no mentality or qualia at all</b>. In ‘Troubles with Functionalism’ (1978; set text §§1–2), Ned Block asks us to imagine converting the government of China to functionalism and persuading officials that it would enhance their international prestige to realise a human mind for an hour. Each of the billion or so people in China is given a specially designed two-way radio that connects them, in the appropriate ways, to other people and to an artificial body. Each person plays the role of a neuron (or a functional unit), sending signals when they receive certain signals. Block argues that such a system is not physically impossible, and it could be functionally equivalent to you for a short time – say an hour. (Paraphrased from the passage quoted in the departmental slides.)</p>
+  <svg viewBox="0 0 640 210" role="img" aria-label="Diagram: many small figures connected by radio links form a network that receives inputs from and sends outputs to an artificial body.">
+    <rect width="640" height="210" rx="14" fill="#fffaf7"/>
+    <g fill="#8a3f1c">
+      <circle cx="140" cy="60" r="8"/><circle cx="190" cy="40" r="8"/><circle cx="240" cy="70" r="8"/><circle cx="170" cy="110" r="8"/><circle cx="230" cy="130" r="8"/><circle cx="290" cy="100" r="8"/><circle cx="120" cy="150" r="8"/><circle cx="300" cy="160" r="8"/><circle cx="340" cy="60" r="8"/><circle cx="360" cy="130" r="8"/>
+    </g>
+    <g stroke="#e8a985" stroke-width="1.5"><line x1="140" y1="60" x2="190" y2="40"/><line x1="190" y1="40" x2="240" y2="70"/><line x1="140" y1="60" x2="170" y2="110"/><line x1="170" y1="110" x2="230" y2="130"/><line x1="240" y1="70" x2="290" y2="100"/><line x1="230" y1="130" x2="290" y2="100"/><line x1="120" y1="150" x2="170" y2="110"/><line x1="230" y1="130" x2="300" y2="160"/><line x1="290" y1="100" x2="340" y2="60"/><line x1="290" y1="100" x2="360" y2="130"/><line x1="300" y1="160" x2="360" y2="130"/><line x1="240" y1="70" x2="340" y2="60"/></g>
+    <rect x="460" y="50" width="150" height="100" rx="14" fill="#fbe3d6"/>
+    <text x="535" y="95" text-anchor="middle" font-family="Nunito Sans,sans-serif" font-size="14" fill="#8a3f1c">Artificial body</text>
+    <text x="535" y="115" text-anchor="middle" font-family="Nunito Sans,sans-serif" font-size="11" fill="#5b6070">inputs and outputs</text>
+    <g stroke="#8a3f1c" stroke-width="2"><line x1="370" y1="95" x2="460" y2="95"/><line x1="370" y1="110" x2="460" y2="110"/></g>
+    <text x="40" y="196" font-family="Nunito Sans,sans-serif" font-size="13" fill="#5b6070">Each dot is a person with a radio, playing the role of a neuron. Is the whole system in pain?</text>
+  </svg>
+  <p>Block’s question: when the system is in the functional state that realises pain, is anything in pain? It seems very doubtful that the whole system has any mental states at all – that there is something it is like to be the nation of China. Each person has their own experiences, of course, but none of them is experiencing your pain. So we can have perfect functional duplication without consciousness. Whether such a system could actually be built is irrelevant: in principle it shows the point.</p>
+  <div class="argbox"><span class="tag">The China thought experiment in standard form</span>
+  <ol class="list">
+    <li>If functionalism is true, any system that has the same functional organisation as a person in pain is in pain. <span class="note">(Mental states are functional states, multiply realisable.)</span></li>
+    <li>The China system could have the same functional organisation as a person in pain. <span class="note">(Block’s thought experiment; physically possible in principle.)</span></li>
+    <li>The China system would not be in pain – it would have no qualia, and arguably no mental states at all. <span class="note">(Intuition: there is nothing it is like to be the system.)</span></li>
+    <li>Therefore, functionalism is false.</li>
+  </ol></div>
+  <p>Block calls this an ‘absent qualia’ case. It mirrors the zombie argument but without needing physical identity – only functional identity.</p>
+  <h3>Responses</h3>
+  <div class="resp for"><span class="tag">Response 1: deny the intuition</span><p>Our intuition that the system is not conscious may just reflect its unfamiliar size and speed. A neuron, looked at alone, does not seem conscious either; we have no idea what it would be like to be a system of a billion people. If it really duplicated the functional organisation of a brain, perhaps it <i>would</i> be conscious. Intuitions about such bizarre cases are unreliable.</p></div>
+  <div class="resp for"><span class="tag">Response 2: it would not really be a duplicate</span><p>The China system would run far more slowly than a brain (radios versus neurons), and a brain has around 86 billion neurons, many times more than China has people. Real functional duplication might require timing and fine-grained detail the system could not have. So premise 2 may be false in practice.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>Block’s point concerns possibility, not practicality: we can imagine enough people and fast enough signals. And Response 1 risks making functionalism unfalsifiable – any counterexample can be met by saying ‘perhaps it is conscious after all’.</p></div>
+  <div class="resp for"><span class="tag">Response 3: the hybrid theory again</span><p>As with inverted qualia, one could hold that functional role is sufficient for intentional states (perhaps the China system has beliefs), but that qualia also depend on the right physical realiser – neurons, not people with radios. This concedes Block’s point about qualia.</p></div>
+  <h3>Evaluation</h3>
+  <p>The China case is powerful because it isolates the functionalist’s central claim – that only organisation matters – and pairs it with a realiser in which consciousness seems absent. The best functionalist reply, that the intuition is unreliable, has some force, but it amounts to biting the bullet. <b>A fair judgement: the China brain shows that if functionalism is true, it has the surprising consequence that a nation could have experiences; most philosophers find this less plausible than the claim that qualia depend on more than functional role.</b></p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Absent qualia</dt><dd>A functional duplicate with no qualia at all.</dd><dt>China brain</dt><dd>Block’s thought experiment in which the population of China realises a mind’s functional organisation.</dd><dt>Biting the bullet</dt><dd>Accepting an apparently absurd consequence of one’s theory.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 5 ============ -->
+<template id="s-mary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 5 · Issue 3</div>
+  <h2>Mary applied to functional facts</h2>
+  <p>The third issue: <b>the knowledge/Mary argument can be applied to functional facts – no amount of facts about function suffices to explain qualia.</b> Jackson himself makes the point: tell me everything about what is going on in a living brain – the kinds of states, <i>their functional role</i>, their relations to other states – and you will still not have told me about the hurtfulness of pains or the characteristic experience of tasting a lemon. (Paraphrased from the handout’s quotation of Jackson.)</p>
+  <div class="argbox"><span class="tag">Mary against functionalism in standard form</span>
+  <ol class="list">
+    <li>Mary, in her black-and-white room, knows all the functional facts about colour vision: every input, output and causal relation of every state involved. <span class="note">(Stipulation.)</span></li>
+    <li>On her release, Mary learns something new: what it is like to see red. <span class="note">(Intuition.)</span></li>
+    <li>So there are facts about colour experience that are not functional facts. <span class="note">(From 1, 2.)</span></li>
+    <li>Therefore, functionalism – the view that all mental states can be characterised by functional role – is false.</li>
+  </ol></div>
+  <h3>The hard problem</h3>
+  <p>The handout links this to David Chalmers’ distinction (influenced by William James). Functionalism may answer the <span class="term" data-t="Easy problems of consciousness">easy problems</span> of consciousness – how the mind works from the third-person perspective, how it processes information and controls behaviour. But it cannot answer the <span class="term" data-t="Hard problem of consciousness">hard problem</span>: why all this functioning is accompanied by subjective experience, why there is something it is like. As Colin McGinn puts it in the departmental slides, it seems impossible to see how technicolour phenomenology could arise from soggy grey matter (paraphrased).</p>
+  <h3>Responses</h3>
+  <p>The functionalist can use the same responses as the physicalist in property dualism.</p>
+  <div class="resp for"><span class="tag">Ability knowledge (Lewis)</span><p>Mary gains new abilities – to remember, imagine and recognise red – not new facts. This fits functionalism well: abilities are themselves functional capacities. Lewis, of course, was a functionalist-style physicalist.</p></div>
+  <div class="resp for"><span class="tag">Acquaintance knowledge</span><p>Mary becomes acquainted with a functional state she already knew everything about by description.</p></div>
+  <div class="resp for"><span class="tag">New knowledge, old fact</span><p>Mary acquires a phenomenal concept of a functional state she already knew about under functional concepts. Same fact, new way of knowing it.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>These replies are strongest when the old fact is a <i>physical</i> fact with a rich intrinsic nature (a particular neural state). Functional facts are abstract and relational – facts about what causes what. It is especially hard to see how knowing what red is <i>like</i> could be just another way of knowing a pattern of causal relations. This is why the hybrid response (qualia fixed by the physical realiser) tempts many functionalists.</p></div>
+  <h3>Evaluation</h3>
+  <p>The Mary argument is if anything stronger against functionalism than against identity theory, because functional facts are purely relational, while qualia seem intrinsic (recall AQA’s definition in 3.4.1). <b>A sustained judgement: the three qualia objections together suggest that functionalism is a strong theory of intentional states but an incomplete theory of phenomenal states; the most defensible position is a hybrid that is functionalist about belief and desire and looks to the physical realiser, or treats the hard problem as still open, for qualia.</b></p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Functional fact</dt><dd>A fact about a state’s causal relations to inputs, outputs and other states.</dd><dt>Hard problem</dt><dd>Why functional processing is accompanied by experience.</dd><dt>Relational property</dt><dd>A property a thing has in virtue of its relations to other things.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ REVISE ============ -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>Is functionalism true?</h2>
+  <h3>Overall evaluation</h3>
+  <p>Functionalism combines the best of its predecessors: like identity theory, it treats mental states as real inner causes; like behaviourism, it ties them to behaviour; and unlike either, it accommodates multiple realisability and the distinctness of mental states from behaviour. It gives a plausible account of intentional states, whose identity really does seem to lie in their role in reasoning and action. Its weakness is phenomenal consciousness. The inverted qualia, China brain and Mary arguments all claim that qualia are not fixed by functional role, and the most persuasive functionalist replies either deny the intuitions or concede that qualia depend on the physical realiser. A sustained judgement: <b>functionalism is the most successful physicalist theory on the specification for intentional states, but it does not solve the hard problem; at best it is part of the truth about the mind.</b></p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Thesis (AQA):</b> all mental states can be characterised in terms of functional roles which can be multiply realised.</li>
+    <li><b>Putnam:</b> pain is a functional state of a whole organism; inputs, outputs, other states; software/hardware; octopus eye; convergent evolution.</li>
+    <li><b>Neutral</b> between dualism and physicalism, but usually physicalist. <b>Role vs realiser</b> functionalism (Lewis: realiser).</li>
+    <li><b>Advantages:</b> multiple realisability (vs identity theory); distinctness from behaviour, super-spartans (vs behaviourism); mental causation; holism.</li>
+    <li><b>Inverted qualia:</b> same function, swapped experience. Replies: no perfect duplicate (P. Churchland); conceivable ≠ possible; hybrid theory.</li>
+    <li><b>China brain (Block):</b> functional duplicate with absent qualia. Replies: intuition unreliable; not a real duplicate; hybrid.</li>
+    <li><b>Mary applied:</b> all functional facts, still learns qualia. Replies: ability, acquaintance, new knowledge/old fact; hard problem remains.</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Is functionalism a convincing account of the mind?</b><br>1. Thesis; define functional role and multiple realisability.<br>2. Advantages over behaviourism and identity theory.<br>3. Inverted qualia → Churchland’s reply → subtle inversion → judge.<br>4. China brain → intuition unreliable → biting the bullet → judge.<br>5. Conclusion: right about intentional states, incomplete for qualia.</p></div>
+</aside></div>
+</template>
+
+<!-- ============ GLOSSARY ============ -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>For 3-mark questions, learn these definitions precisely – one accurate sentence is better than a vague paragraph.</p></div></aside></div>
+</template>
+
+<script>
+
+var GLOSS=[
+ ["Functionalism","AQA: all mental states can be characterised in terms of functional roles which can be multiply realised.","h"],
+ ["Functional state","A state defined by its specific inputs and outputs, where outputs can be behaviour and/or other mental states.","h"],
+ ["Functional role","The typical causes, effects and relations to other mental states that define a mental state.","t"],
+ ["Function (mathematical)","A rule taking inputs from a domain to outputs in a range, e.g. ‘plus’ takes 2 and 2 to 4 (Frege).","h"],
+ ["Multiple realisability","The same mental state can be realised by different physical states in different systems.","h"],
+ ["Realisation","The relation between a functional role and the state that plays it in a given system.","t"],
+ ["Convergent evolution","Unrelated species evolving similar features because their environments demand similar functions.","h"],
+ ["Software/hardware analogy","Mind is to brain as a program is to the computer that runs it.","h"],
+ ["Role functionalism","Identifies a mental property with what is common to all states that play its role.","h"],
+ ["Realiser functionalism","Identifies a mental state, in a given kind of creature, with whatever physical state plays the role there (Lewis).","h"],
+ ["Probabilistic automaton","Putnam: a system whose transitions between states, given inputs, have fixed probabilities.","t"],
+ ["Qualia","Intrinsic and non-intentional phenomenal properties that are introspectively accessible (AQA).","h"],
+ ["Inverted qualia","A possible case in which two functionally identical people have systematically swapped experiences.","h"],
+ ["Functional duplicate","A system with exactly the same functional organisation as another.","t"],
+ ["Absent qualia","A possible functional duplicate of a conscious being that has no qualia at all.","t"],
+ ["China brain","Block’s thought experiment in which the population of China, linked by radios, realises the functional organisation of a mind.","h"],
+ ["Knowledge argument","Jackson’s Mary argument; applied here, knowing all the functional facts does not give knowledge of qualia.","h"],
+ ["Easy problems of consciousness","Explaining the functions of consciousness – processing, reporting, control of behaviour – from a third-person perspective.","h"],
+ ["Hard problem of consciousness","Explaining why functional processing is accompanied by subjective experience (Chalmers).","h"],
+ ["Hybrid theory","Functionalism about the role of a mental state combined with identity theory about its qualia.","h"],
+ ["Biting the bullet","Accepting an apparently counter-intuitive consequence of one’s theory.","t"],
+ ["Chinese Room","Searle’s different thought experiment arguing that running a program is not sufficient for understanding.","b"],
+ ["Liberalism (Block)","Ned Block’s term for a theory that wrongly attributes minds to systems that lack them – the charge against functionalism.","b"]
+];
+var STOPS=[["start","Start here"],["roles","Functional roles"],["advantages","Advantages"],["inverted","Inverted qualia"],["china","China brain"],["mary","Mary and function"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["roles","Stop 1","Functional roles","Putnam, software and hardware, multiple realisability."],
+ ["advantages","Stop 2","The advantages","Why functionalism beat its rivals."],
+ ["inverted","Stop 3","Inverted qualia","Same function, different experience?"],
+ ["china","Stop 4","Block’s China brain","Same function, no experience?"],
+ ["mary","Stop 5","Mary and functional facts","Can function explain qualia?"]
+];
+var STRETCH={
+ "start":[
+  ["Machine functionalism","Putnam’s earliest functionalism compared mental states to the states of a Turing machine – an abstract computer defined by a table of instructions. He later abandoned functionalism himself.","Paraphrased; Putnam, ‘Minds and Machines’ (1960); <i>Representation and Reality</i> (1988)"],
+  ["Can computers think?","Alan Turing proposed that if a machine’s conversation is indistinguishable from a human’s, we should credit it with thinking. Functionalism gives the theory behind this test – and current debates about whether AI systems could have minds turn on it.","Paraphrased; Turing, ‘Computing Machinery and Intelligence’ (1950)"]],
+ "roles":[
+  ["The Ramsey–Lewis method","Lewis showed how to define all mental terms at once: write down the whole of folk psychology as a theory, replace each mental term with a variable, and say that pain is whatever fills the pain slot. This makes the circularity harmless.","Paraphrased; Lewis, ‘Psychophysical and Theoretical Identifications’ (1972)"],
+  ["Mad pain and Martian pain","Lewis asks us to imagine a madman whose pain has unusual causes and effects, and a Martian whose pain is realised hydraulically. A good theory should count both as pain; he argues his realiser view does.","Paraphrased; Lewis, ‘Mad Pain and Martian Pain’ (1980)"]],
+ "advantages":[
+  ["The autonomy of psychology","Jerry Fodor argued that because psychological kinds are functional, psychology is an autonomous special science: its laws need not reduce to laws of neuroscience, just as economics need not reduce to physics.","Paraphrased; Fodor, ‘Special Sciences’ (1974)"],
+  ["Analytic and empirical functionalism","The handout distinguishes ‘empirical’ functionalism (Putnam: an ontological hypothesis) from analysis of the meaning of mental terms (Lewis, Armstrong). Exam answers rarely need this, but it explains why Lewis is often called an identity theorist.","Paraphrased; departmental handout; see ‘Functionalism’, <i>Stanford Encyclopedia of Philosophy</i>"]],
+ "inverted":[
+  ["Locke’s inverted spectrum","John Locke raised the possibility that the idea a violet produces in one person’s mind might be the same as the idea a marigold produces in another’s, without anyone ever being able to tell.","Paraphrased; Locke, <i>Essay Concerning Human Understanding</i> II.xxxii.15"],
+  ["Shoemaker’s reply","Sydney Shoemaker argued that functionalism can accommodate inverted qualia by defining qualitative similarity functionally, while denying that absent qualia are possible.","Paraphrased; Shoemaker, ‘The Inverted Spectrum’ (1982)"],
+  ["Pseudo-normal vision","Martine Nida-Rümelin argued that some combinations of known colour-vision conditions could produce people whose red and green experiences are swapped while their behaviour is normal.","Paraphrased; Nida-Rümelin, ‘Pseudonormal Vision’ (1996)"]],
+ "china":[
+  ["The Chinese Room is different","Don’t confuse Block’s China brain with Searle’s Chinese Room, in which a man who knows no Chinese follows rules to answer Chinese questions. Searle targets understanding (intentionality); Block targets qualia.","Paraphrased; Searle, ‘Minds, Brains, and Programs’ (1980)"],
+  ["Liberalism and chauvinism","Block argues that every theory of mind must steer between chauvinism (denying minds to creatures that have them – identity theory) and liberalism (attributing minds to systems that lack them – functionalism).","Paraphrased; Block, ‘Troubles with Functionalism’ (1978)"]],
+ "mary":[
+  ["Representationalism","Some functionalists, such as Michael Tye, argue that qualia are just representational contents of a certain functional kind. Seeing red is representing a surface as red. If so, function plus representation may explain qualia after all.","Paraphrased; Tye, <i>Ten Problems of Consciousness</i> (1995)"],
+  ["Global workspace theory","Bernard Baars and Stanislas Dehaene propose that a state is conscious when its information is broadcast widely across the brain. It is a functionalist theory of consciousness – critics say it addresses only the easy problems.","Paraphrased; Dehaene, <i>Consciousness and the Brain</i> (2014)"]],
+ "revise":[
+  ["Back to the beginning","The whole module returns to the two features from 3.4.1. Functionalism handles intentionality well; every theory has struggled most with phenomenal properties. That pattern is worth stating explicitly in any 25-mark essay.","Cross-link within the AQA course"]]
+};
+var QS={
+ "roles":["What is functionalism?","Explain what is meant by multiple realisability, using an example.","Explain Putnam’s functionalism, including the software/hardware analogy.","Is functionalism the best physicalist account of mental states?"],
+ "advantages":["Give one advantage of functionalism over identity theory.","Explain how functionalism deals with Putnam’s super-spartans.","Explain why functionalism is thought to improve on behaviourism and identity theory.","Does functionalism improve on behaviourism and identity theory?"],
+ "inverted":["What are inverted qualia?","Explain why the possibility of inverted qualia is a problem for functionalism.","Explain the inverted qualia objection to functionalism and a response to it.","Does the possibility of inverted qualia refute functionalism?"],
+ "china":["Outline Block’s China thought experiment.","Explain how Block’s China thought experiment challenges functionalism.","Explain the possibility of a functional duplicate with no mentality and how functionalists respond.","Does Block’s China thought experiment show that functionalism is false?"],
+ "mary":["What is the hard problem of consciousness?","Explain how the knowledge argument can be applied to functional facts.","Explain the knowledge argument as applied to functionalism and one response.","Can functional facts explain qualia?"]
+};
+var QUIZ=[
+ ["State AQA’s definition of functionalism.","All mental states can be characterised in terms of functional roles which can be multiply realised."],
+ ["Complete Putnam’s hypothesis: ‘pain, or the state of being in pain, is…’","‘…a functional state of a whole organism.’"],
+ ["What are the three elements of a functional role?","Inputs (typical causes), outputs (behaviour), and relations to other mental states."],
+ ["Give an example of multiple realisation from the handout.","Human and octopus eyes; pain in humans and octopuses; convergent evolution (thylacine and dog)."],
+ ["Is functionalism compatible with dualism?","In principle, yes (Putnam), but it is usually physicalist."],
+ ["How does functionalism handle the super-spartan?","Pain plays its role but other states (stronger goals) override the usual output."],
+ ["State the inverted qualia objection.","Two people could be functionally identical with swapped colour experiences, so mental states are not functional states."],
+ ["What is Patricia Churchland’s reply to inverted qualia?","There would not be perfect functional duplication: differences would show up in responses, associations and emotions."],
+ ["What does Block’s China brain show, if it works?","A functional duplicate could lack qualia (absent qualia), so function is not sufficient for mentality."],
+ ["How does Mary apply to functionalism?","Mary could know all the functional facts about colour vision and still learn what seeing red is like."],
+ ["What is the hybrid response?","Function explains our responses; the physical realiser explains the qualia."]
+];
+
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src'+(x[2]==="b"?" b":"")+'">'+(x[2]==="h"?"Departmental handout":x[2]==="b"?"Beyond the spec":"From the tour text")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>

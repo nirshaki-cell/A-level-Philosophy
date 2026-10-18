@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cosmological Arguments Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#ece0f5; --ink:#5a2f78;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#ece0f5}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#d6efdf}
+.stretch h4{color:#245c3c}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#faf6fd}
+details.resp summary{cursor:pointer}
+.bspec{display:inline-block;margin-left:8px;font-size:.7rem;font-weight:600;letter-spacing:.08em;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;vertical-align:middle}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="#">← Metaphysics of God</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 2 · Spec 3.3.2</span>
+      <h1>Cosmological arguments</h1>
+      <p>Why is there something rather than nothing? Take the tour: the Kalām argument, Aquinas’ first three Ways, Descartes on his continuing existence, Leibniz’s principle of sufficient reason – and the objections from Hume, Russell and Kant.</p>
+    </div>
+    <svg viewBox="0 0 320 220" role="img" aria-label="A chain of linked rings receding to the left, ending at a single glowing source labelled 'first cause?'.">
+      <rect width="320" height="220" rx="14" fill="#fff"/>
+      <g fill="none" stroke="#5a2f78" stroke-width="4">
+        <ellipse cx="250" cy="110" rx="26" ry="16"/><ellipse cx="205" cy="110" rx="24" ry="15" stroke="#7a52a0"/><ellipse cx="164" cy="110" rx="21" ry="13" stroke="#9f7fbf"/><ellipse cx="128" cy="110" rx="18" ry="11" stroke="#b79bd0"/><ellipse cx="97" cy="110" rx="15" ry="9" stroke="#cdb8e0"/>
+      </g>
+      <circle cx="52" cy="110" r="20" fill="#ece0f5" stroke="#5a2f78" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="52" y="150" text-anchor="middle" font-size="12" fill="#5b6070" font-family="Nunito Sans,sans-serif">first cause?</text>
+      <text x="250" y="150" text-anchor="middle" font-size="12" fill="#5b6070" font-family="Nunito Sans,sans-serif">the world now</text>
+      <text x="160" y="192" text-anchor="middle" font-size="12" fill="#5b6070" font-family="Nunito Sans,sans-serif">Can the chain go back for ever?</text>
+    </svg>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Built from the departmental <i>Cosmological argument</i> slides and handout (2024) and Reichenbach, ‘Cosmological Argument’, <i>Stanford Encyclopedia of Philosophy</i>. Material marked ‘Beyond the spec’ is extension only. AQA 7172 · Metaphysics of God.</footer>
+</div>
+
+<!-- START -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>Why is there something rather than nothing?</h2>
+  <p>Cosmological arguments start from a very general fact about the world – that things exist, that they change, that they are caused, that they might not have existed – and argue that this fact can only be explained by a first cause or necessary being: God. The word comes from the Greek <i>kosmos</i>, ‘ordered world’.</p>
+  <p>Like the design argument, they are <span class="term" data-t="A posteriori">a posteriori</span>: they begin from experience. But the experience they need is minimal – just that <i>something</i> exists. That makes their starting point almost impossible to deny, which is their great strength. The debate is about the principles that take us from that starting point to God.</p>
+  <p>The argument reaches back to Aristotle, who held there must be a first mover of all things – though, writing before Christianity, he thought the world was eternal. Anselm described the goal in the <i>Monologion</i>:</p>
+  <blockquote>‘That there exists a nature, through which everything that exists exists, which exists through itself, and which is, of all things that exist, supreme.’<cite>Anselm, <i>Monologion</i>, as quoted on the departmental slides</cite></blockquote>
+  <h3>Technical terms you need</h3>
+  <dl class="gloss" style="display:grid">
+    <div><dt>Necessary</dt><dd>That which must be the case; a necessary being cannot fail to exist.</dd></div>
+    <div><dt>Contingent</dt><dd>That which may or may not be the case; a contingent being could have failed to exist.</dd></div>
+    <div><dt>Sufficient reason</dt><dd>A reason that explains why something is X and not Y.</dd></div>
+    <div><dt>Temporal cause</dt><dd>A cause that comes first in a sequence in time and can cease while its effect continues.</dd></div>
+    <div><dt>Sustaining cause</dt><dd>A cause that keeps its effect in existence for as long as the effect lasts.</dd></div>
+  </dl>
+  <div class="thesis"><b>What the spec requires.</b> The Kalām argument; Aquinas’ 1st, 2nd and 3rd Ways; Descartes’ argument from his continuing existence; Leibniz’s argument from sufficient reason. Issues: the possibility of an infinite series; Hume’s objection to the causal principle; the fallacy of composition (Russell); the impossibility of a necessary being (Hume and Russell). <b>Kant, the Big Bang and Swinburne’s inductive argument are beyond the spec.</b></div>
+  <h3>Choose where to go</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <div class="card"><h4>The big question</h4><p>Does the existence of the universe require an explanation beyond itself – and if so, is it God?</p></div>
+  <div class="card"><h4>How to use this tour</h4><p>Stops 1–5 are the arguments; Stops 6–9 are the objections. Go in order to learn it; jump to revise. Cards marked ‘Beyond the spec’ in the margin are extension.</p></div>
+  <div class="card"><h4>Exam lens</h4><p>Sort every argument into one of two types: <b>causation</b> (Kalām, Ways 1 and 2, Descartes) or <b>contingency</b> (Way 3, Leibniz). Then ask: <b>temporal</b> or <b>sustaining</b> cause?</p></div>
+</aside></div>
+</template>
+
+<!-- KALAM -->
+<template id="s-kalam">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · The Kalām argument</div>
+  <h2>The Kalām argument: an argument from temporal causation</h2>
+  <p>The Kalām argument was developed by Islamic theologians of the early Middle Ages – the <i>mutakallimūn</i>, who used reason to support revealed belief (<i>kalām</i> means ‘speech’ or ‘theological argument’). The Stanford Encyclopedia names al-Ghazālī (1058–1111) as a key figure: everything that begins to exist requires a cause of its beginning, and since a series of temporal events cannot go back to infinity, the world must have had a beginning and a cause. It entered the Christian tradition through Bonaventure, and has been revived by William Lane Craig.</p>
+  <h3>The argument in standard form</h3>
+  <p>Craig’s formulation, as given in the Stanford Encyclopedia:</p>
+  <ol class="list">
+    <li>Everything that begins to exist has a cause of its existence. <span class="note">(The causal principle – supported by the intuition that something cannot come from nothing.)</span></li>
+    <li>The universe began to exist. <span class="note">(Supported philosophically – an actual infinite is impossible – and scientifically, by the Big Bang.)</span></li>
+    <li>Therefore, the universe has a cause of its existence. <span class="note">(From 1, 2.)</span></li>
+    <li>No scientific explanation can account for the very beginning of the universe, since physical laws and conditions are part of the universe. <span class="note">(Premise.)</span></li>
+    <li>Therefore, the cause must be personal – a non-natural, personal agent. <span class="note">(From 3, 4.)</span></li>
+  </ol>
+  <p class="note">The departmental slides give a simpler version – everything that exists has a cause; the universe exists; so the universe has a cause. Be careful: ‘everything that exists has a cause’ would also require God to have a cause. Craig’s ‘everything that <i>begins</i> to exist’ avoids this.</p>
+  <h3>Why the universe must have begun</h3>
+  <p>Craig argues that an actual infinite cannot exist in reality. Imagine a library with infinitely many books, half red and half black: there would be as many red books as books in total, and removing books would not reduce the collection. Such absurdities suggest an actual infinite can exist in thought but not in reality. A beginningless series of past events would be an actual infinite, so it cannot exist. (See Stop 6 for objections.)</p>
+  <p>A second argument: you cannot form an actual infinite by adding one thing after another. If an infinite number of events had to happen before today, today would never have arrived.</p>
+  <h3>Why the cause is personal</h3>
+  <p>If the cause were an eternal, impersonal set of conditions, the universe would have existed eternally alongside it. The only way an eternal cause can produce an effect that begins in time, Craig argues, is if it <i>chooses</i> to – so the cause must be a personal agent.</p>
+  <div class="resp against"><span class="tag">Objection (Morriston)</span><p>If a timeless agent intended from eternity to create, and that intention is enough, the universe would also exist from eternity. A personal cause does no better than an impersonal one here.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Kalām</dt><dd>Islamic rational theology; the argument from the beginning of the universe.</dd><dt>Actual infinite</dt><dd>A completed infinite collection.</dd><dt>Potential infinite</dt><dd>A collection that can always grow but is always finite.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- AQUINAS 1 2 -->
+<template id="s-aquinas">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · Aquinas (1225–1274): Ways 1 and 2</div>
+  <h2>Aquinas: the argument from motion and the argument from causation</h2>
+  <p>In the <i>Summa Theologica</i> (I, q.2, a.3), Aquinas gives ‘Five Ways’ to show that God exists. The first three are cosmological. Before reading them, you need the key distinction from the departmental slides:</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Temporal cause</span><p>A cause that can cease to exist while its effect continues: your parents caused you, but you would go on existing without them.</p></div>
+    <div class="resp"><span class="tag">Sustaining cause</span><p>A cause that is present alongside its effect and keeps it in existence: remove the cause and the effect stops at once – like a hand holding a ball in the air.</p></div>
+  </div>
+  <p>Aquinas’ Ways concern <b>sustaining</b> causes. He is not arguing that the universe had a beginning – he thought reason alone could not prove that. His question is what keeps things in existence and in motion <i>now</i>.</p>
+  <h3>The First Way: from motion (change)</h3>
+  <p>For Aquinas, following Aristotle, ‘motion’ means any change from <span class="term" data-t="Potentiality">potentiality</span> to <span class="term" data-t="Actuality">actuality</span>. Wood is potentially hot; fire, which is actually hot, makes it actually hot. Nothing can be both potentially and actually hot in the same respect at the same time, so nothing can change itself: whatever is changed is changed by something else.</p>
+  <ol class="list">
+    <li>Some things in the world are in motion (changing). <span class="note">(Observation.)</span></li>
+    <li>Whatever is in motion is moved by something else – nothing moves itself from potentiality to actuality. <span class="note">(Analysis of change: the fire and wood.)</span></li>
+    <li>If that mover is itself moved, it too is moved by another, and so on. <span class="note">(From 2.)</span></li>
+    <li>This cannot go on to infinity, or there would be no first mover and so no subsequent movers. <span class="note">(Impossibility of an infinite sustaining series.)</span></li>
+    <li>Therefore there is a first unmoved mover, and this everyone understands to be God.</li>
+  </ol>
+  <h3>The Second Way: from efficient causation</h3>
+  <ol class="list">
+    <li>We observe an order of efficient (sustaining) causes in the world. <span class="note">(Observation.)</span></li>
+    <li>Nothing is the efficient cause of itself, for then it would have to exist before itself. <span class="note">(Impossible.)</span></li>
+    <li>In an ordered series, the first causes the intermediate, which causes the last; remove the cause and you remove the effect. <span class="note">(Analysis of sustaining causation.)</span></li>
+    <li>If the series went back to infinity, there would be no first cause, and so no intermediate or last causes – but there are. <span class="note">(From 3.)</span></li>
+    <li>Therefore there is a first efficient cause, which everyone calls God.</li>
+  </ol>
+  <p class="note">The departmental slides combine these into a single ‘sustaining cause’ argument: we find sustaining causes; nothing can sustain itself; remove the cause and you remove the effect; an infinite regress is impossible; so there is a first sustaining cause, God.</p>
+  <h3>Why no infinite regress?</h3>
+  <p>Aquinas distinguishes series where each member depends on the one before <i>now</i> (essentially ordered – a hand moving a stick moving a stone) from series where earlier members are no longer needed (accidentally ordered – grandparents, parents, child). An infinite accidental series is possible; Aquinas allows the world might be eternal. But in an essential series, intermediate causes have no power of their own; they only pass it on. Without a first cause, nothing would be passed along at all – like a train of infinitely many carriages with no engine.</p>
+  <h3>Participation in being</h3>
+  <blockquote>‘everything that is at all real, is from God. For when we encounter a subject which shares in a reality then this reality must needs be caused there by a thing which possesses it of its nature, as when, for example, iron is made red-hot by fire’.<cite>Aquinas, as quoted on the departmental slides</cite></blockquote>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-aquinas.jpg" alt="Painting of Aquinas in a Dominican habit holding a model church and a book" loading="lazy"><figcaption><b>Thomas Aquinas</b>Carlo Crivelli, 1476 (detail of an altarpiece) · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Potentiality</dt><dd>What something could become.</dd><dt>Actuality</dt><dd>What something is now.</dd><dt>Efficient cause</dt><dd>That which brings about an effect.</dd><dt>Essentially ordered series</dt><dd>Each member depends on the previous one now.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- THIRD WAY -->
+<template id="s-third">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · Aquinas’ Third Way</div>
+  <h2>The Third Way: an argument from contingency</h2>
+  <p>The Third Way shifts from causation to <span class="term" data-t="Contingent being">contingency</span>. The things around us come into being and pass away: it is possible for them not to exist. The Stanford Encyclopedia notes that this argument came to Aquinas from the Islamic philosopher Ibn Sīnā (Avicenna).</p>
+  <h3>The argument in standard form</h3>
+  <p>As set out on the departmental slides:</p>
+  <ol class="list">
+    <li>Things in the universe exist contingently. <span class="note">(Observation: they come into being and pass away.)</span></li>
+    <li>If it is possible for something not to exist, there is a time when it did not exist. <span class="note">(Over infinite time, every possibility is realised.)</span></li>
+    <li>If everything existed contingently, then at some time nothing existed. <span class="note">(From 2.)</span></li>
+    <li>From nothing, nothing can come into existence. <span class="note">(<i>Ex nihilo nihil fit</i>.)</span></li>
+    <li>So if there had ever been nothing, there would be nothing now. But things exist. <span class="note">(Observation.)</span></li>
+    <li>Therefore not everything is contingent: there is something necessary.</li>
+    <li>This necessary being is God.</li>
+  </ol>
+  <p>In the full text, Aquinas adds a further step: a necessary being might owe its necessity to something else, but this cannot go on to infinity, so there must be a being necessary <i>of itself</i> – God.</p>
+  <h3>Objections</h3>
+  <div class="resp against"><span class="tag">The quantifier shift</span><p>Premise 3 seems to slide from ‘each thing at some time does not exist’ to ‘at some time, nothing exists’. That is like moving from ‘every person has a mother’ to ‘there is one mother of every person’. The Stanford Encyclopedia reports William Rowe’s point: even if each contingent thing could fail to exist, it may be that there is always at least one contingent thing in existence.</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>Defenders reply that if all the contingent things that make up the universe could cease to exist, the universe as a whole is contingent and needs an explanation – which leads to Leibniz (Stop 5), and to Russell’s fallacy of composition objection (Stop 8).</p></div>
+  <div class="resp against"><span class="tag">Matter as necessary?</span><p>Why should the necessary being be God? Perhaps matter or energy, which is conserved, is the necessary thing. (Compare Hume, Stop 9.)</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Contingent being</dt><dd>A being that could have failed to exist.</dd><dt>Necessary being</dt><dd>A being that cannot fail to exist.</dd><dt>Ex nihilo nihil fit</dt><dd>Nothing comes from nothing.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- DESCARTES -->
+<template id="s-descartes">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · Descartes (1596–1650)</div>
+  <h2>Descartes: the argument from my continuing existence</h2>
+  <p>In the Third <i>Meditation</i> (1641), Descartes gives two arguments for God. The one in the spec is a cosmological argument from causation – but with a distinctive starting point: not the world, which he is still doubting, but <b>his own existence as a thinking thing</b>, which he has just established with the <i>cogito</i>. The Stanford Encyclopedia notes his aim is partly epistemic: to show God exists and so cannot be deceiving him.</p>
+  <h3>The key idea: existing over time needs a cause</h3>
+  <p>Descartes argues that a lifetime can be divided into countless parts, each independent of the others. It does not follow from the fact that I existed a moment ago that I must exist now. Something must <i>keep</i> me in existence from moment to moment. Preserving something in existence takes the same power as creating it in the first place. So my continuing existence needs a sustaining cause.</p>
+  <h3>The argument in standard form</h3>
+  <p>A paraphrase of Descartes’ reasoning:</p>
+  <ol class="list">
+    <li>I exist as a thinking thing, with the idea of God (a supremely perfect being). <span class="note">(The cogito; introspection.)</span></li>
+    <li>My existence at one moment does not guarantee my existence at the next; something must preserve me. <span class="note">(Time divides into independent moments.)</span></li>
+    <li>I am not the cause of my own continuing existence: if I had that power, I would be aware of it – and I would have given myself every perfection I lack. <span class="note">(Introspection.)</span></li>
+    <li>My parents are not the cause: at most they caused my body to begin, not my continuing existence as a mind. <span class="note">(Temporal, not sustaining, cause.)</span></li>
+    <li>Some other being less perfect than God cannot be the final cause, for the cause must contain at least as much reality as its effect – including my idea of God – and an infinite regress of such causes is ruled out because the cause must preserve me <i>now</i>. <span class="note">(Causal adequacy; sustaining series.)</span></li>
+    <li>Therefore I am preserved by a being that has all the perfections of which I have an idea: God.</li>
+  </ol>
+  <p class="note">This is a summary of Descartes’ reasoning, not a quotation. Check a full text of <i>Meditation</i> III before quoting him directly.</p>
+  <h3>Objections</h3>
+  <div class="resp against"><span class="tag">Why should existence need sustaining?</span><p>Descartes assumes that time is made of independent moments, so things tend to stop existing unless preserved. Why not assume things continue to exist unless something destroys them (a principle of inertia)? Then no sustaining cause is needed.</p></div>
+  <div class="resp against"><span class="tag">The causal principle</span><p>Hume (Stop 7) would ask how we know that every existence needs a cause at all.</p></div>
+  <div class="resp against"><span class="tag">Trademark dependence</span><p>Step 5 relies on Descartes’ claim that only God could cause the idea of God (the trademark argument). Empiricists deny we have an innate idea of an infinite being.</p></div>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-descartes.jpg" alt="Portrait of Descartes in black with a white collar" loading="lazy"><figcaption><b>René Descartes</b>After Frans Hals, c. 1649 · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Cogito</dt><dd>‘I think, therefore I am.’</dd><dt>Conservation</dt><dd>Keeping something in existence – for Descartes, equivalent to creating it anew.</dd><dt>Causal adequacy</dt><dd>A cause must have at least as much reality as its effect.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- LEIBNIZ -->
+<template id="s-leibniz">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 5 · Leibniz (1646–1716)</div>
+  <h2>Leibniz: the principle of sufficient reason</h2>
+  <p>Leibniz’s argument rests on the <span class="term" data-t="Principle of sufficient reason">principle of sufficient reason</span> (PSR). In the <i>Monadology</i> (§32) he states that no fact can be real or existing, and no statement true, without a sufficient reason why it is so and not otherwise (paraphrased via the Stanford Encyclopedia).</p>
+  <h3>Truths of reason and truths of fact</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">Truths of reason</span><p>Necessary, like the truths of mathematics. We find their sufficient reason by seeing why they must be true – their denial is a contradiction.</p></div>
+    <div class="resp"><span class="tag">Truths of fact</span><p>Contingent. We can explain them by other facts, in more and more detail – but never fully from within the series of contingent facts alone.</p></div>
+  </div>
+  <p>Imagine a book on geometry copied from an earlier copy, and that from an earlier one, back for ever. We could explain each copy by the previous one, yet still not know why there are such books at all, or why they are written as they are. The same goes for the series of states that make up the world:</p>
+  <blockquote>‘For neither in any one single thing, nor in the whole aggregate and series of things, can there be found the sufficient reason for existence… And so however far back to earlier states, you will never find in those states a full reason why there should be any world rather than none, and why it should be such as it is.’<cite>Leibniz, <i>On the Ultimate Origination of Things</i> (1697), as quoted on the departmental slides</cite></blockquote>
+  <h3>The argument in standard form</h3>
+  <p>As set out on the departmental slides:</p>
+  <ol class="list">
+    <li>Every fact has a sufficient reason why it is as it is and not otherwise. <span class="note">(The PSR.)</span></li>
+    <li>There are truths of reason and truths of fact. <span class="note">(Leibniz’s distinction.)</span></li>
+    <li>Truths of reason are necessary; their sufficient reason is found in understanding why they are necessary.</li>
+    <li>Truths of fact are contingent; their reason can be given in more and more detail, but we cannot get a sufficient reason for them from them alone.</li>
+    <li>Contingent facts are explained by other contingent facts, and so on. <span class="note">(Even infinitely.)</span></li>
+    <li>So to find a sufficient reason for contingent facts we must look outside the whole series of contingent facts.</li>
+    <li>The sufficient reason must be something necessary, carrying the reason for its existence within itself.</li>
+    <li>This sufficient reason is God.</li>
+  </ol>
+  <blockquote>‘The reason of the world then lies in something extramundane, different from the chain of states, or series of things, whose aggregate constitutes the world.’<cite>Leibniz, <i>On the Ultimate Origination of Things</i>, as quoted on the departmental slides (lightly corrected)</cite></blockquote>
+  <h3>Why this matters</h3>
+  <p>Leibniz’s argument does not need the universe to have a beginning. Even if the series of causes is infinite, the whole series still needs a reason. So the infinite regress objection (Stop 6) does not touch it. Its weak points are the PSR itself (Stop 7), the move from parts to whole (Stop 8) and the idea of a necessary being (Stop 9).</p>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-leibniz.jpg" alt="Portrait of Leibniz in a long dark curled wig" loading="lazy"><figcaption><b>Gottfried Wilhelm Leibniz</b>Christoph Bernhard Francke, c. 1695 · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Principle of sufficient reason</dt><dd>Nothing is the case without a reason why it is so and not otherwise.</dd><dt>Truth of reason</dt><dd>A necessary truth whose denial is a contradiction.</dd><dt>Truth of fact</dt><dd>A contingent truth.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- INFINITE -->
+<template id="s-infinite">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 6 · Issue 1</div>
+  <h2>The possibility of an infinite series</h2>
+  <p>The Kalām argument and Aquinas’ First and Second Ways all claim that a series of causes cannot go back to infinity. If an infinite series is possible, they fail.</p>
+  <h3>The objection</h3>
+  <p>The idea of an infinite universe is not self-contradictory, so we cannot rule it out a priori (departmental slides). Mathematics handles actual infinites consistently: the set of natural numbers is the same size as the set of even numbers, because they can be paired one-to-one. What looks absurd (a part equal to the whole) is simply how infinite sets behave. Hume adds that each member of an infinite series is explained by the one before – so nothing is left unexplained (Stop 8).</p>
+  <h3>Responses</h3>
+  <div class="resp for"><span class="tag">Craig: possible in maths, not in reality</span><p>Infinites may be consistent in thought, but applied to real things they produce absurdities, like Hilbert’s hotel or Craig’s infinite library. And an infinite past could not be ‘traversed’ to reach today.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>The ‘absurdities’ are just counter-intuitive results of infinite arithmetic, which mathematicians accept. And if the future can be potentially infinite, why can the past not be infinite counting backwards?</p></div>
+  <div class="resp for"><span class="tag">Aquinas: it depends on the series</span><p>Aquinas grants that an infinite <i>temporal</i> (accidental) series is possible. His Ways depend only on rejecting an infinite <i>sustaining</i> (essential) series, where every intermediate cause depends on a first cause now. So the infinite-past objection misses his argument.</p></div>
+  <div class="resp for"><span class="tag">Leibniz: irrelevant</span><p>Even an infinite series of contingent causes needs a reason why it exists at all. The argument from contingency survives an infinite past.</p></div>
+  <h3>Evaluation</h3>
+  <p>The objection is strongest against the Kalām argument, which needs the past to be finite. It is weaker against Aquinas, who only rejects an infinite sustaining series, and irrelevant to Leibniz. So the real test of the cosmological argument is not infinity but the principles of causation and sufficient reason.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Infinite regress</dt><dd>A series in which each member depends on a prior one, with no first member.</dd><dt>One-to-one correspondence</dt><dd>Pairing each member of one set with exactly one of another.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- HUME -->
+<template id="s-hume">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 7 · Issue 2: Hume (1711–1776)</div>
+  <h2>Hume’s objection to the causal principle</h2>
+  <p>All cosmological arguments rely on some version of the <span class="term" data-t="Causal principle">causal principle</span>: everything (that begins to exist) has a cause. Hume asks: how do we know this?</p>
+  <blockquote>‘Tis a general maxim in philosophy, that whatever begins to exist, must have a cause of existence. This is commonly taken for granted in all reasonings, without any proof given or demanded.’<cite>Hume, <i>A Treatise of Human Nature</i> (1739), 1.3.3, as quoted on the departmental slides</cite></blockquote>
+  <h3>Not known a priori</h3>
+  <p>To demonstrate that every new existence needs a cause, we would have to show that it is impossible for anything to begin to exist without one. But the ideas of cause and effect are distinct, and what is distinct is separable in thought. So we can easily conceive of an object not existing one moment and existing the next, with no cause at all. Whatever is conceivable is possible, so an uncaused beginning is possible – and the causal principle is not a necessary truth.</p>
+  <h3>Not known a posteriori either</h3>
+  <p>Our belief in causes comes from experience of <span class="term" data-t="Constant conjunction">constant conjunction</span>: we see one kind of event regularly followed by another. That gives us at best a habit of expectation about events <i>within</i> the universe. It cannot justify applying the principle to the universe as a whole, which we have never observed being caused.</p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>A principle is known a priori only if its denial is inconceivable.</li>
+    <li>We can conceive of something beginning to exist without a cause. <span class="note">(Ideas of cause and effect are distinct and separable.)</span></li>
+    <li>So the causal principle is not known a priori.</li>
+    <li>A posteriori, we only know causal regularities between observed events within the universe.</li>
+    <li>So we cannot know that the universe as a whole has a cause.</li>
+    <li>Therefore the cosmological argument rests on an unjustified premise.</li>
+  </ol>
+  <h3>Responses</h3>
+  <div class="resp for"><span class="tag">Conceivable is not possible</span><p>The Stanford Encyclopedia reports the reply that conceivability is a poor guide to possibility. Someone who misunderstands a necessary truth may think they can conceive it false. And what is distinguishable is not always separable: we can distinguish heads from tails on a coin, but cannot separate them.</p></div>
+  <div class="resp for"><span class="tag">Science depends on it</span><p>Alexander Pruss argues that treating things as brute facts should be a last resort, as it would undercut the practice of science. The best explanation of science’s success is that reality really does operate according to causal principles.</p></div>
+  <div class="resp against"><span class="tag">Counter (Mackie)</span><p>That justifies the principle as a working method, not as a truth about reality. We have no right to assume the universe fits our intellectual preferences; science could work perfectly well with brute facts.</p></div>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-hume.jpg" alt="Portrait of Hume wearing a red turban-style cap and brown coat" loading="lazy"><figcaption><b>David Hume</b>Allan Ramsay, 1766 · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Causal principle</dt><dd>Everything that begins to exist has a cause.</dd><dt>Constant conjunction</dt><dd>Two kinds of event always observed together.</dd><dt>Conceivability</dt><dd>Being able to imagine or think something without contradiction.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- RUSSELL -->
+<template id="s-russell">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 8 · Issue 3: Russell (1872–1970)</div>
+  <h2>Russell: the fallacy of composition</h2>
+  <p>In a famous BBC radio debate with Frederick Copleston in 1948, Bertrand Russell raised two objections to the argument from contingency. First, like Hume, he denied that we can know a priori that everything has a sufficient reason. Second, he argued that the argument commits the <span class="term" data-t="Fallacy of composition">fallacy of composition</span>.</p>
+  <h3>The fallacy</h3>
+  <p>The fallacy of composition is the mistake of inferring that because every part of something has a property, the whole has it too. Every sheet of paper in a pile is thin, but the pile is not thin (departmental slides). Russell’s own example was that every human being has a mother, but it does not follow that the human race has a mother.</p>
+  <p>Leibniz and Aquinas’ Third Way move from ‘every thing in the universe is contingent and needs an explanation’ to ‘the universe as a whole is contingent and needs an explanation’. Russell says this is the same mistake. The universe, he claimed, is ‘just there, and that’s all’ (as quoted in the Stanford Encyclopedia).</p>
+  <h3>The objection in standard form</h3>
+  <ol class="list">
+    <li>The argument infers from ‘each member of the universe is contingent’ to ‘the universe is contingent’.</li>
+    <li>Inferring a property of a whole from the properties of its parts is invalid in general.</li>
+    <li>So the argument has not shown that the universe as a whole needs an explanation.</li>
+    <li>Therefore it does not show that there is a necessary being outside the universe.</li>
+  </ol>
+  <h3>Responses</h3>
+  <div class="resp for"><span class="tag">Not every part–whole inference is fallacious</span><p>Each piece of a wooden table is wooden, and so is the table (departmental slides). The Stanford Encyclopedia makes the same point with a brick wall: it is fallacious to infer that a wall is small because its bricks are small, but not that it is made of baked clay because its bricks are. Whether the inference works depends on the property.</p></div>
+  <div class="resp for"><span class="tag">Contingency transfers</span><p>If every contingent thing in the universe – including all matter and energy – ceased to exist at once, the universe would cease to exist. So if every part can fail to exist, the whole can too: contingency is like ‘wooden’, not like ‘thin’.</p></div>
+  <div class="resp against"><span class="tag">Hume’s version</span><p>Hume made a related point: if I explain the cause of each of twenty particles, it would be unreasonable to ask for the cause of the whole twenty. Grouping things into a whole is an act of the mind; explaining the parts explains the whole.</p></div>
+  <div class="resp for"><span class="tag">Rowe’s reply</span><p>Explaining each dependent being by another dependent being is one thing; explaining why there are dependent beings at all is another. A chain of chickens and eggs, each explained by the one before, still does not explain why there are chickens and eggs.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Fallacy of composition</dt><dd>Inferring that a whole has a property because its parts do.</dd><dt>Brute fact</dt><dd>A fact with no explanation.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- NECESSARY -->
+<template id="s-necessary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 9 · Issue 4</div>
+  <h2>The impossibility of a necessary being (Hume and Russell)</h2>
+  <p>The Third Way and Leibniz conclude that there is a <span class="term" data-t="Necessary being">necessary being</span>. Hume and Russell argue that the very idea makes no sense.</p>
+  <h3>Hume</h3>
+  <p>Hume holds that conceivability implies possibility. We can conceive of God existing and of God not existing, so God’s non-existence is possible, and so God is not a necessary being. The only necessary truths are <span class="term" data-t="Relations of ideas">relations of ideas</span> – truths of logic and mathematics – which tell us nothing about what exists. Existence claims are always matters of fact, and their denial is never a contradiction. (Compare Hume’s objection to the ontological argument.)</p>
+  <h3>Russell</h3>
+  <p>In the Copleston debate, Russell argued that ‘necessary’ applies only to propositions – analytic ones, whose denial is self-contradictory – not to things. ‘Necessary being’ is therefore a confused expression, like asking what colour a number is.</p>
+  <h3>The objection in standard form</h3>
+  <ol class="list">
+    <li>A necessary being is one whose non-existence is impossible.</li>
+    <li>Whatever we can conceive is possible.</li>
+    <li>We can conceive of any being, including God, not existing.</li>
+    <li>So the non-existence of any being is possible. <span class="note">(From 2, 3.)</span></li>
+    <li>Therefore there is no necessary being.</li>
+  </ol>
+  <h3>Responses</h3>
+  <div class="resp for"><span class="tag">Factual, not logical, necessity</span><p>The Stanford Encyclopedia argues that the cosmological argument need not claim <i>logical</i> necessity (‘God does not exist’ is a contradiction). It needs only <i>factual</i> or metaphysical necessity: a being that depends on nothing, cannot be caused or destroyed, and explains itself. That is not ruled out by Hume’s or Russell’s point about propositions.</p></div>
+  <div class="resp for"><span class="tag">Conceivability again</span><p>As at Stop 7, it is doubtful that being able to imagine something shows it is really possible.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>But if necessity is only factual, why could the universe – or matter and energy – not be the factually necessary thing? Then we need no God beyond it.</p></div>
+  <h3>Evaluation</h3>
+  <p>The objection defeats the argument if ‘necessary being’ means logically necessary, as Hume and Russell assumed. The shift to factual necessity rescues coherence, but at a cost: the argument now needs a further reason why the necessary being is God rather than the universe itself.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Logical necessity</dt><dd>Its denial is a contradiction.</dd><dt>Factual (metaphysical) necessity</dt><dd>Depends on nothing and cannot fail to exist, though its denial is not a contradiction.</dd><dt>Relations of ideas</dt><dd>Hume: a priori truths of logic and maths.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- KANT -->
+<template id="s-kant">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 10 · Kant (1724–1804) <span class="bspec">Beyond the spec</span></div>
+  <h2>Kant: the cosmological argument depends on the ontological</h2>
+  <p>In the <i>Critique of Pure Reason</i> (1787), Kant argues that the cosmological argument is the ontological argument in disguise. The Stanford Encyclopedia sets out his reasoning in two parts.</p>
+  <ol class="list">
+    <li><b>The empirical part.</b> If anything exists, an absolutely necessary being exists. I, at least, exist. So an absolutely necessary being exists. (Kant’s summary, B632.)</li>
+    <li><b>The identifying part.</b> But what <i>is</i> this necessary being? Experience cannot tell us. Reason must determine it from concepts alone – and the only concept that fits is that of a most real, most perfect being. So the argument must assume that the most real being is necessarily existent.</li>
+    <li>That is exactly the claim of the ontological argument – which Kant believed he had refuted (existence is not a real predicate).</li>
+    <li>Therefore the cosmological argument inherits the ontological argument’s failure.</li>
+  </ol>
+  <p>Kant also argued that the causal principle applies only within the world of experience. Using it to reach beyond experience, to a cause of the whole world, is an illegitimate extension of reason.</p>
+  <h3>Responses</h3>
+  <div class="resp for"><span class="tag">Existence is already established</span><p>The Stanford Encyclopedia reports J.J.C. Smart’s reply: the existence of a necessary being is established in the first, empirical part. The second part only <i>identifies</i> it; it does not prove its existence from a concept, as the ontological argument does.</p></div>
+  <div class="resp for"><span class="tag">Factual necessity</span><p>Kant assumes the necessary being is logically necessary. If the argument concludes only to a factually necessary being, it does not rely on the ontological proof (compare Stop 9).</p></div>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-kant.jpg" alt="Portrait of Kant in old age with powdered grey hair" loading="lazy"><figcaption><b>Immanuel Kant</b>Unknown painter, possibly of the school of Anton Graff · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Ens realissimum</dt><dd>The ‘most real being’.</dd><dt>Transcendental illusion</dt><dd>Kant: reason’s tendency to apply concepts beyond possible experience.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- SCIENCE -->
+<template id="s-science">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 11 · Science and probability <span class="bspec">Beyond the spec</span></div>
+  <h2>The Big Bang, quantum physics and Swinburne</h2>
+  <h3>The Big Bang</h3>
+  <p>Craig supports the Kalām’s second premise with the Big Bang theory. Run the expansion of the universe backwards and it reaches a state of infinite density about 13.8 billion years ago – the beginning of matter, energy, space, time and the laws of physics. Since time itself begins there, there is no ‘before’, and since physical laws begin there, there can be no scientific explanation of it.</p>
+  <div class="resp against"><span class="tag">Objections</span><p>The Stanford Encyclopedia notes that this makes the premise only probably true, dependent on current cosmology. Some argue the Big Bang is not an ‘event’ at all, since there was no time before it in which it could happen; and general relativity may not apply at the very beginning, where quantum effects dominate.</p></div>
+  <h3>Quantum physics and the causal principle</h3>
+  <p>Some critics argue that quantum events, such as radioactive decay or particles appearing in a vacuum, happen without a deterministic cause – so the causal principle fails.</p>
+  <div class="resp for"><span class="tag">Reply</span><p>Defenders reply that the quantum vacuum is not ‘nothing’: it is a physical state governed by laws. Particles appearing from it do not come from nothing in the philosopher’s sense.</p></div>
+  <h3>Swinburne’s inductive argument</h3>
+  <p>Richard Swinburne rejects deductive cosmological arguments. Instead he argues inductively: the existence of a complex physical universe is more likely if God exists than if God does not, because God is a simpler explanation than an unexplained universe. On its own the argument only raises the probability of God; combined with the design argument and others in a cumulative case, he argues God’s existence is more probable than not.</p>
+  <div class="resp against"><span class="tag">Objection</span><p>Is God really simpler than the universe? An infinite mind with unlimited knowledge and power seems far more complex than the physical universe it is meant to explain.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Singularity</dt><dd>The state of infinite density at the beginning of the Big Bang.</dd><dt>Inductive argument</dt><dd>Premises make the conclusion probable, not certain.</dd><dt>Cumulative case</dt><dd>Several arguments that together raise the probability of a conclusion.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- REVISE -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>Does the existence of the universe prove God?</h2>
+  <h3>Overall evaluation</h3>
+  <p>The cosmological arguments divide into two families with different weak points. Arguments from <b>temporal causation</b> (Kalām) need the past to be finite, so the possibility of an infinite series is their main threat; the Big Bang helps, but only makes the premise probable. Arguments from <b>sustaining causation and contingency</b> (Aquinas, Descartes, Leibniz) survive an infinite past, but depend on the causal principle or the PSR, which Hume argues cannot be known; on the move from parts to whole, which Russell calls the fallacy of composition; and on a necessary being, which Hume and Russell think incoherent. The best replies – that contingency, unlike thinness, does transfer from parts to whole, and that necessity can be factual rather than logical – keep the argument alive. But even then, the argument reaches a first cause or necessary being, and a further step is needed to show this is God rather than the universe itself. A sustained judgement: <b>Leibniz’s argument from contingency is the strongest version, because it does not depend on the universe having a beginning; but it succeeds only if we accept the PSR, and rejecting the PSR – accepting the universe as a brute fact – is a coherent, if uncomfortable, alternative.</b></p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Kalām:</b> whatever begins to exist has a cause; the universe began; so it has a cause – personal (Craig).</li>
+    <li><b>Aquinas 1:</b> change needs a changer; no infinite regress; unmoved mover.</li>
+    <li><b>Aquinas 2:</b> nothing causes itself; no infinite sustaining series; first efficient cause.</li>
+    <li><b>Aquinas 3:</b> if all were contingent, once there was nothing; so something is necessary.</li>
+    <li><b>Descartes:</b> my continuing existence needs a sustaining cause; not me, not my parents; so God.</li>
+    <li><b>Leibniz:</b> every fact has a sufficient reason; contingent facts cannot provide it; so a necessary being outside the world.</li>
+    <li><b>Infinite series:</b> threatens Kalām; misses Aquinas’ sustaining series and Leibniz.</li>
+    <li><b>Hume:</b> the causal principle is not known a priori (uncaused beginnings are conceivable) or a posteriori (beyond experience).</li>
+    <li><b>Russell:</b> fallacy of composition; the universe is ‘just there’. Reply: contingency transfers to the whole.</li>
+    <li><b>Necessary being:</b> conceivability and logical necessity; reply – factual necessity.</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Does the cosmological argument prove God exists?</b><br>1. Thesis; define; causation vs contingency.<br>2. Kalām → infinite series objection → Aquinas’ sustaining reply → judge.<br>3. Leibniz → Hume on causal principle / PSR → judge.<br>4. Russell’s composition → table/wall reply → judge.<br>5. Necessary being → factual necessity → but why God? → conclusion.</p></div>
+</aside></div>
+</template>
+
+<!-- GLOSSARY -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>For 3-mark questions, learn these definitions precisely – one accurate sentence is better than a vague paragraph.</p></div></aside></div>
+</template>
+
+<script>
+var GLOSS=[
+ ["A posteriori","Known through experience.","t"],
+ ["Necessary being","A being whose non-existence is impossible; a being that must exist.","h"],
+ ["Contingent being","A being that exists but might not have existed.","h"],
+ ["Sufficient reason","A reason that explains why something is X and not Y.","h"],
+ ["Principle of sufficient reason","Leibniz: nothing is the case without a sufficient reason why it is so and not otherwise.","h"],
+ ["Temporal cause","A cause that comes first in a temporal sequence and can cease while its effect continues.","h"],
+ ["Sustaining cause","A cause that sustains another thing in existence over a period of time.","h"],
+ ["Causal principle","The principle that everything (that begins to exist) has a cause.","t"],
+ ["Potentiality","What something could become (Aristotle and Aquinas).","t"],
+ ["Actuality","What something actually is.","t"],
+ ["Efficient cause","That which brings something about.","t"],
+ ["Essentially ordered series","A series in which each member depends on the previous one here and now.","t"],
+ ["Accidentally ordered series","A series in which earlier members are no longer needed for later ones to exist.","t"],
+ ["Actual infinite","A completed infinite collection.","t"],
+ ["Potential infinite","A collection that can always be added to but is always finite.","t"],
+ ["Infinite regress","A series with no first member, each depending on a prior one.","t"],
+ ["Ex nihilo nihil fit","Nothing comes from nothing.","t"],
+ ["Constant conjunction","Hume: two kinds of event always observed together.","t"],
+ ["Relations of ideas","Hume: a priori truths of logic and mathematics, whose denial is a contradiction.","t"],
+ ["Fallacy of composition","Inferring that the whole has a property because each of its parts does.","t"],
+ ["Brute fact","A fact with no further explanation.","t"],
+ ["Logical necessity","Being such that its denial is a contradiction.","t"],
+ ["Factual necessity","Depending on nothing and being unable to fail to exist, without its denial being a contradiction.","t"],
+ ["Personal explanation","Explanation in terms of the intentional action of a rational agent.","t"]
+];
+var STOPS=[["start","Start here"],["kalam","Kalām"],["aquinas","Aquinas 1 & 2"],["third","Third Way"],["descartes","Descartes"],["leibniz","Leibniz"],["infinite","Infinite series"],["hume","Hume"],["russell","Russell"],["necessary","Necessary being"],["kant","Kant"],["science","Science"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["kalam","Stop 1","The Kalām argument","The universe began, so it has a cause."],
+ ["aquinas","Stop 2","Aquinas: Ways 1 and 2","Motion and sustaining causes."],
+ ["third","Stop 3","Aquinas: Third Way","From contingency to a necessary being."],
+ ["descartes","Stop 4","Descartes","What keeps me in existence?"],
+ ["leibniz","Stop 5","Leibniz","The principle of sufficient reason."],
+ ["infinite","Stop 6","Infinite series","Can the chain go back for ever?"],
+ ["hume","Stop 7","Hume","How do we know everything has a cause?"],
+ ["russell","Stop 8","Russell","The fallacy of composition."],
+ ["necessary","Stop 9","Necessary being","Does the idea make sense?"],
+ ["kant","Stop 10 · Beyond the spec","Kant","The ontological argument in disguise?"],
+ ["science","Stop 11 · Beyond the spec","Science and probability","Big Bang, quantum physics, Swinburne."]
+];
+var STRETCH={
+ "start":[
+  ["Plato and Aristotle","The Stanford Encyclopedia traces the earliest Western version to Plato’s <i>Laws</i> (893–96), with the classical argument rooted in Aristotle’s <i>Physics</i> VIII and <i>Metaphysics</i> XII – the unmoved mover.","<i>Stanford Encyclopedia</i>, ‘Cosmological Argument’, §1"],
+  ["An Indian version","A brief version from dependence appears in Udayana’s <i>Nyāyakusumāñjali</i>. Nyāya philosophers argued that since the universe has parts that come into existence, it must have a cause – and they would accept an infinite regress only if there were evidence for one.","<i>Stanford Encyclopedia</i>, §1"],
+  ["Smart’s ‘deep-seated question’","J.J.C. Smart rejected the argument, but admitted that within us lies a deep-seated question: why should anything exist at all? He did not know what sort of question it was.","Paraphrased; <i>Stanford Encyclopedia</i>, §1, citing Smart 1955"]],
+ "kalam":[
+  ["Hilbert’s hotel","The mathematician David Hilbert imagined a hotel with infinitely many rooms, all full. A new guest arrives: move everyone from room n to room n+1, and room 1 is free. Craig uses examples like this to argue actual infinites cannot exist in reality.","Paraphrased; commonly used by Craig"],
+  ["Al-Ghazālī and Ibn Rushd","Al-Ghazālī attacked the philosophers’ belief in an eternal world in <i>The Incoherence of the Philosophers</i>. Ibn Rushd (Averroes) replied in <i>The Incoherence of the Incoherence</i>.","Paraphrased; titles of standard works"],
+  ["Why personal?","Craig argues the cause must be timeless, spaceless, immensely powerful and personal. Critics such as Wes Morriston question each step.","<i>Stanford Encyclopedia</i>, §8.6"]],
+ "aquinas":[
+  ["Aquinas on an eternal world","Aquinas held that reason alone cannot prove the world had a beginning; we know it began only through revelation. That is why his Ways do not depend on a first moment in time.","Paraphrased; Aquinas, <i>De aeternitate mundi</i>"],
+  ["The Five Ways","The Fourth Way argues from degrees of perfection; the Fifth from the purposeful behaviour of natural things – a design argument (see the Teleological tour).","Aquinas, <i>Summa Theologica</i> I, q.2, a.3"],
+  ["The argument from grounding","Contemporary Thomists such as Edward Feser restate the Ways as arguments about what grounds the existence of things here and now – a renewed defence of the impossibility of an essentially ordered infinite series.","<i>Stanford Encyclopedia</i>, §2 and §4"]],
+ "third":[
+  ["Ibn Sīnā","Ibn Sīnā (Avicenna, c. 980–1037) distinguished beings necessary in themselves from beings necessary through another. His argument from contingency was taken up by Aquinas.","<i>Stanford Encyclopedia</i>, §1"],
+  ["Rowe’s possible worlds point","William Rowe argued that even if every contingent being fails to exist in some possible world, it may be that every possible world contains at least one contingent being – so something must always exist without needing a necessary being.","<i>Stanford Encyclopedia</i>, §5.2"]],
+ "descartes":[
+  ["Descartes’ other argument","In <i>Meditation</i> III, Descartes first gives the ‘trademark’ argument: my idea of an infinite God could only have been caused by an infinite God, like a craftsman’s mark stamped on his work.","Paraphrased; Descartes, <i>Meditation</i> III"],
+  ["Link to the Cartesian circle","Descartes uses God’s existence to guarantee clear and distinct ideas – but his arguments for God rely on clear and distinct ideas. This is the Cartesian circle from Epistemology.","Cross-link within the AQA course"]],
+ "leibniz":[
+  ["Samuel Clarke","The English philosopher Samuel Clarke (1675–1729) also used the PSR in a cosmological argument, and corresponded with Leibniz – though they disagreed about space, time and God.","<i>Stanford Encyclopedia</i>, §1"],
+  ["Weak and strong PSR","Richard Gale and Alexander Pruss defend a weak PSR – every contingent fact <i>possibly</i> has an explanation – which they argue still leads to a necessary, though finite, being.","<i>Stanford Encyclopedia</i>, §7"],
+  ["Copleston v Russell","The 1948 BBC debate is one of the most famous philosophical broadcasts. Copleston defended Leibniz’s argument; Russell said the universe needs no explanation.","Paraphrased; <i>Stanford Encyclopedia</i>, §5.2"]],
+ "infinite":[
+  ["Zeno’s paradoxes","Critics compare the ‘you cannot traverse an infinite past’ argument to Zeno’s paradoxes. Craig replies that Zeno’s distances shrink and sum to a finite total, whereas past events are equal, actual intervals.","<i>Stanford Encyclopedia</i>, §8.3"],
+  ["Galileo on infinity","Galileo already noticed that there are as many square numbers as natural numbers, even though squares seem to be only some of them.","<i>Stanford Encyclopedia</i>, §8.2"]],
+ "hume":[
+  ["Pi and conceivability","The Encyclopedia notes that someone might think they can conceive pi as a simple fraction, but this does not make it possible. Conceivability can mislead.","Paraphrased; <i>Stanford Encyclopedia</i>, §5.4"],
+  ["Do people believe the PSR?","Experimental philosophers Shaun Nichols and Justin Steinberg found that people presuppose something like the PSR in their explanations – evidence, perhaps, that the cosmological argument is intuitive.","<i>Stanford Encyclopedia</i>, §5.4"]],
+ "russell":[
+  ["Hawking agreed","The Stanford Encyclopedia notes that Russell’s view that the universe needs no explanation was later reiterated by Stephen Hawking.","<i>Stanford Encyclopedia</i>, §5.2"],
+  ["Koons on induction","Robert Koons argues that we need not observe a universe being caused to know it needs a cause, just as we need not see every combination of circumstances to know a dropped ball will fall.","<i>Stanford Encyclopedia</i>, §5.2"]],
+ "necessary":[
+  ["O’Connor on necessity","Timothy O’Connor argues that a necessary being would exist in every possible circumstance, which is precisely why the question of its existence cannot arise – ending the regress of explanation non-arbitrarily.","Paraphrased; <i>Stanford Encyclopedia</i>, §5.5"],
+  ["Link to the ontological argument","Malcolm and Plantinga argue a necessary being is coherent. If they are right, Hume and Russell’s objection fails – but their arguments face their own problems.","Cross-link within the AQA course"]],
+ "kant":[
+  ["The antinomies","Kant argued that reason can prove both that the world had a beginning and that it did not – an ‘antinomy’ showing reason has overreached its limits.","Paraphrased; Kant, <i>Critique of Pure Reason</i>, Antinomies"]],
+ "science":[
+  ["Reformed epistemology","Alvin Plantinga concluded the cosmological argument is ineffective – and, from his reformed epistemology, unnecessary, since belief in God can be properly basic without argument.","<i>Stanford Encyclopedia</i>, §1"],
+  ["Boltzmann brains, again","The same multiverse puzzles that arise for fine-tuning (see the Teleological tour) arise for some naturalistic explanations of the Big Bang.","Cross-link within the course"]],
+ "revise":[
+  ["The current state of play","The Stanford Encyclopedia reports that both theists and non-theists generally show a healthy scepticism about the argument – but that defenders like Craig, Koons and Pruss have produced increasingly sophisticated versions.","<i>Stanford Encyclopedia</i>, §1"]]
+};
+var QS={
+ "kalam":["State the Kalām argument.","Explain why Craig claims the universe must have begun to exist.","Explain the Kalām cosmological argument.","Does the Kalām argument prove that God exists?"],
+ "aquinas":["What is the difference between a temporal and a sustaining cause?","Explain Aquinas’ First Way.","Explain Aquinas’ First and Second Ways.","Do Aquinas’ Ways succeed in proving God’s existence?"],
+ "third":["What is meant by a contingent being?","Explain Aquinas’ Third Way.","Explain Aquinas’ Third Way and one objection to it.","Is the argument from contingency persuasive?"],
+ "descartes":["What is meant by a sustaining cause?","Explain why Descartes thinks his continuing existence needs a cause.","Explain Descartes’ cosmological argument.","Does Descartes’ argument from his continuing existence succeed?"],
+ "leibniz":["State the principle of sufficient reason.","Explain the difference between truths of reason and truths of fact.","Explain Leibniz’s argument from the principle of sufficient reason.","Is Leibniz’s cosmological argument successful?"],
+ "infinite":["What is an infinite regress?","Explain why the possibility of an infinite series is a problem for the Kalām argument.","Explain the objection from the possibility of an infinite series and how Aquinas might respond.","Is an infinite series of causes possible?"],
+ "hume":["What is the causal principle?","Explain Hume’s objection to the causal principle.","Explain Hume’s objections to cosmological arguments.","Does Hume’s objection to the causal principle defeat the cosmological argument?"],
+ "russell":["What is the fallacy of composition?","Explain Russell’s claim that the cosmological argument commits the fallacy of composition.","Explain the fallacy of composition objection and one response to it.","Does the cosmological argument commit the fallacy of composition?"],
+ "necessary":["What is meant by a necessary being?","Explain why Hume thinks a necessary being is impossible.","Explain Hume’s and Russell’s objection to the idea of a necessary being.","Is the concept of a necessary being coherent?"],
+ "kant":["What did Kant claim the cosmological argument depends on?","Explain Kant’s claim that the cosmological argument depends on the ontological argument.","Explain Kant’s criticism of the cosmological argument (extension).","Does the cosmological argument depend on the ontological argument?"],
+ "science":["What is a singularity?","Explain how the Big Bang is used to support the Kalām argument.","Explain Swinburne’s inductive cosmological argument (extension).","Can science help or hinder the cosmological argument?"]
+};
+var QUIZ=[
+ ["What is the difference between a temporal and a sustaining cause?","A temporal cause can cease while its effect continues; a sustaining cause keeps its effect in existence for as long as it lasts."],
+ ["Why does Craig say ‘everything that begins to exist’ rather than ‘everything’?","So that God, who did not begin to exist, does not need a cause."],
+ ["What is the First Way’s key claim about change?","Nothing can move itself from potentiality to actuality; whatever is changed is changed by another."],
+ ["Which kind of infinite series does Aquinas reject?","An infinite essentially ordered (sustaining) series – he allows an infinite temporal series is possible."],
+ ["Summarise the Third Way in one sentence.","If everything were contingent, at some time nothing would have existed, and nothing would exist now; so something is necessary."],
+ ["Why can’t Descartes be the cause of his own continuing existence?","If he had that power he would be aware of it, and would have given himself every perfection he lacks."],
+ ["State the principle of sufficient reason.","Nothing is the case without a sufficient reason why it is so and not otherwise."],
+ ["What is Hume’s argument that the causal principle is not known a priori?","Cause and effect are distinct ideas, so we can conceive something beginning without a cause; what is conceivable is possible."],
+ ["Give Russell’s example of the fallacy of composition.","Every human being has a mother, but the human race does not have a mother."],
+ ["What distinction answers the objection to a necessary being?","Logical necessity versus factual (metaphysical) necessity."]
+];
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src">'+(x[2]==="h"?"Handout glossary":"From the handout text")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>

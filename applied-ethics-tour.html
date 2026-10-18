@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Applied Ethics Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#d6efdf; --ink:#245c3c;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#d6efdf}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#ece0f5}
+.stretch h4{color:#5a2f78}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#ece0f5;color:#5a2f78;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#f5fbf7}
+details.resp summary{cursor:pointer}
+.bspec{display:inline-block;margin-left:8px;font-size:.7rem;font-weight:600;letter-spacing:.08em;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;vertical-align:middle}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+
+<style>
+.bird{width:100%;border-collapse:separate;border-spacing:6px;font-size:.92rem;margin:18px 0}
+.bird th{font-weight:600;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);text-align:left;padding:8px 10px;vertical-align:bottom}
+.bird td{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;vertical-align:top;text-align:left!important}
+.bird td.row{background:var(--tint);color:var(--ink);font-weight:600;border:0}
+.bird .v{display:inline-block;font-size:.72rem;font-weight:600;border-radius:999px;padding:2px 8px;margin-bottom:6px}
+.v.no{background:#fbe3d6;color:#8a3f1c}.v.dep{background:#ece0f5;color:#5a2f78}.v.ok{background:#d6efdf;color:#245c3c}
+.bird td p{margin:0;font-size:.88rem;text-align:left!important}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:760px){.bird{min-width:720px}}
+.stop.wide{grid-template-columns:1fr}
+.stop.wide aside{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:.85rem;margin:6px 0 4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="#">← Moral Philosophy</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 1 · Spec 3.2.2</span>
+      <h1>Applied ethics</h1>
+      <p>Three normative theories meet four practical issues: stealing, simulated killing, eating animals and telling lies. Applying a theory is the best test of whether you understand it, and the best way to find its weaknesses. The tour ends by applying meta-ethics to the same issues, as the specification requires.</p>
+    </div>
+    <svg viewBox="0 0 320 220" role="img" aria-label="Grid with three theories as rows (utilitarianism, Kant, Aristotle) and four issues as columns (stealing, simulated killing, eating animals, lying).">
+      <rect width="320" height="220" rx="14" fill="#fff"/>
+      <g font-family="Nunito Sans,sans-serif" font-size="11" text-anchor="middle">
+        <text x="120" y="30" fill="#245c3c" font-weight="600">Steal</text>
+        <text x="172" y="30" fill="#245c3c" font-weight="600">Simulate</text>
+        <text x="228" y="30" fill="#245c3c" font-weight="600">Animals</text>
+        <text x="280" y="30" fill="#245c3c" font-weight="600">Lie</text>
+        <text x="50" y="72" fill="#23262f" font-weight="600">Utilitarian</text>
+        <text x="50" y="122" fill="#23262f" font-weight="600">Kant</text>
+        <text x="50" y="172" fill="#23262f" font-weight="600">Aristotle</text>
+        <g fill="#d6efdf"><rect x="96" y="48" width="48" height="40" rx="8"/><rect x="148" y="48" width="48" height="40" rx="8"/><rect x="204" y="48" width="48" height="40" rx="8"/><rect x="256" y="48" width="48" height="40" rx="8"/></g>
+        <g fill="#ece0f5"><rect x="96" y="98" width="48" height="40" rx="8"/><rect x="148" y="98" width="48" height="40" rx="8"/><rect x="204" y="98" width="48" height="40" rx="8"/><rect x="256" y="98" width="48" height="40" rx="8"/></g>
+        <g fill="#fbe3d6"><rect x="96" y="148" width="48" height="40" rx="8"/><rect x="148" y="148" width="48" height="40" rx="8"/><rect x="204" y="148" width="48" height="40" rx="8"/><rect x="256" y="148" width="48" height="40" rx="8"/></g>
+        <text x="160" y="208" fill="#5b6070">every theory × every issue: see Stop 1</text>
+      </g>
+    </svg>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Built from the departmental handouts <i>Stealing</i>, <i>Simulated killing</i>, <i>Eating animals</i> and <i>Telling lies</i> and the <i>Applied Ethics Revision Tables</i>, which are based on Lacewing, M. (2017) <i>Philosophy for AS and A Level: Epistemology and Moral Philosophy</i> (Routledge), ch. 3. The handouts have been reworded throughout. Material marked ‘Added’ or ‘Beyond the spec’ was not in those sources and should be checked. AQA 7172 · Moral Philosophy.</footer>
+</div>
+
+<!-- START -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>What happens when the theories meet real problems?</h2>
+  <p>Normative ethical theories exist to help us know and do what is right. Testing them against practical issues does two jobs at once: it shows you what each theory really implies, and it exposes where a theory gives answers that seem wrong. In the exam, an applied ethics question is never just about the issue; it is a test of how well you understand the theories.</p>
+  <h3>The three theories in one line each</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">Utilitarianism</span><p>An act is right if it maximises happiness (act); or if it follows the rules whose general observance would maximise happiness (rule). Ask: <b>which act or rule leads to the most happiness on balance?</b></p></div>
+    <div class="resp"><span class="tag">Kantian deontology</span><p>Act only on maxims you could will as universal law; treat humanity always as an end, never merely as a means. Ask: <b>could everyone act on my maxim? Am I using anyone?</b></p></div>
+  </div>
+  <div class="resp"><span class="tag">Aristotelian virtue ethics</span><p>Virtues are traits that help us achieve eudaimonia, living and faring well; we acquire them by practice, and practical wisdom tells us what the mean is in each case. Ask: <b>what would a virtuous person do here, with the right motive and in the right way?</b></p></div>
+  <h3>The four issues on the specification</h3>
+  <ul class="list">
+    <li><b>Stealing</b></li>
+    <li><b>Simulated killing</b> (in computer games, plays, films etc.)</li>
+    <li><b>Eating animals</b></li>
+    <li><b>Telling lies</b></li>
+  </ul>
+  <p>The specification says you must apply <b>both</b> normative theories <b>and</b> meta-ethics to these issues. Stop 6 covers the meta-ethical side.</p>
+  <h3>Start with the big picture</h3>
+  <p>Stop 1 is a bird’s-eye table of the whole topic: every theory against every issue, on one screen. Use it first to get your bearings and last to revise.</p>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <div class="card"><h4>How to use this tour</h4><p>Stop 1 is the overview table. Stops 2–5 take one issue each, theory by theory, with problems and responses. Stop 6 applies meta-ethics. Hover over or tap any dotted term for its definition.</p></div>
+  <div class="card"><h4>Exam lens</h4><p>Applied questions can be 5, 12 or 25 marks. The key skill is <b>application</b>: show the theory’s actual reasoning on the issue, not a general summary of the theory.</p></div>
+</aside></div>
+</template>
+
+<!-- BIRD'S-EYE -->
+<template id="s-overview">
+<div class="stop wide"><div class="panel">
+  <div class="kicker">Stop 1 · Bird’s-eye view</div>
+  <h2>The whole topic on one table</h2>
+  <p>Read across a row to see how one theory handles all four issues; read down a column to compare the theories on one issue. Each cell gives the theory’s usual verdict, its key reasoning and the main problem it faces.</p>
+  <div class="legend"><span class="v no" style="display:inline-block;font-size:.72rem;font-weight:600;border-radius:999px;padding:2px 8px;background:#fbe3d6;color:#8a3f1c">Usually wrong</span><span class="v dep" style="display:inline-block;font-size:.72rem;font-weight:600;border-radius:999px;padding:2px 8px;background:#ece0f5;color:#5a2f78">Depends</span><span class="v ok" style="display:inline-block;font-size:.72rem;font-weight:600;border-radius:999px;padding:2px 8px;background:#d6efdf;color:#245c3c">Usually permissible</span></div>
+  <div class="scroll">
+  <table class="bird">
+    <thead><tr><th></th><th>Stealing</th><th>Simulated killing</th><th>Eating animals</th><th>Telling lies</th></tr></thead>
+    <tbody>
+      <tr><td class="row">Act utilitarianism</td>
+        <td><span class="v dep">Depends</span><p>Right if it creates more happiness on that occasion (dire need, Robin Hood, stealing a murderer’s gun). <b>Problem:</b> a society that allowed this would lose trust.</p></td>
+        <td><span class="v ok">Usually permissible</span><p>No one is harmed and gamers enjoy it. Wrong only if real-world harm outweighs the pleasure; the evidence for harm is unclear.</p></td>
+        <td><span class="v no">Wrong as now practised</span><p>Bentham: can they suffer? Singer: speciesism. Factory farming causes great suffering. <b>But</b> killing itself isn’t the issue: happy lives and painless deaths could be acceptable.</p></td>
+        <td><span class="v dep">Depends</span><p>Right if the lie produces more happiness. Mill: trust is so valuable that convenient lies are wrong; lying to the would-be murderer is right.</p></td></tr>
+      <tr><td class="row">Rule utilitarianism</td>
+        <td><span class="v no">Usually wrong</span><p>While there is property, “do not steal” maximises happiness. Keep the simple rule, perhaps with a general rule to prevent serious, immediate harm.</p></td>
+        <td><span class="v ok">Usually permissible</span><p>The evidence doesn’t show that a rule allowing simulated killing would reduce happiness. Mill’s higher pleasures: childish, but not wrong.</p></td>
+        <td><span class="v no">Wrong as now practised</span><p>A rule allowing industrial farming produces more suffering than any alternative rule.</p></td>
+        <td><span class="v dep">Depends</span><p>“Don’t lie” maximises happiness, but needs exceptions, which are very hard to put into a rule (harm, illness, infidelity, politics).</p></td></tr>
+      <tr><td class="row">Kant: universal law</td>
+        <td><span class="v no">Wrong</span><p>Universal stealing destroys property, which stealing presupposes: a contradiction in conception. <b>Problem:</b> “steal to save a life” may be universalisable.</p></td>
+        <td><span class="v ok">Permissible</span><p>Playing a game breaks no duty, unless it damages one’s rational will or leads to neglect of duties to others.</p></td>
+        <td><span class="v ok">Permissible</span><p>Only rational wills count; the maxim “eat meat” can be universalised without contradiction.</p></td>
+        <td><span class="v no">Wrong</span><p>Universal lying destroys belief, which lying needs. Kant: don’t lie even to the murderer. <b>Problem:</b> “lie to save a life” may be universalisable.</p></td></tr>
+      <tr><td class="row">Kant: humanity</td>
+        <td><span class="v no">Wrong</span><p>Stealing bypasses the owner’s informed choice. Justice constrains how we pursue good ends.</p></td>
+        <td><span class="v dep">Depends</span><p>Wrong if cultivating indifference to suffering undermines our treating others as ends (Kant’s butchers and doctors on juries). Imagining the immoral as moral is irrational.</p></td>
+        <td><span class="v dep">Indirect duties</span><p>Animals are not ends in themselves, but cruelty to them may make us cruel to people. <b>Problem:</b> what about humans without rational wills?</p></td>
+        <td><span class="v no">Wrong</span><p>Lying manipulates people as means. <b>But</b> in the <i>Lectures</i>, a lie can be “a weapon of defence”.</p></td></tr>
+      <tr><td class="row">Aristotle & virtue ethics</td>
+        <td><span class="v no">Usually wrong</span><p>Stealing is listed among acts with no mean: always unjust. <b>But</b> justice in rectification, or a clash with kindness, may allow it.</p></td>
+        <td><span class="v dep">Depends</span><p>Doing unjust acts makes us unjust, but simulated killing isn’t unjust. It depends on the motive and the person: the mean is relative to us.</p></td>
+        <td><span class="v dep">Depends</span><p>Aristotle: animals have no share in eudaimonia. Diamond: animals are fellow creatures; industrial farming is callous, rearing well or hunting fairly may not be.</p></td>
+        <td><span class="v dep">Depends</span><p>“Falsehood is in itself mean and culpable.” Either lying has no mean, or truth is a final end that practical wisdom can sometimes outweigh.</p></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">On a phone, scroll the table sideways.</p>
+  <h3>Patterns to notice</h3>
+  <ul class="list">
+    <li><b>Kant is the strictest</b> on stealing and lying, and the most permissive on animals. Utilitarianism is the reverse.</li>
+    <li><b>Simulated killing</b> divides theories by what they care about: utilitarians look at effects; Kant and Aristotle also ask what the activity does to our character or will.</li>
+    <li><b>The same move recurs</b>: restating the maxim (“to save a life, even by stealing/lying”) is the main way to soften Kant on both stealing and lying.</li>
+    <li><b>Practical wisdom</b> does most of Aristotle’s work in every issue, which is a strength (flexibility) and a weakness (guidance).</li>
+  </ul>
+</div>
+<aside>
+  <div class="card"><h4>Revision use</h4><p>Cover a cell and try to recall its verdict, reason and problem before you check. Twenty cells, one per minute.</p></div>
+</aside></div>
+</template>
+
+<!-- STEALING -->
+<template id="s-steal">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · Stealing</div>
+  <h2>Stealing</h2>
+  <div class="thesis"><b>Definition:</b> to steal is to take someone else’s property without their permission (or legal right) and with no intention of returning it.</div>
+  <p>Owning something means holding a set of rights over it: I may use my books as I like, and others may use them only with my say-so. So stealing is a question of <b>justice</b>: of what each person is owed. We begin with the presumption that stealing is wrong. The hard cases are those where it seems permissible: stealing to save a life, stealing in desperate need, “Robin Hood” stealing from the rich to give to the poor, or taking a gun from someone about to commit murder. Can each theory explain both the presumption and the exceptions?</p>
+  <h3>Act utilitarianism</h3>
+  <p>Act utilitarianism doesn’t speak of justice at all. Stealing is right on an occasion if it produces more happiness than not stealing, and wrong otherwise. Since theft usually causes more unhappiness than it creates, it is usually wrong. This approach handles the hard cases well: in each of them, stealing plausibly does produce more happiness.</p>
+  <div class="resp against"><span class="tag">Problem: the loss of trust</span><p>Imagine a society where theft was allowed whenever the thief judged it would maximise happiness. People would live in fear that anyone might convince themselves that taking their property was for the best. Trust would collapse, and overall happiness would fall.</p></div>
+  <div class="resp for"><span class="tag">Mill’s response</span><p>Mill holds that respecting property rights does most for happiness in the long run, because rights give us security, and he calls justice the “most sacred and binding part of all morality”. That suggests we should never steal.</p></div>
+  <div class="resp against"><span class="tag">But…</span><p>A rule of never stealing seems wrong in the Robin Hood and dire-need cases. We need exceptions.</p></div>
+  <h3>Rule utilitarianism</h3>
+  <p>Rule utilitarianism asks which rules, if generally followed, would produce the most happiness.</p>
+  <div class="resp against"><span class="tag">Objection: a world without property?</span><p>Perhaps the world would be happier if no one owned anything, in which case the best rule would forbid ownership.</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>That is beside the point. Theft presupposes property: no property, no theft. If we want a world without property, we need new laws, not stealing. While property exists, people are deeply upset when it is taken, so “do not steal” produces more happiness than a rule allowing theft freely.</p></div>
+  <div class="resp against"><span class="tag">Objection: the hard cases</span><p>A simple rule gives the wrong answer in the hard cases. Should it have exceptions?</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>Exception clauses invite everyone to think their own case is “exceptional”, so they steal when they shouldn’t. A simple, clear rule is likely to produce better results overall. One solution is to keep “do not steal” and add a general rule: <i>where failing to act will lead to significant and immediate harm, act, even if that breaks another rule.</i></p></div>
+  <h3>Kant: the universal law formula</h3>
+  <ol class="list">
+    <li>The maxim is “to steal something I want if I can’t afford it”.</li>
+    <li>If everyone helped themselves to whatever they wanted, the idea of ownership would disappear.</li>
+    <li>But stealing presupposes ownership: you can only steal what belongs to someone else.</li>
+    <li>So universal stealing is logically impossible: a contradiction in conception.</li>
+    <li>Therefore stealing (at least because one wants something) is wrong.</li>
+  </ol>
+  <div class="resp against"><span class="tag">Objection: stealing to save a life</span><p>The maxim “steal to save a life” would not destroy property if universalised, because people rarely need to steal for this reason.</p></div>
+  <div class="resp for"><span class="tag">Kant’s likely reply</span><p>The maxim is still “to steal”, and that is what generates the contradiction. Stealing to save a life is the same kind of act as stealing because you want something.</p></div>
+  <div class="resp against"><span class="tag">Counter-reply</span><p>Perhaps the maxim is really “to save a life, even if by stealing”. Kant himself says it is a contradiction in will not to help others. But Kant also holds that <b>duties of justice are more stringent than duties of virtue</b>: there are constraints on how we pursue good ends. So we should still not steal.</p></div>
+  <h3>Kant: the humanity formula</h3>
+  <p>Stealing denies the owner an informed choice about their property. Why not simply ask? That would be better. But what if they refuse, and refusing is itself wrong, as when someone won’t help a person who will otherwise die? If Kant’s theory forbids stealing even in a lethal emergency or under a repressive and unjust regime, critics can use this as an objection to the theory itself.</p>
+  <h3>Aristotle</h3>
+  <p>Aristotle’s account of justice is largely about doing just actions. He doesn’t think in terms of rights (a later, Roman concept), but he says some actions are never in the mean but always wrong, and theft is one of them. Stealing deprives someone of their due or fair share.</p>
+  <p>What about stealing where wealth is unfairly distributed? Aristotle distinguishes unjust <b>states of affairs</b> from unjust <b>actions</b>:</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Inequality no one caused</span><p>This is unfortunate, but deliberately choosing an unjust act such as theft is worse, and can’t be justified by pointing to an unjust state of affairs.</p></div>
+    <div class="resp"><span class="tag">Inequality people caused</span><p>If the rich are deliberately keeping the poor poor, justice in <b>rectification</b> is needed, to restore equality. If a theft were an act of rectification (Robin Hood again?), it could be justified.</p></div>
+  </div>
+  <div class="resp for"><span class="tag">A third response</span><p>We could deny that theft has no mean. Stealing may be justified when it does not deprive anyone of their due, and owning something does not guarantee owning it fairly. Or, even if theft violates justice, another virtue such as kindness in saving a life may justify it. Practical wisdom must resolve the conflict.</p></div>
+  <h3>A final thought: property rights are limited</h3>
+  <p>All three theories can make one more move. Property rights aren’t absolute: I can’t use my books to start a fire in a cinema, throw them at people, keep them from the tax authorities, or keep them if they were stolen. If someone takes your phone, you don’t steal it by taking it back. If the rich in the Robin Hood stories owned their wealth only through exploitative and unjust taxes, Robin Hood did take their property, but perhaps without violating justice, and so without doing wrong. Which theory best explains that thought is an open question.</p>
+</div>
+<aside>
+  <div class="card"><h4>Evaluation</h4><p>Rule utilitarianism with a general harm-prevention rule handles the hard cases best. Kant is most vulnerable here: his strict answer is easiest to turn into an objection to his theory.</p></div>
+</aside></div>
+</template>
+
+<!-- SIMULATED KILLING -->
+<template id="s-sim">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · Simulated killing</div>
+  <h2>Simulated killing</h2>
+  <div class="thesis"><b>Definition:</b> the dramatisation of killing in a fictional context, such as video games, films and plays. Not just describing a killing, as a novel does, but enacting it so that the audience or player sees and hears it.</div>
+  <p>There may be a morally important difference between <b>watching</b> a killing and <b>playing the killer</b>, so we take them separately.</p>
+  <h3>Is it even a moral issue?</h3>
+  <p>No one is actually killed; in a video game, only pixels change. It is “just” a game. Two replies:</p>
+  <ul class="list">
+    <li><b>What is represented matters.</b> Video games involving rape or paedophilia are banned in the UK, yet these too are “just” games in which no one is harmed. Our discomfort shows that simulations are not automatically morally neutral.</li>
+    <li><b>Effects matter.</b> We can be concerned about the effects on the people involved, and on how they treat others in real life.</li>
+  </ul>
+  <h3>Playing the killer: utilitarianism</h3>
+  <p>No one is harmed and the gamer enjoys themselves, so there is a gain in happiness. But could playing increase the risk of real harm: actual killing, aggression, antisocial behaviour such as less concern for others’ distress, or changed attitudes to violence? (A change in attitudes matters to a utilitarian only if it lowers happiness, but it matters to the virtue theorist.)</p>
+  <p>This is an <b>empirical</b> question, and intuition is not a reliable guide. In <i>Ethics in the Virtual World</i>, Garry Young argues the evidence is unclear:</p>
+  <ul class="list">
+    <li><b>Short-term studies</b> (up to 75 minutes after play): some find more aggressive thoughts, feelings and behaviour; others find this only in people with more violent personalities, or only in boys.</li>
+    <li><b>Long-term studies</b> are few. Some reviews report more aggression and less empathy, but several studies have been challenged as invalid or found effects too weak to matter, and journals may be more likely to publish studies that find a link (publication bias).</li>
+  </ul>
+  <p>So the most we can say is that there may be some increased risk for some people. Act utilitarians consider the probable consequences; rule utilitarians consider the consequences of a rule permitting simulated killing. On current evidence, neither can say it will probably increase real immoral behaviour. And even if it did, the harm would have to be weighed against the pleasure of playing.</p>
+  <div class="resp"><span class="tag">Mill</span><p>Mill says we usually rely on the “secondary principles” of common morality. But these games are too new for common morality to give clear guidance. In children’s play (cops and robbers, aliens, monsters), simulated killing is widely accepted as part of normal development. Some may call adult gaming “childish”, and Mill’s higher and lower pleasures may support thinking less of the adult who plays, but not condemning the activity itself.</p></div>
+  <h3>Playing the killer: Kant</h3>
+  <p>Playing a game breaks no duty in itself. But if it damages our rational will, or leads us to neglect or violate duties to others, we can object. Cultivating cruelty and indifference to virtual suffering might weaken our ability to treat real people as ends. Kant notes that in his day, butchers and doctors were not allowed to serve on English juries because they were hardened to suffering and death. Yet the evidence doesn’t clearly link simulated killing to neglect of duties. Perhaps it erodes our sense of ourselves as rational, moral beings, a duty to ourselves; but again, it is unclear whether it does.</p>
+  <h3>Playing the killer: virtue ethics</h3>
+  <p>We become just by doing just acts, and unjust by doing unjust ones. Killing is often unjust, so repeated simulated killing might build vices such as injustice and unkindness, or block virtues. But simulated killing is not an unjust act, since no one is killed; why think simulating it builds injustice? The evidence doesn’t clearly support it.</p>
+  <p>A better question: would a virtuous person play, and if so, how? With the right motive, at the right times, in the right way. Is the aim of the game simply to kill, or is killing a means to some further goal in the story? Does the player enjoy killing as part of competing well, or for its own sake? And how does the player relate the game to reality? The mean is relative to each person and their moral development:</p>
+  <ul class="list">
+    <li>Someone who might treat the game world as a model for the real world should not play.</li>
+    <li>Someone who experiences the adrenaline as a safe outlet for natural aggression may play well.</li>
+    <li>Someone who indulges real killing fantasies during play does not.</li>
+  </ul>
+  <p>This fits the evidence: people who clearly separate simulation from reality may be at no risk; those who can’t may be at risk. But it still leaves open whether a virtuous person would <i>want</i> to play such games at all.</p>
+  <h3>Acting the killer</h3>
+  <p>Acting takes place within conventions that fix what actions mean. Actors don’t imitate real killings (film violence is usually unrealistic); they pretend, on the shared understanding that certain actions count as killing. Even method actors aren’t meant to feel genuine murderous rage or bloodlust towards fellow actors; they feel fictional counterparts “in character”. An actor who admitted feeling real murderous rage after a scene would disturb us all, because that blurs the line between character and actor. The conventions protect actors; the question for gamers is whether they too keep this line, or whether their avatar’s immorality affects their own goodness.</p>
+  <h3>The audience</h3>
+  <p>Watching fiction involves “suspending disbelief”: we make-believe that what we see is real, without believing it (otherwise we’d call the police). Note that each theory permits some killing: in war (Aristotle), euthanasia (utilitarianism) or capital punishment (Kant). If a work convincingly shows a killing as right, imagining it seems unproblematic. So assume the simulated killing would be wrong in real life.</p>
+  <ul class="list">
+    <li><b>Utilitarians</b> look at effects. The evidence is similar to the gaming evidence: not enough to conclude that watching violence generally makes people worse, and any risk must be weighed against the enjoyment.</li>
+    <li><b>Kant and virtue ethics</b> ask whether watching damages the will or character intrinsically. A work may present a killing as wrong (a morality tale) or as right. The second is the hard case. Kant would say imagining that the immoral is moral is irrational: moral truths are necessary, not contingent. But is it <i>wrong</i> to imagine the impossible?</li>
+    <li><b>The virtuous viewer</b> attends to the work’s moral vision: does the author mean its values to hold only within the fiction, or to be lived by? Joining an author’s immoral imagination may not be virtuous; keeping one’s distance can deepen moral understanding.</li>
+  </ul>
+</div>
+<aside>
+  <div class="card"><h4>Evaluation</h4><p>Because the empirical evidence is unclear, the utilitarian case against simulated killing is weak. The strongest worry is the virtue-ethical one about motive and character, but it supports judging individuals, not banning the activity.</p></div>
+</aside></div>
+</template>
+
+<!-- ANIMALS -->
+<template id="s-animals">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · Eating animals</div>
+  <h2>Eating animals</h2>
+  <h3>Utilitarianism: Bentham and Singer</h3>
+  <p>If happiness (pleasure and the absence of pain) is the only good, then it is good whatever creature feels it. Nothing in the theory privileges human happiness. Bentham saw this radical implication: the question is not whether animals can reason or talk, but whether they can suffer.</p>
+  <p>Peter Singer develops the point in <i>Animal Liberation</i>. Treating women worse because they are women is <b>sexism</b>; treating one race worse is <b>racism</b>; treating animals worse merely because they are not human is <span class="term" data-t="Speciesism">speciesism</span>.</p>
+  <div class="resp against"><span class="tag">Objection</span><p>Between sexes and races there is no difference in the capacities that make someone a person: reason, language, depth of emotion, self-awareness, moral understanding. Between humans and animals there is.</p></div>
+  <div class="resp for"><span class="tag">Singer’s reply</span><p>Those differences are irrelevant to the capacity humans and animals share: <span class="term" data-t="Sentience">sentience</span>, the basic consciousness needed to feel pleasure and pain. For a utilitarian, what matters is suffering, not whose suffering it is. When it comes to suffering, animals count equally.</p></div>
+  <p>Does it follow that eating animals is always wrong? Not necessarily:</p>
+  <ol class="list">
+    <li>We must check whether ending farming, slaughter and meat-eating would reduce animal suffering more than it increases human unhappiness. It may seem obvious, but it needs careful thought.</li>
+    <li>Utilitarianism objects to suffering, not killing. Painlessly killing one animal and bringing another into being doesn’t reduce total happiness. On Singer’s view, we need only ensure animals have happy lives and painless deaths.</li>
+  </ol>
+  <p>That would make meat far more expensive, since animals would need much better conditions. Eating meat is wrong only when animals are not treated as well as they could be, and as animals are currently reared, eating meat is wrong.</p>
+  <h3>Kant</h3>
+  <p><b>Universal law:</b> “everyone” means everyone with a rational will. Animals have desires but not a will: they can’t stand back from their desires and ask whether to act on them. So maxims about how we treat animals can be universalised, and “eat meat” produces no contradiction in conception or will.</p>
+  <p><b>Humanity:</b> rational beings are ends in themselves; a rational will is the only unconditional good, and everything else gets its value by being chosen by a will. Animals are not rational wills, so they may be treated as means. We may eat them.</p>
+  <p><b>Indirect duties:</b> yet Kant denies we may treat animals however we like. We have a duty to develop our capacity for a good will. If we are unkind to animals, we may become unkind to people, which would be wrong. So we have no duties <i>to</i> animals, but we do have duties <i>concerning</i> them, which are really duties to ourselves and others.</p>
+  <div class="resp against"><span class="tag">Objection 1: the wrong reason</span><p>This is very counter-intuitive. Kant says harming an animal is wrong because of what it does to <i>us</i>, not because of the harm to the animal.</p></div>
+  <div class="resp against"><span class="tag">Objection 2: marginal cases</span><p>Babies are not (yet) rational. They have the potential to be, which may ground our duties to them. But some people with severe cognitive disabilities will never develop a rational will. If we have duties to them, and their capacities are no different from some animals’, denying those animals similar consideration looks speciesist. Whatever grounds our duty of care to such people should ground a duty to animals too.</p></div>
+  <h3>Aristotle</h3>
+  <p>Aristotle holds that animals have no share in eudaimonia, because they lack practical and theoretical reason. Since ethics is centred on eudaimonia, there is little room in it for animals. More recent virtue theorists think this a mistake: a better understanding of our relationship with animals shows that some ways of treating them are not virtuous.</p>
+  <h3>Cora Diamond: “Eating meat and eating people”</h3>
+  <p>Diamond argues that eating meat is often wrong, but that the speciesism argument misunderstands ethics. If we start by counting human and animal interests equally, we misunderstand what matters in our relationships with both.</p>
+  <ul class="list">
+    <li><b>We don’t eat our dead.</b> Not because it would cause them suffering (they’re dead) or violate their rights (though killing them for food would), but because a person is not something to eat. Many animals are. Singer doesn’t dispute this, and sees nothing wrong in a vegetarian eating a cow killed by lightning, but misses its significance.</li>
+    <li><b>An animal is not something to have sex with.</b> On equal-interests thinking, sex with a person of another race and with a consenting gorilla would be morally alike. That is plainly not how we think.</li>
+    <li><b>Practices make the concept.</b> We don’t raise people for meat; we name children rather than number them; we mark births, marriages and deaths. These practices are not just in our species’ interests. They are part of what it is to recognise someone as a human being, owed moral concern. Moral duties partly constitute that recognition.</li>
+  </ul>
+  <p>So we can’t show that eating animals is wrong by erasing the human/animal difference that gives these concepts their meaning. Why, then, be vegetarian? There are many practices of eating animals. Rearing your own pigs well and killing them humanely is very different from buying sliced pork in a supermarket. The meat industry is an industry: animals are reared, slaughtered and shipped on an industrial scale, and much of what is done to them serves efficiency, not the animals.</p>
+  <p>Our other attitudes to animals conflict with this. Animals fill nursery rhymes; we feed birds and squirrels; we stop children hurting pets. These reflect seeing animals as <b>fellow creatures</b>, not because they are biologically similar, but because we are “in the same boat”: they can die, they live independent lives we know little of, they keep us company. Seeing them as fellow creatures allows eating them, but demands rearing them well or hunting them fairly. It conflicts with treating them merely as units of meat production, which strips them of respect, much as slavery does to humans. Animals appeal to our <b>pity</b>, not to a claim of equal interests.</p>
+  <p><b>The virtue-ethics link:</b> our emotional responses show that animals, like us, have lives that can go better or worse. Not responding is the vice of <b>callousness</b>; treating them purely as means is <b>selfishness</b>. Killing animals for food may be permissible if done for the right reason, in the right way, with the right feelings. Because it so often isn’t, eating animals is often wrong.</p>
+</div>
+<aside>
+  <div class="card"><h4>Set text</h4><p>Diamond, C. (1978) ‘Eating Meat and Eating People’, <i>Philosophy</i> 53: 465–479.</p></div>
+  <div class="card"><h4>Evaluation</h4><p>Utilitarianism and Diamond reach a similar verdict on factory farming by opposite routes: Singer erases the human/animal difference; Diamond insists on it.</p></div>
+</aside></div>
+</template>
+
+<!-- LIES -->
+<template id="s-lies">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 5 · Telling lies</div>
+  <h2>Telling lies</h2>
+  <h3>Act utilitarianism and Mill</h3>
+  <p>The simple act-utilitarian test: does the lie produce more happiness than telling the truth or staying silent? If so, it is right; if not, wrong.</p>
+  <p>Mill’s brief discussion in <i>Utilitarianism</i> shows that he looks beyond immediate effects to the bigger picture. Truthfulness benefits everyone, and our ability to trust what others say underpins social well-being and is a foundation of civilisation and virtue. Weakening either our own truthfulness or others’ trust does serious damage to happiness, so lying merely for convenience is wrong.</p>
+  <p>But Mill allows exceptions, for example when lying is the only way to withhold information from someone who means harm. We must weigh the conflicting utilities. He discusses Kant’s example from “On a Supposed Right to Lie from Altruistic Motives”: a person hides in your house from someone who wants to murder them; the murderer arrives and asks where they are. Mill says the harm of the lie is outweighed by saving a life, so the lie is permissible.</p>
+  <h3>Rule utilitarianism</h3>
+  <p>“Don’t lie”, generally followed, creates more happiness than a rule permitting lies. But, as Mill shows, never lying sometimes causes harm, so the rule needs exceptions, and they are hard to state. We might lie to stop someone harming others or themselves; because the truth would hurt (terminal illness, infidelity); or to protect a long-term good (in politics)… It is hard to know what the right rule would be.</p>
+  <h3>Kant: universal law</h3>
+  <ol class="list">
+    <li>The usual maxim is “to lie to get what I want”.</li>
+    <li>If everyone lied whenever they wanted, people would stop believing one another.</li>
+    <li>But a lie can deceive only if it is believed.</li>
+    <li>So the maxim cannot be universalised, and lying is wrong.</li>
+  </ol>
+  <p>Kant holds that you must not lie even to the would-be murderer. Most people disagree. Perhaps Kant has the maxim wrong: “to lie when necessary to save a life” may be universalisable, since lives are rarely at stake and people would still mostly believe each other.</p>
+  <div class="resp for"><span class="tag">Kant’s possible reply</span><p>If everyone lies when a life is at stake, the murderer knows it, so he won’t believe us, and the lie can’t deceive. The maxim isn’t universalisable after all.</p></div>
+  <div class="resp for"><span class="tag">Kant’s further argument</span><p>In the essay on lying, Kant adds that we can’t know the consequences of a lie. Suppose we say the victim ran down the street, and, unknown to us, they did. Our lie sends the murderer straight to them, and we are responsible. If we lie to get better outcomes and are wrong, we have failed in duty, achieved nothing and are to blame. Better to do our duty.</p></div>
+  <div class="resp against"><span class="tag">Objection</span><p>Why aren’t we equally responsible if we tell the truth and the murderer finds the victim where we said?</p></div>
+  <h3>Kant: humanity</h3>
+  <p>Lying treats people as means: they can’t make an informed choice, and are manipulated without knowing it. They can’t share our ends because we have hidden them. Even when the other person’s ends are immoral, we should not deceive them about our aim of thwarting them; we should give them the chance to share our end of persuading them to stop.</p>
+  <p>It seems to follow that, if everyone were morally good, lying would always be wrong. But sometimes we must protect ourselves and others from wrongdoing, and a lie may be the only way. If someone means to treat me as a means, lying may prevent it. Kant himself recognises this in his <i>Lectures on Ethics</i>: “if I cannot save myself by maintaining silence, then my lie is a weapon of defence”.</p>
+  <h3>Aristotle</h3>
+  <p>In the <i>Nicomachean Ethics</i>, truthfulness is the mean between boastfulness and mock-modesty, so Aristotle’s main focus is truthfulness about oneself. But he also says that “falsehood is in itself mean and culpable, and truth noble and worthy of praise”. Two readings:</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">No mean</span><p>Lying, like adultery and murder, has no mean: it is already an excess or deficiency and can never be virtuous.</p></div>
+    <div class="resp"><span class="tag">Truth as a final end</span><p>Truth is sought for its own sake. That doesn’t make lying always wrong: pleasure is a final end too, yet there are right and wrong ways to pursue it.</p></div>
+  </div>
+  <p>Aristotle distinguishes motives. Lying about yourself for the pleasure of it is contemptible but “futile rather than bad”; lying to protect your reputation is not very blameworthy, since reputation is good; lying for money makes for “an uglier character”. So there are better and worse motives, but this still suggests lying is never virtuous.</p>
+  <div class="resp against"><span class="tag">Objection</span><p>Some occasions and motives do justify lying. If ethics has few strict rules, as Aristotle says, lying is unlikely to be always wrong. Practical wisdom must judge: a virtuous deception would be at the right time, with the right motive, about the right truths, in the right way.</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>There are ways of not sharing the truth other than lying. The virtuous person will exhaust all the alternatives before lying.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Link</h4><p>The murderer at the door is also used against Kant in the Kantian ethics tour, Stop 7 (clashing duties).</p></div>
+  <div class="card"><h4>Evaluation</h4><p>Kant’s “weapon of defence” remark is his best answer to the murderer case, but it sits uneasily with the essay on lying. Use the tension in a 25-mark essay.</p></div>
+</aside></div>
+</template>
+
+<!-- META-ETHICS -->
+<template id="s-meta">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 6 · Applying meta-ethics</div>
+  <h2>What do meta-ethical theories say about these debates?</h2>
+  <p class="note">Added to complete the spec: the handouts apply only the normative theories. The specification also requires applying meta-ethics. See the Meta-ethics tour for the theories themselves.</p>
+  <p>Meta-ethics doesn’t usually tell you whether stealing or eating meat is wrong. It tells you what you are <i>doing</i> when you say it is, and so what a disagreement about it amounts to.</p>
+  <h3>Moral realism</h3>
+  <ul class="list">
+    <li><b>Naturalism:</b> “factory farming is wrong” is true or false, and could be settled by natural facts, such as facts about suffering (a utilitarian naturalist) or about what human flourishing involves (a virtue naturalist). Singer’s argument fits well here: sentience is a natural fact.</li>
+    <li><b>Non-naturalism and intuitionism:</b> we may know by intuition that gratuitous cruelty to animals is wrong, or that lying is <i>prima facie</i> wrong. But intuitions conflict: many people “just see” that lying to the murderer is right, while Kant seems to see the opposite.</li>
+  </ul>
+  <h3>Error theory (Mackie)</h3>
+  <p>All claims such as “stealing is wrong” or “eating animals is wrong” are false, because there are no objective moral properties. Moral disagreement about these issues, from culture to culture (think of attitudes to eating particular animals), is just what Mackie’s argument from relativity predicts. Yet Mackie thinks we should still <i>invent</i> rules about stealing and lying, because social life needs them.</p>
+  <h3>Emotivism (Ayer)</h3>
+  <p>“Stealing is wrong” is like saying “you stole that money” in a tone of horror. Disputes about these issues are really disputes about <b>facts</b>: does simulated killing make people aggressive? Do fish feel pain? Once the facts are agreed, if attitudes still differ, argument has run out. This fits the simulated-killing debate well, which is largely an argument about empirical evidence.</p>
+  <h3>Prescriptivism (Hare)</h3>
+  <p>“Do not lie” is a universalisable prescription. Moral reasoning about these issues is a test of <b>consistency</b>: if I prescribe that you must not lie to me, I must accept the same prescription for myself in a relevantly similar situation. Singer, who was Hare’s student, uses this kind of reasoning in the animals debate: if suffering is a reason to protect humans, consistency requires applying it to animals too.</p>
+  <h3>Which meta-ethics fits applied ethics best?</h3>
+  <p>Realism makes sense of the fact that we treat these as questions with right answers worth arguing about. Anti-realism explains why the arguments never seem to end. A strong essay point: our sense that the abolition of cruel farming would be <b>moral progress</b> is a challenge to anti-realism.</p>
+</div>
+<aside>
+  <div class="card"><h4>Exam use</h4><p>A question may ask, for example, how an emotivist would view the debate about eating animals. Explain the theory, apply it to a specific argument, and say what it implies about the dispute.</p></div>
+</aside></div>
+</template>
+
+<!-- BEYOND -->
+<template id="s-beyond">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 7 · Beyond the spec</div>
+  <h2>Other voices on the four issues</h2>
+  <p class="note">None of this is in the departmental handouts, and none of it is required. Use it to show breadth in 25-mark essays.</p>
+  <h3>Stealing: Aquinas on necessity</h3>
+  <p>Thomas Aquinas argued that in cases of urgent need, when there is no other remedy, taking what you need from another’s surplus is not really theft at all, because in necessity all things are common. This is close to the “property rights are limited” move at the end of Stop 2.</p>
+  <h3>Simulated killing: the gamer’s dilemma</h3>
+  <p>Morgan Luck (2009) posed the “gamer’s dilemma”: most people accept virtual murder in games, but reject virtual paedophilia. Both harm no one. Either we find a principled difference between them, or we must accept both or reject both. This is exactly the point the handout raises about UK bans.</p>
+  <h3>Simulated killing: Plato and the poets</h3>
+  <p>In the <i>Republic</i>, Plato argued that imitating bad characters in drama can shape the soul of the imitator, and proposed banning much poetry from his ideal city. Aristotle, in the <i>Poetics</i>, defended tragedy: watching it can produce <i>katharsis</i>, a kind of purging or clarification of pity and fear.</p>
+  <h3>Eating animals: rights, not utility</h3>
+  <p>Tom Regan (<i>The Case for Animal Rights</i>, 1983) argued that animals who are “subjects-of-a-life” have inherent value and rights, so even painless killing for food wrongs them. This closes the gap in Singer’s view that killing itself isn’t the problem. Christine Korsgaard has argued from Kantian premises that we must value animals as ends in themselves.</p>
+  <h3>Telling lies: Constant and Augustine</h3>
+  <p>Kant’s essay on lying was a reply to the French writer Benjamin Constant, who argued that we owe the truth only to those who have a right to it, and a would-be murderer has none. Long before Kant, Augustine held that every lie is a sin, though some are much less serious than others. Sissela Bok’s <i>Lying</i> (1978) is an accessible modern study of when, if ever, lies are justified.</p>
+</div>
+<aside>
+  <div class="card"><h4>Exam use</h4><p>One well-placed extension point, clearly connected to your argument, is worth more than a list of names.</p></div>
+</aside></div>
+</template>
+
+<!-- REVISE -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Summary and quiz</div>
+  <h2>Applied ethics in brief</h2>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Stealing:</b> act utilitarianism allows hard cases but threatens trust; Mill: justice “most sacred and binding”; rule utilitarianism: “do not steal” plus a harm-prevention rule. Kant: contradiction in conception; “steal to save a life”; duties of justice outrank duties of virtue. Aristotle: no mean; unjust states vs unjust acts; rectification; limited property rights.</li>
+    <li><b>Simulated killing:</b> “just pixels” vs what is represented; Young: evidence unclear; Mill: childish but not wrong. Kant: hardening (butchers and doctors on juries). Aristotle: motive, the mean relative to the person; actors’ conventions; audiences, make-believe and the moral vision of the work.</li>
+    <li><b>Eating animals:</b> Bentham: can they suffer? Singer: speciesism, sentience; happy lives and painless death. Kant: no rational will, indirect duties; marginal cases. Aristotle: no share in eudaimonia. Diamond: not something to eat; fellow creatures; pity; callousness.</li>
+    <li><b>Telling lies:</b> Mill: trust; lie to the murderer. Rule utilitarianism: exceptions hard to state. Kant: universal lying is self-defeating; the murderer; “weapon of defence”. Aristotle: “falsehood is in itself mean and culpable”; motives; practical wisdom; alternatives to lying.</li>
+    <li><b>Meta-ethics:</b> realism, error theory, emotivism (disputes about facts), prescriptivism (consistency).</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Is eating animals morally wrong?</b><br>1. Thesis.<br>2. Utilitarianism: Singer, speciesism → “killing isn’t the problem” → judge.<br>3. Kant: indirect duties → marginal cases → judge.<br>4. Diamond: fellow creatures → the theory that best explains the wrong of factory farming → judge.<br>5. Conclusion.</p></div>
+</aside></div>
+</template>
+
+<!-- GLOSSARY -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>Many of these terms belong to the normative theories. Revise them in the Utilitarianism, Kant and Virtue Ethics tours too.</p></div></aside></div>
+</template>
+
+<script>
+var GLOSS=[
+ ["Applied ethics","The application of normative and meta-ethical theories to particular practical issues.","t"],
+ ["Stealing","Taking someone else’s property without permission or legal right, with no intention of returning it.","h"],
+ ["Property","A set of rights over something: to use it, and to exclude others from using it.","h"],
+ ["Justice","Giving each person their due or fair share.","h"],
+ ["Justice in rectification","Aristotle: restoring equality where people have deliberately made things unequal.","h"],
+ ["Simulated killing","The dramatisation of killing in a fictional context, such as games, films or plays.","h"],
+ ["Suspension of disbelief","Making-believe that a fiction is real while knowing it is not.","h"],
+ ["Secondary principles","Mill: the rules of common morality that experience shows tend to promote happiness.","h"],
+ ["Speciesism","Singer: treating beings worse merely because they are not of our species.","h"],
+ ["Sentience","The basic consciousness needed to experience pleasure and pain.","h"],
+ ["Indirect duties","Kant: duties concerning animals that are really duties to ourselves or other people.","h"],
+ ["Rational will","The capacity to step back from one’s desires and choose whether to act on them.","h"],
+ ["Fellow creatures","Diamond: animals as beings ‘in the same boat’ as us, with independent lives.","h"],
+ ["Callousness","The vice of failing to respond to how other creatures’ lives are going.","h"],
+ ["Maxim","The principle on which you act.","h"],
+ ["Contradiction in conception","We cannot even conceive of everyone acting on the maxim.","h"],
+ ["Contradiction in will","We can conceive of the maxim as universal but cannot rationally will it.","h"],
+ ["Duties of justice","Kant: stringent duties that constrain how we may pursue good ends; outrank duties of virtue.","h"],
+ ["The mean","Acting at the right time, with the right motive, in the right way; relative to each person.","h"],
+ ["No mean","Acts, such as theft, that are never in the mean but always wrong.","h"],
+ ["Practical wisdom","The ability to judge what each situation requires and resolve conflicts between virtues.","h"],
+ ["Truthfulness","Aristotle: the mean between boastfulness and mock-modesty.","h"],
+ ["Publication bias","The tendency for studies that find an effect to be published more than those that do not.","t"],
+ ["Gamer’s dilemma","Luck: why accept virtual murder but reject other virtual wrongs that also harm no one?","t"]
+];
+var STOPS=[["start","Start here"],["overview","Bird’s-eye table"],["steal","Stealing"],["sim","Simulated killing"],["animals","Eating animals"],["lies","Telling lies"],["meta","Meta-ethics"],["beyond","Other voices"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["overview","Stop 1","Bird’s-eye table","The whole topic on one screen."],
+ ["steal","Stop 2","Stealing","Property, justice and Robin Hood."],
+ ["sim","Stop 3","Simulated killing","Gamers, actors and audiences."],
+ ["animals","Stop 4","Eating animals","Singer, Kant and Diamond."],
+ ["lies","Stop 5","Telling lies","Mill, Kant’s murderer and Aristotle."],
+ ["meta","Stop 6","Applying meta-ethics","What disagreement means."],
+ ["beyond","Stop 7","Other voices","Beyond the spec."],
+ ["revise","Revise","Summary and quiz","Recap and retrieval."],
+ ["glossary","A–Z","Glossary","Every key term."]
+];
+var STRETCH={
+ "steal":[["Aquinas: necessity makes things common","Aquinas argued that taking from another’s surplus in urgent need, when there is no other remedy, is not strictly theft (<i>Summa Theologiae</i> II-II, q.66, a.7).","Added: not in the departmental sources"]],
+ "sim":[["Plato vs Aristotle on drama","Plato’s <i>Republic</i> worried that imitating bad characters shapes the soul; Aristotle’s <i>Poetics</i> defended tragedy for its <i>katharsis</i> of pity and fear.","Added: not in the departmental sources"]],
+ "animals":[["Kantians for animals","Christine Korsgaard has argued from Kantian premises that because we value things, we must value ourselves as ends, and this commits us to valuing all animals as ends.","Johnson and Cureton, ‘Kant’s Moral Philosophy’, SEP §11"],["Regan: animal rights","Tom Regan argued that animals who are ‘subjects-of-a-life’ have rights, so even painless killing wrongs them.","Added: not in the departmental sources"]],
+ "lies":[["Constant’s challenge","Kant’s essay on lying replied to Benjamin Constant, who held that we owe the truth only to those with a right to it.","Added: not in the departmental sources"]],
+ "meta":[["Moral progress","Anti-realists struggle to explain moral progress, such as the abolition of slavery. The same challenge applies if we come to think factory farming was a moral mistake.","See the Meta-ethics tour, Stop 10"]],
+ "overview":[["Lacewing’s method","The handouts follow Lacewing’s approach: for each issue, apply each theory, raise the strongest problem, and consider a response. That three-step pattern is also the shape of a good 25-mark paragraph.","Lacewing (2017), ch. 3"]]
+};
+var QS={
+ "start":["What is meant by applied ethics?","Explain why applying normative theories to practical issues is useful.","Explain how the three normative theories approach applied ethical issues.","Which normative theory gives the best guidance on practical issues?"],
+ "overview":["Name the four applied issues on the specification.","Explain one contrast between Kant and utilitarianism on applied issues.","Explain how Kantian ethics would approach stealing and telling lies.","Which theory deals best with the four applied issues?"],
+ "steal":["What is stealing?","Explain why, for Kant, stealing involves a contradiction in conception.","Explain how utilitarianism (act and rule) would respond to the issue of stealing.","Is stealing always wrong?"],
+ "sim":["What is simulated killing?","Explain why simulated killing might be a moral concern even though no one is harmed.","Explain how Aristotelian virtue ethics would respond to simulated killing.","Is it morally wrong to engage in simulated killing?"],
+ "animals":["What is speciesism?","Explain Kant’s view that we have only indirect duties concerning animals.","Explain how utilitarianism would respond to the issue of eating animals.","Is it morally wrong to eat animals?"],
+ "lies":["What is Kant’s view of lying to the would-be murderer?","Explain Mill’s view of lying.","Explain how Kantian deontology would respond to the issue of telling lies.","Is lying always morally wrong?"],
+ "meta":["What would an emotivist say ‘stealing is wrong’ means?","Explain how an error theorist would view the debate about eating animals.","Explain how meta-ethical theories might be applied to the issue of telling lies.","Can anti-realism make sense of moral debate about applied issues?"],
+ "beyond":["What is the gamer’s dilemma?","Explain Aquinas’s view of stealing in necessity (extension).","Explain one rights-based argument about eating animals (extension).","Do animals have rights?"]
+};
+var QUIZ=[
+ ["Why does act utilitarianism threaten trust in the case of stealing?","If theft were allowed whenever someone judged it maximised happiness, people would fear theft and stop trusting each other."],
+ ["What general rule might a rule utilitarian add to ‘do not steal’?","Where failing to act would lead to significant and immediate harm, act, even if it breaks another rule."],
+ ["Why can’t ‘steal what I want’ be universalised?","Universal stealing would destroy property, which stealing presupposes: a contradiction in conception."],
+ ["What does Aristotle say about stealing and the mean?","It is one of the acts that is never in the mean but always wrong."],
+ ["What does Garry Young conclude about the evidence on violent games?","It is unclear: some short-term effects in some people, weak or disputed long-term evidence, and publication bias."],
+ ["Why were butchers and doctors excluded from English juries, according to Kant?","They were thought hardened to suffering and death."],
+ ["What is Singer’s reply to the claim that humans have capacities animals lack?","Those capacities are irrelevant to sentience, the capacity to suffer, which they share."],
+ ["Why does Diamond reject the speciesism argument?","It ignores how practices such as not eating our dead constitute our concept of a human being."],
+ ["What is Kant’s ‘weapon of defence’ remark?","In the Lectures on Ethics: if silence cannot save me, a lie is a weapon of defence."],
+ ["What two readings of Aristotle on lying are there?","Lying has no mean (always wrong), or truth is a final end that may sometimes be outweighed."]
+];
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src">'+(x[2]==="h"?"From the slide glossary":"Course definition")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+
+</script>
+</body>
+</html>

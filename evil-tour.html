@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Problem of Evil Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#ece0f5; --ink:#5a2f78;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#ece0f5}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#d6efdf}
+.stretch h4{color:#245c3c}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#faf6fd}
+details.resp summary{cursor:pointer}
+.bspec{display:inline-block;margin-left:8px;font-size:.7rem;font-weight:600;letter-spacing:.08em;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;vertical-align:middle}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="#">← Metaphysics of God</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 2 · Spec 3.3.2</span>
+      <h1>The problem of evil</h1>
+      <p>If God is all-powerful, all-knowing and perfectly good, why is there evil? Take the tour: the logical and evidential problems, the free will theodicy, Plantinga’s free will defence, Hick’s soul-making theodicy and Midgley on human wickedness and free will.</p>
+    </div>
+    <svg viewBox="0 0 320 220" role="img" aria-label="Diagram: three overlapping circles labelled omnipotent, omniscient and supremely good, with a fourth circle labelled evil that seems not to fit.">
+      <rect width="320" height="220" rx="14" fill="#fff"/>
+      <g font-family="Nunito Sans,sans-serif" font-size="12" text-anchor="middle">
+        <circle cx="110" cy="88" r="50" fill="#ece0f5" fill-opacity=".8" stroke="#5a2f78" stroke-width="2"/>
+        <circle cx="170" cy="88" r="50" fill="#d9c7ea" fill-opacity=".7" stroke="#5a2f78" stroke-width="2"/>
+        <circle cx="140" cy="138" r="50" fill="#c6addf" fill-opacity=".6" stroke="#5a2f78" stroke-width="2"/>
+        <text x="92" y="74" fill="#5a2f78">all-powerful</text>
+        <text x="190" y="74" fill="#5a2f78">all-knowing</text>
+        <text x="140" y="168" fill="#5a2f78">all-good</text>
+        <circle cx="262" cy="110" r="34" fill="#fbe3d6" stroke="#8a3f1c" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x="262" y="114" fill="#8a3f1c" font-size="14">evil?</text>
+      </g>
+    </svg>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Built from the departmental handouts <i>The logical problem of evil and free will</i>, <i>The evidential problem of evil</i> and <i>Midgley on Evil and Free Will</i> (after Lacewing 2017), and Tooley, ‘The Problem of Evil’, <i>Stanford Encyclopedia of Philosophy</i>. Material marked ‘Beyond the spec’ is extension only. AQA 7172 · Metaphysics of God.</footer>
+</div>
+
+<!-- START -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>Can God’s attributes be reconciled with evil?</h2>
+  <p>The problem of evil is widely considered the most powerful argument against the existence of God. Every other argument in this module tries to <i>prove</i> God exists; this one argues from a fact almost no one denies – that there is evil in the world – to the conclusion that God, as traditionally conceived, does not exist, or at least that believing in God is unreasonable.</p>
+  <p>The problem arises only for a particular concept of God: the classical theist God who is <span class="term" data-t="Omnipotence">omnipotent</span>, <span class="term" data-t="Omniscience">omniscient</span> and <span class="term" data-t="Omnibenevolence">supremely good</span> (see the Concept of God tour). A limited god, or an indifferent one, faces no such problem.</p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>If God is supremely good, he has the desire to eliminate evil.</li>
+    <li>If God is omnipotent, he is able to eliminate evil.</li>
+    <li>If God is omniscient, he knows that evil exists and knows how to eliminate it.</li>
+    <li>Therefore, if God exists and is supremely good, omnipotent and omniscient, God will eliminate evil. <span class="note">(From 1–3.)</span></li>
+    <li>Therefore, if such a God exists, evil does not exist.</li>
+    <li>Evil exists. <span class="note">(Observation.)</span></li>
+    <li>Therefore, a supremely good, omnipotent and omniscient God does not exist.</li>
+  </ol>
+  <h3>Two types of evil</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">Moral evil</span><p>The morally wrong actions or motives of human beings: murder, cruelty, genocide. Hitler’s attempt to eradicate the Jews of Europe; ethnic cleansing.</p></div>
+    <div class="resp"><span class="tag">Natural evil</span><p>Suffering caused by natural events and processes: earthquakes, disease, the predation of animals on each other.</p></div>
+  </div>
+  <p>The two can overlap: famine may drive people to steal and kill; global warming may be a natural evil caused by human choices. But keep them apart in your answers, because some responses solve the problem of moral evil but not of natural evil.</p>
+  <h3>Two forms of the problem</h3>
+  <div class="pair">
+    <div class="resp against"><span class="tag">The logical problem</span><p>The mere existence of evil is <b>logically incompatible</b> with God. The argument is deductive: God exists, God is good, God is omnipotent, God is omniscient, evil exists – if any four are true, the fifth must be false.</p></div>
+    <div class="resp against"><span class="tag">The evidential problem</span><p>A weaker claim: the <b>amount, kinds and distribution</b> of evil are good evidence that God does not exist. The argument is inductive, and ‘evil’ becomes ‘unnecessary evil’.</p></div>
+  </div>
+  <div class="thesis"><b>What the spec requires.</b> The nature of moral and natural evil; the logical and evidential forms of the problem; the free will defence (including Plantinga); soul-making (including Hick). Midgley’s <i>Wickedness</i> (chs 1 and 5) is an AQA set text for this topic. <b>Other responses are beyond the spec.</b></div>
+  <h3>Choose where to go</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-hume.jpg" alt="Portrait of Hume wearing a red turban-style cap and brown coat" loading="lazy"><figcaption><b>David Hume</b>Allan Ramsay, 1766. Hume’s Philo restated ‘Epicurus’ old questions’ about evil · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>The big question</h4><p>Does evil prove that God does not exist – or make belief in God unreasonable?</p></div>
+  <div class="card"><h4>How to use this tour</h4><p>Stops 1–3 deal with the logical problem; Stops 4–6 with the evidential problem; Stops 7–8 with Midgley. Cards marked ‘Beyond the spec’ in the margin are extension.</p></div>
+  <div class="card"><h4>Exam lens</h4><p>Always ask two questions of a response: does it answer the <b>logical</b> or the <b>evidential</b> problem? And does it cover <b>moral</b> evil, <b>natural</b> evil, or both?</p></div>
+</aside></div>
+</template>
+
+<!-- LOGICAL -->
+<template id="s-logical">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · The logical problem</div>
+  <h2>The logical problem of evil</h2>
+  <p>The logical problem claims that the existence of an omnipotent, omniscient, supremely good God is <span class="term" data-t="Logical inconsistency">logically inconsistent</span> with the existence of evil: the two cannot both be true, just as a square circle cannot exist. The Stanford Encyclopedia notes that in the mid-20th century J. L. Mackie (‘Evil and Omnipotence’, 1955), H. J. McCloskey and H. D. Aiken defended this ‘incompatibility’ version.</p>
+  <p>The logical problem makes a very <b>strong</b> claim: not that God’s existence is unlikely, but that it is impossible. That is its power – if it succeeds, it is decisive. It is also its weakness: to defeat it, a theist need only show that God and evil are <i>possibly</i> compatible.</p>
+  <h3>Ways to respond</h3>
+  <ul class="list">
+    <li><b>Give up one of the claims.</b> Deny that evil really exists (what we call evil isn’t really evil), or deny that God is omnipotent (perhaps God cannot prevent evil). These remove the problem, but at a cost: few believers accept that suffering is unreal, and a limited God is not the God of classical theism.</li>
+    <li><b>Show the claims are consistent.</b> The more common response: find a reason why a good, omnipotent, omniscient God might allow evil. The strongest candidate is free will (Stops 2 and 3).</li>
+  </ul>
+  <h3>Theodicy and defence</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">Theodicy</span><p>An attempt to explain <b>why God actually allows evil</b> – to give the real reason. (The term means ‘justifying God’.)</p></div>
+    <div class="resp"><span class="tag">Defence</span><p>A weaker claim: an account of a <b>possible</b> reason why God might allow evil. If it is even possible, God and evil are logically consistent – which is all that is needed against the logical problem.</p></div>
+  </div>
+  <p>This distinction, which comes from Plantinga, is essential. A theodicy must be true, or at least plausible; a defence need only be possible.</p>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-leibniz.jpg" alt="Portrait of Leibniz in a long dark curled wig" loading="lazy"><figcaption><b>Gottfried Wilhelm Leibniz</b>Christoph Bernhard Francke, c. 1695. Leibniz coined the word ‘theodicy’ · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Logical problem of evil</dt><dd>Evil is logically incompatible with the existence of God.</dd><dt>Theodicy</dt><dd>An account of why God actually allows evil.</dd><dt>Defence</dt><dd>An account of a possible reason, showing God and evil are consistent.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- FREE WILL THEODICY -->
+<template id="s-freewill">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · The free will theodicy</div>
+  <h2>Evil as the price of free will</h2>
+  <p>Perhaps the most famous theodicy answers ‘why does God allow evil?’ with <b>free will</b>.</p>
+  <ul class="list">
+    <li>Free will is a great good. Without it our lives would not be <b>morally significant</b>: we could not choose good or evil.</li>
+    <li>Without it we could not have a meaningful, personal <b>relationship with God</b>, because the relationship would not be freely entered into.</li>
+    <li>A world with moral significance is better than a world without it. So a supremely good God creates a world with free will.</li>
+    <li>Being morally imperfect, we sometimes use free will to bring about evil. Evil is the price of free will – a price worth paying.</li>
+  </ul>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>Free will is a great good: it makes our lives morally significant and allows a free relationship with God.</li>
+    <li>A world with free will is better than a world without it.</li>
+    <li>A supremely good God would therefore create a world with free will.</li>
+    <li>Free creatures can, and sometimes will, choose evil.</li>
+    <li>So a world with free will is likely to contain moral evil.</li>
+    <li>Therefore the existence of (moral) evil is consistent with the existence of God.</li>
+  </ol>
+  <h3>Why not free will without evil?</h3>
+  <div class="resp against"><span class="tag">Objection (Mackie)</span><p>Why didn’t God make us so that we always freely choose the good? There is no contradiction in a person freely choosing good on every occasion, so an omnipotent God could create a world of free beings who never do wrong.</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>This is not logically possible. To be free is for one’s choices not to be determined. If God <i>made</i> us choose the good, our choices would be determined, and we would not be free. An omnipotent God cannot do the logically impossible (see Aquinas on omnipotence in the Concept of God tour).</p></div>
+  <h3>Limits of the theodicy</h3>
+  <div class="resp against"><span class="tag">Natural evil</span><p>Free will explains moral evil. But earthquakes and cancer do not seem to result from anyone’s choices. See Stop 3.</p></div>
+  <div class="resp against"><span class="tag">Is free will real?</span><p>The theodicy works only if we really have free will of the right kind. If determinism is true, it fails. See Midgley at Stop 8.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Free will</dt><dd>The ability to choose between alternatives without being determined.</dd><dt>Morally significant</dt><dd>A life or action in which right and wrong are at stake.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- PLANTINGA -->
+<template id="s-plantinga">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · Alvin Plantinga (b. 1932)</div>
+  <h2>Plantinga’s free will defence</h2>
+  <p>In <i>God, Freedom and Evil</i> (1974), Alvin Plantinga argues that to solve the logical problem we do not need to know the <i>true</i> reason God allows evil. We only need to show that God and evil are <b>consistent</b> – that both can be true together. That is a defence, not a theodicy.</p>
+  <h3>Definitions</h3>
+  <dl class="gloss" style="display:grid">
+    <div><dt>Free</dt><dd>Able to do or refrain from an action; not causally determined to act one way or another.</dd></div>
+    <div><dt>Morally significant action</dt><dd>One it is either right or wrong to perform (unlike choosing a banana for breakfast).</dd></div>
+    <div><dt>Significantly free</dt><dd>Free to do or refrain from morally significant actions.</dd></div>
+    <div><dt>Moral evil</dt><dd>Evil resulting from the actions of significantly free creatures.</dd></div>
+  </dl>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>A world containing significantly free creatures is better than a world containing no free creatures. <span class="note">(Value judgement.)</span></li>
+    <li>God can create significantly free creatures.</li>
+    <li>To be significantly free is to be capable of both moral good and moral evil. <span class="note">(Definition.)</span></li>
+    <li>If significantly free creatures were caused to do only what is right, they would not be free. <span class="note">(Definition of freedom.)</span></li>
+    <li>Therefore God cannot cause significantly free creatures to do only what is right.</li>
+    <li>(Therefore God cannot create a world containing significantly free creatures but no evil.)</li>
+    <li>Therefore God can only eliminate the moral evil done by significantly free creatures by eliminating the greater good of significantly free creatures.</li>
+  </ol>
+  <p>If (7) is asserted as true, this is a theodicy. The free will <b>defence</b> claims only that (7) is <b>possible</b>. If it could be true, and a good God would not eliminate the greater good of free will to eliminate evil, then evil is logically consistent with God – and the logical problem fails.</p>
+  <h3>Natural evil</h3>
+  <p>Two responses:</p>
+  <div class="resp for"><span class="tag">Fallen angels</span><p>Plantinga suggests it is possible that natural evil results from the free choices of Satan and other fallen angels – created free by God, but rebelling. Natural evil is then a form of moral evil. He does not claim this is true, only possible – which is enough for a defence.</p></div>
+  <div class="resp for"><span class="tag">Virtue needs suffering</span><p>Some evil is necessary for greater goods. Without danger there is no courage; without illness and poverty, no benevolence; without suffering, no sympathy. A universe with both suffering and virtue is better than one with neither. Similarly, we only develop virtues by facing temptation and weakness: if we felt no fear, ‘acting well’ in danger would take no more effort than eating when hungry.</p></div>
+  <h3>Evaluation</h3>
+  <p>Most philosophers, including many atheists, accept that Plantinga’s defence defeats the <i>logical</i> problem: since the logical problem claims impossibility, a merely possible scenario is enough to refute it. The Satan story strikes many as implausible – but implausibility does not matter against a claim of logical impossibility. It matters a great deal against the evidential problem (Stop 5).</p>
+</div>
+<aside>
+  <figure class="card portrait wide"><img src="img/phil-plantinga.jpg" alt="Photograph of Plantinga smiling, with glasses and a grey beard" loading="lazy"><figcaption><b>Alvin Plantinga</b>Photograph · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Free will defence</dt><dd>It is possible that God could not eliminate moral evil without eliminating free will.</dd><dt>Significantly free</dt><dd>Free to perform or refrain from morally significant actions.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- EVIDENTIAL -->
+<template id="s-evidential">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · The evidential problem</div>
+  <h2>The evidential problem of evil</h2>
+  <p>The evidential problem grants that evil does not make God’s existence <i>impossible</i>. But possible is not the same as reasonable to believe. Planets made of green cheese are logically possible; it is not reasonable to think they exist. The evidential problem argues that, given our experience of evil, belief in an omnipotent, omniscient, supremely good God is unreasonable.</p>
+  <h3>Amount, kind and distribution</h3>
+  <p>The problem bites hardest with concrete examples:</p>
+  <ul class="list">
+    <li>Wars and genocide kill millions; perhaps the worst example is the Holocaust.</li>
+    <li>People who have already suffered terribly suffer more, without reprieve; innocent children die agonising deaths.</li>
+    <li>Natural disasters such as the Indian Ocean tsunami of December 2004 kill hundreds of thousands.</li>
+    <li>Who suffers, and how much, is deeply unfair.</li>
+    <li>Animals suffer too: eaten alive, or afflicted with chronic, debilitating illness.</li>
+  </ul>
+  <p>The Stanford Encyclopedia reports William Rowe’s famous example: a fawn trapped in a forest fire, badly burned, dying in agony over several days. No one learns from its suffering; no free choice is involved. What greater good could it serve?</p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>If God exists, there is no unnecessary (gratuitous) evil – a good God would prevent any evil not needed for a greater good. <span class="note">(From God’s attributes.)</span></li>
+    <li>Even granting that some evil is needed for free will and virtue, a better world seems possible – with free will, virtue and some evil, but less, and less terrible, evil than ours. <span class="note">(Observation of the amount, kind and distribution of evil.)</span></li>
+    <li>So it is very probable that there is unnecessary evil. <span class="note">(From 2.)</span></li>
+    <li>Therefore it is very probable that God does not exist. <span class="note">(From 1, 3.)</span></li>
+  </ol>
+  <p>Note that the argument accepts the free will and virtue responses in principle. It asks whether <i>all</i> this evil is really necessary for them.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Evidential problem of evil</dt><dd>The amount, kind and distribution of evil make God’s existence improbable.</dd><dt>Gratuitous evil</dt><dd>Evil not needed for any greater good.</dd><dt>Inductive argument</dt><dd>Premises make the conclusion probable, not certain.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- FWD EVIDENTIAL -->
+<template id="s-fwdev">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 5 · Free will and the evidential problem</div>
+  <h2>Does free will answer the evidential problem?</h2>
+  <h3>Plantinga’s reply</h3>
+  <p>Plantinga applies his defence to the evidential problem too. It is possible that the moral evil that occurs could only be eliminated by eliminating free will, and that natural evil results from fallen angels. It is even possible that this is the best possible world – that any world with less evil would have no free will.</p>
+  <p>The evidential problem replies that this is possible, but very unlikely. Plantinga asks: why think so? How could we assess the probability that no better balance of good and evil is possible? The amount of evil on its own, he argues, neither supports nor opposes that claim – so it does not make God’s existence less likely.</p>
+  <h3>Objections</h3>
+  <div class="resp against"><span class="tag">Kinds and distribution, not just amount</span><p>Plantinga considers only the total amount of evil, very abstractly. The evidential problem also appeals to the kinds and distribution of evil, which are harder to dismiss.</p></div>
+  <div class="resp against"><span class="tag">Selective interference</span><p>Free will is a great good, but that does not mean we should never interfere with it. If you see someone about to commit murder, it is no defence to praise the murderer’s free will. Selectively preventing some evils is compatible with free will existing – so God would interfere.</p></div>
+  <div class="resp for"><span class="tag">Reply</span><p>If God always interfered to stop us causing evil, that would be equivalent to causing us to do good – we would not be free at all.</p></div>
+  <div class="resp against"><span class="tag">Refined objection</span><p>God could interfere only when we are about to do <i>terrible</i> evil, or give us free will without the power to do terrible evil. Not every free choice is good; wouldn’t a limited free will be better?</p></div>
+  <div class="resp for"><span class="tag">Hick (and Swinburne): no ‘toy world’</span><p>The value of free will depends on what we can do with it. A world where we could not harm each other – because we lacked the power or God always intervened – would be one where we had very little responsibility for each other’s well-being. The Stanford Encyclopedia reports Swinburne’s version: otherwise we would live in a ‘toy world’.</p></div>
+  <div class="resp against"><span class="tag">Counter (Stanford Encyclopedia)</span><p>Free will could still range over actions of great moral value without the power to inflict great harm – e.g. the freedom to benefit others enormously, or not.</p></div>
+  <h3>Natural evil, again</h3>
+  <div class="resp against"><span class="tag">The Satan story fails here</span><p>Against the evidential problem, appealing to Satan requires us to find it plausible, not merely possible. And is Satan’s free will so valuable that it outweighs all the natural evil he causes? Surely a world without Satan would be better – and God could have created it.</p></div>
+  <h3>Evaluation</h3>
+  <p>Free will may justify much moral evil, and Hick’s ‘responsibility’ point is strong. But against the evidential problem it struggles with the worst moral evils and with almost all natural evil. A response that covers natural evil needs a different good – which is what Hick provides.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Best possible world</dt><dd>A world than which no better is possible.</dd><dt>‘Toy world’</dt><dd>A world in which free choices make little moral difference.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- HICK -->
+<template id="s-hick">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 6 · John Hick (1922–2012)</div>
+  <h2>Hick’s soul-making theodicy</h2>
+  <p>In <i>Evil and the God of Love</i> (1966), Hick argues that evil is necessary for us to become good people – to grow morally and spiritually. Hick traced this approach to the early Christian writer Irenaeus.</p>
+  <h3>Unfinished creatures</h3>
+  <p>God has not finished creating us. The first stage of creation is evolutionary history, which produced creatures capable of conscious fellowship with God. The second stage is individual and harder: bringing each person freely towards personal, ethical and spiritual virtue and a relationship with God. This is individual, not collective – it does not mean the world as a whole is getting morally better.</p>
+  <h3>Why evil is necessary</h3>
+  <p>Virtue is impossible unless there is evil to respond to. We cannot be courageous without danger, benevolent without others’ needs, or forgiving unless we are wronged. Through struggling with natural disasters, illness, our own motives and other people’s actions, we mature. So <b>both natural and moral evil are necessary</b>. A world designed to maximise pleasure and minimise pain might suit perfected creatures, but it would be no good for helping imperfect creatures grow. The world is a place of ‘soul-making’.</p>
+  <blockquote>Goodness attained by meeting and mastering temptation is ‘good in a richer and more valuable sense than would be one created <i>ab initio</i> in a state either of innocence or of virtue’.<cite>Hick, <i>Evil and the God of Love</i>, as quoted in the Stanford Encyclopedia</cite></blockquote>
+  <p>And some attitudes God could not simply create: it is impossible to create free beings guaranteed to respond to God in authentic faith and love. Building that into human nature would be a form of manipulation.</p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>God’s purpose is for us to develop freely into morally and spiritually mature beings in relationship with God. <span class="note">(Hick’s account of creation.)</span></li>
+    <li>Virtue developed through struggle and overcoming temptation is more valuable than virtue created ready-made.</li>
+    <li>Such development is impossible without evil – danger, need, wrongdoing, suffering – to respond to.</li>
+    <li>So a good God would create a world containing both natural and moral evil.</li>
+    <li>Therefore the existence of evil is compatible with the existence of God.</li>
+  </ol>
+  <h3>Pain and suffering</h3>
+  <p>Hick distinguishes pain from suffering. Pain teaches us how to preserve ourselves; life without it would not be life as we know it. We often endure pain without suffering, as in adventure or overcoming obstacles. Much suffering – self-pity, fear of weakness and mortality – comes from our response to pain, and can be understood as part of our going wrong morally.</p>
+  <h3>Challenges from the evidential problem – and Hick’s replies</h3>
+  <div class="resp against"><span class="tag">Animal suffering</span><p>Animals do not grow spiritually. Why must they suffer?</p></div>
+  <div class="resp for"><span class="tag">Hick</span><p>Animals live in the present, without fear of death or future pain. And for us to be free to choose a relationship with God, there must be <span class="term" data-t="Epistemic distance">epistemic distance</span>: the world must be understandable as if God did not exist. Our place within the animal world, with its own natural history, provides that.</p></div>
+  <div class="resp against"><span class="tag">Terrible evils</span><p>Are evils like the Holocaust really necessary for growth?</p></div>
+  <div class="resp for"><span class="tag">Hick</span><p>‘Terrible’ is relative. Remove the worst evils and the next-worst will seem terrible; keep removing them and we reach a world with little evil but also little freedom, responsibility or virtue.</p></div>
+  <div class="resp against"><span class="tag">Pointless evil</span><p>Much evil breaks people rather than building them: abused children who never recover, those who suffer at the end of life, those who die young. Meanwhile some who need to grow suffer little.</p></div>
+  <div class="resp for"><span class="tag">Hick</span><p>Such evils remain a mystery. But if we knew every instance of suffering was for the best, we would lack deep sympathy, which responds to unjust and excessive suffering, and we would need neither faith nor hope. So for souls to grow, evil must <i>appear</i> unfair.</p></div>
+  <div class="resp against"><span class="tag">Souls not perfected</span><p>Many people die morally and spiritually undeveloped. The theodicy fails unless souls are perfected.</p></div>
+  <div class="resp for"><span class="tag">Hick</span><p>He accepts this: the theodicy requires life after death – and universal salvation. If there are wasted lives or unredeemed suffering, then God is either not supremely good or not omnipotent.</p></div>
+  <h3>Evaluation</h3>
+  <p>Hick’s theodicy is the strongest response to the evidential problem in the spec, because it covers natural as well as moral evil and engages directly with amount and distribution. Its costs are high: it requires an afterlife and universal salvation, and it asks us to accept that the Holocaust is justified by the growth it makes possible – which many critics find morally unacceptable.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Soul-making</dt><dd>Developing moral and spiritual maturity through responding to evil.</dd><dt>Epistemic distance</dt><dd>The world can be understood without God, leaving us free to choose faith.</dd><dt>Universal salvation</dt><dd>The belief that all people will ultimately be saved.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- MIDGLEY 1 -->
+<template id="s-midgley">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 7 · Mary Midgley (1919–2018): human evil</div>
+  <h2>Midgley: understanding human wickedness</h2>
+  <p>The free will theodicy says moral evil is the price of free will. Before accepting that, Midgley’s <i>Wickedness</i> (1984) asks us to think harder about two things: what human evil is, and what free will is.</p>
+  <h3>Two explanations that are too simple</h3>
+  <div class="pair">
+    <div class="resp against"><span class="tag">Just free will</span><p>People do evil because they choose to. But would evil develop unless we were prone to spite, resentment, envy and cruelty?</p></div>
+    <div class="resp against"><span class="tag">Just society</span><p>Evil comes from upbringing, bad examples or tyranny. But then how do these causes start, and how do they spread?</p></div>
+  </div>
+  <p>Neither takes proper account of human nature and the complex interaction between individual choice and society.</p>
+  <h3>Three points about how evil works</h3>
+  <ol class="list">
+    <li><b>Evil is not aggression.</b> Some aggression is good (friendly competition, defending what we need), and much evil comes from fear, greed or laziness.</li>
+    <li><b>Evildoers need not be thoroughly evil.</b> People often do evil with intentions they understand as good, and act well elsewhere. Even movements like Nazism were mixed in motivation, aiming at some (badly misconceived) good.</li>
+    <li><b>Evil is a failure to live as we are capable.</b> It arises from natural capacities – for power, aggression, territory, competition – that can give rise to good or evil. Each aims at something, but none on its own aims at a person’s overall good.</li>
+  </ol>
+  <h3>Evil as absence</h3>
+  <p>Our capacities for good logically entail capacities for evil: a capacity for courage is a capacity for cowardice; a capacity to help is a capacity to harm. Evil is the <b>absence of good</b>. It can be a powerful motivator – but so are cold and dark, which are still absences of heat and light. Midgley illustrates this with Goethe’s devil Mephistopheles, who introduces himself as the spirit that endlessly denies (<i>Faust</i>).</p>
+  <h3>Responsibility and natural evil</h3>
+  <p>Having a nature that inclines us to evil (and to good) does not remove free will or responsibility. Our power-related motives are natural but not overwhelming. Acting on a motive is not acting involuntarily: there is a real moral difference between being hurt by accident and being hurt by deliberate cruelty.</p>
+  <div class="thesis"><b>Link to the problem of evil.</b> Between natural and moral evil lies human nature. Our nature is not chosen – it is natural – yet its impulses cause great suffering. Moral evil has a ‘natural history’. This blurs the line the free will theodicy relies on: if God made our nature, is God responsible for its tendencies?</div>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Privation</dt><dd>Evil as an absence or lack of good.</dd><dt>Human nature</dt><dd>The natural capacities and motives we share as a species.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- MIDGLEY 2 -->
+<template id="s-midgley2">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 8 · Midgley: free will and determinism</div>
+  <h2>Is free will compatible with determinism?</h2>
+  <p>The free will theodicy works only if we really have free will. The most important argument against free will claims it is incompatible with determinism.</p>
+  <h3>What is determinism?</h3>
+  <p><span class="term" data-t="Determinism">Determinism</span> is a view about causality: everything that happens has a cause (universal causation), and – more controversially – given a particular cause in a particular situation, only one outcome is possible (causal necessity). If a pipe bursts and the floor gets wet, we expect the same in any situation exactly like it; if the floor stays dry, something must be different (perhaps the water is frozen).</p>
+  <p>Determinism is not proven: it is neither analytic nor established by examining every event. It is best understood as a commitment or assumption we make in doing science.</p>
+  <h3>The argument against free will</h3>
+  <ol class="list">
+    <li>Determinism is true.</li>
+    <li>So our choices have causes – in human nature, our environment, upbringing, or previous brain states.</li>
+    <li>So each choice has a particular set of causes in a particular situation.</li>
+    <li>So, given those causes, no choice is possible other than the one we make.</li>
+    <li>If we could not make any other choice, we do not have free will.</li>
+    <li>Therefore we do not have free will – and the free will theodicy fails.</li>
+  </ol>
+  <h3>Midgley: determinism is not fatalism</h3>
+  <p>Midgley argues this ‘incompatibilism’ misunderstands both determinism and free will. Determinism says events are intelligibly connected and predictable in principle; it does not say events are <i>forced</i> to happen. Confusing the two leads to <span class="term" data-t="Fatalism">fatalism</span> – the belief that human action is useless, that whatever we do the outcome will be the same – and to shifting responsibility onto ‘the laws of nature’.</p>
+  <div class="resp for"><span class="tag">The farmer by the Nile</span><p>A farmer cannot change the Nile’s regular flooding, but by understanding it he can plan when to plant and grow more crops. The regularities of nature <i>enable</i> human action. That is the opposite of fatalism.</p></div>
+  <p>Midgley notes that the same confusion appears in the theological version: if God knows the future, God created us knowing we would do evil – so God is responsible. (Compare omniscience and free will in the Concept of God tour.)</p>
+  <h3>Compatibilism: what free will is</h3>
+  <p>The opposite of free will is not causation but <b>slavery</b> – to external forces or internal constraints. Free will is not omnipotence, nor randomness. We expect people to act in ways that grow out of their character; acting with no continuity with one’s past would be a kind of disorder. Free will is <b>rational</b>: understanding and overcoming difficulties, external or psychological. So being predictable is compatible with free will, if the prediction rests on someone’s reasons or general truths about human nature.</p>
+  <h3>Objection: predicting choices from the brain</h3>
+  <div class="resp against"><span class="tag">Objection</span><p>If determinism is true, brain states can be predicted from neurophysiological laws, and so can the thoughts that depend on them – not from reasoning, but from physics. That is not compatible with free will.</p></div>
+  <div class="resp for"><span class="tag">Midgley: Pythagoras</span><p>Even if we could predict Pythagoras’ next brain state, we could not read his theorem off it without a complete account of how brain states relate to thoughts – because accounts of brain states do not mention triangles at all. To predict his thought, we would have to start from thought and work the problem out ourselves, becoming his colleagues rather than mere predictors.</p>
+  <blockquote>‘accounts of brain-states simply do not mention matters like triangles and hypotenuses at all.’<cite>Midgley, <i>Wickedness</i>, as quoted in the departmental handout</cite></blockquote></div>
+  <p>Two lessons: thinking is not an illusion carried along by the brain; and reasoning, where free will shows itself, can only be understood by joining in with it, not by predicting it. The creativity of Pythagoras is shared, in lesser degree, in every decision we make.</p>
+  <h3>Evaluation</h3>
+  <p>Midgley gives the free will theodicy a firmer foundation: free will need not mean uncaused choice. But this creates a tension with Plantinga, who defines freedom as not being causally determined. If compatibilism is true, Mackie’s objection returns: could God not have given us natures that reliably (and freely, in the compatibilist sense) choose good?</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Determinism</dt><dd>Every event has a cause, and given that cause only one outcome is possible.</dd><dt>Fatalism</dt><dd>The belief that human action makes no difference to outcomes.</dd><dt>Compatibilism</dt><dd>Free will is compatible with determinism.</dd><dt>Incompatibilism</dt><dd>Free will and determinism cannot both be true.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- OTHER -->
+<template id="s-other">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 9 · Other responses <span class="bspec">Beyond the spec</span></div>
+  <h2>Augustine, sceptical theism, natural laws and protest</h2>
+  <h3>Augustine: evil as privation and the Fall</h3>
+  <p>Augustine (354–430) argued that evil is not a substance or force but a <span class="term" data-t="Privation">privation</span> – a lack of the good a thing should have, as blindness is a lack of sight (compare Midgley, and Plato and Augustine on goodness in the Concept of God tour). God created everything good; evil entered through the free choices of angels and humans – the Fall – and natural evil is a consequence of that. Hick contrasted this ‘Augustinian’ type of theodicy with his own ‘Irenaean’ type.</p>
+  <div class="resp against"><span class="tag">Objections</span><p>If creation was perfect, how could perfect beings choose evil? And natural evil, such as disease and predation, existed long before humans, which seems to rule out the Fall as its cause.</p></div>
+  <h3>Sceptical theism</h3>
+  <p>The Stanford Encyclopedia reports that the most popular attempt to refute the evidential argument appeals to human cognitive limitations. From the fact that we cannot see a reason why God would allow the fawn’s suffering, it does not follow that there is no reason. An infinite mind may know goods we cannot grasp, as a child cannot understand why a parent allows a painful injection.</p>
+  <div class="resp against"><span class="tag">Objection</span><p>If we cannot judge God’s reasons for allowing evil, can we judge God’s reasons for anything – including whether God is good? Sceptical theism threatens much of what believers want to say about God.</p></div>
+  <h3>The need for natural laws</h3>
+  <p>Swinburne argues that a world governed by regular natural laws is necessary for us to make responsible choices: we can only act knowingly if we can predict what our actions will do. But regular laws that let fire warm us also let it burn us. Natural evil is a by-product of a law-governed world.</p>
+  <h3>Draper’s argument</h3>
+  <p>Paul Draper, inspired by Hume, compares theism with a ‘hypothesis of indifference’: neither the nature nor the condition of sentient beings results from the actions of benevolent or malevolent non-human persons. He argues the observed pattern of pleasure and pain is much more probable on indifference than on theism (Stanford Encyclopedia).</p>
+  <h3>Protest</h3>
+  <p>In Dostoevsky’s <i>The Brothers Karamazov</i>, Ivan refuses to accept any future harmony bought at the price of the suffering of even one innocent child – he ‘returns his ticket’. This is not an argument that God does not exist, but a moral protest against theodicy itself.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Privation</dt><dd>Evil as the absence of a good that should be present.</dd><dt>Sceptical theism</dt><dd>Our inability to see God’s reasons does not show there are none.</dd><dt>Augustinian vs Irenaean</dt><dd>Theodicies based on the Fall vs on growth towards perfection.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- REVISE -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>Does evil show that God does not exist?</h2>
+  <h3>Overall evaluation</h3>
+  <p>The logical problem makes too strong a claim. Because it asserts impossibility, Plantinga’s free will defence defeats it simply by describing a possible world in which God allows evil for the sake of free will – and even natural evil can be covered by a possible story about fallen angels or the need for suffering to build virtue. The evidential problem is much harder. Free will justifies a great deal of moral evil, especially with Hick’s point that freedom without real consequences would be a ‘toy world’, but it struggles with the worst evils and with natural evil, where the Satan story is implausible. Hick’s soul-making theodicy is the most complete response, covering both kinds of evil and confronting distribution head-on, but it depends on an afterlife and universal salvation and seems to justify horrors by their spiritual benefits. Midgley strengthens the free will response by showing that freedom is compatible with our having a nature, while making clear that human nature itself blurs moral and natural evil. A sustained judgement: <b>the logical problem fails, but the evidential problem remains a serious challenge: the theist can show that God’s allowing evil is possible and partly intelligible, but not that the actual amount and distribution of evil is what we should expect if God exists.</b></p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>The problem:</b> a good God would want, an omnipotent God could, and an omniscient God would know how to eliminate evil – yet evil exists.</li>
+    <li><b>Moral vs natural evil.</b> <b>Logical</b> (incompatible, deductive) vs <b>evidential</b> (improbable, inductive).</li>
+    <li><b>Theodicy</b> (actual reason) vs <b>defence</b> (possible reason).</li>
+    <li><b>Free will theodicy:</b> free will is a great good; evil is its price; God cannot make us freely choose only good.</li>
+    <li><b>Plantinga:</b> it is possible God cannot eliminate moral evil without eliminating free will; natural evil possibly from fallen angels. Defeats the logical problem.</li>
+    <li><b>Evidential:</b> amount, kind, distribution; Rowe’s fawn; would a limited free will be better? Hick: no ‘toy world’.</li>
+    <li><b>Hick:</b> soul-making; virtue requires evil; epistemic distance; requires afterlife and universal salvation.</li>
+    <li><b>Midgley:</b> evil as failure and absence; human nature links moral and natural evil; determinism is not fatalism; compatibilism; Pythagoras.</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Can God’s existence be reconciled with evil?</b><br>1. Thesis; logical vs evidential; moral vs natural.<br>2. Logical → Plantinga’s defence → judge (succeeds).<br>3. Evidential → free will (selective interference, toy world) → judge.<br>4. Hick’s soul-making → pointless evil, afterlife → judge.<br>5. Conclusion: possible, but is it probable?</p></div>
+</aside></div>
+</template>
+
+<!-- GLOSSARY -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>For 3-mark questions, learn these definitions precisely – one accurate sentence is better than a vague paragraph.</p></div></aside></div>
+</template>
+
+<script>
+var GLOSS=[
+ ["Omnipotence","The power to do anything logically possible.","t"],
+ ["Omniscience","Knowing everything it is possible to know.","t"],
+ ["Omnibenevolence","Being supremely good.","t"],
+ ["Moral evil","The morally wrong actions or motives of human beings (or other free agents).","t"],
+ ["Natural evil","Suffering caused by natural events and processes, such as earthquakes and disease.","t"],
+ ["Logical problem of evil","The claim that the existence of evil is logically incompatible with the existence of God.","t"],
+ ["Evidential problem of evil","The claim that the amount, kind and distribution of evil make God’s existence improbable.","t"],
+ ["Logical inconsistency","Claims that cannot all be true together.","t"],
+ ["Gratuitous evil","Evil that serves no greater good.","t"],
+ ["Theodicy","An attempt to explain why God actually allows evil.","t"],
+ ["Defence","An account of a possible reason for God allowing evil, showing that God and evil are consistent.","t"],
+ ["Free will","The ability to choose between alternatives; for Plantinga, not being causally determined.","t"],
+ ["Significantly free","Free to do or refrain from morally significant actions (Plantinga).","t"],
+ ["Soul-making","Hick: developing moral and spiritual maturity through responding to evil.","t"],
+ ["Epistemic distance","Hick: the world can be understood as if God did not exist, leaving us free to choose faith.","t"],
+ ["Universal salvation","The belief that all people will ultimately be saved.","t"],
+ ["Privation","Evil understood as an absence or lack of good.","t"],
+ ["Determinism","Every event has a cause, and given that cause, only one outcome is possible.","t"],
+ ["Fatalism","The belief that human action is useless – whatever one does, the outcome will be the same.","t"],
+ ["Compatibilism","The view that free will is compatible with determinism.","t"],
+ ["Incompatibilism","The view that free will and determinism cannot both be true.","t"],
+ ["Sceptical theism","The view that our inability to see God’s reasons for allowing evil does not show there are none.","t"]
+];
+var STOPS=[["start","Start here"],["logical","Logical problem"],["freewill","Free will theodicy"],["plantinga","Plantinga"],["evidential","Evidential problem"],["fwdev","Free will & evidence"],["hick","Hick"],["midgley","Midgley: evil"],["midgley2","Midgley: free will"],["other","Other responses"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["logical","Stop 1","The logical problem","Is evil incompatible with God?"],
+ ["freewill","Stop 2","The free will theodicy","Evil as the price of free will."],
+ ["plantinga","Stop 3","Plantinga’s defence","Possible is enough."],
+ ["evidential","Stop 4","The evidential problem","Amount, kind and distribution."],
+ ["fwdev","Stop 5","Free will and the evidence","Selective interference and the ‘toy world’."],
+ ["hick","Stop 6","Hick’s soul-making","Evil as necessary for growth."],
+ ["midgley","Stop 7","Midgley on human evil","Wickedness as failure and absence."],
+ ["midgley2","Stop 8","Midgley on free will","Determinism is not fatalism."],
+ ["other","Stop 9 · Beyond the spec","Other responses","Augustine, sceptical theism, natural laws, protest."]
+];
+var STRETCH={
+ "start":[
+  ["Epicurus’ old questions","In Hume’s <i>Dialogues</i> (Part X), Philo puts the problem in its classic form: is God willing to prevent evil but not able? Then he is impotent. Able but not willing? Then he is malevolent. Both able and willing? Then whence comes evil? Hume attributes the questions to Epicurus.","Paraphrased; Hume, <i>Dialogues Concerning Natural Religion</i>, Part X"],
+  ["Abstract and concrete","The Stanford Encyclopedia notes that early formulations were very abstract (‘evil exists’); once the argument becomes probabilistic, details of concrete cases can be evidentially crucial.","<i>Stanford Encyclopedia</i>, ‘The Problem of Evil’, §1.3"],
+  ["The Book of Job","The problem is ancient. In the Book of Job, a righteous man loses everything; his friends insist he must have sinned. God’s eventual answer from the whirlwind stresses the limits of human understanding – an early form of sceptical theism.","Paraphrased; Book of Job"]],
+ "logical":[
+  ["Leibniz coins ‘theodicy’","Leibniz’s <i>Theodicy</i> (1710) gave the word its meaning, from the Greek for ‘God’ and ‘justice’. He argued this is the best of all possible worlds – a view Voltaire satirised in <i>Candide</i>.","Paraphrased; Leibniz, <i>Théodicée</i> (1710); Voltaire, <i>Candide</i> (1759)"],
+  ["No best possible world?","Some argue there is no best of all possible worlds: for every world there is a better one. Then the fact that our world could be better shows nothing about God. The Stanford Encyclopedia reports strong objections to this response.","<i>Stanford Encyclopedia</i>, §5.2"]],
+ "freewill":[
+  ["Mackie’s challenge","J. L. Mackie argued that if there is no contradiction in someone freely choosing good on one occasion, there is none in their freely choosing good on every occasion – so God could have made free beings who always do right.","Paraphrased; Mackie, ‘Evil and Omnipotence’, <i>Mind</i> (1955)"],
+  ["Link to omniscience","If God foreknows our evil choices, does God bear responsibility for creating us? See ‘Omniscience and freedom’ in the Concept of God tour.","Cross-link within the AQA course"]],
+ "plantinga":[
+  ["Transworld depravity","Plantinga’s full defence uses possible-worlds logic. He argues it is possible that every creaturely essence suffers from ‘transworld depravity’: in any world God could create where that person is significantly free, they would go wrong at least once.","Paraphrased; Plantinga, <i>The Nature of Necessity</i> (1974)"],
+  ["Mackie’s concession","Many commentators read Mackie’s later work as conceding that the logical problem, as he first stated it, does not succeed – though he still thought evil counted heavily against theism.","Paraphrased; Mackie, <i>The Miracle of Theism</i> (1982)"]],
+ "evidential":[
+  ["Rowe’s fawn and Sue","Rowe’s two cases are a fawn dying slowly in a forest fire (E1) and a young girl raped, beaten and murdered (E2). He argues that no good we know of would justify God in permitting either.","<i>Stanford Encyclopedia</i>, §3.2, citing Rowe 1991"],
+  ["Horrendous evils","Marilyn McCord Adams focused on ‘horrendous evils’ – evils so terrible they seem to destroy the meaning of a person’s life – and argued only God’s intimate goodness, not general theodicies, could defeat them.","Paraphrased; Adams, <i>Horrendous Evils and the Goodness of God</i> (1999)"]],
+ "fwdev":[
+  ["Swinburne’s ‘toy world’","The Stanford Encyclopedia sets out Swinburne’s argument that the value of free will depends on the range of options open to us; it also reports three objections to it.","<i>Stanford Encyclopedia</i>, §7.3"],
+  ["Divine hiddenness","J. L. Schellenberg argues that a loving God would make his existence evident to anyone open to a relationship with him. Hick’s epistemic distance is one reply.","Paraphrased; Schellenberg, <i>Divine Hiddenness and Human Reason</i> (1993)"]],
+ "hick":[
+  ["Irenaeus","Irenaeus of Lyon (2nd century) distinguished the ‘image’ of God in which humans are created from the ‘likeness’ of God towards which they must grow. Hick built his theodicy on this.","Paraphrased; Hick, <i>Evil and the God of Love</i>"],
+  ["Stump on suffering","The Stanford Encyclopedia notes Eleonore Stump’s suggestion that unalleviated suffering at the end of life may be ordained for the person’s spiritual health – and reports objections to it.","<i>Stanford Encyclopedia</i>, §7.1"],
+  ["D. Z. Phillips’ protest","D. Z. Phillips argued that theodicies like Hick’s treat suffering as a means to an end, which is morally corrupting: to say the Holocaust served soul-making is obscene.","Paraphrased; Phillips, <i>The Problem of Evil and the Problem of God</i> (2004)"]],
+ "midgley":[
+  ["Arendt and the banality of evil","Hannah Arendt, reporting on the trial of Adolf Eichmann (1961), described the ‘banality of evil’: great evil done by ordinary, thoughtless people. Midgley’s view that evildoers need not be monsters is in a similar spirit.","Paraphrased; Arendt, <i>Eichmann in Jerusalem</i> (1963)"],
+  ["Midgley and ethology","Midgley drew heavily on animal behaviour studies in <i>Beast and Man</i> (1978), arguing that understanding human nature requires seeing us as animals – a theme that runs through <i>Wickedness</i>.","Paraphrased; Midgley, <i>Beast and Man</i> (1978)"]],
+ "midgley2":[
+  ["Frankfurt cases","Harry Frankfurt argued that people can be morally responsible even if they could not have done otherwise – which challenges premise 5 of the argument against free will.","Paraphrased; Frankfurt, ‘Alternate Possibilities and Moral Responsibility’ (1969)"],
+  ["Link to Metaphysics of Mind","Midgley’s Pythagoras argument resembles arguments against reducing thought to brain states, such as the knowledge argument. Compare the mind–brain identity theory.","Cross-link within the AQA course"]],
+ "other":[
+  ["The free will of animals?","Some theists suggest animal suffering is redeemed in an afterlife for animals, or that animals do not experience pain as we do. The Stanford Encyclopedia treats such responses sceptically.","Paraphrased; general literature"],
+  ["Process theodicy","Process theologians such as David Ray Griffin hold that God does not have coercive power: God persuades but cannot prevent evil. This avoids the problem by revising omnipotence.","Paraphrased; Griffin, <i>God, Power, and Evil</i> (1976)"]],
+ "revise":[
+  ["Set texts","AQA’s set texts for this topic are Hick, <i>Evil and the God of Love</i> (chs 13–17, esp. 13); Plantinga, <i>God, Freedom and Evil</i> (pp. 29–34, 59–64); and Midgley, <i>Wickedness</i> (chs 1 and 5).","AQA 7172 specification"]]
+};
+var QS={
+ "logical":["What is the logical problem of evil?","Explain the difference between a theodicy and a defence.","Explain the logical problem of evil.","Does the logical problem of evil show that God does not exist?"],
+ "freewill":["What is meant by moral evil?","Explain why, on the free will theodicy, God cannot create free beings who always choose good.","Explain the free will theodicy.","Does free will justify the existence of moral evil?"],
+ "plantinga":["What does Plantinga mean by ‘significantly free’?","Explain how Plantinga accounts for natural evil.","Explain Plantinga’s free will defence.","Does Plantinga’s free will defence solve the problem of evil?"],
+ "evidential":["What is meant by natural evil?","Explain the difference between the logical and evidential problems of evil.","Explain the evidential problem of evil.","Is the evidential problem of evil a good reason to reject belief in God?"],
+ "fwdev":["What is meant by ‘gratuitous evil’?","Explain the ‘selective interference’ objection to the free will defence.","Explain how the free will defence responds to the evidential problem of evil.","Does the free will defence answer the evidential problem of evil?"],
+ "hick":["What is meant by ‘soul-making’?","Explain Hick’s idea of epistemic distance.","Explain Hick’s soul-making theodicy.","Does Hick’s soul-making theodicy succeed?"],
+ "midgley":["How does Midgley understand evil?","Explain why Midgley thinks human evil cannot be explained just by free will or just by society.","Explain Midgley’s account of human wickedness.","Does Midgley’s account of evil support the free will theodicy?"],
+ "midgley2":["What is fatalism?","Explain Midgley’s example of the farmer by the Nile.","Explain Midgley’s claim that free will is compatible with determinism.","Is free will compatible with determinism?"],
+ "other":["What is meant by evil as a privation?","Explain sceptical theism.","Explain two responses to the problem of evil beyond free will and soul-making (extension).","Is any response to the problem of evil successful?"]
+};
+var QUIZ=[
+ ["Distinguish moral and natural evil.","Moral evil: wrong actions or motives of free agents. Natural evil: suffering caused by natural processes."],
+ ["How do the logical and evidential problems differ?","Logical: evil and God are incompatible (deductive). Evidential: evil makes God improbable (inductive)."],
+ ["What is the difference between a theodicy and a defence?","A theodicy gives the actual reason God allows evil; a defence gives a possible reason, showing consistency."],
+ ["Why can’t God create free beings who always choose good, on the free will theodicy?","If God made them choose good, their choices would be determined, so they would not be free."],
+ ["How does Plantinga explain natural evil?","It is possible that it results from the free choices of fallen angels such as Satan."],
+ ["Why does Plantinga’s defence succeed against the logical problem?","The logical problem claims impossibility, so showing a possible scenario is enough to refute it."],
+ ["What is the ‘toy world’ reply?","Free will is only valuable if our choices make a real difference, including the power to harm."],
+ ["What is ‘epistemic distance’?","Hick: the world can be understood as if God did not exist, so we are free to choose faith."],
+ ["What does Hick’s theodicy require about the afterlife?","Life after death and universal salvation."],
+ ["What is Midgley’s point with the farmer by the Nile?","The regularities of nature enable human action – determinism is not fatalism."]
+];
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src">'+(x[2]==="h"?"Handout glossary":"From the handout text")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>

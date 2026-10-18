@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Substance Dualism Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#fbe3d6; --ink:#8a3f1c;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#fbe3d6}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#d6efdf}
+.stretch h4{color:#245c3c}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#fdf5f0}
+details.resp summary{cursor:pointer}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+
+/* mind tours additions */
+.resp.against{border-left-color:#f1b796}
+.gloss .src.b{color:#245c3c}
+.argbox{border:1px solid var(--line);border-radius:12px;padding:16px 20px 6px;margin:18px 0;background:#fffaf7}
+.argbox .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--ink)}
+.argbox ol{margin-top:8px}
+.ai{font-size:.8rem;color:var(--muted)}
+.band img{max-height:320px;object-fit:cover}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+</head>
+<body>
+<!--TITLE:Substance Dualism Tour-->
+<div class="wrap">
+  <a class="back" href="#">← Metaphysics of Mind</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 2 · Spec 3.4.2</span>
+      <h1>Substance dualism</h1>
+      <p>Is the mind a thing in its own right, distinct from the body? Take the tour: Descartes’ indivisibility and conceivability arguments, the responses to each, and the issues facing dualism – other minds, Ryle’s category mistake and the interaction problem.</p>
+    </div>
+    <img src="img/mind-descartes.jpg" alt="Portrait of René Descartes in a dark coat with a white collar.">
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Text adapted from the departmental handouts <i>Substance Dualism</i>, <i>Substance dualism and the problem of other minds</i> and <i>Conceivability and possibility</i>, checked against the AQA 7172 specification and set texts (Descartes, <i>Meditations</i> VI; Ryle, <i>The Concept of Mind</i>; the Elisabeth–Descartes correspondence; Avramides, <i>Other Minds</i>). Images from the departmental slides. Boxes marked ‘Beyond the spec’ are extension only.</footer>
+</div>
+
+<!-- ============ STOP 0 ============ -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>Is the mind a distinct substance?</h2>
+  <p>AQA states the thesis of substance dualism in one line: <b>minds exist and are not identical to bodies or to parts of bodies.</b> On this view there are two fundamentally different kinds of <span class="term" data-t="Substance">substance</span>. <span class="term" data-t="Extension">Physical</span> substances are by essence <i>extended</i> – they take up three-dimensional space and have size, shape and location. Mental substances are by essence <i>thinking</i> – conscious – and are not extended at all. Your body is a physical substance; your mind, or soul, is a mental substance. Your thoughts and emotions are properties of the mind, and they come and go while the mind that has them stays the same.</p>
+  <p>This is the view most people in history have held, in one form or another, and it underlies many religious beliefs about life after death. It is most closely associated with René Descartes, who argued for it in <i>Meditations on First Philosophy</i>, Meditation VI (1641) – one of your set texts. The question matters because if substance dualism is true, physical science can never give a complete account of what we are. If it is false, we need to explain how something as apparently non-physical as consciousness can be part of the physical world. Every later theory in this module is, in part, a reaction to Descartes.</p>
+  <div class="thesis"><b>The structure of the topic.</b> Stop 1 explains the thesis and the principle it relies on, Leibniz’s law. Stops 2 and 3 give Descartes’ two arguments with their responses. Stops 4–6 cover the issues facing dualism named in the specification: the problem of other minds, Ryle’s category mistake, and the conceptual and empirical interaction problems.</div>
+  <h3>Choose where to go</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <div class="card"><h4>The big question</h4><p>Are minds things that exist and are not identical to bodies or parts of bodies?</p></div>
+  <div class="card"><h4>How to use this tour</h4><p>Learning it for the first time? Go through the stops in order. Revising? Jump to a stop, or go straight to <b>Revise</b> for the summary and quiz. Dotted words are in the glossary: tap one to see its meaning.</p></div>
+  <div class="card"><h4>Spec checklist</h4><p>✓ Indivisibility argument + two responses<br>✓ Conceivability argument (without God) + three responses<br>✓ Problem of other minds: analogy; best hypothesis<br>✓ Ryle’s category mistake<br>✓ Conceptual interaction problem (Elisabeth)<br>✓ Empirical interaction problem</p></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 1 ============ -->
+<template id="s-thesis">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · The thesis</div>
+  <h2>Two substances and Leibniz’s law</h2>
+  <h3>Cashing out the terms</h3>
+  <p>The handout recommends understanding substance dualism by cashing out each term. A <span class="term" data-t="Substance">substance</span> is what ‘lies under’ properties: a chair that was once red and is now green has changed its colour properties but remains the same chair. <span class="term" data-t="Dualism">Dualism</span> is the claim that existence is fundamentally composed of two categories of substance:</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Physical substance</span><p>Essentially <b>extended</b>: it has volume, shape and location, and can be measured. The body is a physical substance.</p></div>
+    <div class="resp"><span class="tag">Mental substance</span><p>Essentially <b>thinking</b> (conscious): it has thoughts, emotions and perceptions, but no volume. The mind, or soul, is a mental substance.</p></div>
+  </div>
+  <p>The mind counts as a substance because it persists through changes in its properties: as a stream of consciousness it stays the same while particular thoughts and feelings come and go. Crucially, then, <b>the mind is a substance and not a property</b> – it is not a feature of the brain but a thing in its own right.</p>
+  <h3>Leibniz’s law</h3>
+  <p>Both of Descartes’ arguments depend on a principle now called <span class="term" data-t="Leibniz’s law">Leibniz’s law</span> (the indiscernibility of identicals):</p>
+  <div class="thesis"><b>If X and Y are identical, then every property X has, Y also has, and every property Y has, X also has.</b> If Cicero is identical with Tully, then if Cicero is six feet tall, so is Tully.</div>
+  <p>Leibniz’s law gives a simple test for distinctness: find <i>one</i> property that the mind has and the body lacks (or vice versa), and you have shown they are not identical. The indivisibility argument uses the property of being divisible. The conceivability argument uses the property of possibly existing without the other.</p>
+  <div class="argbox"><span class="tag">The general strategy</span>
+  <ol class="list">
+    <li>If the mind is identical to the body, they share all properties. <span class="note">(Leibniz’s law.)</span></li>
+    <li>The mind has a property the body lacks (or vice versa). <span class="note">(To be shown by each argument.)</span></li>
+    <li>Therefore, the mind is not identical to the body.</li>
+  </ol></div>
+  <h3>Not a pilot in a ship</h3>
+  <p>Descartes did not think the mind merely sits in the body. In Meditation VI he says that sensations such as pain, hunger and thirst teach him that he is not present in his body only as a sailor is present in a ship, but is very closely joined and, as it were, intermingled with it, so that he and the body form a unit. (Paraphrased from the handout’s translation.) So Descartes holds both that mind and body are distinct substances <i>and</i> that they form an intimate union. Whether he can consistently hold both is part of the interaction problem (Stop 6).</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Extension</dt><dd>Taking up three-dimensional space.</dd><dt>Leibniz’s law</dt><dd>Identical things share all their properties.</dd><dt>Essence</dt><dd>The property without which a thing would not be what it is.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 2 ============ -->
+<template id="s-divisible">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · Argument 1</div>
+  <h2>The indivisibility argument</h2>
+  <p>Descartes thinks the most obvious difference between the two substances is that the body can be divided and the mind cannot. In Meditation VI he writes:</p>
+  <blockquote>‘there is a great difference between the mind and the body, inasmuch as the body is by its very nature always divisible, while the mind is utterly indivisible.’<cite>Descartes, <i>Meditations</i> VI (Cottingham translation, as quoted in the departmental handout)</cite></blockquote>
+  <p>When he considers himself purely as a thinking thing, he cannot distinguish any parts: he understands himself as something single and complete. If a foot or an arm is cut off, nothing is taken away from the mind. And the faculties of willing, understanding and sense-perception are not parts of the mind, because it is one and the same mind that wills, understands and perceives. By contrast, any extended thing can easily be divided in thought into parts.</p>
+  <div class="argbox"><span class="tag">The indivisibility argument in standard form</span>
+  <ol class="list">
+    <li>The body (and every physical thing) is divisible. <span class="note">(Anything extended can be divided, at least in thought, into parts.)</span></li>
+    <li>The mind is not divisible. <span class="note">(Introspection: I find no parts in myself; my faculties are not parts, since the same mind uses each.)</span></li>
+    <li>If two things are identical, they share all properties. <span class="note">(Leibniz’s law.)</span></li>
+    <li>Therefore, the mind is not the body (nor any part of it).</li>
+  </ol></div>
+  <h3>Response 1: the mental is divisible in some sense</h3>
+  <div class="resp against"><span class="tag">Objection to premise 2</span>
+  <p><b>Dissociative identity disorder.</b> The handout discusses the documented case of ‘Miss Beauchamp’, whose distinct personalities differed in tastes (some hated smoking, one loved it), skills (one knew no French or shorthand) and memory, with one personality knowing all the thoughts of another. This looks like a mind that is functionally split.</p>
+  <p><b>Split-brain cases.</b> In ‘Brain bisection and the unity of consciousness’, Thomas Nagel discusses patients whose corpus callosum (the band of fibres linking the two hemispheres) has been cut. When ‘pencil’ was flashed to one half of the visual field and ‘toothbrush’ to the other, and the patient was asked to retrieve the matching objects with both hands, each hand searched independently, the right hand picking up the pencil and the left rejecting it in favour of the toothbrush. (Paraphrased from the handout.) Perhaps consciousness itself can be divided.</p>
+  <p><b>Psychological division.</b> Psychologists divide the mind into conscious and unconscious, and into different faculties with different functions.</p></div>
+  <div class="resp for"><span class="tag">Descartes could reply</span><p>These are divisions of <i>function</i>, not divisions of the mind as a substance. A computer running several programs has not been cut into pieces. Descartes already said that willing and perceiving are not parts of the mind; the different personalities or hemispheric ‘streams’ might similarly be activities, not parts. But the reply has a cost: if the split-brain patient has two centres of consciousness, it is hard to see what makes them <i>one</i> mind rather than two.</p></div>
+  <h3>Response 2: not everything physical is divisible</h3>
+  <div class="resp against"><span class="tag">Objection to premise 1</span><p>Some physical properties do not seem divisible: the temperature of a room, a magnetic field, or the property of belonging to the human race. If something physical can be indivisible, then the mind’s indivisibility does not show it is non-physical. A physicalist can say the mind is more like a physical <i>property</i> or process of the brain than like a lump of matter.</p></div>
+  <div class="resp for"><span class="tag">Descartes could reply</span><p>Descartes is arguing about <i>substances</i>, not properties. A room’s temperature is a property of a divisible substance. The objection only works if the mind is a property – which is what Descartes denies. But this makes the argument question-begging: it only shows the mind is a non-physical substance if we already assume it is a substance.</p></div>
+  <h3>Evaluation</h3>
+  <p>The indivisibility argument is valid, but each premise is vulnerable. Premise 2 relies on introspection, and introspection may simply fail to reveal the mind’s divisions; the split-brain evidence suggests the unity of consciousness depends on the physical brain. Premise 1 is true of physical substances but false of physical properties, so the argument at best shows the mind is not a physical <i>object</i> – leaving property dualism and physicalist theories that treat mind as a process untouched. The most a dualist can claim is that the argument shows the mind is not a divisible lump of matter.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Divisible</dt><dd>Able to be split into parts.</dd><dt>Dissociative identity disorder</dt><dd>A condition in which a person appears to have more than one personality.</dd><dt>Corpus callosum</dt><dd>The band of nerve fibres connecting the brain’s hemispheres.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 3 ============ -->
+<template id="s-conceive">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · Argument 2</div>
+  <h2>The conceivability argument</h2>
+  <h3>Descartes’ version</h3>
+  <p>Descartes argues that everything he clearly and distinctly understands is capable of being created by God exactly as he understands it. So if he can clearly and distinctly understand one thing apart from another, they are capable of being separated, at least by God – and so they are distinct. He has a clear and distinct idea of himself as a thinking, non-extended thing, and a clear and distinct idea of body as an extended, non-thinking thing. So he is really distinct from his body and can exist without it. (Paraphrased from <i>Meditations</i> VI.)</p>
+  <h3>The specification’s version – without God</h3>
+  <p>AQA asks for the argument <b>expressed without reference to God</b>. The role God played – guaranteeing that what is clearly conceived is possible – is taken over by a general principle linking conceivability to possibility. The handout gives the core in three lines:</p>
+  <div class="argbox"><span class="tag">The conceivability argument (without God)</span>
+  <ol class="list">
+    <li>I can clearly and distinctly conceive of my mind existing without my body. <span class="note">(I can conceive of myself as a thinking, non-extended thing; I can doubt my body exists but not that I think – Meditations II.)</span></li>
+    <li>Whatever I can clearly and distinctly conceive is (metaphysically) possible. <span class="note">(The conceivability–possibility principle, replacing the appeal to God’s power.)</span></li>
+    <li>So it is possible for my mind to exist without my body. <span class="note">(From 1, 2.)</span></li>
+    <li>If it is possible for A to exist without B, then A is not identical to B. <span class="note">(Leibniz’s law: the body cannot possibly exist without itself, so it lacks a property the mind has.)</span></li>
+    <li>Therefore, my mind is not identical to my body.</li>
+  </ol></div>
+  <p>The handout’s shorter version: (1) ‘I’ am possibly such as to be non-extended; (2) no physical body is possibly such as to be non-extended; (C) therefore I am not a body.</p>
+  <h3>What ‘conceive’ and ‘possible’ mean</h3>
+  <p>The departmental slides on conceivability distinguish two senses of <span class="term" data-t="Conceivability">conceive</span>: understanding a proposition (I understand ‘there is a chiliagon in the museum’) and picturing a state of affairs (I cannot really picture a thousand-sided figure). They also distinguish kinds of possibility. Something is <span class="term" data-t="Logical possibility">logically possible</span> if it involves no contradiction; <span class="term" data-t="Physical possibility">physically possible</span> if it breaks no law of nature; and <span class="term" data-t="Metaphysical possibility">metaphysically possible</span> if it could really have been the case, given the natures of the things involved. In possible-worlds language, a necessary truth holds in all possible worlds; a contingent truth in some; an impossibility in none.</p>
+  <figure class="side"><img src="img/mind-leap.jpg" alt="A person leaping high over a mountain peak."><figcaption><b>Conceivable but impossible?</b> I can imagine someone jumping over a mountain in one leap without contradiction – yet it breaks the laws of physics. So imagination is not a reliable guide to what can really happen.</figcaption></figure>
+  <h3>Response 1: mind without body is not conceivable</h3>
+  <div class="resp against"><span class="tag">Attack premise 1</span><p>Behaviourists (3.4.3) argue that mental concepts are concepts of behaviour and dispositions to behave; on that analysis, the idea of a mind without a body is confused, like the idea of a smile without a face. Descartes may <i>think</i> he is conceiving of a disembodied mind, but what he is really conceiving is just his own ignorance of how his mind depends on his body. Compare: someone might think they are conceiving of water that is not H₂O, but they are really conceiving of a different, watery-looking substance.</p></div>
+  <div class="resp for"><span class="tag">Reply</span><p>The handout notes Descartes could say this objection proves too much: it would make the idea of God or a ghost – a mind without a body – inconceivable, yet people clearly do conceive of these and understand stories about them.</p></div>
+  <h3>Response 2: what is conceivable may not be metaphysically possible</h3>
+  <div class="resp against"><span class="tag">Attack premise 2</span><p>Conceivability may be a guide to <i>logical</i> possibility, but not to <i>metaphysical</i> possibility. Before 1811 someone could have conceived of water without hydrogen, but because water is H₂O, water without hydrogen is metaphysically impossible. Likewise, if the mind <i>is</i> the brain, a mind without a brain is impossible, however conceivable it seems. And without God to guarantee the link, Descartes has no reason to trust premise 2. At best, as Scott Sturgeon suggests, conceivability gives <i>defeasible</i> evidence of possibility.</p></div>
+  <p>The slides set out three ways to respond to any conceivability argument: (1) accept that conceivability implies possibility; (2) deny that it does; (3) deny that the thing is really conceivable. Responses 1 and 2 here are options (3) and (2).</p>
+  <h3>Response 3: what is metaphysically possible tells us nothing about the actual world</h3>
+  <div class="resp against"><span class="tag">Attack premise 4 / the conclusion</span><p>Even if a disembodied mind is possible in some possible world, it does not follow that <i>in the actual world</i> my mind is something other than my body. Perhaps in some possible worlds minds are non-physical, while in ours they are physical. Descartes needs an extra claim: that what a thing is, it is necessarily – so if my mind could be non-physical, it actually is.</p></div>
+  <div class="resp for"><span class="tag">Reply</span><p>Many philosophers accept that identity is necessary: if A really is B, then A is B in every possible world (Cicero could not have failed to be Tully). If so, Response 3 fails: showing it is possible for mind and body to be distinct shows they are not actually identical. The physicalist must therefore fall back on Response 1 or 2.</p></div>
+  <figure class="side"><img src="img/mind-cheshire.jpg" alt="A cartoon cat's face fading into a dark background."><figcaption><b>The Cheshire cat.</b> Dean Zimmerman’s objection (handout): we can conceive of an extended cat fading to a two-dimensional grin and then disappearing. If that is possible, the same thing could be extended and then non-extended – so extension is not essential, and the argument fails.</figcaption></figure>
+  <h3>Evaluation</h3>
+  <p>Without God, the argument stands or falls with the principle that clear conceivability implies metaphysical possibility. The water/H₂O case shows that principle fails at least sometimes: we can conceive of things that are necessarily false because we do not know their underlying nature. Since we do not know the underlying nature of the mind, our ability to conceive of it without the body tells us little. The strongest version of the argument therefore shows only that we cannot know <i>a priori</i> that mind and body are identical – which physicalists like Smart happily accept (see identity theory).</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Conceivable</dt><dd>Able to be coherently thought of without contradiction.</dd><dt>Metaphysically possible</dt><dd>Could really have been the case, given the natures of things.</dd><dt>Defeasible</dt><dd>A reason that can be overturned by further evidence.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 4 ============ -->
+<template id="s-others">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · Issue 1</div>
+  <h2>The problem of other minds</h2>
+  <figure class="side"><img src="img/mind-other-minds.jpg" alt="A cartoon of a puzzled boy with a question mark beside a girl whose glowing brain is visible."><figcaption><b>What is going on in there?</b> I see your body and hear your words. If your mind is immaterial, I can never observe it.</figcaption></figure>
+  <h3>The problem</h3>
+  <p>Substance dualism claims that the mind is immaterial and non-extended, and so cannot be seen with the senses. I have immediate, private and privileged access to my own mind, but I have no empirical evidence of any other mind and no direct access to it. The most I can do is infer that others have minds from their behaviour and speech. And it is logically coherent that they do not. This is an <span class="term" data-t="Epistemic">epistemic</span> problem, and the handout notes it is a logical consequence of Descartes’ philosophy of mind.</p>
+  <div class="argbox"><span class="tag">The problem in standard form</span>
+  <ol class="list">
+    <li>If substance dualism is true, minds are immaterial and non-extended. <span class="note">(The thesis.)</span></li>
+    <li>I can only perceive what is material and extended – I see bodies, not souls. <span class="note">(Empirical claim about perception.)</span></li>
+    <li>I have no rational intuition of the existence of your mind. <span class="note">(It is not a necessary truth that you have one.)</span></li>
+    <li>So I have neither sense experience nor rational intuition of any mind other than my own. <span class="note">(From 1–3.)</span></li>
+    <li>Therefore, if substance dualism is true, I cannot know that other minds exist.</li>
+  </ol></div>
+  <p>This leaves us at risk of <span class="term" data-t="Solipsism">solipsism</span>, the view that only my mind exists – or at least of scepticism about other minds. Note that the problem applies to dualism in general (AQA lists it under ‘issues facing dualism’), so it applies to property dualism too.</p>
+  <h3>Response 1: the argument from analogy</h3>
+  <p>J.S. Mill offers an argument from analogy:</p>
+  <div class="argbox"><span class="tag">Mill’s argument from analogy (as in the handout)</span>
+  <ol class="list">
+    <li>I have a mind.</li>
+    <li>I know from experience that my mind and my body interact: my mental states cause my behaviour.</li>
+    <li>I can see that other bodies behave as mine does.</li>
+    <li>Similar effects have similar causes.</li>
+    <li>Therefore, other bodies are also connected to minds.</li>
+  </ol></div>
+  <div class="resp against"><span class="tag">Objection: a single case</span><p>I am generalising from one example – my own mind – to billions. That is like concluding that all water boils at 100°C from one observation. Analogical arguments are inductive, not proofs, and this one is unusually weak.</p></div>
+  <div class="resp for"><span class="tag">Mill’s reformulation</span><p>I do not have one case but thousands: every time I am hungry and eat, or thirsty and drink, I observe a type of behaviour with a mental cause. I see the same types of behaviour in others, so I have many cases to go on.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>All these cases are still from <i>one</i> mind – mine – so the sample remains biased. The principle that similar effects have similar causes is not always true, and some behaviour has no mental cause at all (sleepwalking, reflexes). Worse, the conclusion can never be checked: I can never observe another mind to confirm the inference.</p></div>
+  <h3>Response 2: the existence of other minds is the best hypothesis</h3>
+  <p>We do not need a proof. The existence of other minds is the <span class="term" data-t="Inference to the best explanation">best explanation</span> of other people’s behaviour. Their behaviour is complex, flexible, purposeful and responsive to reasons and language in ways that are explained very well by supposing they have beliefs, desires and experiences like mine. No rival hypothesis (they are automata, or I am dreaming them) explains as much as simply, or predicts as well.</p>
+  <div class="resp against"><span class="tag">Objection</span><p>On dualism, why is it the <i>best</i> explanation? If minds are immaterial, then other people’s behaviour could in principle be fully explained by their brains (especially given causal closure), so the hypothesis that there is also an immaterial mind behind it adds nothing to the explanation. Ironically, the best-hypothesis reply works better for physicalists, for whom the mind just is what produces behaviour.</p></div>
+  <div class="resp for"><span class="tag">Reply</span><p>Inference to the best explanation is how we justify belief in electrons, the past and the external world; it would be special pleading to reject it here. And our own case gives us direct evidence that minds explain behaviour.</p></div>
+  <h3>Evaluation</h3>
+  <p>Both responses give us reasonable belief rather than certainty, but that is all we have for most of our knowledge. The deeper issue is the one Anita Avramides (set text) highlights: the problem only arises in this acute form because dualism makes minds inner and hidden. The analogical argument is weak because it relies on one case; the best-hypothesis response is stronger, but its strength depends on minds being causally relevant to behaviour – which pushes the dualist back into the interaction problem.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Solipsism</dt><dd>The view that only one’s own mind exists (or can be known to).</dd><dt>Argument from analogy</dt><dd>Inferring that because two things are alike in some respects, they are alike in another.</dd><dt>Inference to the best explanation</dt><dd>Accepting the hypothesis that best explains the evidence.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 5 ============ -->
+<template id="s-ryle">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 5 · Issue 2</div>
+  <h2>Dualism makes a ‘category mistake’ (Ryle)</h2>
+  <h3>The ghost in the machine</h3>
+  <p>In <i>The Concept of Mind</i> (1949), Gilbert Ryle calls the Cartesian picture ‘the dogma of the Ghost in the Machine’ (Ryle’s phrase). He argues that it rests not on a false empirical claim but on a logical error: a <span class="term" data-t="Category mistake">category mistake</span>. A category mistake is the error of presenting facts as if they belonged to one logical category when they belong to another.</p>
+  <h3>Ryle’s university example</h3>
+  <p>A visitor is shown Oxford’s colleges, libraries, laboratories and offices, and then asks: ‘But where is the University?’ The visitor has made a category mistake. The university is not another building alongside the colleges; it is the way all of them are organised. Ryle gives similar examples: a foreigner watching cricket who, having seen the bowlers, batsmen and fielders, asks where ‘team spirit’ is. (Paraphrased from Ryle, <i>The Concept of Mind</i>, ch. 1.)</p>
+  <div class="argbox"><span class="tag">Ryle’s argument in standard form</span>
+  <ol class="list">
+    <li>Mental concepts (believing, wanting, being intelligent) describe how a person behaves and is disposed to behave. <span class="note">(Ryle’s analysis of mental concepts – see soft behaviourism, 3.4.3.)</span></li>
+    <li>Substance dualism treats mental concepts as naming events in a hidden, non-physical thing, alongside physical events. <span class="note">(Descartes’ picture.)</span></li>
+    <li>To treat a way of organising or describing things as if it were another thing of the same kind is a category mistake. <span class="note">(Definition; the university example.)</span></li>
+    <li>Therefore, substance dualism makes a category mistake.</li>
+  </ol></div>
+  <p>Ryle thought this also dissolves the problems of interaction and other minds: if minds are not ghostly things, there is no puzzle about how they push bodies, and no hidden inner theatre to be sceptical about.</p>
+  <h3>Responses</h3>
+  <div class="resp for"><span class="tag">Response 1: premise 1 is false</span><p>Ryle’s argument depends on behaviourism being true. But mental states seem distinct from behaviour: a perfect actor can behave as if in pain without feeling it, and a ‘super-spartan’ can feel pain without showing it (3.4.3). If mental concepts do not refer to behaviour, then treating them as referring to inner states is no mistake at all.</p></div>
+  <div class="resp for"><span class="tag">Response 2: the mistake may be Ryle’s</span><p>Ryle may be making the opposite category mistake – treating mental states as dispositions when they belong to the category of inner, conscious episodes. Pains and visual experiences seem to be occurrences, happening at a time and felt by a subject, not merely tendencies to behave.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>Even if Ryle’s full behaviourism fails, his core point survives: we should not assume that because we have nouns like ‘mind’ there must be a special thing they name. Many physicalists accept this lesson without being behaviourists – the mind is what the brain does.</p></div>
+  <h3>Evaluation</h3>
+  <p>Ryle’s objection is only as strong as his positive account of mental concepts. As a <i>diagnosis</i> it is powerful: it explains why dualism is tempting (the grammar of ‘mind’ suggests a thing) without granting that it is true. But as a <i>refutation</i> it presupposes a behaviourist analysis that faces serious objections, especially from phenomenal consciousness. A fair judgement: Ryle shows that dualism is not forced on us by the way we talk about minds, but he does not show that dualism is incoherent.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Category mistake</dt><dd>Treating something as belonging to a logical category it does not belong to.</dd><dt>Ghost in the machine</dt><dd>Ryle’s mocking label for the Cartesian picture of mind.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 6 ============ -->
+<template id="s-interact">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 6 · Issues 3 and 4</div>
+  <h2>The interaction problems</h2>
+  <p>Descartes is an <span class="term" data-t="Interactionist dualism">interactionist</span> dualist: the mind causes changes in the body (I decide to go to the kitchen, and I walk there) and the body causes changes in the mind (I stub my toe and feel pain). The specification names two problems for this.</p>
+  <h3>The conceptual interaction problem (Elisabeth of Bohemia)</h3>
+  <p>In May 1643 Princess Elisabeth of Bohemia wrote to Descartes asking how the human soul, being only a thinking substance, can determine the bodily spirits so as to cause voluntary actions. (Paraphrased from her letter; Shapiro translation is the set text.) Her point is conceptual. On the understanding of causation in Descartes’ own physics, one thing moves another by contact – by pushing it – which requires extension and surface. But the mind, by definition, is not extended. So the very concept of a non-extended mind moving an extended body seems incoherent.</p>
+  <div class="argbox"><span class="tag">Elisabeth’s argument in standard form</span>
+  <ol class="list">
+    <li>Physical things are moved only by being pushed (contact). <span class="note">(Descartes’ mechanistic physics.)</span></li>
+    <li>Contact requires extension. <span class="note">(To push, a thing needs a surface and location.)</span></li>
+    <li>The mind is not extended. <span class="note">(Substance dualism.)</span></li>
+    <li>So the mind cannot make contact with or push the body. <span class="note">(From 2, 3.)</span></li>
+    <li>Therefore, the mind cannot move the body – contrary to interactionist dualism.</li>
+  </ol></div>
+  <p>Descartes replied that the union of mind and body is a ‘primitive notion’ understood through the senses rather than the intellect, and compared it to the way people once (wrongly) conceived of heaviness acting on a body. Elisabeth was not satisfied; the handout notes she suggested that the soul might have properties we do not know, which might overturn the doctrine that it is non-extended.</p>
+  <div class="resp for"><span class="tag">Response</span><p>Premise 1 is out of date. Physics now recognises causation without contact – gravity and electromagnetic fields act at a distance. And since Hume, many philosophers think causation is just regular succession, which requires no mechanism: we never ‘see’ the necessary connection even between billiard balls. So there may be no conceptual barrier to mind–body causation.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>Forces such as gravity still operate in space, between things with location. The mind has no location at all. And if causation is mere regularity, why should <i>this</i> mind be regularly connected with <i>this</i> body rather than another? Spatial location usually answers that question; the dualist cannot use it.</p></div>
+  <h3>The empirical interaction problem</h3>
+  <figure class="side"><img src="img/mind-supernova.jpg" alt="An exploding star throwing out bright clouds of gas."><figcaption><b>Causal closure.</b> From a supernova to the movement of an electron, every physical event seems fully explained by prior physical events and laws. There seems to be no room for a non-physical cause.</figcaption></figure>
+  <p>The second problem is empirical. Science gives us strong evidence for the <span class="term" data-t="Causal closure of the physical">causal closure of the physical</span>: every physical event that has a cause has a sufficient physical cause. Neuroscience traces the causes of muscle movements back through nerve signals to brain events, and finds only physical causes. If the mind is non-physical and causes bodily movement, then either (a) physical laws are broken in the brain – energy appears from nowhere, violating its conservation – or (b) bodily movements are <span class="term" data-t="Overdetermination">overdetermined</span>, with a full physical cause and a mental cause as well. Neither looks credible.</p>
+  <div class="argbox"><span class="tag">The empirical interaction problem in standard form</span>
+  <ol class="list">
+    <li>Every physical event has a sufficient physical cause. <span class="note">(Causal closure – supported by the success of physics and neuroscience.)</span></li>
+    <li>Bodily movements are physical events.</li>
+    <li>Bodily movements are not systematically overdetermined. <span class="note">(It would be bizarre if every action had two complete causes.)</span></li>
+    <li>So mental causes of bodily movements must be physical. <span class="note">(From 1–3.)</span></li>
+    <li>Therefore, if the mind causes behaviour, interactionist substance dualism is false.</li>
+  </ol></div>
+  <div class="resp for"><span class="tag">Responses</span><p>(1) Causal closure is an inductive generalisation, not something proved; and we do not yet have a settled understanding of causation (the handout cites Hume). (2) Quantum indeterminacy may leave gaps in physical causation that a mind could exploit without violating physical law. (3) The dualist can give up interaction and accept that the mind does not cause physical events (epiphenomenalism) – but that faces its own problems (see property dualism).</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>The physicalist can reply that even though we do not fully understand causation, we can at least see how physical causes connect (heat raises the temperature of a liquid); we cannot envisage how an immaterial cause would work at all. So the physicalist hypothesis is stronger.</p></div>
+  <h3>Evaluation</h3>
+  <p>The two problems work as a pair. The conceptual problem asks <i>how</i> interaction could work and is weakened by modern physics and Humean causation. The empirical problem asks <i>where</i> it could happen, and is much harder to escape: unless causal closure is false, an immaterial mind has no causal work to do. This is arguably the most serious objection to substance dualism, because it threatens the one thing Descartes most needs – that my thoughts make a difference to what I do.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Interactionism</dt><dd>Mind and body causally affect each other.</dd><dt>Causal closure</dt><dd>Every physical event has a sufficient physical cause.</dd><dt>Overdetermination</dt><dd>An event having two independent, each sufficient, causes.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ REVISE ============ -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>Is substance dualism true?</h2>
+  <h3>Overall evaluation</h3>
+  <p>Descartes’ two arguments both rely on Leibniz’s law, and both are valid; the question is whether their premises are true. The indivisibility argument at most shows the mind is not a divisible physical object, since physical properties can be indivisible, and split-brain cases cast doubt on the unity of consciousness. The conceivability argument, once God is removed, depends on the principle that conceivability implies metaphysical possibility – a principle that fails when, as with water and H₂O, we do not know a thing’s underlying nature. Meanwhile dualism faces the problem of other minds (manageable through inference to the best explanation, though only if minds are causally relevant), Ryle’s charge of a category mistake (powerful as a diagnosis, but dependent on behaviourism) and the interaction problems. A sustained judgement: <b>neither argument establishes substance dualism, and the empirical interaction problem gives positive reason to reject it, because a non-physical mind seems to have no causal role in a causally closed physical world. Its lasting value is that it identifies something – consciousness – that any rival theory must still explain.</b></p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Thesis:</b> minds exist and are not identical to bodies or parts of bodies; two substances – extended and thinking.</li>
+    <li><b>Leibniz’s law:</b> identical things share all properties; find one difference and you have distinctness.</li>
+    <li><b>Indivisibility:</b> body divisible, mind not. Responses: mind divisible in some sense (DID, split brain); not all physical things divisible (temperature, fields).</li>
+    <li><b>Conceivability (no God):</b> I can conceive mind without body; conceivable → possible; so distinct. Responses: not really conceivable; conceivable ≠ metaphysically possible (water/H₂O); possible ≠ actual.</li>
+    <li><b>Other minds:</b> immaterial minds unobservable → solipsism. Responses: analogy (Mill; one case, unverifiable); best hypothesis.</li>
+    <li><b>Ryle:</b> ‘ghost in the machine’ is a category mistake (university example). Depends on behaviourism.</li>
+    <li><b>Conceptual interaction (Elisabeth):</b> how can the non-extended push the extended? <b>Empirical:</b> causal closure leaves no room for non-physical causes.</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Is substance dualism true?</b><br>1. Thesis: define substance dualism and Leibniz’s law; state your line.<br>2. Indivisibility → physical things can be indivisible → judge.<br>3. Conceivability → conceivable ≠ possible (water/H₂O) → necessity-of-identity reply → judge.<br>4. Empirical interaction problem → closure is inductive → still the best evidence → judge.<br>5. Conclusion that follows from your judgements.</p></div>
+</aside></div>
+</template>
+
+<!-- ============ GLOSSARY ============ -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>For 3-mark questions, learn these definitions precisely – one accurate sentence is better than a vague paragraph.</p></div></aside></div>
+</template>
+
+<script>
+
+var GLOSS=[
+ ["Substance dualism","The belief that there are two fundamental categories of substance in existence: mental and physical. AQA: minds exist and are not identical to bodies or parts of bodies.","h"],
+ ["Substance","That which ‘lies under’ properties and stays the same through changes in them.","h"],
+ ["Dualism","The view that reality contains two fundamentally different kinds of thing (substances or properties).","t"],
+ ["Extension","Taking up three-dimensional space; for Descartes, the essence of physical substance.","t"],
+ ["Essence","The property a thing must have to be the thing it is.","t"],
+ ["Leibniz’s law","If X and Y are identical, then every property X has, Y also has, and every property Y has, X also has.","h"],
+ ["Divisible","Able to be split into parts, at least in thought.","t"],
+ ["Dissociative identity disorder","A psychological disorder in which someone appears to have more than one personality.","h"],
+ ["Split-brain case","A patient whose corpus callosum has been cut, who in experiments can behave as if the hemispheres act independently.","t"],
+ ["Conceivability","Being able to coherently think of something – understanding a proposition or picturing a state of affairs – without contradiction.","h"],
+ ["Logical possibility","Involving no contradiction.","h"],
+ ["Physical possibility","Not breaking the laws of physics.","h"],
+ ["Metaphysical possibility","Could really have been the case, given the natures of the things involved (true in some possible world).","t"],
+ ["Necessary truth","True in all possible worlds (e.g. 2 + 2 = 4).","h"],
+ ["Contingent truth","True in some possible worlds but not others.","h"],
+ ["Defeasible","Able to be overturned by further evidence.","t"],
+ ["Problem of other minds","If minds are immaterial and private, how can I know that anyone else has one?","h"],
+ ["Solipsism","The view that only one’s own mind exists, or can be known to exist.","t"],
+ ["Argument from analogy","Mill: because others’ bodies behave like mine, and my behaviour is caused by my mind, theirs is caused by minds too.","h"],
+ ["Inference to the best explanation","Accepting the hypothesis that best explains the evidence.","h"],
+ ["Category mistake","Ryle: presenting facts as if they belonged to one logical category when they belong to another.","t"],
+ ["Ghost in the machine","Ryle’s mocking name for the Cartesian picture of an immaterial mind inside a mechanical body.","t"],
+ ["Interactionist dualism","The view that the mind and body causally affect each other.","t"],
+ ["Conceptual interaction problem","Elisabeth: how can a non-extended mind move an extended body, if causation requires contact?","t"],
+ ["Empirical interaction problem","Scientific evidence that the physical world is causally closed leaves no room for non-physical mental causes.","t"],
+ ["Causal closure of the physical","The claim that physical events can only ever have physical causes.","h"],
+ ["Overdetermination","An event having two independent causes, each of which would have been sufficient on its own.","t"],
+ ["Epistemic","To do with knowledge.","t"],
+ ["Occasionalism","Malebranche’s view that God is the only true cause, producing bodily events on the ‘occasion’ of mental ones.","b"]
+];
+var STOPS=[["start","Start here"],["thesis","The thesis"],["divisible","Indivisibility"],["conceive","Conceivability"],["others","Other minds"],["ryle","Category mistake"],["interact","Interaction"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["thesis","Stop 1","Two substances","The thesis and Leibniz’s law."],
+ ["divisible","Stop 2","The indivisibility argument","Body divisible, mind not – so distinct?"],
+ ["conceive","Stop 3","The conceivability argument","Can I conceive my mind without my body?"],
+ ["others","Stop 4","The problem of other minds","How do I know anyone else has a mind?"],
+ ["ryle","Stop 5","Ryle’s category mistake","The ghost in the machine."],
+ ["interact","Stop 6","The interaction problems","Elisabeth and causal closure."]
+];
+var STRETCH={
+ "start":[
+  ["Plato’s dualism","Long before Descartes, Plato argued in the <i>Phaedo</i> that the soul is simple, unchanging and akin to the eternal Forms, while the body is composite and perishable – an early ancestor of the indivisibility argument.","Paraphrased; Plato, <i>Phaedo</i> 78b–80b"],
+  ["Modern substance dualists","Substance dualism still has defenders. Richard Swinburne argues that the facts about a person cannot be fully stated in physical terms, and that a soul is required to explain personal identity.","Paraphrased; Swinburne, <i>The Evolution of the Soul</i> (1986)"]],
+ "thesis":[
+  ["Is Leibniz’s law always safe?","Leibniz’s law is unproblematic for ordinary properties, but it fails for ‘properties’ like being believed by Lois Lane to be able to fly: Superman has it and Clark Kent does not, though they are one person. Critics say Descartes’ conceivability argument uses a property of this suspect, mind-dependent kind.","Paraphrased; see ‘The Identity of Indiscernibles’, <i>Stanford Encyclopedia of Philosophy</i>"],
+  ["A third primitive notion","In his letters to Elisabeth, Descartes describes three ‘primitive notions’: extension, thought, and the union of mind and body. Some scholars, such as Jean-Luc Marion (cited in the handout), argue Descartes’ dualism has been overstated.","Paraphrased; Descartes to Elisabeth, 21 May 1643; Marion, <i>On Descartes’ Passive Thought</i>"]],
+ "divisible":[
+  ["Sperry and Gazzaniga","The split-brain experiments Nagel discussed were carried out by Roger Sperry and Michael Gazzaniga from the 1960s. Sperry won a share of the 1981 Nobel Prize in Physiology or Medicine for this work.","Paraphrased; Nagel, ‘Brain Bisection and the Unity of Consciousness’ (1971)"],
+  ["Kant on the simple soul","Kant argued that the inference from ‘I think’ to ‘I am a simple substance’ is a fallacy (a ‘paralogism’): the unity of the thinking subject is a feature of how thought is organised, not proof of a simple thing underlying it.","Paraphrased; Kant, <i>Critique of Pure Reason</i>, Paralogisms (A351–361)"]],
+ "conceive":[
+  ["Arnauld’s objection","Antoine Arnauld replied to Descartes that someone could clearly conceive of a right-angled triangle without conceiving that the square on the hypotenuse equals the squares on the other sides – yet that property is essential to it. So clearly conceiving A without B does not show A can exist without B.","Paraphrased; Arnauld, Fourth Set of Objections to the <i>Meditations</i>"],
+  ["Kripke and necessary identity","Saul Kripke argued that true identity statements between rigid names (‘water = H₂O’) are necessary, yet discovered a posteriori. This is the background to the necessity-of-identity reply to Response 3, and it returns in identity theory.","Paraphrased; Kripke, <i>Naming and Necessity</i> (1980)"]],
+ "others":[
+  ["Wittgenstein: no private language","The handout notes that Wittgenstein attacks the problem at its root: we learn mental words in a shared ‘language game’ with others, so the idea of a purely private mind that must infer the existence of others is incoherent. His ‘beetle in a box’ makes the same point.","Paraphrased; Wittgenstein, <i>Philosophical Investigations</i> §243–315"],
+  ["Avramides on other minds","Your set text, Anita Avramides’ <i>Other Minds</i> chapter 2, traces how the problem became pressing only in the modern period, after Descartes made the mind something inner and private.","Paraphrased; Avramides, <i>Other Minds</i> (2001), ch. 2"]],
+ "ryle":[
+  ["Ryle’s ‘knowing how’","Ryle also distinguished knowing how (skills) from knowing that (facts), and argued that intelligence is mostly knowing how, displayed in behaviour, not an inner act of consulting rules. You will meet the distinction again in Lewis’s ability reply to Mary.","Paraphrased; Ryle, <i>The Concept of Mind</i>, ch. 2"],
+  ["Was Descartes a ghost-in-the-machine theorist?","Some scholars argue Ryle attacked a caricature: Descartes insisted on the intimate union of mind and body and denied being ‘like a pilot in a ship’.","Paraphrased; see ‘Descartes and the Pineal Gland’ / ‘Dualism’, <i>Stanford Encyclopedia of Philosophy</i>"]],
+ "interact":[
+  ["The pineal gland","Descartes proposed that mind and body interact through the pineal gland, a small structure deep in the brain, because it is single rather than paired. This locates the effect but does not explain the mechanism.","Paraphrased; Descartes, <i>The Passions of the Soul</i> I.31–32"],
+  ["Leibniz and conservation","Leibniz objected that Descartes wrongly thought the mind could change the direction of motion without changing the total quantity of motion; once the conservation of momentum is understood, any mental push would violate physical law.","Paraphrased; Leibniz, <i>Monadology</i> §80"],
+  ["Malebranche’s occasionalism","Nicolas Malebranche concluded that neither mind nor body really causes anything: God produces the bodily movement on the occasion of my willing it. It solves the interaction problem at a heavy theological cost.","Paraphrased; Malebranche, <i>The Search after Truth</i> VI.ii.3"]],
+ "revise":[
+  ["Where next: property dualism","If substance dualism fails, perhaps there is only one substance – the physical brain – but it has some non-physical properties. That is property dualism, the next tour.","Cross-link within the AQA course"]]
+};
+var QS={
+ "thesis":["What is substance dualism?","Explain Leibniz’s law and how dualists use it.","Explain the difference between physical and mental substance, according to Descartes.","Is the mind a distinct substance from the body?"],
+ "divisible":["State Descartes’ indivisibility argument.","Explain one response to the indivisibility argument.","Explain Descartes’ indivisibility argument for substance dualism and the responses to it.","Does the indivisibility argument show that the mind is not physical?"],
+ "conceive":["Explain the difference between logical and metaphysical possibility.","Explain why what is conceivable may not be metaphysically possible.","Explain Descartes’ conceivability argument for substance dualism (without reference to God).","Does the conceivability argument prove that substance dualism is true?"],
+ "others":["What is the problem of other minds?","Explain the argument from analogy for the existence of other minds.","Explain how the problem of other minds arises for dualism and two responses to it.","Can a dualist know that other minds exist?"],
+ "ryle":["What is a category mistake?","Explain Ryle’s claim that dualism makes a category mistake.","Explain Ryle’s objection to substance dualism, using his examples.","Does dualism make a category mistake?"],
+ "interact":["What is the causal closure of the physical?","Explain the conceptual interaction problem as articulated by Elisabeth of Bohemia.","Explain the conceptual and empirical interaction problems for interactionist dualism.","Is the interaction problem fatal to substance dualism?"]
+};
+var QUIZ=[
+ ["State the AQA thesis of substance dualism.","Minds exist and are not identical to bodies or to parts of bodies."],
+ ["State Leibniz’s law.","If X and Y are identical, every property X has, Y has, and vice versa."],
+ ["What are the premises of the indivisibility argument?","The body is divisible; the mind is not; identical things share all properties – so mind ≠ body."],
+ ["Give two responses to the indivisibility argument.","The mental is divisible in some sense (DID, split-brain cases); not everything physical is divisible (temperature, magnetic fields)."],
+ ["What replaces God in the conceivability argument expressed without God?","The principle that whatever is clearly and distinctly conceivable is metaphysically possible."],
+ ["Give the three responses to the conceivability argument on the specification.","Mind without body is not conceivable; what is conceivable may not be metaphysically possible; what is metaphysically possible tells us nothing about the actual world."],
+ ["How does the water/H₂O example undermine the conceivability argument?","We can conceive of water without hydrogen, but since water is H₂O this is metaphysically impossible – so conceivability is not a reliable guide to possibility."],
+ ["What is the main weakness of Mill’s argument from analogy?","It generalises from a single case – my own mind – and its conclusion can never be checked."],
+ ["Give Ryle’s university example.","A visitor sees the colleges and libraries and asks where the University is – treating the organisation of the parts as another part."],
+ ["What was Elisabeth’s objection?","How can a non-extended, thinking soul move the body, if motion requires contact and contact requires extension?"],
+ ["What is the empirical interaction problem?","Causal closure: every physical event has a sufficient physical cause, so there is no room for a non-physical mind to cause behaviour (without overdetermination)."]
+];
+
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src'+(x[2]==="b"?" b":"")+'">'+(x[2]==="h"?"Departmental handout":x[2]==="b"?"Beyond the spec":"From the tour text")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>

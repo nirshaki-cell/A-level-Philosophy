@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What Is Mind? Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#fbe3d6; --ink:#8a3f1c;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#fbe3d6}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#d6efdf}
+.stretch h4{color:#245c3c}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#fdf5f0}
+details.resp summary{cursor:pointer}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+
+/* mind tours additions */
+.resp.against{border-left-color:#f1b796}
+.gloss .src.b{color:#245c3c}
+.argbox{border:1px solid var(--line);border-radius:12px;padding:16px 20px 6px;margin:18px 0;background:#fffaf7}
+.argbox .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--ink)}
+.argbox ol{margin-top:8px}
+.ai{font-size:.8rem;color:var(--muted)}
+.band img{max-height:320px;object-fit:cover}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+</head>
+<body>
+<!--TITLE:What Is Mind? Tour-->
+<div class="wrap">
+  <a class="back" href="#">← Metaphysics of Mind</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 2 · Spec 3.4.1</span>
+      <h1>What do we mean by ‘mind’?</h1>
+      <p>Before we can ask what the mind <i>is</i>, we need to know what marks something out as mental. Take the tour: substances and properties, phenomenal properties and qualia, intentionality, and the two perspectives we have on ourselves.</p>
+    </div>
+    <img src="img/mind-brain-glow.jpg" alt="A glowing, stylised human brain with threads of light running through it.">
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Text adapted from the departmental handouts <i>Introduction to the Philosophy of Mind</i> and <i>The Hard Problem of Consciousness</i> (Nagel), checked against the AQA 7172 specification. Images from the departmental slides. Boxes marked ‘Beyond the spec’ are extension only. AQA 7172 · Metaphysics of mind.</footer>
+</div>
+
+<!-- ============ STOP 0 ============ -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>What makes something a mental state?</h2>
+  <p>You are reading this sentence. Perhaps you are also a little tired, hoping for a good grade, and aware of the colour of the screen. All of these are <span class="term" data-t="Mental state">mental states</span>. Your brain, meanwhile, is a grey organ of about 1.4 kilograms in which billions of neurons are firing. The <span class="term" data-t="Mind–body problem">mind–body problem</span> asks how these two descriptions fit together. Is the mind a thing of its own, separate from the brain? Is it a set of special properties that the brain has? Or is talk of ‘the mind’ really just talk about the brain and the body?</p>
+  <p>Every theory in this module – dualist or physicalist – has to answer to the same data: the features that mental states actually have. That is why the specification begins here. AQA picks out two features. Some or all mental states have <span class="term" data-t="Phenomenal properties">phenomenal properties</span>: there is something it is like to have them. And some or all mental states have <span class="term" data-t="Intentionality">intentionality</span>: they are <i>about</i> something. If a theory of mind cannot account for these two features, it is not a theory of mind at all. You will see this test applied again and again: the zombie and Mary arguments press on phenomenal properties; the self-refutation objection to eliminativism presses on intentionality.</p>
+  <div class="thesis"><b>The structure of this topic.</b> Stop 1 gives you the metaphysical vocabulary – substance, property, physical – that every later theory uses. Stops 2 and 3 cover the two features named in the specification. Stop 4 explains why the first-person perspective makes the mind so puzzling. Stop 5 maps the theories you will meet next.</div>
+  <h3>Choose where to go</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <div class="card"><h4>The big question</h4><p>What features make a state mental – and can any one theory account for all of them?</p></div>
+  <div class="card"><h4>How to use this tour</h4><p>Learning it for the first time? Go through the stops in order. Revising? Jump to a stop, or go straight to <b>Revise</b> for the summary and quiz. Dotted words are in the glossary: tap one to see its meaning.</p></div>
+  <div class="card"><h4>Spec checklist</h4><p>✓ Some or all mental states have phenomenal properties<br>✓ ‘Qualia’: intrinsic, non-intentional phenomenal properties that are introspectively accessible<br>✓ Some or all mental states have intentional properties (intentionality)</p></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 1 ============ -->
+<template id="s-vocab">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · The tools of the debate</div>
+  <h2>Substances, properties and the physical</h2>
+  <p>The departmental handout frames the whole module with one question: <b>should we understand the mind as a substance – that which stays the same through changes – or as a property, for example a property of the brain?</b> To answer it you need three pieces of vocabulary.</p>
+  <figure class="side"><img src="img/mind-chair.jpg" alt="A simple wooden chair against a plain wall."><figcaption><b>Substance and property.</b> The chair is the substance. Its colour, its weight and where it stands are its properties. Paint it green and move it to another room: the properties change, but it is the same chair.</figcaption></figure>
+  <h3>Substance</h3>
+  <p>A <span class="term" data-t="Substance">substance</span> is that which stays the same through changes in its properties. Philosophers also say that a substance is <i>ontologically independent</i>: it does not need anything else (apart, perhaps, from God) in order to exist. A table is a substance; its colour and its position are properties of it.</p>
+  <h3>Property</h3>
+  <p>A <span class="term" data-t="Property">property</span> is a feature of a substance – what is true of a substance, or what a substance might possess. Properties depend on substances, but not the other way round: there is no ‘red’ floating free of any red thing, but the table could exist with a different colour. This asymmetry matters. A <b>substance dualist</b> says the mind is a substance in its own right; a <b>property dualist</b> says there is only one kind of substance (physical), but it has two kinds of property.</p>
+  <h3>The physical</h3>
+  <figure class="side"><img src="img/mind-galaxy.jpg" alt="A spiral galaxy of stars and dust."><figcaption><b>The physical world.</b> Physical objects take up three-dimensional space and obey physical laws – from galaxies down to electrons.</figcaption></figure>
+  <p>The body is <span class="term" data-t="Physical">physical</span>: it takes up three-dimensional space and is subject to physical laws. These laws are widely held to be <i>closed</i>: physical events can only be caused by other physical events or states. This is the <span class="term" data-t="Causal closure of the physical">causal closure of physics</span>. Keep it in mind – it is the source of the interaction problem for substance dualism (3.4.2) and of the worry that property dualism leaves the mind with nothing to do.</p>
+  <div class="thesis"><b>Key idea.</b> The mind–body problem can be stated precisely: is the mind a distinct substance, a distinct kind of property, or nothing over and above physical substances and their physical properties?</div>
+  <h3>Why the mind looks different</h3>
+  <p>The handout lists five features that seem to distinguish the mental from the physical: (1) intentionality – the mind is directed at things; (2) qualia – the intrinsic qualities of experience; (3) thought – the mind has propositional attitudes; (4) the first-person perspective – we see things ‘from the inside out’; and (5) the third-person perspective – we can also see things from an abstract, impersonal point of view. Stops 2–4 take these in turn.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Substance</dt><dd>What stays the same through change; does not depend on anything else to exist.</dd><dt>Property</dt><dd>A feature of a substance; depends on the substance.</dd><dt>Causal closure</dt><dd>Every physical event has a sufficient physical cause.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 2 ============ -->
+<template id="s-qualia">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · Feature 1</div>
+  <h2>Phenomenal properties and qualia</h2>
+  <figure class="side"><img src="img/mind-rose.jpg" alt="A deep red rose with green leaves."><figcaption><b>What is it like?</b> Seeing the red of a rose, smelling it, feeling a thorn: each experience has its own distinctive ‘feel’. That feel is a phenomenal property.</figcaption></figure>
+  <h3>Consciousness and ‘what it is like’</h3>
+  <p>To be conscious, the handout says, is to be a subject with a rich experiential life. It involves not only being aware of theoretical propositions, or knowing how to do something, but being acquainted with certain phenomena. When you see red, hear a symphony or smell fresh coffee, there is <i>something it is like</i> for you to have that experience. Thomas Nagel made this phrase famous. In ‘What is it like to be a bat?’ (1974) he argues that</p>
+  <blockquote>‘an organism has conscious mental states if and only if there is something that it is like to be that organism – something it is like for the organism.’<cite>Thomas Nagel, ‘What is it like to be a bat?’ (1974), as quoted in the departmental handout</cite></blockquote>
+  <p>We can assume there is something it is like to be a bat, though we cannot imagine what it is like to navigate by echolocation; there is nothing it is like to be a chair. The features of experience that make up ‘what it is like’ are its <span class="term" data-t="Phenomenal properties">phenomenal properties</span>.</p>
+  <h3>Qualia: the specification’s definition</h3>
+  <p>Some, but not all, philosophers use the term <span class="term" data-t="Qualia">qualia</span> (singular: <i>quale</i>, Latin for ‘of what kind’) for these properties. AQA defines qualia precisely, and you should learn the definition word for word:</p>
+  <blockquote>‘intrinsic and non-intentional phenomenal properties that are introspectively accessible’<cite>AQA A-level Philosophy specification 7172, 3.4.1</cite></blockquote>
+  <p>Each word does work:</p>
+  <ul class="list">
+    <li><b>Intrinsic</b> – the property belongs to the experience in itself, not in virtue of its relation to anything else. The redness of your experience is not a matter of what caused it or what it makes you do.</li>
+    <li><b>Non-intentional</b> – the property is not a matter of the experience being <i>about</i> or representing anything. The throbbing of a headache does not seem to represent anything at all.</li>
+    <li><b>Phenomenal</b> – it is part of what the experience is like for the subject.</li>
+    <li><b>Introspectively accessible</b> – you can become aware of it by attending to your own experience.</li>
+  </ul>
+  <div class="thesis"><b>Why ‘some, but not all’?</b> Everyone agrees that experiences have a phenomenal character. What is disputed is whether that character consists of special <i>intrinsic, non-intentional</i> properties. If it does, physicalism faces a serious challenge, because it is hard to see how the intrinsic redness of an experience could be a property of neurons. This is why the qualia debate sits at the heart of 3.4.2–3.4.4.</div>
+  <h3>Which mental states have phenomenal properties?</h3>
+  <p>The specification says ‘all or at least some’. Sensations (pain, itches) and perceptual experiences (seeing red) clearly have phenomenal properties. Emotions such as fear seem to. But what is it like to believe that Paris is the capital of France – especially when you are not thinking about it, as you were not a minute ago? Many philosophers think beliefs and other <span class="term" data-t="Propositional attitude">propositional attitudes</span> have no phenomenal character of their own. Others argue that thinking has a distinctive ‘cognitive phenomenology’. You do not need to settle this for the exam, but you should be able to explain why the specification hedges.</p>
+  <div class="argbox"><span class="tag">The challenge to physicalism, in standard form</span>
+  <ol class="list">
+    <li>Some mental states have qualia. <span class="note">(Introspection: attending to our own experiences.)</span></li>
+    <li>Qualia are intrinsic and non-intentional. <span class="note">(Definition.)</span></li>
+    <li>Physical science describes things only in terms of structure, function and causal relations. <span class="note">(A claim about the nature of physical explanation; Nagel and Chalmers press it.)</span></li>
+    <li>Intrinsic, non-intentional properties are not structural, functional or causal properties. <span class="note">(From 2.)</span></li>
+    <li>Therefore, physical science cannot fully describe qualia – physicalism appears incomplete.</li>
+  </ol></div>
+  <p class="note">This is not on the specification as an argument in its own right; it shows the shape of reasoning behind the zombie and knowledge arguments you will meet in property dualism.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Phenomenal property</dt><dd>A feature of what an experience is like for its subject.</dd><dt>Qualia (AQA)</dt><dd>Intrinsic and non-intentional phenomenal properties that are introspectively accessible.</dd><dt>Introspection</dt><dd>Attending to one’s own mental states.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 3 ============ -->
+<template id="s-intent">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · Feature 2</div>
+  <h2>Intentionality</h2>
+  <figure class="side"><img src="img/mind-archer.jpg" alt="An archer drawing back a bow and aiming an arrow."><figcaption><b>Aiming.</b> <i>Intentio</i> was the Latin word for ‘aim’ or ‘stretching out’, used of the stretch of an archer’s bow. A mental state ‘aims at’ something beyond itself.</figcaption></figure>
+  <h3>Brentano’s mark of the mental</h3>
+  <p>In the late nineteenth century Franz Brentano claimed that what marks out mental phenomena from physical phenomena is that they are <span class="term" data-t="Intentionality">intentional</span>. This has nothing to do with <i>intending</i> to do something. The old word <i>intentio</i> was used for the stretch of an archer’s bow. Brentano’s claim was that the mind is always directed at objects outside itself. A belief is about something; a fear is a fear of something; a desire is a desire for something. When you love someone, your love is aimed at that person.</p>
+  <h3>Propositional attitudes</h3>
+  <figure class="side"><img src="img/mind-paris.jpg" alt="A profile of a head with the Eiffel Tower inside and a thought bubble reading Paris is the capital of France."><figcaption><b>Thought.</b> To think that Paris is the capital of France is to have an <i>attitude</i> (belief) towards a <i>proposition</i> (that Paris is the capital of France).</figcaption></figure>
+  <p>One central kind of intentional state is thought. According to philosophers, to think is to be in a mental state that represents some proposition or <span class="term" data-t="Content">content</span>. To think that Paris is the capital of France is to be in a mental state that represents <i>that Paris is the capital of France</i>. In analytic philosophy this is called a <span class="term" data-t="Propositional attitude">propositional attitude</span>, because it has two parts:</p>
+  <ol class="list"><li>the <b>attitude</b> – believing, hoping, fearing, wanting, doubting; and</li><li>the <b>content</b> – the proposition the attitude is directed at, which can be true or false.</li></ol>
+  <p>The same content can be the object of different attitudes (I <i>hope</i> it will rain; you <i>fear</i> it will rain), and the same attitude can take different contents. Propositional attitudes explain behaviour: if you <i>want</i> to stay dry and <i>believe</i> it will rain, you take an umbrella. Remember this – it is the core of ‘folk psychology’, which eliminative materialists say is false (3.4.3).</p>
+  <h3>Intentional inexistence</h3>
+  <p>Intentional states can be about things that do not exist. You can fear a ghost, hope for world peace, or think about Sherlock Holmes. Brentano called this <span class="term" data-t="Intentional inexistence">intentional inexistence</span>. It makes intentionality puzzling for physicalism: physical relations like ‘is next to’ or ‘causes’ need both things to exist; ‘is thinking about’ does not.</p>
+  <div class="argbox"><span class="tag">Why intentionality puzzles physicalists</span>
+  <ol class="list">
+    <li>Some mental states are about things, including things that do not exist. <span class="note">(Brentano; ordinary examples such as fearing a ghost.)</span></li>
+    <li>No purely physical state is intrinsically about anything. <span class="note">(A pattern of neural firing is just a pattern; a book is ‘about’ something only because people interpret it.)</span></li>
+    <li>So either intentional states are not purely physical, or intentionality must be explained (or explained away) in other terms.</li>
+  </ol></div>
+  <p>Physicalists respond in different ways: functionalists try to explain content through causal role; the Churchlands suspect the folk notion of content will be replaced (3.4.3–3.4.4).</p>
+  <h3>Do all mental states have intentionality?</h3>
+  <div class="pair">
+    <div class="resp for"><span class="tag">Yes (intentionalism)</span><p>Even sensations seem to represent: pain represents damage in a part of your body; seeing red represents a red surface. Some philosophers say phenomenal properties just <i>are</i> intentional properties.</p></div>
+    <div class="resp against"><span class="tag">Not all</span><p>Moods such as general anxiety or elation seem not to be directed at anything in particular. And if qualia exist, as defined by AQA, they are by definition non-intentional. The specification’s ‘all or at least some’ leaves this open.</p></div>
+  </div>
+  <h3>Evaluation: two marks of the mental?</h3>
+  <p>Neither feature alone seems to cover every mental state. Beliefs clearly have intentionality but may lack phenomenal character; moods have phenomenal character but may lack intentionality. That is why the specification names <i>both</i>. A reasonable judgement is that the mental is marked by a <b>family</b> of features: a state counts as mental if it has phenomenal properties, intentional properties, or both. The consequence is that a theory of mind has two jobs, and success at one (say, functionalism’s account of belief) does not guarantee success at the other (qualia).</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Intentionality</dt><dd>The ‘aboutness’ or directedness of a mental state.</dd><dt>Propositional attitude</dt><dd>An attitude (belief, desire) towards a content that can be true or false.</dd><dt>Intentional inexistence</dt><dd>A state’s being about something that need not exist.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 4 ============ -->
+<template id="s-perspective">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · Why the mind is puzzling</div>
+  <h2>First-person and third-person perspectives</h2>
+  <div class="pair">
+    <figure class="tile portrait wide"><img src="img/mind-first-person.jpg" alt="A view from a bed looking down at one's own feet towards a window."><figcaption><b>First person</b>The world from the inside: my body, my room, my experiences.</figcaption></figure>
+    <figure class="tile portrait wide"><img src="img/mind-third-person.jpg" alt="A person seen from behind looking out over a park full of people."><figcaption><b>Third person</b>Myself as one person among many, part of a wider system.</figcaption></figure>
+  </div>
+  <h3>The first-person perspective</h3>
+  <p>One mark of consciousness is that it is ‘like something’ to be conscious. This is the perspective we have when we look out at the world from within and feel ourselves embodied. Our first-person perspective is in some important way <span class="term" data-t="Privileged access">private</span>, and we have privileged, or at least better, access to it than anyone else has. It is the subjective perspective: how things seem from the inside.</p>
+  <h3>The third-person perspective</h3>
+  <p>The third-person perspective is the one we take when we consider the world without our own point of view at the centre. We think of ourselves as units in a much wider universe, subject to physical, psychological and sociological laws. Science works from this perspective: it aims at descriptions that anyone could check.</p>
+  <h3>Nagel’s challenge</h3>
+  <p>Nagel argues that the subjective character of experience is fully comprehensible only from one point of view. Science makes progress by moving towards greater objectivity – leaving out how things seem to particular observers. But with consciousness, that move takes us further from the phenomenon, not closer to it. An intelligent Martian could understand water completely without sharing our experience of it; but it could not understand <i>our experience</i> without knowing what it is like. (Paraphrased from the departmental handout on Nagel.)</p>
+  <div class="argbox"><span class="tag">Nagel’s argument, in standard form (paraphrased)</span>
+  <ol class="list">
+    <li>A creature is conscious if and only if there is something it is like to be that creature. <span class="note">(Nagel’s account of consciousness.)</span></li>
+    <li>What it is like to be a creature can only be fully grasped from that creature’s point of view. <span class="note">(The bat example: we cannot imagine echolocation from the inside.)</span></li>
+    <li>Physical explanation abstracts away from every particular point of view. <span class="note">(This is what makes it objective.)</span></li>
+    <li>Therefore, physical explanation, as we currently understand it, leaves out the subjective character of consciousness.</li>
+  </ol></div>
+  <div class="resp against"><span class="tag">Careful: what Nagel does not claim</span><p>Nagel does not say that physicalism is false. His conclusion is about <i>understanding</i>: we have no idea at present what it would mean for experience to be physical. He compares this to someone who finds a butterfly in a safe where a caterpillar was locked: they have reason to believe the butterfly was the caterpillar, without understanding how.</p></div>
+  <h3>The asymmetry of self-knowledge</h3>
+  <p>The two perspectives create an <span class="term" data-t="Asymmetry of self-knowledge">asymmetry</span>. I know that I am in pain immediately, without observing my behaviour. I know that you are in pain only by inference from what you say and do. This asymmetry is used against behaviourism (3.4.3), and it generates the problem of other minds for dualism (3.4.2).</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Subjective</dt><dd>Belonging to, or only fully grasped from, a particular point of view.</dd><dt>Objective</dt><dd>Describable from no particular point of view; checkable by anyone.</dd><dt>Privileged access</dt><dd>Special, direct knowledge of one’s own mental states.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ STOP 5 ============ -->
+<template id="s-map">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 5 · Where next</div>
+  <h2>A map of the theories</h2>
+  <p>Every theory in this module is an answer to the question from Stop 1: is the mind a substance, a property, or nothing over and above the physical? Here is how they line up in the AQA specification.</p>
+  <svg viewBox="0 0 720 330" role="img" aria-label="Diagram: theories of mind split into dualist theories (substance dualism, property dualism) and physicalist theories (behaviourism, identity theory, eliminative materialism), with functionalism compatible with either.">
+    <rect width="720" height="330" rx="14" fill="#fffaf7"/>
+    <rect x="270" y="16" width="180" height="44" rx="10" fill="#8a3f1c"/><text x="360" y="44" text-anchor="middle" font-size="16" fill="#fff" font-family="Nunito Sans,sans-serif">Theories of mind</text>
+    <line x1="360" y1="60" x2="170" y2="100" stroke="#8a3f1c" stroke-width="2"/><line x1="360" y1="60" x2="550" y2="100" stroke="#8a3f1c" stroke-width="2"/>
+    <rect x="70" y="100" width="200" height="40" rx="10" fill="#fbe3d6"/><text x="170" y="126" text-anchor="middle" font-size="15" fill="#8a3f1c" font-family="Nunito Sans,sans-serif">Dualism (3.4.2)</text>
+    <rect x="450" y="100" width="200" height="40" rx="10" fill="#fbe3d6"/><text x="550" y="126" text-anchor="middle" font-size="15" fill="#8a3f1c" font-family="Nunito Sans,sans-serif">Physicalism (3.4.3)</text>
+    <g font-family="Nunito Sans,sans-serif" font-size="13" fill="#23262f">
+      <rect x="20" y="170" width="150" height="56" rx="8" fill="#fff" stroke="#e8c3ac"/><text x="95" y="194" text-anchor="middle">Substance dualism</text><text x="95" y="213" text-anchor="middle" fill="#5b6070" font-size="11">two substances</text>
+      <rect x="180" y="170" width="150" height="56" rx="8" fill="#fff" stroke="#e8c3ac"/><text x="255" y="194" text-anchor="middle">Property dualism</text><text x="255" y="213" text-anchor="middle" fill="#5b6070" font-size="11">one substance, two kinds of property</text>
+      <rect x="370" y="170" width="105" height="56" rx="8" fill="#fff" stroke="#e8c3ac"/><text x="422" y="194" text-anchor="middle">Behaviourism</text><text x="422" y="213" text-anchor="middle" fill="#5b6070" font-size="11">hard / soft</text>
+      <rect x="485" y="170" width="105" height="56" rx="8" fill="#fff" stroke="#e8c3ac"/><text x="537" y="194" text-anchor="middle">Identity theory</text><text x="537" y="213" text-anchor="middle" fill="#5b6070" font-size="11">mind = brain</text>
+      <rect x="600" y="170" width="105" height="56" rx="8" fill="#fff" stroke="#e8c3ac"/><text x="652" y="194" text-anchor="middle">Eliminativism</text><text x="652" y="213" text-anchor="middle" fill="#5b6070" font-size="11">folk psychology false</text>
+    </g>
+    <g stroke="#e8c3ac" stroke-width="1.5"><line x1="170" y1="140" x2="95" y2="170"/><line x1="170" y1="140" x2="255" y2="170"/><line x1="550" y1="140" x2="422" y2="170"/><line x1="550" y1="140" x2="537" y2="170"/><line x1="550" y1="140" x2="652" y2="170"/></g>
+    <rect x="200" y="262" width="320" height="50" rx="10" fill="#d6efdf"/><text x="360" y="284" text-anchor="middle" font-size="14" fill="#245c3c" font-family="Nunito Sans,sans-serif">Functionalism (3.4.4)</text><text x="360" y="302" text-anchor="middle" font-size="11" fill="#245c3c" font-family="Nunito Sans,sans-serif">defined by role, not stuff – usually physicalist, compatible with dualism</text>
+  </svg>
+  <h3>How each theory handles the two features</h3>
+  <ul class="list">
+    <li><b>Substance dualism</b> – both features belong to an immaterial mind. Problem: how does it interact with the body?</li>
+    <li><b>Property dualism</b> – qualia are non-physical properties of a physical brain. Problem: are they causally idle?</li>
+    <li><b>Behaviourism</b> – mental talk is talk about behaviour or dispositions. Problem: seems to leave out the inner feel entirely.</li>
+    <li><b>Identity theory</b> – each type of mental state is a type of brain state. Problem: can creatures with different brains share a mental state?</li>
+    <li><b>Eliminative materialism</b> – some folk-psychological states, perhaps beliefs and desires, do not exist. Problem: can the theory even be stated?</li>
+    <li><b>Functionalism</b> – a mental state is whatever plays a certain causal role. Problem: could the role be played with different qualia, or none?</li>
+  </ul>
+  <div class="thesis"><b>Tip for 25-mark essays.</b> Almost every essay in this module can be organised around the two features from this topic. Ask of any theory: does it account for phenomenal properties? does it account for intentionality? does it fit with causal closure?</div>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Dualism</dt><dd>The mind involves something non-physical: a substance or properties.</dd><dt>Physicalism</dt><dd>Everything is physical or supervenes on the physical.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ============ REVISE ============ -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>What is distinctive about the mental?</h2>
+  <h3>Overall evaluation</h3>
+  <p>The specification gives two features of mental states, each hedged with ‘all or at least some’. The hedging is philosophically honest. Phenomenal properties seem to be the hardest feature for physicalism, because they are subjective and – if they are qualia in AQA’s sense – intrinsic and non-intentional, which is exactly what physical description seems to leave out. Intentionality is puzzling too, since no physical pattern seems to be about anything in itself; but here physicalists have more resources, because content can plausibly be linked to causal relations with the world. A sustained judgement: <b>the mental is best marked by a family of two features, and the harder of the two for any physicalist theory is phenomenal character. Whether ‘qualia’ in the strict sense exist is itself contested, so you should never assume them uncritically in an essay.</b></p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Substance:</b> what stays the same through change; ontologically independent. <b>Property:</b> a feature of a substance, depends on it.</li>
+    <li><b>Physical:</b> extended in space, governed by physical laws; <b>causal closure</b> – physical events have physical causes.</li>
+    <li><b>Phenomenal properties:</b> what it is like to have an experience (Nagel: something it is like for the organism).</li>
+    <li><b>Qualia (AQA):</b> intrinsic, non-intentional, phenomenal, introspectively accessible. Some philosophers deny there are any.</li>
+    <li><b>Intentionality (Brentano):</b> the directedness or aboutness of mental states; includes <b>intentional inexistence</b>.</li>
+    <li><b>Propositional attitudes:</b> attitude + content (believing <i>that p</i>).</li>
+    <li><b>Perspectives:</b> first-person (subjective, private, privileged) vs third-person (objective, scientific). Nagel: objectivity takes us further from experience.</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>12-mark plan</h4><p><b>Explain what is meant by ‘qualia’ and ‘intentionality’.</b><br>1. Phenomenal properties: what it is like (Nagel).<br>2. AQA’s definition of qualia, word by word, with an example.<br>3. Intentionality: Brentano, aboutness, archer image.<br>4. Propositional attitudes: attitude + content.<br>5. How they differ: pain has qualia but arguably no content; belief has content but arguably no qualia.</p></div>
+</aside></div>
+</template>
+
+<!-- ============ GLOSSARY ============ -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>For 3-mark questions, learn these definitions precisely – one accurate sentence is better than a vague paragraph. Learn AQA’s definition of qualia word for word.</p></div></aside></div>
+</template>
+
+<script>
+
+var GLOSS=[
+ ["Mental state","Any state of a mind: a sensation, perception, emotion, belief, desire and so on.","t"],
+ ["Mind–body problem","The problem of how the mind is related to the body, and in particular the brain.","t"],
+ ["Substance","That which stays the same through changes in its properties; something that does not depend on anything else in order to exist.","h"],
+ ["Property","A feature of a substance: what is true of it or what it possesses. Properties depend on substances.","h"],
+ ["Physical","Taking up three-dimensional space and being subject to the laws of physics.","h"],
+ ["Causal closure of the physical","The claim that physical events can only be caused by other physical events or states.","h"],
+ ["Phenomenal properties","Properties of an experience that make up what it is like for the subject to have it.","t"],
+ ["Qualia","AQA: ‘intrinsic and non-intentional phenomenal properties that are introspectively accessible’. Singular: quale.","h"],
+ ["Intrinsic","Belonging to a thing in itself, not in virtue of its relations to other things.","t"],
+ ["Introspection","Attending to and becoming aware of one’s own mental states.","t"],
+ ["Intentionality","The directedness or ‘aboutness’ of a mental state (Brentano). Not the same as intending.","h"],
+ ["Intentional inexistence","The capacity of a mental state to be about something that does not exist, such as a ghost.","t"],
+ ["Propositional attitude","A mental state made up of an attitude (belief, hope, fear) towards a content (a proposition).","h"],
+ ["Content","What an intentional state represents; for propositional attitudes, a proposition that can be true or false.","t"],
+ ["Proposition","What a declarative sentence expresses; something that can be true or false.","t"],
+ ["Consciousness","Being a subject with experiences; on Nagel’s account, there being something it is like to be that creature.","h"],
+ ["First-person perspective","The subjective point of view from which a subject experiences the world and its own states.","h"],
+ ["Third-person perspective","The objective point of view from which a subject is one thing among others in the world.","h"],
+ ["Privileged access","The special, direct knowledge a subject seems to have of its own mental states.","t"],
+ ["Asymmetry of self-knowledge","I know my own mental states directly; I know others’ only by inference from their behaviour.","t"],
+ ["Dualism","The view that the mind involves something non-physical, either a substance or properties.","t"],
+ ["Physicalism","The view that everything is physical or supervenes on the physical.","t"],
+ ["Cognitive phenomenology","The disputed view that thinking itself has a distinctive phenomenal character.","b"],
+ ["Representationalism","The view that phenomenal character is (or is determined by) representational content; denies qualia as AQA defines them.","b"]
+];
+var STOPS=[["start","Start here"],["vocab","Substance & property"],["qualia","Phenomenal properties"],["intent","Intentionality"],["perspective","Two perspectives"],["map","Map of theories"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["vocab","Stop 1","Substances, properties, the physical","The vocabulary every theory of mind uses."],
+ ["qualia","Stop 2","Phenomenal properties and qualia","What it is like – and AQA’s definition of qualia."],
+ ["intent","Stop 3","Intentionality","Brentano, aboutness and propositional attitudes."],
+ ["perspective","Stop 4","First and third person","Why subjectivity is so hard to capture."],
+ ["map","Stop 5","A map of the theories","How dualism and physicalism divide."]
+];
+var STRETCH={
+ "start":[
+  ["The hard problem","David Chalmers distinguishes the ‘easy problems’ of consciousness (explaining how the brain discriminates, reports and controls behaviour) from the ‘hard problem’: why any of this processing is accompanied by experience at all. You will meet the distinction again in property dualism.","Paraphrased; Chalmers, ‘Facing Up to the Problem of Consciousness’ (1995)"],
+  ["Is the mind just the brain?","Neuroscience shows tight correlations between mental and brain events, but correlation is not identity. Spinoza and Leibniz held that the two run in parallel without one being the other. Every theory in this module is a different interpretation of the same correlations.","Paraphrased; cf. departmental handout on identity theory"]],
+ "vocab":[
+  ["Aristotle and substance","The idea that a substance is the subject of properties and persists through change goes back to Aristotle’s <i>Categories</i>. Descartes adds that a substance is something that needs nothing else in order to exist, which strictly only God satisfies.","Paraphrased; Aristotle, <i>Categories</i> 5; Descartes, <i>Principles of Philosophy</i> I.51"],
+  ["Is causal closure true?","Causal closure is usually defended by the track record of physics: whenever we have traced the causes of a physical event, we have found physical causes. Critics reply that this is an inductive generalisation, and that it may beg the question against dualism.","Paraphrased; see Papineau, ‘The Rise of Physicalism’ (2001)"]],
+ "qualia":[
+  ["Quining qualia","Daniel Dennett argues that the concept of qualia (intrinsic, ineffable, private, directly apprehensible) is confused and that there are no such properties. He keeps phenomenal experience but rejects the theory of it. Compare eliminative materialism.","Paraphrased; Dennett, ‘Quining Qualia’ (1988)"],
+  ["The transparency of experience","Gilbert Harman argued that when you try to attend to the qualities of your experience you only ever find qualities of the things experienced: the redness of the tomato, not of your experience. If so, phenomenal properties may be intentional after all.","Paraphrased; Harman, ‘The Intrinsic Quality of Experience’ (1990)"],
+  ["Access and phenomenal consciousness","Ned Block distinguishes phenomenal consciousness (experience) from access consciousness (information available for reasoning and report), and argues that the two can come apart. He also wrote one of your set texts on functionalism.","Paraphrased; Block, ‘On a Confusion about a Function of Consciousness’ (1995)"]],
+ "intent":[
+  ["Brentano’s thesis","Brentano wrote that every mental phenomenon includes something as an object within itself, and that this ‘intentional inexistence’ is characteristic of mental phenomena exclusively. Later philosophers dispute both halves: perhaps some mental states lack it, and perhaps some physical states (a compass needle) have something like it.","Paraphrased; Brentano, <i>Psychology from an Empirical Standpoint</i> (1874)"],
+  ["Naturalising content","Philosophers such as Fred Dretske and Ruth Millikan try to explain what makes a brain state about something in terms of causal and evolutionary relations – a state is about water because of its history of being caused by water. This is the main physicalist strategy on intentionality.","Paraphrased; see ‘Teleological Theories of Mental Content’, <i>Stanford Encyclopedia of Philosophy</i>"]],
+ "perspective":[
+  ["The view from nowhere","Nagel later developed his contrast into a whole book, arguing that objective and subjective standpoints can never be fully reconciled, and that a complete picture of reality must include both.","Paraphrased; Nagel, <i>The View from Nowhere</i> (1986)"],
+  ["Mysterianism","Colin McGinn argues that the mind–body problem may be insoluble for us: our concept-forming capacities may be closed off from whatever property links brain and consciousness, just as a dog cannot grasp calculus.","Paraphrased; McGinn, ‘Can We Solve the Mind–Body Problem?’ (1989)"]],
+ "map":[
+  ["Idealism and neutral monism","The AQA map leaves out two historical options: idealism (only minds and ideas exist – Berkeley, whom you met in epistemology) and neutral monism (both mental and physical are aspects of something more basic – Russell, and some readings of Spinoza).","Paraphrased; see ‘Neutral Monism’, <i>Stanford Encyclopedia of Philosophy</i>"],
+  ["Panpsychism","Some contemporary philosophers, including Philip Goff, argue that consciousness is a fundamental and widespread feature of matter. It is a minority view but an active research area.","Paraphrased; Goff, <i>Consciousness and Fundamental Reality</i> (2017)"]],
+ "revise":[
+  ["Where next","Substance dualism treats the mind as a substance; property dualism treats it as a set of non-physical properties. Both rely on the features from this topic – especially phenomenal properties.","Cross-link within the AQA course"]]
+};
+var QS={
+ "vocab":["What is meant by ‘substance’?","Explain the difference between a substance and a property, using an example.","Explain the difference between substance dualism and property dualism.","Is the mind best understood as a substance or as a property?"],
+ "qualia":["What are qualia?","Explain what is meant by saying that a mental state has phenomenal properties.","Explain the concept of qualia and why some philosophers think qualia are a problem for physicalism.","Do all mental states have phenomenal properties?"],
+ "intent":["What is intentionality?","Explain what a propositional attitude is, with an example.","Explain the difference between phenomenal properties and intentional properties.","Is intentionality the mark of the mental?"],
+ "perspective":["What is meant by the ‘first-person perspective’?","Explain the asymmetry between knowledge of our own mental states and knowledge of others’.","Explain Nagel’s claim that physical explanation leaves out the subjective character of experience.","Can a third-person science ever fully explain the mind?"],
+ "map":["What is physicalism?","Explain why the causal closure of the physical is a problem for dualism.","Outline the main dualist and physicalist theories of mind.","Which features of mental states pose the greatest challenge to physicalism?"]
+};
+var QUIZ=[
+ ["Define ‘substance’.","That which stays the same through changes in its properties; something that does not depend on anything else to exist."],
+ ["What is the causal closure of physics?","The claim that physical events can only be caused by other physical events or states."],
+ ["Give AQA’s definition of qualia.","‘Intrinsic and non-intentional phenomenal properties that are introspectively accessible.’"],
+ ["What does ‘intrinsic’ mean in that definition?","The property belongs to the experience in itself, not in virtue of its relations (causes, effects, what it represents)."],
+ ["What did Nagel say makes an organism conscious?","There is something it is like to be that organism – something it is like for the organism."],
+ ["Who introduced intentionality as the mark of the mental, and what does it mean?","Franz Brentano: mental states are directed at, or about, something beyond themselves."],
+ ["What are the two parts of a propositional attitude?","An attitude (believing, hoping, fearing) and a content (a proposition, true or false)."],
+ ["Give an example of intentional inexistence.","Fearing a ghost, or thinking about Sherlock Holmes: the state is about something that does not exist."],
+ ["Give a mental state that may have phenomenal properties but no intentionality, and one with the reverse.","A mood of general anxiety (phenomenal, not obviously about anything); a standing belief that Paris is the capital of France (intentional, not obviously felt)."],
+ ["Why does the first-person perspective cause trouble for physicalism, according to Nagel?","Physical explanation is objective and abstracts away from points of view, but experience is only fully graspable from one point of view."]
+];
+
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src'+(x[2]==="b"?" b":"")+'">'+(x[2]==="h"?"Departmental handout":x[2]==="b"?"Beyond the spec":"From the tour text")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>

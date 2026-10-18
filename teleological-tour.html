@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Teleological Arguments Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#ece0f5; --ink:#5a2f78;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#ece0f5}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#d6efdf}
+.stretch h4{color:#245c3c}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#faf6fd}
+details.resp summary{cursor:pointer}
+.bspec{display:inline-block;margin-left:8px;font-size:.7rem;font-weight:600;letter-spacing:.08em;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;vertical-align:middle}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="#">← Metaphysics of God</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 2 · Spec 3.3.2</span>
+      <h1>Teleological arguments</h1>
+      <p>Does the order and apparent purpose in nature point to a designing mind? Take the tour: Hume’s argument from analogy, Paley’s watch, Hume’s objections, evolution, Swinburne’s argument from temporal order, and beyond the spec to Kant and cosmic fine-tuning.</p>
+    </div>
+    <svg viewBox="0 0 320 220" role="img" aria-label="A pocket watch on the left and an eye on the right, joined by a dashed line labelled 'same property: parts arranged for a purpose'.">
+      <rect width="320" height="220" rx="14" fill="#fff"/>
+      <g transform="translate(80,110)">
+        <circle r="46" fill="#ece0f5" stroke="#5a2f78" stroke-width="3"/>
+        <rect x="-6" y="-60" width="12" height="12" rx="3" fill="#5a2f78"/>
+        <g stroke="#5a2f78" stroke-width="2"><line x1="0" y1="-38" x2="0" y2="-32"/><line x1="38" y1="0" x2="32" y2="0"/><line x1="0" y1="38" x2="0" y2="32"/><line x1="-38" y1="0" x2="-32" y2="0"/></g>
+        <line x1="0" y1="0" x2="0" y2="-26" stroke="#23262f" stroke-width="3" stroke-linecap="round"/>
+        <line x1="0" y1="0" x2="18" y2="8" stroke="#23262f" stroke-width="3" stroke-linecap="round"/>
+        <circle r="4" fill="#23262f"/>
+      </g>
+      <g transform="translate(240,110)">
+        <path d="M-48 0 Q0 -42 48 0 Q0 42 -48 0Z" fill="#fff" stroke="#5a2f78" stroke-width="3"/>
+        <circle r="20" fill="#9f7fbf"/><circle r="9" fill="#23262f"/><circle cx="-5" cy="-5" r="3" fill="#fff"/>
+      </g>
+      <line x1="130" y1="110" x2="188" y2="110" stroke="#5a2f78" stroke-width="2" stroke-dasharray="5 4"/>
+      <text x="160" y="188" text-anchor="middle" font-size="12" fill="#5b6070" font-family="Nunito Sans,sans-serif">Same property? Parts arranged for a purpose</text>
+    </svg>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Built from the departmental resources: <i>The design argument</i> slides and notes (philosophyacademy.co.uk, 2024), the design argument revision table, and Ratzsch and Koperski, ‘Teleological Arguments for God’s Existence’, <i>Stanford Encyclopedia of Philosophy</i> (Summer 2023). Material marked ‘Beyond the spec’ is extension only. AQA 7172 · Metaphysics of God.</footer>
+</div>
+
+<!-- START -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>Does the order of nature point to a designer?</h2>
+  <p>The design argument claims that the order, sophistication and functional properties we find in the universe are best explained as the result of deliberate design by an intelligent being – and that this being is best understood as the God of monotheism. The word <span class="term" data-t="Teleology">teleological</span> comes from the Greek <i>telos</i>, ‘end’ or ‘purpose’.</p>
+  <p>It is the most intuitive of the arguments for God. Look at an eye, a bird’s wing or the orbit of the planets, and many people find it natural to see a mind behind them. The Stanford Encyclopedia notes that Hume’s character Cleanthes put this as seeing the image of mind reflected back from countless objects in nature. The philosophical task is to turn that intuition into an argument and ask whether it survives scrutiny.</p>
+  <p>Unlike the ontological argument, the design argument is <span class="term" data-t="A posteriori">a posteriori</span>: it starts from experience of the world. It is also usually <span class="term" data-t="Inductive argument">inductive</span> or an <span class="term" data-t="Inference to the best explanation">inference to the best explanation</span>, so its conclusion is at most probable, not certain – a point worth making in any 25-mark answer.</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Spatial order</span><p>Order in how things are arranged at a time: the parts of an eye fitted together so that it can see. (Hume’s analogy; Paley.)</p></div>
+    <div class="resp"><span class="tag">Temporal order</span><p>Regularity over time: the way the universe behaves according to simple laws of nature. (Swinburne.)</p></div>
+  </div>
+  <div class="thesis"><b>What the spec requires.</b> The design argument from analogy (as presented by Hume); Paley’s argument from spatial order; Swinburne’s argument from temporal order. Issues: Hume’s objections to the argument from analogy; the problem of spatial disorder (as posed by Hume and Paley); the argument from a unique case; whether God is the best or only explanation. <b>Kant and fine-tuning are beyond the spec.</b></div>
+  <h3>Choose where to go</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <div class="card"><h4>The big question</h4><p>Is God the best – or the only – explanation of the order we find in nature?</p></div>
+  <div class="card"><h4>How to use this tour</h4><p>New to the topic? Go in order. Revising? Jump to a stop or go to <b>Revise</b>. Dotted words open a definition. Cards marked ‘Beyond the spec’ in the margin are extension.</p></div>
+  <div class="card"><h4>Exam lens</h4><p>AQA asks you to notice the <b>logical form</b> (analogy, inference to the best explanation, inductive), the <b>strength of the conclusion</b> and the <b>nature of God</b> each argument can support.</p></div>
+</aside></div>
+</template>
+
+<!-- HUME ANALOGY -->
+<template id="s-analogy">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · The argument from analogy</div>
+  <h2>The design argument from analogy, as presented by Hume</h2>
+  <p>Hume’s <i>Dialogues Concerning Natural Religion</i> (published 1779, after his death) is a conversation between three characters. <b>Cleanthes</b> defends the design argument; <b>Philo</b>, often taken to speak for Hume, attacks it; <b>Demea</b> defends a priori arguments. The spec’s ‘argument from analogy as presented by Hume’ is Cleanthes’ version:</p>
+  <blockquote>‘The curious adapting means to ends, throughout all nature, resembles exactly, though it much exceeds, the production of human contrivance… Since the effects resemble each other, we are led to infer, by all the rules of analogy, that the causes also resemble; and that the author of nature is rather similar to, the mind of man; though possessed of much larger faculties, proportioned to the grandeur of the work, which he has executed.’<cite>Hume, <i>Dialogues Concerning Natural Religion</i>, Part II (Cleanthes), as quoted on the departmental slides</cite></blockquote>
+  <h3>What is an argument from analogy?</h3>
+  <p>An <span class="term" data-t="Argument from analogy">argument from analogy</span> reasons that because two things are alike in some known respects, they are probably alike in a further respect. A heart is like a pump in structure and function, so we can learn about the heart by thinking about pumps. The argument is only as strong as the similarity it relies on.</p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>The products of nature resemble the products of human design: they have properties that let them fulfil a specific function (think of the eye). <span class="note">(Observation.)</span></li>
+    <li>Similar effects have similar causes. <span class="note">(General principle of causal reasoning.)</span></li>
+    <li>The cause of a product of human design is an intelligent mind that intended the object and worked from a blueprint. <span class="note">(Experience of human making.)</span></li>
+    <li>Therefore the cause of nature is an intelligent mind that intended the design. <span class="note">(From 1–3, by analogy.)</span></li>
+    <li>This designer is God. <span class="note">(Identification – a separate step.)</span></li>
+  </ol>
+  <p>Note two features. The argument is <b>inductive</b>: the conclusion is probable in proportion to the degree of resemblance. And Cleanthes claims it shows not only that God exists but that God’s mind is similar to ours – which, as Philo will argue, is a double-edged claim.</p>
+  <p>Philo’s objections to this argument are at Stop 3.</p>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-hume.jpg" alt="Portrait of Hume wearing a red turban-style cap and brown coat" loading="lazy"><figcaption><b>David Hume</b>Allan Ramsay, 1766 · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Teleological</dt><dd>Concerning purpose or ends.</dd><dt>Argument from analogy</dt><dd>Inferring a further similarity from known similarities.</dd><dt>A posteriori</dt><dd>Based on experience.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- PALEY -->
+<template id="s-paley">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · William Paley (1743–1805)</div>
+  <h2>Paley: the watch on the heath</h2>
+  <p>Paley’s <i>Natural Theology</i> (1802) opens with a famous comparison:</p>
+  <blockquote>‘In crossing a heath, suppose I pitched my foot against a stone, and were asked how the stone came to be there; I might possibly answer, that, for anything I knew to the contrary, it had lain there forever… But suppose I had found a watch upon the ground… I should hardly think of the answer I had before given’.<cite>Paley, <i>Natural Theology</i> (1802), ch. 1, as quoted on the departmental slides</cite></blockquote>
+  <p>Why the difference? Because the watch has parts put together for a purpose: the spring, wheels and hands work together to tell the time. If they were shaped or arranged even slightly differently, it would not work. That kind of property – Paley calls it <span class="term" data-t="Contrivance">contrivance</span> – needs an explanation that ‘it has always been there’ does not give. So:</p>
+  <blockquote>‘There must have existed, at some time, and at some place or other, an artificer or artificers, who formed [the watch] for the purpose which we find it actually to answer… Every indication of contrivance, every manifestation of design, which existed in the watch, exists in the works of nature; with the difference, on the side of nature, of being greater or more, and that in a degree which exceeds all computation.’<cite>Paley, <i>Natural Theology</i> (1802), as quoted on the departmental slides</cite></blockquote>
+  <h3>Not an analogy</h3>
+  <p>The departmental notes stress that Paley does <b>not</b> argue by analogy. He does not say nature is <i>like</i> a watch. He identifies a <b>property</b> – having parts organised to serve a purpose – that both watches and eyes possess, and argues that this property, wherever it is found, can only be explained by design. That makes his argument an <span class="term" data-t="Inference to the best explanation">inference to the best explanation</span>, or even a deductive argument, and so – as the Stanford Encyclopedia notes – it may have been deliberately structured to avoid Hume’s attacks on analogy.</p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>Anything that has parts organised to serve a purpose is designed. <span class="note">(Premise, illustrated by the watch.)</span></li>
+    <li>Nature contains things that have parts organised to serve a purpose (e.g. the eye). <span class="note">(Observation.)</span></li>
+    <li>Therefore nature contains things that are designed. <span class="note">(From 1, 2.)</span></li>
+    <li>Design can only be explained in terms of a designer. <span class="note">(Analysis of design.)</span></li>
+    <li>A designer must have a mind and be distinct from what is designed. <span class="note">(Analysis of designing.)</span></li>
+    <li>Therefore nature was designed by a mind distinct from nature. <span class="note">(From 3–5.)</span></li>
+    <li>Such a mind exists – and God is this mind.</li>
+  </ol>
+  <h3>Paley anticipates objections</h3>
+  <div class="resp for"><span class="tag">1 · We need not have seen it made</span><p>It would not weaken the conclusion if we had never seen a watch being made. We infer intelligent makers for ancient artefacts and lost arts whose making no one has seen. What drives the inference is the property of contrivance, not experience of manufacture.</p></div>
+  <div class="resp for"><span class="tag">2 · Imperfection does not disprove design</span><p>It would not invalidate the conclusion that the watch sometimes went wrong: it is not necessary that a machine be perfect to show it was designed.</p></div>
+  <div class="resp for"><span class="tag">3 · ‘Possible combinations of matter’ explain nothing</span><p>No one in their senses would think the watch explained by being told it was one of the possible combinations of material forms. Chance is logically possible, but far less plausible than a designer.</p></div>
+  <div class="resp for"><span class="tag">4 · An infinite regress does not help</span><p>Even if watches produced each other to infinity, we would still need to explain why they have the property of answering to a purpose. The length of the chain does not make that question go away.</p></div>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-paley.jpg" alt="Portrait of Paley in a black cap and clerical dress with a white wig" loading="lazy"><figcaption><b>William Paley</b>William Beechey, after George Romney (Christ’s College, Cambridge) · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Contrivance</dt><dd>Parts arranged so that they work together to serve a purpose.</dd><dt>Inference to the best explanation</dt><dd>Accepting the hypothesis that best explains the evidence.</dd><dt>Spatial order</dt><dd>The arrangement of parts at a time.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- HUME OBJECTIONS -->
+<template id="s-objections">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · Hume’s objections</div>
+  <h2>Philo’s objections to the design argument</h2>
+  <p>Hume wrote before Paley, so some objections (especially the attack on analogy) do not touch Paley directly. AQA’s spec lists Hume’s objections to the argument from analogy, the unique-case objection, and whether God is the best or only explanation. They are organised below by what they attack.</p>
+  <h3>1. The analogy is weak</h3>
+  <p>An argument from analogy is only as good as the analogy. The things we know are designed (houses, watches) are made by beings in space and time; the universe as a whole is not obviously like a house or a machine at all.</p>
+  <blockquote>‘If we see a house… we conclude with the greatest certainty, that it had an architect or builder… But surely you will not affirm that the universe bears such resemblance to a house, that we can with the same certainty infer a similar cause… The dissimilarity is so striking, that the utmost you can pretend to is a guess, a conjecture, a presumption concerning a similar cause’.<cite>Hume, <i>Dialogues</i>, Part II (Philo), as quoted in the departmental notes and slides</cite></blockquote>
+  <div class="resp for"><span class="tag">Paley’s reply</span><p>The argument does not rely on analogy but on a shared property – functional complexity. Anything with parts organised for a purpose needs a designer, however unlike a house it is overall.</p></div>
+  <h3>2. A unique case</h3>
+  <p>We infer causes from effects when we have seen them constantly conjoined: smoke and fire, water and boiling at 100°C. But we have experienced only one universe – indeed only a part of one – and never seen a universe being made.</p>
+  <blockquote>‘To ascertain this reasoning, it were requisite, that we had experience of the origin of worlds; and it is not sufficient surely, that we have seen ships and cities arise from human art and contrivance’.<cite>Hume, <i>Dialogues</i>, Part II, as quoted in the departmental notes</cite></blockquote>
+  <div class="resp for"><span class="tag">Response</span><p>Paley: we infer designers of ancient artefacts without seeing them made. Swinburne: scientists reason about unique objects all the time – the origin of the universe, the Big Bang – by asking which hypothesis best explains the evidence.</p></div>
+  <h3>3. Other explanations: the Epicurean hypothesis</h3>
+  <p>We cannot rule out a priori that order arises from within nature itself. Suppose matter is finite and time eternal: a finite number of particles can only be arranged in a finite number of ways, so over eternity every arrangement – including an orderly one like ours – will occur, and recur, by chance.</p>
+  <blockquote>‘For aught we can know a priori, nature may contain the source or spring of order originally, within itself’.<cite>Hume, <i>Dialogues</i>, Part VIII, as quoted on the departmental slides</cite></blockquote>
+  <div class="resp for"><span class="tag">Response</span><p>Paley: chance is possible but far less plausible than design. Swinburne: even if order arises naturally, the laws that make it possible still need explaining (Stop 6).</p></div>
+  <h3>4. The cause must be proportioned to the effect</h3>
+  <p>If we know a cause only by its effect, we may ascribe to it only the qualities needed to produce that effect. From a painting we may infer a painter who could see, but nothing about their character or other skills. So:</p>
+  <ul class="list">
+    <li>A finite, imperfect universe supports at most a finite, imperfect designer – not an omnipotent, omniscient, supremely good God.</li>
+    <li>Designers are not always creators; a designer might have died; a large project may need a team – so why not many gods?</li>
+  </ul>
+  <div class="resp for"><span class="tag">Swinburne’s reply</span><p>Simplicity – Ockham’s razor – favours one infinite God over many limited designers. A single being with unlimited power is the simplest hypothesis.</p></div>
+  <h3>5. Anthropomorphism</h3>
+  <p>The argument makes God’s mind like ours. But religious believers themselves warn against picturing God in human form. Cleanthes has ‘run into anthropomorphism’ to fit common experience – and minds, in our experience, always come with bodies.</p>
+  <h3>6. The belief is useless</h3>
+  <p>Hume, a ‘mitigated sceptic’, argued that inferring an intelligent cause adds nothing to our knowledge: from a cause known only by its effects, we can never reason back to any new effect or principle of conduct.</p>
+  <h3>Evaluation</h3>
+  <p>Against the analogical argument, objections 1 and 2 are strong. But against Paley – and, later, Swinburne – the decisive objections are 3 and 4: whether God is the <i>only</i> explanation, and whether the evidence supports <i>God</i> rather than some lesser designer. These shape the rest of the tour.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Epicurean hypothesis</dt><dd>Order arises by chance from finite matter in infinite time.</dd><dt>Anthropomorphism</dt><dd>Attributing human characteristics to God.</dd><dt>Constant conjunction</dt><dd>Two kinds of event always observed together.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- DISORDER -->
+<template id="s-disorder">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · The problem of spatial disorder</div>
+  <h2>Disorder, dysteleology and evil</h2>
+  <p>The spec asks for ‘the problem of spatial disorder (as posed by Hume and Paley)’. If order is evidence of design, is disorder evidence against it? Philo argues that nature shows not just order but waste, suffering and parts that serve no purpose – what philosophers call <span class="term" data-t="Dysteleology">dysteleology</span>.</p>
+  <blockquote>‘The whole presents nothing but the idea of a blind nature, impregnated by a great vivifying principle, and pouring forth from her lap, without discernment or parental care, her maimed and abortive children’.<cite>Hume, <i>Dialogues</i>, Part XI, as quoted in the departmental notes</cite></blockquote>
+  <p>The departmental notes give examples: the ostrich has wings it cannot fly with; the human appendix seems to serve no function and can become inflamed and kill. The revision table adds the blind spot in the human eye. And there is natural evil: earthquakes, disease and predation.</p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>If nature were designed by an omnipotent, omniscient and supremely good God, we would expect it to be well ordered throughout and free of pointless suffering.</li>
+    <li>Nature contains disorder, poorly designed features and natural evil.</li>
+    <li>So nature is not what we would expect if it were designed by such a God.</li>
+    <li>Therefore the design argument cannot support the God of classical theism – at best an incompetent, limited or indifferent designer.</li>
+  </ol>
+  <h3>Paley’s response</h3>
+  <div class="resp for"><span class="tag">Imperfection is not absence of design</span><p>A watch that sometimes goes wrong is still evidently designed. Imperfections, or features we do not understand, do not show there is no designer. The question is whether functional complexity is better explained by design or chance – and design remains more plausible.</p></div>
+  <div class="resp against"><span class="tag">Counter</span><p>This saves design but not the <i>God</i> of the argument. A watch that often goes wrong suggests a fallible watchmaker. Combined with Hume’s ‘proportion the cause to the effect’, disorder supports a limited designer.</p></div>
+  <div class="resp for"><span class="tag">Further response</span><p>Theodicies (the problem of evil, later in 3.3.2) argue that natural evil is necessary for goods such as free will, regular natural laws or soul-making. Swinburne, for instance, argues that a world governed by regular laws – which makes natural evil possible – is needed for us to learn and act responsibly.</p></div>
+  <h3>Evaluation</h3>
+  <p>Disorder does not refute design: some design with some flaws is still design. But it weakens the move from ‘a designer’ to ‘God’, since every flaw counts against the designer’s power, knowledge or goodness. This links the design argument directly to the problem of evil.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Dysteleology</dt><dd>Apparent purposelessness or bad design in nature.</dd><dt>Natural evil</dt><dd>Suffering not caused by human choices.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- EVOLUTION -->
+<template id="s-evolution">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 5 · Darwin and evolution</div>
+  <h2>Is God the best explanation? Evolution by natural selection</h2>
+  <p>Neither Hume nor Paley knew of Darwin’s theory of evolution by natural selection (<i>On the Origin of Species</i>, 1859). It offers exactly what Hume’s Epicurean hypothesis lacked: a detailed, testable mechanism by which apparent design can arise without a designer.</p>
+  <h3>How it works</h3>
+  <ol class="list">
+    <li>Living things vary, and much of that variation is inherited.</li>
+    <li>More are born than can survive.</li>
+    <li>Those whose inherited traits help them survive and reproduce pass those traits on.</li>
+    <li>Over millions of years, small changes accumulate into complex, functional structures like the eye.</li>
+  </ol>
+  <p>Evolution also explains the <b>imperfections</b> Paley struggled with: features such as the eye’s blind spot or a flightless bird’s wings are what we would expect from a process that modifies what already exists, not one that designs from scratch.</p>
+  <blockquote>Biology is ‘the study of complicated things that give the appearance of having been designed for a purpose.’<cite>Richard Dawkins, <i>The Blind Watchmaker</i> (1987), as quoted in the Stanford Encyclopedia</cite></blockquote>
+  <h3>Does this defeat Paley?</h3>
+  <div class="resp against"><span class="tag">Yes: premise 1 is false</span><p>Paley’s first premise says anything with parts organised for a purpose is designed. Evolution shows such things can arise from unguided processes. By Ockham’s razor, a theory that explains the evidence without postulating God is preferable.</p></div>
+  <div class="resp for"><span class="tag">Not entirely: the laws remain</span><p>As the slides put it, the problem that cannot be evaded is why the laws of nature are such as to allow living things at all. Evolution explains complexity <i>within</i> existing laws; it cannot explain those laws themselves. This is where Swinburne begins.</p></div>
+  <div class="resp for"><span class="tag">Design through natural means</span><p>The Stanford Encyclopedia notes that many earlier design theorists, such as Francis Bacon and Robert Boyle, already thought God works through natural processes rather than by intervening. On this view, evolution could be the <i>means</i> of design rather than an alternative to it.</p></div>
+  <h3>Evaluation</h3>
+  <p>Evolution defeats Paley’s argument <i>as stated</i>, because it removes the support for premise 1 in biology. It does not defeat design arguments as such: it pushes the question back to the origin and character of the laws of nature – the question of temporal order.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Natural selection</dt><dd>Inherited traits that aid survival and reproduction become more common over generations.</dd><dt>Ockham’s razor</dt><dd>Do not multiply entities beyond necessity.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- SWINBURNE -->
+<template id="s-swinburne">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 6 · Richard Swinburne (b. 1934)</div>
+  <h2>Swinburne: the argument from temporal order</h2>
+  <p>Swinburne accepts evolution. His argument starts not from the eye but from the <b>regularity of the universe over time</b>: the planets moving according to the law of gravity, and the fact that the whole universe behaves according to a small number of simple laws.</p>
+  <h3>Two kinds of explanation</h3>
+  <p>Swinburne claims there are only two ways to explain a regularity:</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Scientific (impersonal)</span><p>Things keep to laws because of their nature. Planets move around the sun according to the law of gravity; they cannot do otherwise.</p></div>
+    <div class="resp"><span class="tag">Personal (a will)</span><p>A person follows a rule they could break. A student arrives at school at the same time each day because they choose to. The regularity is explained by intention and choice.</p></div>
+  </div>
+  <p>Almost all regularities are explained scientifically, as instances of more general laws. But the most fundamental laws cannot be explained scientifically, because there are no more fundamental laws to appeal to – science cannot explain science without assuming what it is trying to explain. So, Swinburne argues, if the most basic laws are to be explained rather than left as a <span class="term" data-t="Brute fact">brute fact</span>, the explanation must be personal: the free choice of a rational agent.</p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>There are temporal regularities that result from human action (personal explanation). <span class="note">(Observation.)</span></li>
+    <li>There are temporal regularities that result from the laws of nature. <span class="note">(Observation.)</span></li>
+    <li>There are only two types of explanation: scientific and personal. <span class="note">(Premise.)</span></li>
+    <li>There is no scientific explanation of the most fundamental laws of nature. <span class="note">(Science cannot explain its own basic laws.)</span></li>
+    <li>So the fundamental regularities of nature are either inexplicable brute facts or have a personal explanation. <span class="note">(From 3, 4.)</span></li>
+    <li>By analogy with personal regularities, they are best explained by a person who wills them. <span class="note">(Inference to the best explanation.)</span></li>
+    <li>Therefore such a person – God – exists.</li>
+  </ol>
+  <p>This is an <b>inductive</b> argument, and Swinburne claims only that it makes God’s existence more probable than not when combined with other evidence. He is careful not to claim proof.</p>
+  <h3>Swinburne against Hume</h3>
+  <div class="resp for"><span class="tag">Against ‘the cause must be proportioned’</span><p>We cannot show the designer is infinite, but we can speak of the designer in the superlative. Ockham’s razor favours one God over many gods or a dead god: a single, unlimited being is the simplest hypothesis.</p></div>
+  <div class="resp for"><span class="tag">Against the unique case</span><p>Science routinely postulates unobservable entities, such as dark matter, to explain phenomena. There is no reason theology should not do the same.</p></div>
+  <h3>Objections</h3>
+  <div class="resp against"><span class="tag">God of the gaps</span><p>Swinburne invokes God where science has no answer – yet. Future science may explain the laws of nature without a designer.</p></div>
+  <div class="resp for"><span class="tag">Reply</span><p>Swinburne’s gap is not a temporary hole in science but a logical one: no scientific law can explain why there are scientific laws at all. A personal explanation is not a gap-filler but the only distinct alternative.</p></div>
+  <div class="resp against"><span class="tag">Ockham cuts the other way</span><p>The simplest explanation is no designer at all: the universe and its laws exist as a brute fact.</p></div>
+  <div class="resp for"><span class="tag">Reply</span><p>For Swinburne, ‘simplest’ means ‘most explanatory power per entity posited’, not ‘fewest entities’. God explains both the existence of the universe and its order, which a brute fact does not.</p></div>
+  <div class="resp against"><span class="tag">Only two kinds of explanation?</span><p>Is premise 3 true? Perhaps fundamental laws are necessary, or explained by something we have not imagined. And personal explanation works for embodied humans; whether it works for a bodiless mind outside time is exactly what Hume’s anthropomorphism objection questions.</p></div>
+  <h3>Evaluation</h3>
+  <p>Swinburne’s argument escapes evolution and the weak analogy, and it addresses a genuine question that science cannot answer. Its weakest point is premise 3, together with the claim that a personal explanation is simpler than a brute fact. Whether God is the <i>best</i> explanation depends on whether ‘brute fact’ is a failure to explain or an acceptable stopping point.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Temporal order</dt><dd>Regularity of behaviour over time.</dd><dt>Personal explanation</dt><dd>Explanation in terms of an agent’s intentions and choices.</dd><dt>Brute fact</dt><dd>A fact with no further explanation.</dd><dt>God of the gaps</dt><dd>Invoking God to fill gaps in scientific explanation.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- KANT -->
+<template id="s-kant">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 7 · Kant (1724–1804) <span class="bspec">Beyond the spec</span></div>
+  <h2>Kant: the ‘physico-theological’ proof</h2>
+  <p>In the <i>Critique of Pure Reason</i> (1781/1787), Kant calls the design argument the <span class="term" data-t="Physico-theological proof">physico-theological proof</span>. He treats it with notable respect – it is the oldest, clearest and most accessible proof, and it encourages the study of nature – but argues that it cannot establish the God of theism on its own.</p>
+  <h3>Kant’s three steps</h3>
+  <p>Paraphrasing Kant’s critique:</p>
+  <ol class="list">
+    <li><b>At most an architect, not a creator.</b> The argument infers from the order in matter to a cause of that order. At best it shows a designer who shaped material that already existed – a world-architect, limited by the material it worked with – not a creator of matter itself.</li>
+    <li><b>At most great, not infinite.</b> The order we observe is great but finite, so it supports only a very great, wise and powerful designer – not an omnipotent, omniscient one. (Compare Hume’s ‘proportion the cause to the effect’.)</li>
+    <li><b>The leap relies on other arguments.</b> To get from ‘a very great designer’ to ‘an absolutely necessary, all-perfect being’, the argument must fall back on the cosmological argument (from contingency to a necessary being), which in turn relies on the ontological argument (from the concept of a perfect being to its existence).</li>
+  </ol>
+  <div class="thesis"><b>Why this matters.</b> Kant thought he had already refuted the ontological argument (existence is not a real predicate – see the Ontological tour). If the design argument depends on it to reach God, it inherits its failure.</div>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>The design argument infers from the order in nature to the cause of that order.</li>
+    <li>Order in nature is finite, and concerns the form of matter, not its existence.</li>
+    <li>So the argument supports at most a very great architect of the world. <span class="note">(From 1, 2.)</span></li>
+    <li>The God of theism is an infinite, necessary creator.</li>
+    <li>To reach God, the argument must rely on the cosmological and ontological arguments.</li>
+    <li>The ontological argument fails.</li>
+    <li>Therefore the design argument cannot prove the existence of God.</li>
+  </ol>
+  <h3>Evaluation</h3>
+  <p>Kant does not deny the design intuition – he even admits that nature’s order moves us. His point is about what the argument can <i>prove</i>. This is a powerful structural point for a 25-mark answer: the design argument, on its own, cannot get further than Hume allowed.</p>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-kant.jpg" alt="Portrait of Kant in old age with powdered grey hair" loading="lazy"><figcaption><b>Immanuel Kant</b>Unknown painter, possibly of the school of Anton Graff · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Physico-theological proof</dt><dd>Kant’s name for the design argument.</dd><dt>Architect vs creator</dt><dd>One who orders existing matter vs one who brings matter into being.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- FINE TUNING -->
+<template id="s-finetuning">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 8 · Cosmic fine-tuning <span class="bspec">Beyond the spec</span></div>
+  <h2>The fine-tuning argument</h2>
+  <p>The most discussed modern design argument looks not at organisms but at the laws of physics. The Stanford Encyclopedia reports that even an extraordinarily small change in many key parameters would have made life impossible anywhere in the universe. Two of its examples:</p>
+  <ul class="list">
+    <li><b>The cosmological constant</b> (the universe’s expansion rate): slightly greater, and there would be no stars; slightly less, and the universe would have quickly collapsed back on itself.</li>
+    <li><b>The strong nuclear force:</b> a change of about 0.4% would leave too little carbon or too little oxygen for life.</li>
+  </ul>
+  <blockquote>‘In my opinion, a probability this tiny is not something we can let go unexplained. Luck will certainly not do here’.<cite>Lee Smolin (1999), physicist, on the chance of a universe with stars, as quoted in the Stanford Encyclopedia</cite></blockquote>
+  <p>The Encyclopedia compares this to poker: every hand is equally improbable, but if the dealer is dealt three royal flushes in a row, we rightly demand an explanation.</p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>The constants of physics fall within an extremely narrow range that permits life.</li>
+    <li>This is either due to chance, physical necessity or design.</li>
+    <li>It is not plausibly due to chance (too improbable) or necessity (the constants could apparently have been otherwise).</li>
+    <li>Therefore it is due to design.</li>
+  </ol>
+  <h3>Responses</h3>
+  <div class="resp against"><span class="tag">The weak anthropic principle</span><p>We could only observe a universe compatible with our existence. So we should not be surprised to find one – the demand for explanation is misplaced.</p></div>
+  <div class="resp for"><span class="tag">Reply: the firing squad</span><p>Defenders reply that surviving a firing squad of 50 marksmen still demands explanation, even though you could only observe that you survived if you did. (A standard reply in the literature, often credited to John Leslie.)</p></div>
+  <div class="resp against"><span class="tag">The multiverse</span><p>If there are vast numbers of universes with different constants, a few will permit life, and we are in one of them – like buying millions of lottery tickets.</p></div>
+  <div class="resp for"><span class="tag">Reply</span><p>The Encyclopedia notes a multiverse does not by itself explain fine-tuning: we would need to know whether the process producing universes is biased for, against or indifferent to life-permitting values. It also faces the ‘Boltzmann brains’ problem: in a multiverse, randomly formed observers would vastly outnumber ordinary ones, which seems to undermine our reasons for believing anything – including the multiverse.</p></div>
+  <div class="resp against"><span class="tag">Future science</span><p>Science may one day explain the constants. Reply: this is a promissory note, not a rival explanation.</p></div>
+  <h3>Link to the spec</h3>
+  <p>Fine-tuning is a development of Swinburne’s question – why are the laws as they are? – and the multiverse is a modern version of Hume’s Epicurean hypothesis. Using it in an essay shows the debate over ‘whether God is the best or only explanation’ is very much alive.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Fine-tuning</dt><dd>The constants of physics lie within a narrow life-permitting range.</dd><dt>Anthropic principle</dt><dd>We can only observe a universe compatible with observers.</dd><dt>Multiverse</dt><dd>A vast array of universes with different physical constants.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- REVISE -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>Is God the best explanation of order in nature?</h2>
+  <h3>Overall evaluation</h3>
+  <p>The design argument has moved from biology to physics. Hume’s analogical version is weak: the universe is unlike a house, and we have only one case. Paley avoids the analogy objection by appealing to a shared property, but Darwin removes the support for his first premise by explaining biological contrivance naturally. Swinburne relocates design to the laws themselves, which evolution cannot explain; but he must show that a personal explanation is better than accepting the laws as a brute fact, and fine-tuning responses such as the multiverse offer rivals. Throughout, Hume’s and Kant’s point stands: even a successful argument reaches a very great designer, not the infinite, perfect God of theism. A sustained judgement: <b>the design argument gives some reason to think the order of the universe has an explanation beyond science, but it cannot show that God is the only explanation, and on its own it cannot show that the explanation is God.</b></p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Hume (Cleanthes):</b> nature resembles human artefacts; similar effects, similar causes; so a mind like ours, but greater.</li>
+    <li><b>Paley:</b> the watch; parts organised for a purpose require a designer; not an analogy but a shared property.</li>
+    <li><b>Hume (Philo):</b> weak analogy; unique case; Epicurean hypothesis; proportion the cause to the effect; anthropomorphism; useless belief.</li>
+    <li><b>Spatial disorder:</b> dysteleology and natural evil; Paley – a faulty watch is still designed; but it suggests a limited designer.</li>
+    <li><b>Darwin:</b> natural selection explains apparent design; but not why the laws permit life.</li>
+    <li><b>Swinburne:</b> regularities need scientific or personal explanation; the basic laws cannot be explained scientifically; so a personal explanation – God.</li>
+    <li><b>Kant (beyond spec):</b> at most an architect, not a creator; relies on the cosmological and ontological arguments.</li>
+    <li><b>Fine-tuning (beyond spec):</b> life-permitting constants; replies – anthropic principle, multiverse.</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Does the design argument prove that God exists?</b><br>1. Thesis; define teleological; a posteriori and inductive.<br>2. Paley → Hume (analogy, unique case) → Paley’s property reply → judge.<br>3. Evolution → Swinburne’s temporal order → judge.<br>4. Is God the best explanation? Brute fact, multiverse → judge.<br>5. Hume/Kant: at best a designer, not God → conclusion.</p></div>
+</aside></div>
+</template>
+
+<!-- GLOSSARY -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>For 3-mark questions, learn these definitions precisely – one accurate sentence is better than a vague paragraph.</p></div></aside></div>
+</template>
+
+<script>
+var GLOSS=[
+ ["Teleology","The study of purpose or ends (Greek telos). A teleological argument argues from apparent purpose in nature to a designer.","t"],
+ ["A posteriori","Known through experience.","t"],
+ ["Inductive argument","An argument whose premises make the conclusion probable but not certain.","t"],
+ ["Argument from analogy","An argument that infers a further similarity between two things from known similarities.","t"],
+ ["Inference to the best explanation","Accepting the hypothesis that best explains the evidence (also called abduction).","t"],
+ ["Contrivance","Paley’s term: parts arranged so they work together to serve a purpose.","t"],
+ ["Spatial order","Order in the arrangement of parts at a given time.","t"],
+ ["Temporal order","Regularity of behaviour over time, as in the laws of nature.","t"],
+ ["Epicurean hypothesis","Hume’s suggestion that finite matter in infinite time would, by chance, eventually fall into orderly arrangements.","t"],
+ ["Anthropomorphism","Attributing human characteristics to God.","t"],
+ ["Constant conjunction","Hume: two kinds of event always observed together, the basis of causal inference.","t"],
+ ["Mitigated sceptic","Hume’s position: suspending judgement about God, given the limits of human knowledge.","h"],
+ ["Dysteleology","Apparent purposelessness or poor design in nature.","t"],
+ ["Natural evil","Suffering not caused by human choices, such as disease or earthquakes.","t"],
+ ["Natural selection","The process by which inherited traits that aid survival and reproduction become more common over generations.","t"],
+ ["Ockham’s razor","The principle that, all else being equal, we should not multiply entities beyond necessity.","h"],
+ ["Personal explanation","Explanation of an event in terms of an agent’s intentions and choices.","t"],
+ ["Scientific explanation","Explanation of an event in terms of laws of nature and initial conditions.","t"],
+ ["Brute fact","A fact that has no further explanation.","t"],
+ ["God of the gaps","Invoking God to explain whatever science has not yet explained.","t"],
+ ["Physico-theological proof","Kant’s name for the design argument.","t"],
+ ["Fine-tuning","The claim that the constants of physics lie within a very narrow life-permitting range.","t"],
+ ["Anthropic principle","The principle that we can only observe a universe compatible with the existence of observers.","t"],
+ ["Multiverse","The hypothesis that there are vast numbers of universes with different physical constants.","t"]
+];
+var STOPS=[["start","Start here"],["analogy","Hume’s analogy"],["paley","Paley"],["objections","Hume’s objections"],["disorder","Spatial disorder"],["evolution","Evolution"],["swinburne","Swinburne"],["kant","Kant"],["finetuning","Fine-tuning"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["analogy","Stop 1","The argument from analogy","Cleanthes: nature resembles human artefacts."],
+ ["paley","Stop 2","Paley’s watch","Parts organised for a purpose."],
+ ["objections","Stop 3","Hume’s objections","Weak analogy, unique case, Epicurus and more."],
+ ["disorder","Stop 4","Spatial disorder","Dysteleology and natural evil."],
+ ["evolution","Stop 5","Evolution","Design without a designer?"],
+ ["swinburne","Stop 6","Swinburne","Temporal order and personal explanation."],
+ ["kant","Stop 7 · Beyond the spec","Kant","An architect, not a creator."],
+ ["finetuning","Stop 8 · Beyond the spec","Fine-tuning","Constants, the anthropic principle and the multiverse."]
+];
+var STRETCH={
+ "start":[
+  ["An ancient argument","The Stanford Encyclopedia notes that the design argument goes back at least to the Greeks, and in very brief form is one of Aquinas’ Five Ways (the fifth way, from the ordered behaviour of things that lack knowledge). It was most influential in the 18th and early 19th centuries.","<i>Stanford Encyclopedia</i>, ‘Teleological Arguments’, §1"],
+  ["Three logical shapes","Ratzsch and Koperski distinguish analogical design arguments (Hume’s Cleanthes), deductive ones (arguably Paley) and inferences to the best explanation (closer to Swinburne). Identifying which shape an argument has tells you which objections hit it.","<i>Stanford Encyclopedia</i>, §2"],
+  ["Is design even inferred?","Thomas Reid suggested some beliefs – in an external world, in other minds – are not inferred but arise naturally from experience. Perhaps design beliefs work like that, which would explain why they persist despite the arguments’ problems.","<i>Stanford Encyclopedia</i>, §5"]],
+ "analogy":[
+  ["Why dialogues?","Hume chose the dialogue form, and arranged for the <i>Dialogues</i> to be published only after his death. Scholars still debate which character, if any, speaks for him – Philo is the usual candidate, but Philo seems to concede something to Cleanthes at the end.","Paraphrased; commonly discussed in commentaries on the <i>Dialogues</i>"],
+  ["Aquinas’ fifth way","Aquinas argued that things without knowledge, such as natural bodies, act for an end – reliably achieving the best result – and so must be directed by something with knowledge, ‘as the arrow is directed by the archer’. That director, he says, we call God.","Paraphrased; Aquinas, <i>Summa Theologica</i> I, q.2, a.3"]],
+ "paley":[
+  ["Paley and the eye","Paley spends much of <i>Natural Theology</i> on anatomical detail, especially comparing the eye to a telescope. Darwin read Paley as a student at Cambridge and later wrote that he had admired the book – before his own work undermined it.","Paraphrased; Darwin, <i>Autobiography</i>"],
+  ["Did Paley answer Hume deliberately?","The Stanford Encyclopedia reports the argument (Gillispie 1990) that Paley knew of Hume’s attacks on analogical design arguments and deliberately structured his own argument to avoid them.","<i>Stanford Encyclopedia</i>, §2.2"],
+  ["Intelligent Design","The modern ‘Intelligent Design’ movement revives Paley’s strategy with new properties: Michael Behe’s ‘irreducible complexity’ and William Dembski’s ‘specified complexity’. Critics argue these are ‘gap’ arguments and get the science wrong.","<i>Stanford Encyclopedia</i>, §4.2"]],
+ "objections":[
+  ["Hume’s fork again","Hume’s objections rest on his empiricism: causal knowledge comes only from experience of constant conjunction. If that theory of causation is too narrow, several objections weaken. Compare his attack on a priori arguments in the Ontological tour.","Cross-link within the AQA course"],
+  ["The likelihood approach","Elliott Sober recasts the design argument as a comparison of likelihoods: how probable is the evidence on design, compared with on chance? He argues that without independent knowledge of what a designer would want, we cannot assign the design hypothesis a likelihood at all.","<i>Stanford Encyclopedia</i>, §2.3.1, citing Sober 2003, 2009"],
+  ["Is God of the gaps fair?","The Stanford Encyclopedia argues that calling all design arguments ‘God of the gaps’ is historically inaccurate: many design theorists held that God works through unbroken natural processes, not interventions.","<i>Stanford Encyclopedia</i>, §3.2"]],
+ "disorder":[
+  ["Darwin and the wasp","Darwin wrote to the botanist Asa Gray that he could not persuade himself that a good and all-powerful God would have designed parasitic wasps to feed within the living bodies of caterpillars. This is dysteleology in its sharpest form.","Paraphrased; Darwin, letter to Asa Gray, 22 May 1860"],
+  ["Link to the problem of evil","The problem of spatial disorder is a version of the evidential problem of evil (also 3.3.2). Hick’s soul-making theodicy and Swinburne’s regular-laws argument are relevant replies.","Cross-link within the AQA course"]],
+ "evolution":[
+  ["Explaining away","Ratzsch and Koperski distinguish <i>undercutting</i> an argument from <i>explaining away</i> design. Evolution may undercut Paley without showing there is no design at all, if mind operates at a deeper level, through the laws.","<i>Stanford Encyclopedia</i>, §3.1"],
+  ["Crick’s warning","Francis Crick warned biologists to keep reminding themselves that what they see was not designed but evolved – which, the Encyclopedia notes, shows how natural design thinking remains, even in science.","Paraphrased; <i>Stanford Encyclopedia</i>, §2.2"],
+  ["Bacon before Darwin","Over two centuries before Darwin, Francis Bacon wrote that God accomplishes his will ‘not immediate and direct, but by compass; not violating Nature’.","Bacon, quoted in Whewell (1834), as cited in the <i>Stanford Encyclopedia</i>, §3.2"]],
+ "swinburne":[
+  ["Swinburne’s cumulative case","In <i>The Existence of God</i> (1979; 2nd ed. 2004), Swinburne uses probability theory (Bayes’ theorem) to argue that the cosmological, design and other arguments together make God’s existence more probable than not.","Paraphrased; Swinburne, <i>The Existence of God</i>"],
+  ["Laws as necessary?","Some philosophers argue that the laws of nature are not contingent regularities but necessary relations between properties. If so, Swinburne’s premise that the basic laws need an explanation may fail.","Paraphrased; a standard objection in philosophy of science"]],
+ "kant":[
+  ["The starry heavens","Kant famously wrote that two things fill the mind with ever new admiration and awe: the starry heavens above and the moral law within. The Stanford Encyclopedia notes even Kant admitted nature’s power to move us.","Paraphrased; Kant, <i>Critique of Practical Reason</i> (1788), conclusion"],
+  ["Purposiveness without a purpose","In the <i>Critique of Judgement</i> (1790), Kant argued we cannot help viewing organisms as if designed, but this is a feature of how our judgement works, not a proof that they were designed.","Paraphrased; Kant, <i>Critique of Judgement</i>, Part II"],
+  ["Kant’s moral argument","Having rejected the theoretical proofs, Kant argued that belief in God is a postulate of practical (moral) reason: we must assume God exists for the highest good to be achievable.","Paraphrased; Kant, <i>Critique of Practical Reason</i>"]],
+ "finetuning":[
+  ["Exotic life","Perhaps life could exist under very different constants. The Encyclopedia replies that any life must extract energy to resist entropy, which needs complexity – and many fine-tuned universes would lack even stars.","<i>Stanford Encyclopedia</i>, §4.1.2.2"],
+  ["Sober’s selection effect","Elliott Sober argues fine-tuning is subject to an observation selection effect, like a net with large holes that can only catch large fish: the evidence then does not favour design over chance.","<i>Stanford Encyclopedia</i>, §4.1.1.2"],
+  ["Does theism do better?","Neil Manson (2018) argues that neither theism nor naturalism provides a better explanation of fine-tuning.","<i>Stanford Encyclopedia</i>, §4.1.1"]],
+ "revise":[
+  ["Why do design arguments persist?","The Encyclopedia ends by asking why design arguments remain so durable when the evidence is ambiguous and the logic controversial – perhaps they are better arguments than critics concede, or perhaps design beliefs are not based on argument at all.","<i>Stanford Encyclopedia</i>, §5"],
+  ["Link to the cosmological argument","Kant’s point that the design argument needs the cosmological argument to reach a necessary creator is a useful bridge to the next topic.","Cross-link within the AQA course"]]
+};
+var QS={
+ "analogy":["What is meant by an argument from analogy?","Explain the design argument from analogy as presented by Hume.","Explain the design argument from analogy and one objection to it.","Does the design argument from analogy succeed?"],
+ "paley":["What is meant by ‘spatial order’?","Explain why Paley’s argument is not an argument from analogy.","Explain Paley’s design argument.","Is Paley’s design argument persuasive?"],
+ "objections":["Explain the objection that the design argument is based on a unique case.","Explain Hume’s Epicurean hypothesis.","Explain Hume’s objections to the design argument from analogy.","Do Hume’s objections defeat the design argument?"],
+ "disorder":["What is meant by dysteleology?","Explain the problem of spatial disorder for the design argument.","Explain how Hume and Paley each treat the problem of spatial disorder.","Does disorder in nature undermine the design argument?"],
+ "evolution":["Briefly explain natural selection.","Explain how evolution challenges Paley’s design argument.","Explain how evolution challenges the design argument and how a defender might respond.","Has evolution defeated the design argument?"],
+ "swinburne":["What is meant by ‘temporal order’?","Explain the difference between scientific and personal explanation.","Explain Swinburne’s design argument from temporal order.","Is God the best explanation of the order in the universe?"],
+ "kant":["What did Kant call the design argument?","Explain Kant’s claim that the design argument shows at most an architect, not a creator.","Explain Kant’s criticism of the design argument (extension).","Can the design argument establish the God of classical theism?"],
+ "finetuning":["What is meant by fine-tuning?","Explain the multiverse response to the fine-tuning argument.","Explain the fine-tuning argument and two responses to it (extension).","Is God the only explanation of fine-tuning?"]
+};
+var QUIZ=[
+ ["What does ‘teleological’ mean?","Concerning purpose or ends (Greek telos)."],
+ ["State the principle Cleanthes’ argument relies on.","Similar effects have similar causes."],
+ ["Why does Paley contrast the stone and the watch?","The watch has parts organised for a purpose (contrivance), which demands a designer; the stone does not."],
+ ["Why is Paley’s argument not an argument from analogy?","It identifies a shared property (parts organised for a purpose) rather than arguing that nature resembles a watch overall."],
+ ["What is the unique-case objection?","We infer causes from constant conjunction, but we have experienced only one universe and never seen one made."],
+ ["What is the Epicurean hypothesis?","Finite matter in infinite time will, by chance, eventually fall into orderly arrangements."],
+ ["How does Paley respond to imperfection in nature?","A watch that goes wrong is still designed; imperfection does not disprove design."],
+ ["What can evolution not explain, according to the design argument’s defenders?","Why the laws of nature are such as to permit life at all."],
+ ["What are Swinburne’s two types of explanation?","Scientific (impersonal laws) and personal (the choices of an agent)."],
+ ["What is Kant’s ‘architect not creator’ point?","Order in matter shows at most a being who shaped existing matter, not one who created it."]
+];
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src">'+(x[2]==="h"?"Handout glossary":"From the handout text")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>

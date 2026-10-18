@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Religious Language Tour</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff; --line:#dbe4ee;
+  --tint:#ece0f5; --ink:#5a2f78;
+  --mor:#d6efdf; --mor-ink:#245c3c;
+  --god:#ece0f5; --god-ink:#5a2f78;
+  --mind:#fbe3d6; --mind-ink:#8a3f1c;
+  --font:"Avenir Light","Avenir","Avenir Next","Nunito Sans",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:300;line-height:1.5;font-size:1.0625rem}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,64px) 16px}
+.back{display:inline-block;margin-bottom:24px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.band{background:var(--tint);color:var(--ink);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:24px}
+.band h1{margin:6px 0 10px;font-weight:300;font-size:clamp(2rem,5vw,3.1rem);line-height:1.15}
+.band p{margin:0;max-width:60ch;font-size:1.08rem}
+.band img{width:100%;border-radius:14px;display:block}
+@media (max-width:760px){.band{grid-template-columns:1fr}}
+
+/* tour map */
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:0 0 auto;font:inherit;font-size:.92rem;font-weight:400;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 15px;border-radius:999px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tabs button .n{font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs button[aria-selected=true] .n{color:#ece0f5}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* stop layout */
+.stop{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:28px;align-items:start}
+@media (max-width:900px){.stop{grid-template-columns:1fr}}
+.panel{background:var(--card);border-radius:16px;padding:clamp(20px,4vw,40px)}
+.panel h2{margin:0 0 4px;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.2;color:var(--ink)}
+.panel h3{margin:30px 0 8px;font-weight:400;font-size:1.3rem;color:var(--fg)}
+.panel p{margin:0 0 14px;max-width:70ch}
+.kicker{color:var(--muted);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.thesis{background:var(--tint);color:var(--ink);border-radius:12px;padding:16px 20px;margin:0 0 18px}
+.thesis b{font-weight:600}
+blockquote{margin:18px 0;padding:14px 20px;border-left:5px solid var(--ink);background:#f6f9fd;border-radius:0 12px 12px 0;font-style:italic;max-width:70ch}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.88rem;color:var(--muted)}
+figure{margin:18px 0;max-width:640px}
+figure img{width:100%;border-radius:12px;display:block}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.pair{grid-template-columns:1fr}}
+ol.list,ul.list{padding-left:1.3em;margin:0 0 14px}
+ol.list li,ul.list li{margin-bottom:4px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+.resp .tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.resp.for .tag{color:var(--mor-ink)} .resp.for{border-left:5px solid var(--mor)}
+.resp.against .tag{color:var(--mind-ink)} .resp.against{border-left:5px solid var(--mind)}
+.resp p:last-child{margin-bottom:0}
+.note{font-size:.88rem;color:var(--muted)}
+
+/* side */
+aside{display:grid;gap:16px;position:sticky;top:72px}
+@media (max-width:900px){aside{position:static}}
+.card{background:var(--card);border-radius:14px;padding:18px 20px;border-top:6px solid var(--tint)}
+.card h4{margin:0 0 8px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.card p{margin:0;font-size:.95rem}
+.card dl{margin:0}.card dt{font-weight:600;font-size:.95rem;margin-top:8px}.card dd{margin:0;font-size:.92rem;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.nav button{font:inherit;font-weight:600;font-size:.95rem;background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 0}
+.nav button[hidden]{visibility:hidden;display:block}
+
+/* overview map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.tile{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;padding:0;border:0;border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;color:var(--fg);border-top:6px solid var(--tint);transition:transform .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tile .t{padding:4px 18px 18px;display:grid;gap:6px}
+.tile .paper{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile h3{margin:0;font-weight:400;font-size:1.2rem}
+.tile p{margin:0;font-size:.93rem;color:var(--muted)}
+.tile .go{font-weight:600;font-size:.9rem;color:var(--ink)}
+.tile.text-only{padding-top:14px}
+
+/* glossary */
+.gsearch{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);margin:8px 0 18px;background:#fbfdff}
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss div{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gloss dt{font-weight:600;color:var(--ink)}
+.gloss dd{margin:4px 0 0;font-size:.95rem}
+.gloss .src{font-size:.78rem;color:var(--muted);margin-top:6px}
+.term{border-bottom:1px dotted var(--ink);cursor:help}
+footer{margin-top:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+html.embedded .back{display:none}
+html.embedded .wrap{padding:0}
+html.embedded .tabs{position:static}
+html.embedded aside{position:static}
+figure.tile{margin:0;max-width:none}
+figure.tile img{border-radius:0}
+
+.exam{border-top-color:#cfe3f7}
+.exam h4{color:#1f4f7a}
+.exam ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.exam li{font-size:.93rem;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.exam .mk{font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;background:#cfe3f7;color:#1f4f7a;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:2px}
+.exam details{margin-top:12px;font-size:.85rem;color:var(--muted)}
+.exam summary{cursor:pointer;color:#1f4f7a;font-weight:600}
+.exam details p{margin:6px 0 0}
+
+.stretch{border-top-color:#d6efdf}
+.stretch h4{color:#245c3c}
+.stretch .tag2{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.stretch h5{margin:0 0 6px;font-size:1rem;font-weight:600}
+.stretch p{font-size:.92rem}
+.stretch .src{margin-top:8px;font-size:.78rem;color:var(--muted)}
+/* ---- alignment pass ---- */
+.panel p,.panel blockquote,.panel .thesis,.panel ol.list,.panel ul.list{max-width:none}
+.panel p,.panel blockquote,.panel li,.resp p,.panel figcaption{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.card p,.card dd,.card li,.tile p,.map p,.gloss dd,.pair .resp li,.panel figure.tile figcaption{text-align:left}
+.panel h2,.panel h3{text-align:left}
+aside{position:static!important}
+.panel figure:not(.tile){max-width:none!important;width:100%;margin:20px 0}
+.panel figure:not(.tile)>img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.panel .pair{gap:16px;margin:20px 0}
+.panel .pair figure:not(.tile){margin:0}
+.panel .pair figure:not(.tile)>img{aspect-ratio:4/3}
+.panel figure.side{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:22px;align-items:center;background:#f6f9fd;border-radius:14px;padding:16px}
+.panel figure.side>img{aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.panel figure.side figcaption{margin:0;font-size:1rem;color:var(--fg)}
+@media (max-width:560px){.panel figure.side{grid-template-columns:1fr}}
+.panel svg{display:block;width:100%!important;max-width:none!important;height:auto;margin:20px 0!important}
+.panel .quad{max-width:none}
+.panel table.doubt{margin:20px 0}
+.panel .resp{margin:18px 0}
+.panel blockquote{margin:20px 0}
+.panel .map{margin:20px 0}
+.band svg{width:100%;height:auto;display:block}
+blockquote{background:#faf6fd}
+details.resp summary{cursor:pointer}
+.bspec{display:inline-block;margin-left:8px;font-size:.7rem;font-weight:600;letter-spacing:.08em;background:#d6efdf;color:#245c3c;border-radius:999px;padding:2px 8px;vertical-align:middle}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+</style>
+<script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
+
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="#">← Metaphysics of God</a>
+  <header class="band">
+    <div>
+      <span class="spec">Paper 2 · Spec 3.3.3</span>
+      <h1>Religious language</h1>
+      <p>When we say ‘God loves us’, are we stating a fact – or doing something else entirely? Take the tour: cognitivism and non-cognitivism, Ayer’s verification principle, Hick’s reply, and the ‘University debate’ between Flew, Mitchell and Hare – with Wittgenstein and Aquinas beyond the spec.</p>
+    </div>
+    <svg viewBox="0 0 320 220" role="img" aria-label="A speech bubble saying 'God exists' with two arrows: one to a box labelled 'states a fact (true or false)' and one to a box labelled 'expresses an attitude'.">
+      <rect width="320" height="220" rx="14" fill="#fff"/>
+      <path d="M110 30 h100 a14 14 0 0 1 14 14 v28 a14 14 0 0 1 -14 14 h-46 l-12 14 l-4 -14 h-38 a14 14 0 0 1 -14 -14 v-28 a14 14 0 0 1 14 -14z" fill="#ece0f5" stroke="#5a2f78" stroke-width="2"/>
+      <text x="160" y="64" text-anchor="middle" font-size="16" fill="#5a2f78" font-family="Nunito Sans,sans-serif">‘God exists’</text>
+      <line x1="140" y1="112" x2="90" y2="140" stroke="#5a2f78" stroke-width="2"/><line x1="180" y1="112" x2="230" y2="140" stroke="#5a2f78" stroke-width="2"/>
+      <rect x="20" y="142" width="132" height="54" rx="10" fill="#5a2f78"/>
+      <text x="86" y="166" text-anchor="middle" font-size="12" fill="#fff" font-family="Nunito Sans,sans-serif">Cognitive:</text>
+      <text x="86" y="183" text-anchor="middle" font-size="12" fill="#fff" font-family="Nunito Sans,sans-serif">true or false</text>
+      <rect x="168" y="142" width="132" height="54" rx="10" fill="#fff" stroke="#5a2f78" stroke-width="2"/>
+      <text x="234" y="166" text-anchor="middle" font-size="12" fill="#5a2f78" font-family="Nunito Sans,sans-serif">Non-cognitive:</text>
+      <text x="234" y="183" text-anchor="middle" font-size="12" fill="#5a2f78" font-family="Nunito Sans,sans-serif">an attitude</text>
+    </svg>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Tour stops" id="tabs"></nav>
+  <main id="stage"></main>
+  <footer>Built from the departmental resources: <i>Religious Language</i> and <i>Mitchell and Hare</i> slides (2024), the religious language revision table, <i>Wittgenstein on religious language and belief</i>, and Scott, ‘Religious Language’, <i>Stanford Encyclopedia of Philosophy</i> (2022). Material marked ‘Beyond the spec’ is extension only. AQA 7172 · Metaphysics of God.</footer>
+</div>
+
+<!-- START -->
+<template id="s-start">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 0 · The big question</div>
+  <h2>When we talk about God, what are we doing?</h2>
+  <p>Every other topic in Metaphysics of God assumes that ‘God exists’ is a claim that could be true or false. The arguments try to show it is true; the problem of evil tries to show it is false. But what if it is not that kind of claim at all? This unit asks whether religious language makes, or attempts to make, objective claims about the world – or whether it does something else.</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Cognitivism</span><p>Religious language expresses <b>beliefs</b> that aim to describe reality, and so are <span class="term" data-t="Truth-apt">truth-apt</span>: they can be true or false. ‘God exists’ is like ‘Mars exists’ – a claim about what there is.</p></div>
+    <div class="resp"><span class="tag">Non-cognitivism</span><p>Religious language expresses a <b>non-cognitive</b> state – an attitude, value, commitment or way of seeing the world – rather than a belief, and so is not true or false. ‘God exists’ is more like ‘Hurrah for life!’ or a promise.</p></div>
+  </div>
+  <p>Why does this matter? If religious language is non-cognitive, there is no point arguing about whether God exists – the question rests on a misunderstanding. If it is cognitive, then we need to know what would make it true, and some philosophers argue that there is no answer to that question – which would make it meaningless.</p>
+  <p>Notice a second distinction running through the topic: the question of whether religious language is <b>meaningful</b> at all (Ayer, Flew) is different from whether it is <b>cognitive</b>. Hare thinks it is meaningful but non-cognitive; Mitchell thinks it is meaningful and cognitive; Ayer thinks it is not literally meaningful.</p>
+  <div class="thesis"><b>What the spec requires.</b> The cognitive/non-cognitive distinction; the logical positivist challenge – the verification principle and verification/falsification (Ayer); Hick’s eschatological verification and issues arising; the ‘University debate’ – Flew (Wisdom’s gardener), Mitchell (the partisan) and Hare (bliks and the lunatic), and issues arising. <b>Wittgenstein, analogy and other approaches are beyond the spec.</b></div>
+  <h3>Choose where to go</h3>
+  <div class="map" id="map"></div>
+</div>
+<aside>
+  <div class="card"><h4>The big question</h4><p>Is religious language cognitive or non-cognitive – and is it meaningful at all?</p></div>
+  <div class="card"><h4>How to use this tour</h4><p>Go in order: the debate builds, each thinker answering the last. Revising? Use the map below. Cards marked ‘Beyond the spec’ are extension.</p></div>
+  <div class="card"><h4>Exam lens</h4><p>For every thinker, be ready to say two things: is religious language <b>meaningful</b>, and is it <b>cognitive</b>? Most 12-mark answers turn on getting this right.</p></div>
+</aside></div>
+</template>
+
+<!-- AYER -->
+<template id="s-ayer">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 1 · A. J. Ayer (1910–1989)</div>
+  <h2>Logical positivism and the verification principle</h2>
+  <p><span class="term" data-t="Logical positivism">Logical positivism</span> was an early-20th-century movement, centred on the Vienna Circle, which held that genuine knowledge must be grounded either in logic or in empirical observation. Ayer brought it to the English-speaking world in <i>Language, Truth and Logic</i> (1936), whose first chapter is ambitiously titled ‘The Elimination of Metaphysics’.</p>
+  <h3>Two kinds of meaningful statement</h3>
+  <p>According to the <span class="term" data-t="Verification principle">verification principle</span>, only two kinds of statement are literally meaningful:</p>
+  <div class="pair">
+    <div class="resp"><span class="tag">Analytic statements</span><p>True or false in virtue of the meaning of their words, like ‘bachelors are unmarried’ or ‘2 + 2 = 4’. Known without experience, but they tell us nothing about the world.</p></div>
+    <div class="resp"><span class="tag">Empirical statements</span><p>Claims about the world that can be verified – shown true or false – by observation, like ‘water boils at 100°C’.</p></div>
+  </div>
+  <p>Anything else is a <span class="term" data-t="Pseudo-proposition">pseudo-proposition</span>: it looks like a statement of fact but has no factual content.</p>
+  <blockquote>‘The criterion which we use to test the genuineness of apparent statements of fact is the criterion of verifiability. We say that a sentence is factually significant to any given person, if and only if, he knows how to verify the proposition which it purports to express – that is, if he knows what observations would lead him, under certain conditions, to accept the proposition as being true, or reject it as being false… The sentence expressing it may be emotionally significant to him; but it is not literally significant.’<cite>Ayer, <i>Language, Truth and Logic</i> (1936), ch. 1, as quoted on the departmental slides (lightly corrected)</cite></blockquote>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>A statement is literally meaningful only if it is analytic or empirically verifiable. <span class="note">(The verification principle.)</span></li>
+    <li>‘God exists’ is not analytic. <span class="note">(Its denial is not a contradiction – compare Hume and Kant against the ontological argument.)</span></li>
+    <li>‘God exists’ is not empirically verifiable. <span class="note">(No observation could show it true or false; God is transcendent.)</span></li>
+    <li>Therefore ‘God exists’ is not literally meaningful – it is a pseudo-proposition.</li>
+  </ol>
+  <h3>A radical conclusion</h3>
+  <p>Notice what follows. Ayer is not saying God does not exist: that would be just as meaningless. The theist, the atheist and the agnostic are all talking nonsense, because they all treat ‘God exists’ as if it were a genuine question. The Stanford Encyclopedia notes that Ayer offered an ‘emotivist’ account of ethics (moral statements express approval or disapproval) but no positive account of religious language at all – he saw little value in it and preferred its elimination.</p>
+  <h3>Strong and weak verification</h3>
+  <p>Ayer’s original principle seemed to require <b>conclusive</b> verification by direct observation (strong verification). He soon weakened it: a statement is meaningful if some possible observation would be <b>relevant</b> to establishing whether it is true or probable, even indirectly (weak verification).</p>
+  <blockquote>‘We say that the question that must be asked about any putative statement of fact is not, Would any observations make its truth or falsehood logically certain? but simply, Would any observations be relevant to the determination of its truth or falsehood?’<cite>Ayer, <i>Language, Truth and Logic</i>, as quoted on the departmental slides</cite></blockquote>
+  <p>The problems with both versions are at Stop 2.</p>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-hume.jpg" alt="Portrait of Hume wearing a red turban-style cap and brown coat" loading="lazy"><figcaption><b>David Hume – Ayer’s forerunner</b>Allan Ramsay, 1766. Ayer’s two kinds of meaningful statement descend from Hume’s fork · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Logical positivism</dt><dd>Genuine knowledge must be grounded in logic or observation.</dd><dt>Verification principle</dt><dd>A statement is meaningful only if analytic or empirically verifiable.</dd><dt>Pseudo-proposition</dt><dd>A sentence that looks factual but has no factual meaning.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- PROBLEMS -->
+<template id="s-problems">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 2 · Issues with verification</div>
+  <h2>Problems for the verification principle</h2>
+  <p>The departmental slides list four problems. The first three form a chain: each attempted fix creates a new problem.</p>
+  <h3>Problem 1: history (and much else) becomes meaningless</h3>
+  <p>Take ‘King Harold was killed by an arrow in the eye at the Battle of Hastings’. We cannot go back and observe the battle, and the claim is not analytic. So on strong verification it is meaningless. But that is absurd: we know exactly what it means, even though it is disputed. The same goes for many claims in history, and for general scientific laws like ‘all metals expand when heated’, which no finite set of observations could conclusively verify.</p>
+  <h3>Problem 2: weak verification lets religion back in</h3>
+  <p>Ayer’s fix is weak verification: a statement is meaningful if observations would be <i>relevant</i> to its truth. If we found Harold’s body and DNA evidence of an arrow wound, that would be relevant – so the claim is meaningful.</p>
+  <p>But now religious language gets in through the back door. Theists claim that the order of the universe, religious experience, or the existence of contingent things are relevant to whether God exists – that is exactly what the design and cosmological arguments say. So, on weak verification, ‘God exists’ is meaningful after all, even if the evidence is disputed.</p>
+  <div class="resp against"><span class="tag">Problem 1 → fix → Problem 2</span><p>Strong verification excludes too much (history, science); weak verification excludes too little (religion). Ayer struggled throughout his career to find a version that excluded metaphysics and religion while keeping science.</p></div>
+  <h3>Problem 3: Hick’s eschatological verification</h3>
+  <p>Even on strong verification, religious claims may be verifiable in principle – after death. See Stop 3.</p>
+  <h3>Problem 4: the principle fails its own test</h3>
+  <p>Is the verification principle itself analytic? No – ‘meaningful’ does not mean ‘verifiable’ by definition. Is it empirically verifiable? No – what observation could show it to be true? So by its own standard, the verification principle is meaningless.</p>
+  <ol class="list">
+    <li>Only analytic or empirically verifiable statements are meaningful. <span class="note">(The principle.)</span></li>
+    <li>The verification principle is neither analytic nor empirically verifiable.</li>
+    <li>Therefore the verification principle is not meaningful.</li>
+  </ol>
+  <div class="resp for"><span class="tag">Ayer’s reply</span><p>The principle is not offered as a factual hypothesis but as a <b>definition</b> or recommendation about how to use ‘meaningful’.</p>
+  <blockquote>‘while I wish the principle of verification itself to be regarded, not as an empirical hypothesis, but as a definition, it is not entirely arbitrary’.<cite>Ayer, <i>Language, Truth and Logic</i> (2nd ed., 1946), introduction, as quoted on the departmental slides</cite></blockquote></div>
+  <div class="resp against"><span class="tag">Counter</span><p>We are under no obligation to accept this definition; we can adopt other accounts of meaning. And a recommendation is only as convincing as the arguments for it – so the principle gives no independent reason to reject religious language.</p></div>
+  <h3>Evaluation</h3>
+  <p>Problem 4 is usually treated as decisive: a principle that cannot meet its own standard cannot be used to rule others out. Combined with the dilemma between strong and weak verification, it explains why logical positivism was largely abandoned by the 1960s – Ayer himself later admitted that most of it was false.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Strong verification</dt><dd>Conclusive verification by direct observation.</dd><dt>Weak verification</dt><dd>Some possible observation is relevant to a statement’s truth or probability.</dd><dt>Self-refuting</dt><dd>Failing to meet its own standard.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- HICK -->
+<template id="s-hick">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 3 · John Hick (1922–2012)</div>
+  <h2>Hick: eschatological verification</h2>
+  <p>In ‘Theology and Verification’ (1960), John Hick accepts Ayer’s challenge on its own terms. He argues that ‘God exists’ <b>is</b> verifiable in principle – not now, but after death. <span class="term" data-t="Eschatological">Eschatological</span> means ‘concerning the last things’: death, judgement and the end of time.</p>
+  <h3>The parable of the Celestial City</h3>
+  <p>Two people are travelling along a road. One believes it leads to the Celestial City; the other believes it leads nowhere. Neither has been this way before, so neither can say what lies around the next corner. Along the way they meet both pleasant and difficult experiences: the first sees them as encouragements and trials on the way to the City; the second just endures them. During the journey, neither is proved right. Yet their disagreement is a <b>real</b> one, about a matter of fact – because when they turn the last corner, one of them will be shown to have been right all along.</p>
+  <p class="note">The departmental slides illustrate the same point with a city at the end of a long desert road: I cannot know now that it is there, but it can be verified in the future. Hick’s own parable is retold here in summary.</p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>A statement is meaningful if it is verifiable in principle. <span class="note">(Hick accepts the verification principle.)</span></li>
+    <li>Verification need not be possible now; it is enough that some possible future experience would verify it. <span class="note">(The road analogy.)</span></li>
+    <li>If there is life after death, believers will have experiences that remove all rational doubt about God’s existence – e.g. ‘personal fulfilment in relation to God’ through Christ. <span class="note">(Eschatological experience.)</span></li>
+    <li>So ‘God exists’ is verifiable in principle. <span class="note">(From 2, 3.)</span></li>
+    <li>Therefore ‘God exists’ is meaningful, and cognitive.</li>
+  </ol>
+  <p>Note the asymmetry: if God exists, the claim will be verified; if God does not exist, we will never know, since there will be no one to find out. Hick accepts this – verification is enough for meaning; falsification is not required.</p>
+  <h3>Issues arising</h3>
+  <div class="resp against"><span class="tag">Survival after death</span><p>The argument requires that personal survival after death is at least logically possible. Can we even make sense of a person surviving the death of their body? If not, nothing could be verified after death. (This links to Metaphysics of Mind.)</p></div>
+  <div class="resp against"><span class="tag">What would count as experiencing God?</span><p>Even in an afterlife, how could we recognise an experience as an experience of an infinite, omnipotent God? A very powerful being might be mistaken for God. Without some conception of what such an experience would be, eschatological verification is empty.</p></div>
+  <div class="resp for"><span class="tag">Hick’s reply</span><p>We already have a sense of this: our present experience is ambiguous – it neither proves nor disproves God. Experience after death would remove the ambiguity. ‘Personal fulfilment in relation to God’, Hick suggests, could serve as verification.</p></div>
+  <div class="resp against"><span class="tag">Unfalsifiable</span><p>Because only the believer can be proved right, the claim cannot be falsified. Flew (Stop 4) would say a claim that nothing could count against asserts nothing.</p></div>
+  <h3>Evaluation</h3>
+  <p>Hick shows that verification ‘in principle’ is a looser test than Ayer intended: almost any claim about the future could pass it. That is a strength against Ayer – but it also suggests the verification principle was never a good criterion of meaning in the first place.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Eschatological</dt><dd>Concerning death, judgement and the end of time.</dd><dt>Eschatological verification</dt><dd>‘God exists’ will be verified, or not, by experience after death.</dd><dt>Verifiable in principle</dt><dd>Some possible experience could verify it.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- FLEW -->
+<template id="s-flew">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 4 · Antony Flew (1923–2010)</div>
+  <h2>The University debate: Flew and falsification</h2>
+  <p>In 1950 Antony Flew, R. M. Hare and Basil Mitchell debated religious language at the Oxford Socratic Club; it was published as ‘Theology and Falsification’ (1955). This is the ‘University debate’ in the spec.</p>
+  <h3>Popper’s falsification principle</h3>
+  <p>Karl Popper argued that a theory is <b>scientific</b> only if it could, in principle, be refuted by some observation. A genuine hypothesis rules things out: ‘planets move around the sun in elliptical orbits’ rules out their moving in straight lines. If no possible observation could count against a claim, it is not a scientific hypothesis (departmental slides). Popper meant this as a test for science, not for meaning.</p>
+  <h3>Flew’s principle</h3>
+  <p>Flew turned Popper’s idea into a test for whether a statement <b>asserts</b> anything at all. To assert something is to deny something else – to rule out some possible state of affairs. If a claim is compatible with every possible observation, it rules nothing out, and so asserts nothing.</p>
+  <h3>Wisdom’s parable of the gardener</h3>
+  <p>Flew adapted a parable from John Wisdom’s paper ‘Gods’ (1944):</p>
+  <blockquote>‘Once upon a time two explorers came upon a clearing in the jungle. In the clearing were growing many flowers and many weeds. One explorer says, “Some gardener must tend this plot.” The other disagrees, “There is no gardener.” So they pitch their tents and set a watch. No gardener is ever seen… Yet still the Believer is not convinced. “But there is a gardener, invisible, intangible, insensible to electric shocks, a gardener who has no scent and makes no sound, a gardener who comes secretly to look after the garden which he loves.” At last the Sceptic despairs, “But what remains of your original assertion? Just how does what you call an invisible gardener differ from an imaginary gardener or even from no gardener at all?”’<cite>Flew, ‘Theology and Falsification’ (1955), as quoted on the departmental slides (abridged, lightly corrected)</cite></blockquote>
+  <p>The believer’s claim has died the <b>‘death by a thousand qualifications’</b>: each time evidence counts against it, the claim is qualified until nothing is left. Flew applies this to God: believers say ‘God loves us’, but when a child dies of cancer, they say God’s love is ‘not merely human love’ or ‘inscrutable’.</p>
+  <blockquote>‘Now it seems to people who are not religious as if there was no conceivable event or series of events the occurrence of which would be admitted by sophisticated religious people to be a sufficient reason for conceding “There wasn’t a God after all” or “God does not really love us then”.’<cite>Flew, ‘Theology and Falsification’, as quoted on the departmental slides</cite></blockquote>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>To assert something is to deny something: a meaningful assertion must rule out some possible state of affairs. <span class="note">(The falsification principle.)</span></li>
+    <li>Believers allow nothing to count against ‘God exists’ or ‘God loves us’ – they qualify the claim in the face of every counter-evidence. <span class="note">(The gardener; the problem of evil.)</span></li>
+    <li>So these claims rule nothing out. <span class="note">(From 2.)</span></li>
+    <li>Therefore they assert nothing – they are not genuine assertions.</li>
+  </ol>
+  <h3>Issues arising</h3>
+  <div class="resp against"><span class="tag">We understand what we cannot falsify</span><p>We understand ‘there is no life in distant galaxies’ perfectly well, though no possible observations could decisively rule it out. Hick added examples like ‘there is a yeti’, ‘all swans are white’ and probability claims. So falsifiability cannot be required for meaning.</p></div>
+  <div class="resp for"><span class="tag">Reply</span><p>Popper only claimed to demarcate science from non-science. But that concession matters: if unfalsifiable claims can be meaningful (just not scientific), showing ‘God exists’ is unfalsifiable no longer shows it is meaningless – only that it is not a scientific hypothesis, which most believers accept anyway.</p></div>
+  <div class="resp against"><span class="tag">Weakening collapses into Ayer</span><p>If we weaken falsification to ‘some evidence counts against’ rather than ‘decisively refutes’, it collapses into Ayer’s weak verification and inherits its problems.</p></div>
+  <p>Mitchell and Hare reply in Stops 5 and 6.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Falsification principle</dt><dd>A meaningful assertion must rule out some possible state of affairs.</dd><dt>Death by a thousand qualifications</dt><dd>A claim qualified until it asserts nothing.</dd><dt>Criterion of demarcation</dt><dd>Popper’s test for distinguishing science from non-science.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- MITCHELL -->
+<template id="s-mitchell">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 5 · Basil Mitchell (1917–2011)</div>
+  <h2>Mitchell: the parable of the partisan</h2>
+  <p>Mitchell agrees with Flew on the key principle: religious claims are genuine assertions, and evidence <b>can</b> count against them. Believers do recognise evidence against God – the problem of evil troubles them deeply. But Mitchell denies that a belief must be abandoned as soon as evidence counts against it. A belief can remain meaningful, and rational, if there is good reason to keep trusting.</p>
+  <h3>The parable</h3>
+  <blockquote>‘In time of war in an occupied country, a member of the resistance meets one night a stranger who deeply impresses him. They spend that night together in conversation. The Stranger tells the partisan that he himself is on the side of the resistance – indeed that he is in command of it, and urges the partisan to have faith in him no matter what happens. The partisan is utterly convinced at that meeting of the Stranger’s sincerity and constancy and undertakes to trust him.’<cite>Mitchell, ‘Theology and Falsification’ (1955), as quoted on the departmental slides</cite></blockquote>
+  <p>They never meet in such intimacy again. Sometimes the Stranger is seen helping the resistance; sometimes he is seen in police uniform handing patriots over to the enemy. The partisan’s friends grumble, but he still says, ‘He is on our side.’ Sometimes he asks for help and gets it; sometimes he does not, and says, ‘The Stranger knows best.’ His friends ask what the Stranger would have to do for him to admit he was wrong. The partisan refuses to answer – he will not put the Stranger to the test.</p>
+  <h3>What the parable shows</h3>
+  <ul class="list">
+    <li>The partisan’s belief is an <b>assertion</b>: ‘the Stranger is on our side’ is either true or false.</li>
+    <li>He <b>does</b> recognise evidence against it – the Stranger in police uniform troubles him. So the belief is not unfalsifiable in Flew’s sense.</li>
+    <li>But he does not let the evidence <b>decide</b>, because his trust rests on the earlier encounter. It is reasonable to trust someone you have good reason to trust, despite ambiguous evidence.</li>
+  </ul>
+  <p>Mitchell concludes that ‘God loves us’ is neither a provisional hypothesis to be dropped at the first counter-evidence, nor a vacuous formula compatible with anything. It is a significant article of faith (departmental slides).</p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>Religious claims are assertions: evidence can count against them, and believers recognise this. <span class="note">(The problem of evil is a real trial for faith.)</span></li>
+    <li>A person can rationally keep a belief despite evidence against it, if they have prior reason to trust. <span class="note">(The partisan.)</span></li>
+    <li>Believers have such reasons – a prior experience of, or relationship with, God. <span class="note">(The night-time meeting.)</span></li>
+    <li>So refusing to abandon religious belief in the face of counter-evidence does not make it meaningless. <span class="note">(From 1–3.)</span></li>
+    <li>Therefore religious language is meaningful and cognitive.</li>
+  </ol>
+  <h3>Issues arising</h3>
+  <div class="resp against"><span class="tag">Flew’s reply</span><p>Flew accepts that this preserves meaningfulness. But the Stranger is a human being whose behaviour can be explained by the constraints he is under. God is omnipotent and omniscient – there are no such constraints. So for God, the problem of evil cannot be explained away in the same way.</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>This is no longer an argument about whether religious claims are <i>meaningful</i>: it has become a dispute about whether they are <i>true</i> – about the problem of evil. That is a concession to Mitchell.</p></div>
+  <div class="resp against"><span class="tag">When should the partisan give up?</span><p>If the partisan will never say what would make him abandon his belief, has it not become unfalsifiable after all? Mitchell replies that there is a difference between not knowing in advance what would be decisive and believing that nothing ever could be.</p></div>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Qualified assertion</dt><dd>A genuine assertion maintained through trust despite counter-evidence.</dd><dt>Article of faith</dt><dd>A belief held on trust, neither a mere hypothesis nor vacuous.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- HARE -->
+<template id="s-hare">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 6 · R. M. Hare (1919–2002)</div>
+  <h2>Hare: bliks and the lunatic</h2>
+  <p>Hare concedes Flew’s point: religious claims are not falsifiable assertions. But he denies that this makes them meaningless. They express a <span class="term" data-t="Blik">blik</span> – a fundamental way of seeing and interpreting the world, which shapes how we respond to everything we experience. A blik is not a factual claim, but it is far from empty.</p>
+  <h3>The parable of the lunatic</h3>
+  <blockquote>‘A certain lunatic is convinced that all dons want to murder him. His friends introduce him to all the mildest and most respectable dons that they can find, and after each of them has retired, they say, “You see, he doesn’t really want to murder you; he spoke to you in a most cordial manner; surely you are convinced now?” But the lunatic replies, “Yes, but that was only his diabolical cunning; he’s really plotting against me the whole time, like the rest of them; I know it I tell you.” However many kindly dons are produced, the reaction is still the same.’<cite>Hare, ‘Theology and Falsification’ (1955), as quoted on the departmental slides</cite></blockquote>
+  <p>Nothing could change the lunatic’s mind – his belief is unfalsifiable. Yet it obviously makes a difference: he thinks something very different about dons from what we think, and acts differently. That is why we call him mad.</p>
+  <blockquote>‘He has an insane blik about dons; we have a sane one.’<cite>Hare, as quoted on the departmental slides</cite></blockquote>
+  <h3>Everyone has bliks</h3>
+  <p>Hare’s point is that we all have bliks, and could not live without them. Hare’s own further example is his trust that the steering of his car will respond when he turns the wheel: he does not test it every time, and no evidence could fully establish it, yet it shapes everything he does on the road. The difference between bliks is not that some are verifiable and others not, but that some are sane and others insane.</p>
+  <h3>The argument in standard form</h3>
+  <ol class="list">
+    <li>Religious claims are not falsifiable assertions. <span class="note">(Concession to Flew.)</span></li>
+    <li>Bliks are unfalsifiable ways of seeing the world that nonetheless make a real difference to how we interpret experience and act. <span class="note">(The lunatic; the car.)</span></li>
+    <li>Religious beliefs are bliks. <span class="note">(They shape how believers see and live in the world.)</span></li>
+    <li>Therefore religious language is meaningful, even though it is non-cognitive.</li>
+  </ol>
+  <h3>Issues arising</h3>
+  <div class="resp against"><span class="tag">Flew: not what believers mean</span><p>Hare’s view is unorthodox. Believers think they are making claims about God, not expressing a way of seeing. On Hare’s account, ‘you ought to do this because it is God’s will’ collapses into the bare ‘you ought to do this’.</p></div>
+  <div class="resp against"><span class="tag">Sane and insane bliks</span><p>Hare distinguishes sane from insane bliks – but on what basis? If it is evidence, then bliks are answerable to facts after all, and are cognitive. If not, Hare cannot explain why the lunatic’s blik is insane and ours is sane – or why religious bliks are not simply irrational.</p></div>
+  <div class="resp against"><span class="tag">General objections to non-cognitivism</span><p>If religious language is non-cognitive, evidence becomes irrelevant: design arguments and the problem of evil can no longer support or refute belief. And doctrinal disputes (e.g. over the Incarnation) matter to believers even when they make no difference to how anyone lives (revision table).</p></div>
+  <div class="resp for"><span class="tag">Response</span><p>A non-cognitivist can say religious attitudes must still ‘make sense’ of experience, so the problem of evil remains relevant in a looser sense; or adopt a hybrid view on which religious language is both expressive and fact-stating. But once the cognitive element returns, non-cognitivism no longer does the work alone.</p></div>
+  <h3>Comparing the University debate</h3>
+  <div class="pair">
+    <div class="resp"><span class="tag">Meaningful?</span><p>Flew: no – asserts nothing. Mitchell: yes. Hare: yes.</p></div>
+    <div class="resp"><span class="tag">Cognitive?</span><p>Flew: it tries to be, and fails. Mitchell: yes. Hare: no – a blik.</p></div>
+  </div>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Blik</dt><dd>An unfalsifiable way of seeing the world that shapes how we interpret experience.</dd><dt>Non-cognitivism</dt><dd>Religious language expresses attitudes, not truth-apt beliefs.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- WITTGENSTEIN -->
+<template id="s-wittgenstein">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 7 · Ludwig Wittgenstein (1889–1951) <span class="bspec">Beyond the spec</span></div>
+  <h2>Wittgenstein: language games and forms of life</h2>
+  <h3>Meaning is use</h3>
+  <p>In his <i>Philosophical Investigations</i>, Wittgenstein argued that we cannot understand language without understanding how it is used and how it fits into how we live. He compared language to games: like games, language is an activity governed by rules, and the meaning of a word is learned from the rules governing its use – just as a chess piece is understood by how it can move.</p>
+  <h3>Surface and depth grammar</h3>
+  <p>Sentences that look alike can work very differently. ‘The bus passes the bus stop’ and ‘The peace of the Lord passes understanding’ share a <b>surface grammar</b>, but their <b>depth grammar</b> – what they actually do – is quite different. To understand a piece of language, we must look at the <span class="term" data-t="Language game">language game</span> it belongs to. Wittgenstein’s examples of language games include asking, thanking, cursing, praying and greeting. A language game is the speaking part of a <span class="term" data-t="Form of life">form of life</span> – the wider collection of practices, rooted in biology and culture, out of which language grows.</p>
+  <h3>Religious language</h3>
+  <p>Religious language must therefore be understood as part of religious life. Its surface grammar can look empirical, as if, like science, it is describing things and events. Wittgenstein argues this is misleading.</p>
+  <blockquote>‘a religious belief could only be something like a passionate commitment to a system of reference. Hence, although it’s a belief, it’s really a way of living, or a way of assessing life.’<cite>Wittgenstein, <i>Culture and Value</i>, as quoted in the departmental handout</cite></blockquote>
+  <p>The Last Judgement, for example, is not a hypothesis about a future event – if it were, it would be bizarre (what is the evidence?). It is a ‘picture’ by which the believer is guided through life. Wittgenstein even says the historical accounts in the Gospels might be shown to be false ‘and yet belief would lose nothing by this’ (as quoted in the handout).</p>
+  <h3>Two interpretations</h3>
+  <div class="resp"><span class="tag">Non-cognitivist reading</span><p>‘God exists’ is not a claim about an object at all. Religious language expresses commitment and an attitude to life, and cannot be true or false. This faces the usual objections: it cuts belief off from evidence, cannot explain religious doubt, and misdescribes how many believers think – they argue, give evidence and doubt.</p></div>
+  <div class="resp"><span class="tag">Alternative reading</span><p>Some philosophers argue Wittgenstein was not a non-cognitivist. He does not deny religious language makes claims meant to be true; he insists that this is not <i>all</i> it does. A ‘system of reference’ can contain true or false beliefs; religious belief adds a passionate commitment to it. This is close to Basil Mitchell’s view, and avoids the objections to non-cognitivism.</p></div>
+  <h3>Why this matters for the spec</h3>
+  <p>Wittgenstein shows that Ayer and Flew assumed all meaningful language must work like scientific language. If meaning is use, the verification and falsification principles are simply the wrong test for religious language. This is a powerful general objection to the logical positivist challenge.</p>
+</div>
+<aside>
+  <div class="card"><h4>Key terms</h4><dl><dt>Language game</dt><dd>A rule-governed activity of language use, such as praying or thanking.</dd><dt>Form of life</dt><dd>The shared practices out of which language games grow.</dd><dt>Depth grammar</dt><dd>What a sentence actually does, as opposed to its surface form.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- ANALOGY -->
+<template id="s-analogy">
+<div class="stop"><div class="panel">
+  <div class="kicker">Stop 8 · Other approaches <span class="bspec">Beyond the spec</span></div>
+  <h2>Analogy, symbol, negation and stories</h2>
+  <p>Long before Ayer, philosophers worried about how finite human words could apply to an infinite God. The Stanford Encyclopedia notes that sustained discussion goes back at least to the middle of antiquity. These approaches can strengthen a 25-mark answer by showing alternatives to the cognitive/non-cognitive choice.</p>
+  <h3>Aquinas: analogy</h3>
+  <p>When we say ‘God is good’, do we mean ‘good’ in the same sense as ‘Sarah is good’? Aquinas argued that words are not used <b>univocally</b> of God (with exactly the same meaning – that would make God a creature like us) nor <b>equivocally</b> (with a completely different meaning – then we would know nothing about God). They are used <span class="term" data-t="Analogy">analogically</span>: there is a real but proportional likeness, because creatures’ goodness derives from God’s. We understand ‘good’ from creatures, but it applies primarily and perfectly to God.</p>
+  <h3>Via negativa: saying what God is not</h3>
+  <p>Writers in the apophatic tradition – Pseudo-Dionysius, Gregory of Nyssa, Maimonides, the author of <i>The Cloud of Unknowing</i> – held that God’s nature is inconceivable and inexpressible. We can only say what God is not: ‘God is not finite’, ‘God is not temporal’. The Stanford Encyclopedia notes that for these writers, recognising the failure of our language can itself be part of the ‘ascent’ to God.</p>
+  <h3>Tillich: symbol</h3>
+  <p>Paul Tillich (1951) argued that religious language is <b>symbolic</b>: symbols participate in what they point to and open up levels of reality otherwise closed to us. The Encyclopedia treats this as an early version of the view that talk of God is irreducibly metaphorical. William Alston objected that any metaphor can in principle be paraphrased, at least partly, in literal terms.</p>
+  <h3>Braithwaite: commitments and stories</h3>
+  <p>R. B. Braithwaite (1955) offered a non-cognitive theory modelled on Ayer’s ethics: religious statements are ‘primarily declarations of adherence to a policy of action, declarations of commitment to a way of life’. ‘God is love’ expresses the intention to live an agapeistic (loving) life. Religious narratives are ‘stories’, entertained rather than believed, that help believers act on their intentions.</p>
+  <div class="resp against"><span class="tag">Objection</span><p>With only one plan – live lovingly – Braithwaite’s theory makes all Christian doctrines mean the same thing, which seems clearly false (Stanford Encyclopedia).</p></div>
+</div>
+<aside>
+  <figure class="card portrait"><img src="img/phil-aquinas.jpg" alt="Painting of Aquinas in a Dominican habit holding a model church and a book" loading="lazy"><figcaption><b>Thomas Aquinas</b>Carlo Crivelli, 1476 (detail of an altarpiece) · Wikimedia Commons, public domain</figcaption></figure>
+  <div class="card"><h4>Key terms</h4><dl><dt>Univocal</dt><dd>Used with exactly the same meaning in two contexts.</dd><dt>Equivocal</dt><dd>Used with entirely different meanings.</dd><dt>Analogy</dt><dd>Used with a related, proportional meaning.</dd><dt>Via negativa</dt><dd>Describing God only by what God is not.</dd></dl></div>
+</aside></div>
+</template>
+
+<!-- REVISE -->
+<template id="s-revise">
+<div class="stop"><div class="panel">
+  <div class="kicker">Revise · Evaluation, summary and quiz</div>
+  <h2>Is religious language meaningful – and if so, how?</h2>
+  <h3>Overall evaluation</h3>
+  <p>The logical positivist challenge fails on its own terms. Strong verification makes history and science meaningless; weak verification lets religion back in; and the principle itself is neither analytic nor verifiable. Hick shows that even strong verification might be satisfied after death, though this depends on the coherence of survival and of recognising God. Flew’s falsification challenge is more serious, because it asks a fair question of any believer: what would count against your claim? Mitchell gives the best answer – evidence can count against belief without immediately defeating it, when there are grounds for trust – which keeps religious language cognitive and shifts the debate to whether it is true (the problem of evil). Hare and Wittgenstein (on one reading) show how religious language can be meaningful without being cognitive, but at the cost of misdescribing how many believers understand their own claims. A sustained judgement: <b>religious language is meaningful, and is best understood as cognitive with an essential expressive dimension: Mitchell’s ‘article of faith’ captures both, and it means the arguments for and against God’s existence remain the right place to settle the question.</b></p>
+  <h3>Revision summary</h3>
+  <ul class="list">
+    <li><b>Cognitivism:</b> religious language expresses truth-apt beliefs. <b>Non-cognitivism:</b> it expresses attitudes, not beliefs.</li>
+    <li><b>Ayer:</b> only analytic or empirically verifiable statements are meaningful; ‘God exists’ is neither.</li>
+    <li><b>Problems:</b> history; weak verification lets religion in; the principle fails its own test (Ayer: it is a definition).</li>
+    <li><b>Hick:</b> eschatological verification – the Celestial City. Issues: survival after death; recognising God.</li>
+    <li><b>Flew:</b> to assert is to deny; the gardener; death by a thousand qualifications.</li>
+    <li><b>Mitchell:</b> the partisan – evidence counts against belief, but trust sustains it. Cognitive.</li>
+    <li><b>Hare:</b> bliks – the lunatic; sane and insane bliks. Meaningful but non-cognitive.</li>
+    <li><b>Wittgenstein (beyond spec):</b> meaning is use; language games; forms of life.</li>
+    <li><b>Other approaches (beyond spec):</b> analogy (Aquinas), via negativa, symbol (Tillich), Braithwaite.</li>
+  </ul>
+  <h3>Quick check quiz</h3>
+  <div id="quiz"></div>
+</div>
+<aside>
+  <div class="card"><h4>25-mark essay plan</h4><p><b>Is religious language meaningful?</b><br>1. Thesis; cognitive vs non-cognitive; meaningful vs cognitive.<br>2. Ayer → self-refutation, history/weak dilemma → judge.<br>3. Hick → survival, recognising God → judge.<br>4. Flew → Mitchell (cognitive) and Hare (non-cognitive) → judge.<br>5. Conclusion: meaningful; cognitive with an expressive dimension.</p></div>
+</aside></div>
+</template>
+
+<!-- GLOSSARY -->
+<template id="s-glossary">
+<div class="stop"><div class="panel">
+  <div class="kicker">Glossary</div>
+  <h2>Key terms A–Z</h2>
+  <input class="gsearch" id="gsearch" type="search" placeholder="Search terms…" aria-label="Search the glossary">
+  <dl class="gloss" id="gloss"></dl>
+</div>
+<aside><div class="card"><h4>Tip</h4><p>For 3-mark questions, learn these definitions precisely – one accurate sentence is better than a vague paragraph.</p></div></aside></div>
+</template>
+
+<script>
+var GLOSS=[
+ ["Cognitivism","The view that religious language expresses beliefs, which are truth-apt and aim to describe reality.","h"],
+ ["Non-cognitivism","The view that religious language expresses a non-cognitive mental state (an attitude, value or commitment) rather than a belief, and so is not truth-apt.","h"],
+ ["Truth-apt","Capable of being true or false.","h"],
+ ["Logical positivism","An early-20th-century school holding that genuine knowledge must be grounded in logic or empirical observation.","h"],
+ ["Verification principle","Ayer’s criterion of meaning: a statement is meaningful only if it is analytic or empirically verifiable.","h"],
+ ["Analytic statement","A statement true or false purely in virtue of the meaning of its words.","h"],
+ ["Empirically verifiable","Capable, in principle, of being shown more or less probable by sense evidence.","h"],
+ ["Strong verification","Conclusive establishment of a statement’s truth by direct experience.","h"],
+ ["Weak verification","A statement is meaningful if some possible evidence, even indirect, is relevant to its probability.","h"],
+ ["Pseudo-proposition","Ayer: a sentence that has the grammatical form of a factual statement but no factual meaning.","h"],
+ ["Eschatological","Concerning the ‘last things’: death, judgement and the end of time.","t"],
+ ["Eschatological verification","Hick: ‘God exists’ will be verified (or not) through experience after death.","h"],
+ ["Falsification principle","Flew: a meaningful assertion must rule something out – be incompatible with some possible observation.","h"],
+ ["Falsifiable","Capable of being shown false by some possible observation.","h"],
+ ["Criterion of demarcation","Popper’s standard for distinguishing science from non-science.","h"],
+ ["Parable of the gardener","Wisdom’s and Flew’s story of an undetectable gardener, showing how a claim can be qualified until it asserts nothing.","h"],
+ ["Parable of the partisan","Mitchell’s story of a resistance fighter who trusts an ambiguous Stranger.","h"],
+ ["Blik","Hare: an unfalsifiable attitude or way of seeing the world that shapes how a person lives.","h"],
+ ["Language game","Wittgenstein: a rule-governed activity of language use within a form of life.","t"],
+ ["Form of life","Wittgenstein: the shared practices, rooted in biology and culture, out of which language grows.","t"],
+ ["Analogy","Aquinas: words applied to God with a related, proportional meaning – neither identical nor wholly different.","t"],
+ ["Via negativa","Describing God only by what God is not (apophatic theology).","t"]
+];
+var STOPS=[["start","Start here"],["ayer","Ayer"],["problems","Problems with verification"],["hick","Hick"],["flew","Flew"],["mitchell","Mitchell"],["hare","Hare"],["wittgenstein","Wittgenstein"],["analogy","Other approaches"],["revise","Revise"],["glossary","Glossary"]];
+var MAP=[
+ ["ayer","Stop 1","Ayer","The verification principle."],
+ ["problems","Stop 2","Problems with verification","History, weak verification, self-refutation."],
+ ["hick","Stop 3","Hick","Eschatological verification."],
+ ["flew","Stop 4","Flew","Falsification and the gardener."],
+ ["mitchell","Stop 5","Mitchell","The parable of the partisan."],
+ ["hare","Stop 6","Hare","Bliks and the lunatic."],
+ ["wittgenstein","Stop 7 · Beyond the spec","Wittgenstein","Language games and forms of life."],
+ ["analogy","Stop 8 · Beyond the spec","Other approaches","Analogy, via negativa, symbol, Braithwaite."]
+];
+var STRETCH={
+ "start":[
+  ["The face value theory","The Stanford Encyclopedia calls the default view in contemporary philosophy of religion the ‘face value theory’: religious sentences mean what they appear to mean and are literally true or false. Some have treated resistance to it as a brief mid-20th-century aberration.","<i>Stanford Encyclopedia</i>, ‘Religious Language’, §1"],
+  ["Revisionary or descriptive?","Some theories describe what religious language actually means; others propose what it <i>should</i> mean. Ayer and Braithwaite are arguably revisionary – they tell believers what their words can mean.","<i>Stanford Encyclopedia</i>, introduction"],
+  ["Link to meta-ethics","The same cognitive/non-cognitive split appears in Moral Philosophy (Paper 1): Ayer’s emotivism treats ‘stealing is wrong’ as an expression of disapproval. Comparing the two is a good way to deepen both topics.","Cross-link within the AQA course"]],
+ "ayer":[
+  ["Hume’s fork as ancestor","Ayer’s two categories descend from Hume’s ‘relations of ideas’ and ‘matters of fact’. Hume ended his <i>Enquiry</i> by recommending that any book containing neither abstract reasoning about quantity nor experimental reasoning about fact be committed to the flames.","Paraphrased; Hume, <i>An Enquiry Concerning Human Understanding</i> (1748), §12"],
+  ["The Vienna Circle","Logical positivism grew from the Vienna Circle (Schlick, Carnap, Neurath) in the 1920s. Ayer visited Vienna in 1933 and wrote <i>Language, Truth and Logic</i> at 24.","Paraphrased; standard history"],
+  ["Ayer on religion","The Encyclopedia notes that Ayer gave ethics and aesthetics an emotivist account but said nothing positive about religion – he preferred to eliminate it.","<i>Stanford Encyclopedia</i>, §2.1"]],
+ "problems":[
+  ["Ayer’s later verdict","In a 1978 television interview with Bryan Magee, Ayer was asked what the main defect of logical positivism was. He is reported to have answered that nearly all of it was false.","Paraphrased; BBC, <i>Men of Ideas</i> (1978)"],
+  ["Science suffers too","Universal scientific laws (‘all metals expand when heated’) can never be conclusively verified, since they cover infinitely many cases. Strong verification threatens science itself – the very thing positivism aimed to protect.","Standard objection"]],
+ "hick":[
+  ["Hick and religious pluralism","Hick later became the leading defender of religious pluralism: the world’s religions are different responses to one ultimate Reality. Critics ask what would verify which picture is right.","Paraphrased; Hick, <i>An Interpretation of Religion</i> (1989)"],
+  ["Link to the problem of evil","Hick is also the author of the soul-making theodicy, which appears later in 3.3.2. His idea that this life is ambiguous ‘on the road’ fits his view that the world is a place for growth toward God.","Cross-link within the AQA course"]],
+ "flew":[
+  ["Wisdom’s original","John Wisdom’s ‘Gods’ (1944) introduced the gardener, but his point was different: the believer and sceptic may agree on all the facts and still differ in how they <i>see</i> them – closer to Hare than to Flew.","Paraphrased; Wisdom, ‘Gods’, <i>Proceedings of the Aristotelian Society</i> (1944–5)"],
+  ["Flew changes his mind","In 2004 Flew announced that he had come to believe in a deistic God, largely because of design arguments from biology and fine-tuning; see <i>There Is a God</i> (2007).","Paraphrased; Flew, <i>There Is a God</i> (2007)"],
+  ["Popper on Freud and Marx","Popper’s examples of unfalsifiable theories were psychoanalysis and Marxist history, which he thought could explain any outcome. He contrasted them with Einstein’s theory, which made risky predictions.","Paraphrased; Popper, <i>Conjectures and Refutations</i> (1963)"]],
+ "mitchell":[
+  ["Faith and evidence","Mitchell developed his view in <i>The Justification of Religious Belief</i> (1973), arguing that religious belief is supported by a cumulative case, like interpretations in history or literary criticism.","Paraphrased; Mitchell, <i>The Justification of Religious Belief</i> (1973)"],
+  ["Link to the problem of evil","Flew’s reply turns the meaning debate into the problem of evil. Use the free will defence and soul-making (3.3.2) to extend Mitchell’s side.","Cross-link within the AQA course"]],
+ "hare":[
+  ["Hare’s ethics","Hare is best known for universal prescriptivism in meta-ethics: moral statements are prescriptions we are willing to apply universally. His bliks share its non-cognitive spirit.","Paraphrased; Hare, <i>The Language of Morals</i> (1952)"],
+  ["Seeing-as","The slides’ images exercise links bliks to ‘seeing-as’ – like the duck-rabbit picture Wittgenstein discusses, which can be seen as either animal without anything in the picture changing.","Paraphrased; Wittgenstein, <i>Philosophical Investigations</i>, Part II"]],
+ "wittgenstein":[
+  ["D. Z. Phillips","D. Z. Phillips developed a Wittgensteinian philosophy of religion, arguing that philosophers misunderstand religion when they treat God as an object whose existence could be established by argument. Critics call this ‘Wittgensteinian fideism’.","Paraphrased; Phillips, <i>The Concept of Prayer</i> (1965)"],
+  ["Early Wittgenstein","In the <i>Tractatus</i> (1921), Wittgenstein held that religious and ethical matters cannot be said, only shown – a view that influenced the Vienna Circle, though not in the way he intended. Its last line says that whereof one cannot speak, thereof one must be silent.","Paraphrased; Wittgenstein, <i>Tractatus Logico-Philosophicus</i>, 7"],
+  ["Religious minimalism","The Encyclopedia discusses Wittgenstein under ‘religious minimalism’: religious truth may be ‘thin’, with no need for a robust metaphysics of truth.","<i>Stanford Encyclopedia</i>, §4"]],
+ "analogy":[
+  ["Swinburne on analogy","Richard Swinburne gives a modern account of analogy as a modification of the syntactic and semantic rules for a word’s use – which suggests analogy is not special to religion but common in all language.","<i>Stanford Encyclopedia</i>, §3.1"],
+  ["Fictionalism","Religious fictionalists argue one can engage in religious discourse without believing it, through ‘quasi-assertion’ – going along with a claim without being committed to its truth.","<i>Stanford Encyclopedia</i>, §3.3"],
+  ["Link to the concept of God","Maimonides’ via negativa connects with the debate about divine attributes (3.3.1): if we can only say what God is not, can the paradox of the stone even arise?","Cross-link within the AQA course"]],
+ "revise":[
+  ["Ayer’s set text","AQA’s set text for this topic is Ayer’s <i>The Central Questions of Philosophy</i> (1973), pp. 22–29. Reading those pages will sharpen your account of verification.","AQA 7172 specification, set texts"]]
+};
+var QS={
+ "ayer":["What is meant by non-cognitivism about religious language?","Explain the verification principle.","Explain Ayer’s argument that religious language is meaningless.","Is religious language meaningful?"],
+ "problems":["What is the difference between strong and weak verification?","Explain why the verification principle seems to fail its own test.","Explain the problems for the verification principle.","Does the verification principle show that religious language is meaningless?"],
+ "hick":["What is meant by eschatological verification?","Explain Hick’s parable of the Celestial City.","Explain Hick’s response to Ayer and one issue arising from it.","Does Hick’s eschatological verification succeed?"],
+ "flew":["What is the falsification principle?","Explain Flew’s use of the parable of the gardener.","Explain Flew’s challenge to religious language.","Does Flew’s falsification challenge show religious language is meaningless?"],
+ "mitchell":["What does Mitchell mean by an article of faith?","Explain Mitchell’s parable of the partisan.","Explain Mitchell’s response to Flew.","Does Mitchell successfully answer Flew?"],
+ "hare":["What is a blik?","Explain Hare’s parable of the lunatic.","Explain Hare’s response to Flew and one issue arising from it.","Is religious language better understood as cognitive or non-cognitive?"],
+ "wittgenstein":["What is a language game?","Explain the difference between surface and depth grammar.","Explain Wittgenstein’s account of religious language (extension).","Does Wittgenstein show that religious language is non-cognitive?"],
+ "analogy":["What is the via negativa?","Explain Aquinas’ doctrine of analogy.","Explain two alternative approaches to religious language (extension).","Can human language describe God?"]
+};
+var QUIZ=[
+ ["What is the difference between cognitivism and non-cognitivism?","Cognitivism: religious language expresses truth-apt beliefs. Non-cognitivism: it expresses attitudes or commitments, not beliefs."],
+ ["What are the only two kinds of meaningful statement for Ayer?","Analytic statements and empirically verifiable statements."],
+ ["Why does strong verification threaten history?","Past events cannot be directly observed now, so historical claims cannot be conclusively verified."],
+ ["Why does weak verification let religion ‘back in’?","Theists can claim that evidence such as order in the universe is relevant to God’s existence."],
+ ["What is Ayer’s reply to the self-refutation objection?","The principle is a definition or recommendation, not an empirical hypothesis."],
+ ["What does ‘eschatological verification’ mean?","Verification after death or at the end of time."],
+ ["What is ‘death by a thousand qualifications’?","A claim qualified so many times in the face of counter-evidence that it asserts nothing."],
+ ["Does Mitchell think religious language is cognitive?","Yes – the partisan’s belief is a genuine assertion that evidence can count against, held on trust."],
+ ["What is the point of Hare’s lunatic?","An unfalsifiable belief (a blik) can still be meaningful and make a real difference."],
+ ["What did Wittgenstein mean by ‘language game’?","A rule-governed activity of using language, such as praying or thanking, which gives words their meaning."]
+];
+function addStretch(id){var a=stage.querySelector("aside"),s=STRETCH[id];if(!s||!a)return;
+ s.forEach(function(x){var c=document.createElement("div");c.className="card stretch";
+ c.innerHTML='<h4>In the margin</h4><span class="tag2">Beyond the spec</span><h5>'+x[0]+'</h5><p>'+x[1]+'</p><div class="src">Source: '+x[2]+'</div>';a.appendChild(c);});}
+function addQs(id){var q=QS[id],a=stage.querySelector("aside");if(!q||!a)return;
+ var c=document.createElement("div");c.className="card exam";var m=[3,5,12,25];
+ c.innerHTML='<h4>Exam practice</h4><ol>'+q.map(function(t,i){return '<li><span class="mk">'+m[i]+' marks</span><span>'+t+'</span></li>';}).join("")+'</ol>'+
+ '<details><summary>What do examiners want?</summary><p><b>3 marks (AO1):</b> a precise, accurate definition or statement.</p><p><b>5 marks (AO1):</b> a clear, step-by-step explanation; an example helps.</p><p><b>12 marks (AO1):</b> a full, precise and well-structured explanation, with key terms. No evaluation is needed.</p><p><b>25 marks (AO1 + AO2):</b> state a thesis; set out arguments and objections accurately; weigh them, giving reasons why one is stronger; reach a conclusion that follows from your argument. Most marks are for sustained evaluation (AO2).</p></details>';
+ a.appendChild(c);}
+var tabs=document.getElementById("tabs"),stage=document.getElementById("stage");
+function gdef(t){for(var i=0;i<GLOSS.length;i++)if(GLOSS[i][0]===t)return GLOSS[i][1];return"";}
+tabs.innerHTML=STOPS.map(function(s,i){return '<button role="tab" data-id="'+s[0]+'"><span class="n">'+(i===STOPS.length-1?"A–Z":i===STOPS.length-2?"✓":i)+'</span>'+s[1]+'</button>';}).join("");
+tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.id;});
+function show(id){
+  var idx=STOPS.findIndex(function(s){return s[0]===id;}); if(idx<0){id="start";idx=0;}
+  stage.innerHTML="";stage.appendChild(document.getElementById("s-"+id).content.cloneNode(true));
+  var nav=document.createElement("div");nav.className="nav";
+  var p=STOPS[idx-1],n=STOPS[idx+1];
+  nav.innerHTML='<button '+(p?'':'hidden')+' data-go="'+(p?p[0]:"")+'">← '+(p?p[1]:"")+'</button><button '+(n?'':'hidden')+' data-go="'+(n?n[0]:"")+'">'+(n?n[1]:"")+' →</button>';
+  nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.go)location.hash=b.dataset.go;});
+  stage.querySelector(".panel").appendChild(nav);addStretch(id);addQs(id);
+  tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
+  stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
+    el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
+    return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
+    mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
+  if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
+    function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src">'+(x[2]==="h"?"Handout glossary":"From the handout text")+'</div></div>';}).join("");}
+    q.addEventListener("input",draw);draw();}
+}
+var first=true,EMB=window.parent!==window;
+function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
+function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
+if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
+window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>
