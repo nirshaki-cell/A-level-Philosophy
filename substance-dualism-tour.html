@@ -155,6 +155,12 @@ details.resp summary{cursor:pointer}
 .argbox ol{margin-top:8px}
 .ai{font-size:.8rem;color:var(--muted)}
 .band img{max-height:320px;object-fit:cover}
+.consol{background:var(--tint);color:var(--ink);border-radius:14px;padding:18px 20px}
+.consol h4{margin:0 0 6px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.consol p{margin:0 0 10px;font-size:.92rem}
+.consol a{display:flex;gap:10px;align-items:center;background:var(--card);color:var(--ink);text-decoration:none;font-weight:600;font-size:.92rem;padding:10px 14px;border-radius:10px;overflow-wrap:anywhere}
+.consol a:hover{text-decoration:underline}
+.consol .fmt{margin-left:auto;font-size:.72rem;letter-spacing:.1em;color:var(--muted);font-weight:600}
 </style>
 <script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
 
@@ -188,6 +194,7 @@ details.resp summary{cursor:pointer}
   <div class="map" id="map"></div>
 </div>
 <aside>
+  <div class="consol"><h4>Consolidate knowledge</h4><p>Download the workbook and test yourself on this topic.</p><a href="downloads/Substance_Dualism_Workbook.pdf"><span aria-hidden="true">⬇</span>Substance Dualism Workbook<span class="fmt">PDF</span></a></div>
   <div class="card"><h4>The big question</h4><p>Are minds things that exist and are not identical to bodies or parts of bodies?</p></div>
   <div class="card"><h4>How to use this tour</h4><p>Learning it for the first time? Go through the stops in order. Revising? Jump to a stop, or go straight to <b>Revise</b> for the summary and quiz. Dotted words are in the glossary: tap one to see its meaning.</p></div>
   <div class="card"><h4>Spec checklist</h4><p>✓ Indivisibility argument + two responses<br>✓ Conceivability argument (without God) + three responses<br>✓ Problem of other minds: analogy; best hypothesis<br>✓ Ryle’s category mistake<br>✓ Conceptual interaction problem (Elisabeth)<br>✓ Empirical interaction problem</p></div>
@@ -427,6 +434,7 @@ details.resp summary{cursor:pointer}
   <div id="quiz"></div>
 </div>
 <aside>
+  <div class="consol"><h4>Consolidate knowledge</h4><p>Download the workbook and test yourself on this topic.</p><a href="downloads/Substance_Dualism_Workbook.pdf"><span aria-hidden="true">⬇</span>Substance Dualism Workbook<span class="fmt">PDF</span></a></div>
   <div class="card"><h4>25-mark essay plan</h4><p><b>Is substance dualism true?</b><br>1. Thesis: define substance dualism and Leibniz’s law; state your line.<br>2. Indivisibility → physical things can be indivisible → judge.<br>3. Conceivability → conceivable ≠ possible (water/H₂O) → necessity-of-identity reply → judge.<br>4. Empirical interaction problem → closure is inductive → still the best evidence → judge.<br>5. Conclusion that follows from your judgements.</p></div>
 </aside></div>
 </template>
@@ -568,6 +576,8 @@ function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.
 function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
 if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
 window.addEventListener("hashchange",route);route();
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest(".consol a");if(!a)return;
+e.preventDefault();var p=a.getAttribute("href");window.parent.postMessage({dlFile:p,dlName:p.split("/").pop()},"*");});
 </script>
 </body>
 </html>
