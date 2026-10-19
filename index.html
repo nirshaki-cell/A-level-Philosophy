@@ -61,8 +61,11 @@ footer{margin-top:48px;text-align:center;font-size:.85rem;color:var(--muted)}
 @keyframes twinkle{0%,100%{opacity:.35;transform:scale(.7) rotate(0deg)}50%{opacity:1;transform:scale(1.15) rotate(20deg)}}
 @media (prefers-reduced-motion:reduce){.star{animation:none;opacity:1}}
 
+h2.ph{display:flex;align-items:center;gap:8px}h2.ph .star{width:16px;height:16px;flex:none}
+.prac{background:var(--card);border-radius:14px;padding:28px;display:grid;gap:12px;border-top:6px solid var(--tint)}.prac h2{margin:0;font-weight:400;font-size:1.3rem}.prac p{margin:0;color:var(--muted)}
+.prac .open{justify-self:start;display:inline-block;margin-top:4px;padding:12px 20px;border-radius:999px;background:var(--tint);color:var(--ink);font-weight:600;text-decoration:none}.prac .open:hover{filter:brightness(.96)}.prac .small{font-size:.85rem}
 /* Cream panels with espresso text */
-.panel,.card,.tabs button,.tile.sm,.soon,.tuition{--fg:#3b2a20;--muted:#6e5a4c;color:#3b2a20}
+.panel,.card,.tabs button,.tile.sm,.soon,.prac,.tuition{--fg:#3b2a20;--muted:#6e5a4c;color:#3b2a20}
 .tile.sm h2{color:#3b2a20}
 </style>
 
@@ -122,11 +125,19 @@ function band(m,spec,title,q){
   return '<div class="band"><span class="spec">'+m.paper+' · Spec '+spec+'</span><h1>'+esc(title)+'</h1>'+(q?'<p class="q">'+esc(q)+'</p>':'')+'</div>';
 }
 function module(m){
-  var cols=m.subs.length%3===0||m.subs.length===5||m.subs.length===7?" three":"";
+  var n=m.subs.length+1,cols=n%3===0||n===5||n===7?" three":"";
   return '<div class="wrap '+m.cls+'"><a class="back" href="#home">← All modules</a>'+band(m,m.spec,m.title,m.q)+
   '<nav class="grid'+cols+'" aria-label="Topics">'+m.subs.map(function(s){
     return '<a class="tile sm" href="#'+m.id+'--'+s[0]+'"><span class="paper">Spec '+s[1]+'</span><h2>'+esc(s[2])+'</h2><p>'+esc(s[3])+'</p><span class="go">Open topic →</span></a>';
-  }).join("")+'</nav></div>';
+  }).join("")+'<a class="tile sm" href="#'+m.id+'--practise"><span class="paper">Practice</span><h2 class="ph">Practice writing <span class="star" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span></h2><p>Write and improve your 12-mark answers and 25-mark essays for this module.</p><span class="go">Start writing →</span></a></nav></div>';
+}
+function practise(m){
+  var note='<p class="small">You need to be signed in to Claude. The first time you ask for feedback, choose Allow.</p>';
+  return '<div class="wrap '+m.cls+'"><a class="back" href="#'+m.id+'">← Back to '+esc(m.title)+'</a>'+band(m,m.spec,'Practice writing: '+m.title,'Write and improve your answers to exam-style questions across this module.')+
+  '<div class="prac"><span class="spec">12-mark answers</span><h2>The 12-Mark Trainer</h2><p>Choose a past 12-mark question and write your answer. Press Check my progress while you write to see what is already earning credit. When you have finished, press Mark my answer to get a mark out of 12, your level, and the exact fixes that would take it to full marks. It opens in a new tab.</p>'+
+  '<a class="open" href="https://claude.ai/artifact/VmgwBXZSgFB3sh7C6rKvin" target="_blank" rel="noopener">Open the 12-Mark Trainer →</a>'+note+'</div>'+
+  '<div class="prac" style="margin-top:20px"><span class="spec">25-mark essays</span><h2>The 25-Mark Essay Studio</h2><p>Write a full 25-mark essay from the start. Plan it with the content map and examiner notes, ask for comments while you write, then submit it for a mark out of 25 and your level. It opens in a new tab.</p>'+
+  '<a class="open" href="https://claude.ai/artifact/UbpY5kZNQHxtVH7ttCX2za" target="_blank" rel="noopener">Open the 25-Mark Essay Studio →</a>'+note+'</div></div>';
 }
 var EMBED={"moral-philosophy--applied-ethics":"applied-ethics-tour.html","moral-philosophy--virtue-ethics":"virtue-ethics-tour.html","moral-philosophy--kantian-ethics":"kant-tour.html","moral-philosophy--utilitarianism":"utilitarianism-tour.html","moral-philosophy--meta-ethics":"metaethics-tour.html","epistemology--limits-of-knowledge":"scepticism-tour.html","epistemology--reason":"reason-tour.html","epistemology--what-is-knowledge":"knowledge-tour.html","epistemology--perception":"perception-tour.html","metaphysics-of-god--concept-of-god":"concept-god-tour.html","metaphysics-of-god--ontological":"ontological-tour.html","metaphysics-of-god--teleological":"teleological-tour.html","metaphysics-of-god--cosmological":"cosmological-tour.html","metaphysics-of-god--religious-language":"religious-language-tour.html","metaphysics-of-god--problem-of-evil":"evil-tour.html","metaphysics-of-mind--what-is-mind":"mind-intro-tour.html","metaphysics-of-mind--substance-dualism":"substance-dualism-tour.html","metaphysics-of-mind--property-dualism":"property-dualism-tour.html","metaphysics-of-mind--behaviourism":"behaviourism-tour.html","metaphysics-of-mind--identity-theory":"identity-theory-tour.html","metaphysics-of-mind--eliminative-materialism":"eliminativism-tour.html","metaphysics-of-mind--functionalism":"functionalism-tour.html"};
 function topic(m,s){
@@ -140,7 +151,8 @@ function render(){
   MODULES.forEach(function(m){
     if(parts[0]===m.id){
       out=module(m);
-      if(parts[1]) m.subs.forEach(function(s){ if(s[0]===parts[1]) out=topic(m,s); });
+      if(parts[1]==='practise') out=practise(m);
+      else if(parts[1]) m.subs.forEach(function(s){ if(s[0]===parts[1]) out=topic(m,s); });
     }
   });
   document.getElementById("app").innerHTML=out; window.scrollTo(0,0);
