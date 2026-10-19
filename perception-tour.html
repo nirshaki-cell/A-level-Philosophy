@@ -524,5 +524,30 @@ function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);el
 if(EMB){new ResizeObserver(function(){tell(false);}).observe(document.body);window.addEventListener("load",function(){tell(false);});}
 window.addEventListener("hashchange",route);route();
 </script>
+<script>
+/* Gentle drift: tabs glide right-to-left; pause on hover, touch, keyboard focus; off for reduced motion */
+(function(){
+  var t=document.getElementById("tabs"); if(!t) return;
+  if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var speed=0.35, paused=false, wait=0, pos=0;
+  function hold(){paused=true;clearTimeout(wait);}
+  function release(ms){clearTimeout(wait);wait=setTimeout(function(){paused=false;pos=t.scrollLeft;},ms||2500);}
+  t.addEventListener("mouseenter",hold); t.addEventListener("mouseleave",function(){release(1500);});
+  t.addEventListener("focusin",hold); t.addEventListener("focusout",function(){release(2500);});
+  t.addEventListener("pointerdown",hold); t.addEventListener("touchstart",hold,{passive:true});
+  t.addEventListener("touchend",function(){release(5000);}); t.addEventListener("wheel",function(){hold();release(4000);},{passive:true});
+  t.addEventListener("click",function(){hold();release(8000);});
+  function step(){
+    var max=t.scrollWidth-t.clientWidth;
+    if(!paused&&max>4){
+      pos+=speed;
+      if(pos>=max){paused=true;setTimeout(function(){t.scrollTo({left:0,behavior:"smooth"});pos=0;setTimeout(function(){paused=false;},1200);},1500);}
+      else t.scrollLeft=pos;
+    }
+    requestAnimationFrame(step);
+  }
+  setTimeout(function(){pos=t.scrollLeft;requestAnimationFrame(step);},1500);
+})();
+</script>
 </body>
 </html>
