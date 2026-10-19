@@ -5,7 +5,7 @@
 <style>
 /* Layout: quiet centred header with four module tiles; each module page repeats the tile pattern for its spec sub-topics */
 :root{
-  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#ffffff;
+  --bg:#f1f6fb; --fg:#23262f; --muted:#5b6070; --card:#fbf6ec;
   --epi:#cfe3f7; --epi-ink:#1f4f7a;
   --mor:#d6efdf; --mor-ink:#245c3c;
   --god:#ece0f5; --god-ink:#5a2f78;
@@ -60,6 +60,10 @@ footer{margin-top:48px;text-align:center;font-size:.85rem;color:var(--muted)}
 .star.c{width:12px;height:12px;color:#8cc4ee;animation-delay:1.2s}
 @keyframes twinkle{0%,100%{opacity:.35;transform:scale(.7) rotate(0deg)}50%{opacity:1;transform:scale(1.15) rotate(20deg)}}
 @media (prefers-reduced-motion:reduce){.star{animation:none;opacity:1}}
+
+/* Cream panels with espresso text */
+.panel,.card,.tabs button,.tile.sm,.soon,.tuition{--fg:#3b2a20;--muted:#6e5a4c;color:#3b2a20}
+.tile.sm h2{color:#3b2a20}
 </style>
 
 <div id="app"></div>
