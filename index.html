@@ -64,8 +64,23 @@ footer{margin-top:48px;text-align:center;font-size:.85rem;color:var(--muted)}
 h2.ph{display:flex;align-items:center;gap:8px}h2.ph .star{width:16px;height:16px;flex:none}
 .prac{background:var(--card);border-radius:14px;padding:28px;display:grid;gap:12px;border-top:6px solid var(--tint)}.prac h2{margin:0;font-weight:400;font-size:1.3rem}.prac p{margin:0;color:var(--muted)}
 .prac .open{justify-self:start;display:inline-block;margin-top:4px;padding:12px 20px;border-radius:999px;background:var(--tint);color:var(--ink);font-weight:600;text-decoration:none}.prac .open:hover{filter:brightness(.96)}.prac .small{font-size:.85rem}
+/* Progress tracker */
+.trk{background:var(--card);border-radius:14px;padding:clamp(16px,4vw,28px);border-top:6px solid var(--tint);display:grid;gap:12px}
+.trk .tsum{margin:0;font-weight:600}.trk .small{margin:0;font-size:.85rem;color:var(--muted)}
+.tbar{position:relative;height:10px;border-radius:999px;background:#fffdf8;border:1px solid #e6dccb;overflow:hidden}
+.tbar span{position:absolute;left:0;top:0;bottom:0;border-radius:999px}#tbs{background:var(--tint)}#tbc{background:var(--ink);opacity:.55}
+.tscroll{overflow-x:auto}
+.trk table{width:100%;border-collapse:collapse;font-size:.95rem}
+.trk th,.trk td{padding:10px 8px;border-bottom:1px solid #e6dccb;text-align:left;vertical-align:middle}
+.trk thead th{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+.trk tbody th{font-weight:300}
+.trk td{text-align:center;width:90px}.trk td:last-child{width:150px}
+.trk tr.tg th{background:var(--tint);color:var(--ink);font-weight:600;border-radius:8px}
+.trk input[type=checkbox]{width:22px;height:22px;accent-color:var(--ink);cursor:pointer}
+.trk input[type=text]{width:100%;min-width:90px;font:inherit;padding:6px 8px;border:1px solid #e6dccb;border-radius:8px;background:#fffdf8;color:inherit}
+@media (max-width:520px){.trk table{table-layout:fixed;font-size:.85rem}.trk th,.trk td{padding:8px 4px}.trk thead th:nth-child(1){width:auto}.trk thead th:nth-child(2),.trk thead th:nth-child(3){width:58px}.trk thead th:nth-child(4){width:64px}.trk td,.trk td:last-child{width:auto}.trk thead th{font-size:.58rem;letter-spacing:.04em}.trk input[type=text]{min-width:0;padding:5px 4px}.trk tbody th{overflow-wrap:anywhere}}
 /* Cream panels with espresso text */
-.panel,.card,.tabs button,.tile.sm,.soon,.prac,.tuition{--fg:#3b2a20;--muted:#6e5a4c;color:#3b2a20}
+.panel,.card,.tabs button,.tile.sm,.soon,.prac,.trk,.tuition{--fg:#3b2a20;--muted:#6e5a4c;color:#3b2a20}
 .tile.sm h2{color:#3b2a20}
 </style>
 
@@ -125,11 +140,12 @@ function band(m,spec,title,q){
   return '<div class="band"><span class="spec">'+m.paper+' · Spec '+spec+'</span><h1>'+esc(title)+'</h1>'+(q?'<p class="q">'+esc(q)+'</p>':'')+'</div>';
 }
 function module(m){
-  var n=m.subs.length+1,cols=n%3===0||n===5||n===7?" three":"";
+  var n=m.subs.length+2,cols=n%3===0||n===5||n===7?" three":"";
   return '<div class="wrap '+m.cls+'"><a class="back" href="#home">← All modules</a>'+band(m,m.spec,m.title,m.q)+
   '<nav class="grid'+cols+'" aria-label="Topics">'+m.subs.map(function(s){
     return '<a class="tile sm" href="#'+m.id+'--'+s[0]+'"><span class="paper">Spec '+s[1]+'</span><h2>'+esc(s[2])+'</h2><p>'+esc(s[3])+'</p><span class="go">Open topic →</span></a>';
-  }).join("")+'<a class="tile sm" href="#'+m.id+'--practise"><span class="paper">Practice</span><h2 class="ph">Practice writing <span class="star" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span></h2><p>Write and improve your 12-mark answers and 25-mark essays for this module.</p><span class="go">Start writing →</span></a></nav></div>';
+  }).join("")+'<a class="tile sm" href="#'+m.id+'--practise"><span class="paper">Practice</span><h2 class="ph">Practice writing <span class="star" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span></h2><p>Write and improve your 12-mark answers and 25-mark essays for this module.</p><span class="go">Start writing →</span></a>'+
+  '<a class="tile sm" href="#'+m.id+'--progress"><span class="paper">Progress</span><h2>Tracking my progress</h2><p>Tick off each unit as you study it and feel confident, and record your marks.</p><span class="go">Open my tracker →</span></a></nav></div>';
 }
 function practise(m){
   var note='<p class="small">You need to be signed in to Claude. The first time you ask for feedback, choose Allow.</p>';
@@ -146,16 +162,77 @@ function topic(m,s){
   return '<div class="wrap '+m.cls+'"><a class="back" href="#'+m.id+'">← '+esc(m.title)+'</a>'+band(m,s[1],s[2],s[3])+
   '<div class="soon">The full page for this topic is being written. It will cover the big question, key terms, explanation, formal arguments, objections and responses, evaluation, exam practice, a revision summary and a quick check quiz.</div></div>';
 }
+var TRACK={
+"epistemology":[
+ ["3.1.2 Perception as a source of knowledge",["Direct realism","Direct realism: argument from illusion","Direct realism: argument from perceptual variation","Direct realism: argument from hallucination","Direct realism: time-lag argument","Indirect realism and sense-data","Locke's primary/secondary quality distinction","Indirect realism leads to scepticism, and responses (Locke, Trotter Cockburn, Russell)","Berkeley: mind-dependent ideas cannot be like mind-independent objects","Berkeley's idealism","Berkeley's attack on the primary/secondary distinction","Berkeley's 'Master' argument","Idealism: illusion and hallucination","Idealism leads to solipsism","Problems with the role of God in idealism"]],
+ ["3.1.1 What is knowledge?",["Acquaintance, ability and propositional knowledge","The nature of definition (Zagzebski)","The tripartite view (justified true belief)","The conditions are not individually necessary","Gettier's counter-examples","Infallibilism","No false lemmas (J+T+B+N)","Reliabilism (R+T+B)","Virtue epistemology (V+T+B)"]],
+ ["3.1.3 Reason as a source of knowledge",["Innatism: Plato's 'slave boy' argument","Innatism: Leibniz's argument from necessary truths","Locke's arguments against innatism","The mind as a 'tabula rasa' (impressions, ideas, simple and complex concepts)","Intuition and deduction: meaning and distinction","Descartes' 'clear and distinct ideas'","The cogito as a priori intuition","Descartes' arguments for God and the external world as a priori deductions","Empiricist responses, including Hume's Fork"]],
+ ["3.1.4 The limits of knowledge",["Philosophical scepticism vs normal incredulity","The role of scepticism within epistemology","Local and global scepticism","Descartes' three waves of doubt","Descartes' own response","Empiricist responses (Locke, Berkeley, Russell)","Reliabilism as a response"]]],
+"moral-philosophy":[
+ ["3.2.1 Utilitarianism",["Bentham's quantitative hedonistic utilitarianism (utility calculus)","Mill's qualitative utilitarianism (higher and lower pleasures)","Mill's 'proof' of the greatest happiness principle","Non-hedonistic and preference utilitarianism","Act and rule utilitarianism","Is pleasure the only good? (Nozick's experience machine)","Fairness, liberty and rights (tyranny of the majority)","Problems with calculation","Partiality","Moral integrity and intentions"]],
+ ["3.2.1 Kantian deontological ethics",["The good will","Acting in accordance with duty vs out of duty","Hypothetical and categorical imperatives","First formulation (contradiction in conception and in will)","Second formulation","Clashing/competing duties","Universalisable maxims that are not moral, and vice versa","Consequences determine moral value","Ignoring motives such as love, friendship, kindness","Foot: morality as hypothetical imperatives"]],
+ ["3.2.1 Aristotelian virtue ethics",["Eudaimonia as the final end, and pleasure","The function argument","Virtues as dispositions: habituation, skill analogy, feelings","The doctrine of the mean","Voluntary, involuntary and non-voluntary actions","Practical wisdom (phronesis)","Does it give clear guidance?","Clashing/competing virtues","Circularity of virtuous acts and persons","Must a virtue contribute to Eudaimonia?"]],
+ ["3.2.2 Applied ethics",["Stealing","Simulated killing","Eating animals","Telling lies"]],
+ ["3.2.3 Meta-ethics",["Origins of moral principles: reason, emotion, society","Cognitivism vs non-cognitivism","Moral naturalism","Moral non-naturalism: intuitionism, open question argument, naturalistic fallacy","Hume's Fork and Ayer's verification principle","Hume: moral judgements do not motivate as beliefs","Hume's is-ought gap","Mackie: argument from relativity and from queerness","Error theory (Mackie)","Emotivism (Ayer)","Prescriptivism (Hare)","Anti-realism and moral language","Anti-realism and moral progress","Does anti-realism become nihilism?"]]],
+"metaphysics-of-god":[
+ ["3.3.1 The concept and nature of 'God'",["Omniscience, omnipotence, omnibenevolence","God and time: eternal vs everlasting","The paradox of the stone","The Euthyphro dilemma","Omniscience and human freedom"]],
+ ["3.3.2 Ontological arguments",["Anselm's ontological argument","Descartes' ontological argument","Malcolm's ontological argument","Gaunilo's 'perfect island'","Empiricist objections to a priori arguments","Kant: existence is not a predicate"]],
+ ["3.3.2 Teleological arguments",["Hume's design argument from analogy","Paley: spatial order/purpose","Swinburne: temporal order/regularity","Hume's objections to the argument from analogy","The problem of spatial disorder","Argument from a unique case","Is God the best or only explanation?"]],
+ ["3.3.2 Cosmological arguments",["The Kalam argument","Aquinas' 1st, 2nd and 3rd Ways","Descartes' argument from continuing existence","Leibniz: principle of sufficient reason","The possibility of an infinite series","Hume's objection to the causal principle","Fallacy of composition (Russell)","Impossibility of a necessary being (Hume, Russell)"]],
+ ["3.3.2 The problem of evil",["Moral and natural evil","Logical and evidential forms","The Free Will Defence (Plantinga)","Soul-making (Hick)"]],
+ ["3.3.3 Religious language",["Cognitivism vs non-cognitivism about religious language","Ayer's verification principle","Hick's eschatological verification","Flew on falsification (the Gardener)","Mitchell's Partisan","Hare's bliks and the lunatic"]]],
+"metaphysics-of-mind":[
+ ["3.4.1 What do we mean by 'mind'?",["Phenomenal properties and qualia","Intentionality"]],
+ ["3.4.2 Substance dualism",["Descartes' indivisibility argument","Responses to the indivisibility argument","Descartes' conceivability argument","Responses to the conceivability argument"]],
+ ["3.4.2 Property dualism",["Chalmers' zombie argument","Responses to the zombie argument","Jackson's knowledge (Mary) argument","Ability, acquaintance and new knowledge/old fact responses"]],
+ ["3.4.2 Issues facing dualism",["Problem of other minds: analogy and best hypothesis","Ryle's category mistake","Conceptual interaction problem (Elisabeth)","Empirical interaction problem","Epiphenomenalism: self-knowledge, phenomenology, evolution"]],
+ ["3.4.3 Philosophical behaviourism",["Hard behaviourism (Hempel)","Soft behaviourism (Ryle)","Dualist arguments applied","Super-Spartans and perfect actors (Putnam)","Circularity and multiple realisability in behaviour","Asymmetry of self-knowledge and knowledge of others"]],
+ ["3.4.3 Mind-brain type identity theory",["Type identity theory (ontological, not analytic reduction)","Dualist arguments applied","Multiple realisability"]],
+ ["3.4.3 Eliminative materialism",["Eliminative materialism (the Churchlands)","Certainty of our mental states","Predictive and explanatory power of folk psychology","Self-refutation"]],
+ ["3.4.4 Functionalism",["Functionalism and multiple realisability","Inverted qualia","Block's China thought experiment","Mary applied to functional facts"]]]
+};
+var TKEY="tracker-v1";
+function tload(){try{return JSON.parse(localStorage.getItem(TKEY))||{}}catch(e){return {}}}
+function tsave(d){try{localStorage.setItem(TKEY,JSON.stringify(d));return true}catch(e){return false}}
+function tracker(m){
+  var d=tload(),groups=TRACK[m.id],i=0,rows="";
+  groups.forEach(function(g){
+    rows+='<tr class="tg"><th colspan="4" scope="colgroup">'+esc(g[0])+'</th></tr>';
+    g[1].forEach(function(u){
+      var k=m.id+"|"+u,v=d[k]||{};i++;
+      rows+='<tr><th scope="row">'+esc(u)+'</th>'+
+      '<td><input type="checkbox" data-k="'+esc(k)+'" data-f="s"'+(v.s?" checked":"")+' aria-label="Studied: '+esc(u)+'"></td>'+
+      '<td><input type="checkbox" data-k="'+esc(k)+'" data-f="c"'+(v.c?" checked":"")+' aria-label="Confident: '+esc(u)+'"></td>'+
+      '<td><input type="text" data-k="'+esc(k)+'" data-f="g" value="'+esc(v.g||"")+'" placeholder="e.g. 9/12" aria-label="Marks or grade: '+esc(u)+'"></td></tr>';
+    });
+  });
+  return '<div class="wrap '+m.cls+'"><a class="back" href="#'+m.id+'">← Back to '+esc(m.title)+'</a>'+band(m,m.spec,'Tracking my progress: '+m.title,'Tick each unit when you have studied it, and again when you feel confident. Add your marks for any answers you write.')+
+  '<div class="trk"><p class="tsum" id="tsum" aria-live="polite"></p><div class="tbar" aria-hidden="true"><span id="tbs"></span><span id="tbc"></span></div>'+
+  '<div class="tscroll"><table><thead><tr><th scope="col">Unit</th><th scope="col">Studied</th><th scope="col">Confident</th><th scope="col">Marks</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+  '<p class="small">Your ticks and marks save automatically in this browser on this device. They are not sent anywhere, so use the same device to keep your record.</p></div></div>';
+}
+function tsummary(m){
+  var d=tload(),n=0,s=0,c=0;
+  TRACK[m.id].forEach(function(g){g[1].forEach(function(u){n++;var v=d[m.id+"|"+u]||{};if(v.s)s++;if(v.c)c++;});});
+  var e=document.getElementById("tsum");if(!e)return;
+  e.textContent="Studied "+s+" of "+n+" units · Confident in "+c+" of "+n+".";
+  document.getElementById("tbs").style.width=(100*s/n)+"%";document.getElementById("tbc").style.width=(100*c/n)+"%";
+}
+document.addEventListener("input",function(e){var t=e.target;if(!t.dataset||!t.dataset.k)return;
+  var d=tload(),v=d[t.dataset.k]||{};v[t.dataset.f]=t.type==="checkbox"?t.checked:t.value;d[t.dataset.k]=v;tsave(d);
+  var m=MODULES.filter(function(x){return t.dataset.k.indexOf(x.id+"|")===0})[0];if(m)tsummary(m);});
 function render(){
   var h=(location.hash||"").slice(1),out=home(),parts=h.split("--");
   MODULES.forEach(function(m){
     if(parts[0]===m.id){
       out=module(m);
       if(parts[1]==='practise') out=practise(m);
+      else if(parts[1]==='progress') out=tracker(m);
       else if(parts[1]) m.subs.forEach(function(s){ if(s[0]===parts[1]) out=topic(m,s); });
     }
   });
   document.getElementById("app").innerHTML=out; window.scrollTo(0,0);
+  MODULES.forEach(function(m){if(parts[0]===m.id&&parts[1]==="progress")tsummary(m);});
 }
 /* Fit the topic frame to its content: collapse it first so a short section never inherits a long one's height */
 function fitTour(f,fallback){
