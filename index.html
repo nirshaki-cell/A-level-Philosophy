@@ -51,6 +51,7 @@ footer{margin-top:48px;text-align:center;font-size:.85rem;color:var(--muted)}
 .band .spec{color:inherit}
 .band .q{margin:0;max-width:62ch;font-size:1.1rem}
 .tour{display:block;width:100%;height:600px;border:0;background:transparent}
+.ptabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.ptabs button{font:inherit;font-weight:600;padding:10px 18px;border-radius:999px;border:1px solid #dde4ee;background:var(--card);color:#3b2a20;cursor:pointer}.ptabs button[aria-selected=true]{background:var(--tint);color:var(--ink);border-color:transparent}.ptabs button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 .soon{background:var(--card);border-radius:14px;padding:28px;color:var(--muted)}
 .podcast{background:var(--card);border:1px solid #dbe4ee;border-left:6px solid var(--tint);border-radius:14px;padding:18px 22px;margin-bottom:32px;display:grid;gap:10px;color:#3b2a20}
 .podcast .kick{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#6e5a4c}
@@ -156,10 +157,13 @@ function module(m){
 function practise(m){
   var note='<p class="small">You need to be signed in to Claude. The first time you ask for feedback, choose Allow.</p>';
   return '<div class="wrap '+m.cls+'"><a class="back" href="#'+m.id+'">← Back to '+esc(m.title)+'</a>'+band(m,m.spec,'Practice writing: '+m.title,'Write and improve your answers to exam-style questions across this module.')+
-  '<div class="prac"><span class="spec">12-mark answers</span><h2>The 12-Mark Trainer</h2><p>Choose a past 12-mark question and write your answer. Press Check my progress while you write to see what is already earning credit. When you have finished, press Mark my answer to get a mark out of 12, your level, and the exact fixes that would take it to full marks. It opens in a new tab.</p>'+
+  '<div class="ptabs" role="tablist"><button role="tab" id="tb-w" aria-controls="pn-w" aria-selected="true" onclick="ptab(\'w\')">Practice writing</button><button role="tab" id="tb-p" aria-controls="pn-p" aria-selected="false" onclick="ptab(\'p\')">Essay planning</button></div>'+
+  '<div role="tabpanel" id="pn-p" aria-labelledby="tb-p" hidden><div class="prac"><span class="spec">25-mark essays · planning</span><h2>25 Mark Essay Planner</h2><p>A planning schema for any 25-mark question in '+esc(m.title)+'. Fill every box with notes: your contention and key terms, a short AO1 section, four objections each with a response, counter-response and intermediate conclusion, the bridges between them, and your conclusion. Then read your argument across in one line before you start writing.</p>'+
+  '<a class="open" href="downloads/25-mark-essay-planner.pdf" target="_blank" rel="noopener">Open the essay planner (PDF) →</a><p class="small">Print it, or fill it in on screen.</p></div></div>'+
+  '<div role="tabpanel" id="pn-w" aria-labelledby="tb-w"><div class="prac"><span class="spec">12-mark answers</span><h2>The 12-Mark Trainer</h2><p>Choose a past 12-mark question and write your answer. Press Check my progress while you write to see what is already earning credit. When you have finished, press Mark my answer to get a mark out of 12, your level, and the exact fixes that would take it to full marks. It opens in a new tab.</p>'+
   '<a class="open" href="https://claude.ai/artifact/VmgwBXZSgFB3sh7C6rKvin" target="_blank" rel="noopener">Open the 12-Mark Trainer →</a>'+note+'</div>'+
   '<div class="prac" style="margin-top:20px"><span class="spec">25-mark essays</span><h2>The 25-Mark Essay Studio</h2><p>Write a full 25-mark essay from the start. Plan it with the content map and examiner notes, ask for comments while you write, then submit it for a mark out of 25 and your level. It opens in a new tab.</p>'+
-  '<a class="open" href="https://claude.ai/artifact/UbpY5kZNQHxtVH7ttCX2za" target="_blank" rel="noopener">Open the 25-Mark Essay Studio →</a>'+note+'</div></div>';
+  '<a class="open" href="https://claude.ai/artifact/UbpY5kZNQHxtVH7ttCX2za" target="_blank" rel="noopener">Open the 25-Mark Essay Studio →</a>'+note+'</div></div></div>';
 }
 var EMBED={"moral-philosophy--applied-ethics":"applied-ethics-tour.html","moral-philosophy--virtue-ethics":"virtue-ethics-tour.html","moral-philosophy--kantian-ethics":"kant-tour.html","moral-philosophy--utilitarianism":"utilitarianism-tour.html","moral-philosophy--meta-ethics":"metaethics-tour.html","epistemology--limits-of-knowledge":"scepticism-tour.html","epistemology--reason":"reason-tour.html","epistemology--what-is-knowledge":"knowledge-tour.html","epistemology--perception":"perception-tour.html","metaphysics-of-god--concept-of-god":"concept-god-tour.html","metaphysics-of-god--ontological":"ontological-tour.html","metaphysics-of-god--teleological":"teleological-tour.html","metaphysics-of-god--cosmological":"cosmological-tour.html","metaphysics-of-god--religious-language":"religious-language-tour.html","metaphysics-of-god--problem-of-evil":"evil-tour.html","metaphysics-of-mind--what-is-mind":"mind-intro-tour.html","metaphysics-of-mind--substance-dualism":"substance-dualism-tour.html","metaphysics-of-mind--property-dualism":"property-dualism-tour.html","metaphysics-of-mind--behaviourism":"behaviourism-tour.html","metaphysics-of-mind--identity-theory":"identity-theory-tour.html","metaphysics-of-mind--eliminative-materialism":"eliminativism-tour.html","metaphysics-of-mind--functionalism":"functionalism-tour.html"};
 function topic(m,s){
@@ -262,6 +266,7 @@ window.addEventListener("message",async function(e){var f=document.getElementByI
     var b=await (await fetch(p)).blob();await DL.save({filename:p.split("/").pop(),data:b});
   }catch(err){if(err&&err.code==="declined")return;window.open(p,"_blank");}
 });
+function ptab(k){['w','p'].forEach(function(x){var on=x===k;document.getElementById('tb-'+x).setAttribute('aria-selected',on);document.getElementById('pn-'+x).hidden=!on;});}
 window.addEventListener("hashchange",render); render();
 </script>
 
