@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}/* Sartre animation (home page) */
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}/* Sartre animation (home page) */.sartre{justify-self:end;width:150px;text-align:center}.sartre .stage{max-width:150px!important;padding:6px;border-radius:18px}.sartre .pause{font-size:.8rem;padding:3px 10px}
   .stage{margin:8px auto 0;background:linear-gradient(160deg,var(--epi),var(--mind));border-radius:28px;padding:12px;aspect-ratio:1/1;max-width:300px;width:100%;justify-self:center}
   .stage svg{width:100%;height:100%;display:block}
   .head{transform-origin:200px 250px;animation:tilt 6s ease-in-out infinite}
@@ -123,7 +123,7 @@ h2.ph{display:flex;align-items:center;gap:8px}h2.ph .star{width:16px;height:16px
 </style>
 
 <div id="app"></div>
-<template id="sartre"><div class="stage" id="stage"><svg viewBox="0 0 400 400" role="img" aria-labelledby="fig-title">
+<template id="sartre"><div class="sartre"><div class="stage" id="stage"><svg viewBox="0 0 400 400" role="img" aria-labelledby="fig-title">
           <title id="fig-title">Cartoon of Jean-Paul Sartre looking puzzled, pipe in hand, with question marks in a thought bubble</title>
           <!-- thought bubble -->
           <g class="bubble">
@@ -198,7 +198,7 @@ h2.ph{display:flex;align-items:center;gap:8px}h2.ph .star{width:16px;height:16px
             <circle cx="236" cy="278" r="17" fill="#E9B98F"/>
             <path d="M226 268 C222 258 226 250 232 252" stroke="#E9B98F" stroke-width="9" fill="none" stroke-linecap="round"/>
           </g>
-        </svg></div><button class="pause" id="pause" aria-pressed="false">Pause animation</button></template>
+        </svg></div><button class="pause" id="pause" aria-pressed="false">Pause animation</button></div></template>
 
 <script>
 var MODULES=[
