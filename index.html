@@ -1,35 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}/* Sartre animation (home page) */
-  .stage{margin:8px auto 0;background:linear-gradient(160deg,var(--epi),var(--mind));border-radius:28px;padding:12px;aspect-ratio:1/1;max-width:300px;width:100%;justify-self:center}
-  .stage svg{width:100%;height:100%;display:block}
-  .head{transform-origin:200px 250px;animation:tilt 6s ease-in-out infinite}
-  .brow-l{transform-origin:172px 168px;animation:browL 6s ease-in-out infinite}
-  .brow-r{transform-origin:228px 166px;animation:browR 6s ease-in-out infinite}
-  .eyes{animation:blink 6s infinite;transform-origin:200px 186px}
-  .arm{transform-origin:270px 330px;animation:arm 6s ease-in-out infinite}
-  .bubble{transform-origin:300px 90px;animation:bubble 6s ease-in-out infinite}
-  .q1,.q2,.q3{animation:qbob 6s ease-in-out infinite}
-  .q2{animation-delay:.15s}.q3{animation-delay:.3s}
-  @keyframes tilt{0%,15%{transform:rotate(0)}30%,70%{transform:rotate(-7deg)}85%,100%{transform:rotate(0)}}
-  @keyframes browL{0%,20%{transform:translateY(0)}30%,70%{transform:translateY(3px) rotate(6deg)}85%,100%{transform:translateY(0)}}
-  @keyframes browR{0%,20%{transform:translateY(0)}30%,70%{transform:translateY(-7px) rotate(-6deg)}85%,100%{transform:translateY(0)}}
-  @keyframes blink{0%,44%,48%,100%{transform:scaleY(1)}46%{transform:scaleY(.1)}}
-  @keyframes arm{0%,18%{transform:rotate(0)}32%,72%{transform:rotate(-38deg)}88%,100%{transform:rotate(0)}}
-  @keyframes bubble{0%,30%{opacity:0;transform:scale(.6)}40%,78%{opacity:1;transform:scale(1)}90%,100%{opacity:0;transform:scale(.9)}}
-  @keyframes qbob{0%,40%,100%{transform:translateY(0)}55%{transform:translateY(-6px)}}
-  .smoke{opacity:0;animation:smoke 3s ease-out infinite}
-  .s2{animation-delay:1s}.s3{animation-delay:2s}
-  @keyframes smoke{0%{opacity:0;transform:translateY(8px) scale(.7)}25%{opacity:.8}100%{opacity:0;transform:translateY(-30px) scale(1.2)}}
-  .smoke{transform-box:fill-box;transform-origin:50% 100%}
-  @media (prefers-reduced-motion: reduce){
-    .smoke{animation:none}.s1{opacity:.6}
-    .head,.brow-l,.brow-r,.eyes,.arm,.q1,.q2,.q3{animation:none}
-    .bubble{animation:none;opacity:1}
-    .head{transform:rotate(-7deg)} .brow-r{transform:translateY(-7px) rotate(-6deg)} .arm{transform:rotate(-38deg)}
-  }
-  .pause{display:block;margin-left:auto;margin-right:auto;margin-top:8px;font:inherit;font-size:.9rem;background:none;border:1px solid #dde4ee;border-radius:999px;padding:4px 14px;cursor:pointer;color:var(--muted)}
-  .paused *{animation-play-state:paused!important}
-
-  </style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Advanced Level Philosophy</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap">
@@ -123,82 +92,6 @@ h2.ph{display:flex;align-items:center;gap:8px}h2.ph .star{width:16px;height:16px
 </style>
 
 <div id="app"></div>
-<template id="sartre"><div class="stage" id="stage"><svg viewBox="0 0 400 400" role="img" aria-labelledby="fig-title">
-          <title id="fig-title">Cartoon of Jean-Paul Sartre looking puzzled, pipe in hand, with question marks in a thought bubble</title>
-          <!-- thought bubble -->
-          <g class="bubble">
-            <circle cx="268" cy="132" r="7" fill="#fff"/>
-            <circle cx="284" cy="112" r="11" fill="#fff"/>
-            <ellipse cx="320" cy="70" rx="64" ry="44" fill="#fff"/>
-            <g font-family="Georgia,serif" font-weight="700" font-size="40" text-anchor="middle">
-              <text class="q1" x="290" y="86" fill="#4E3580">?</text>
-              <text class="q2" x="322" y="80" fill="#1F4F7A">?</text>
-              <text class="q3" x="354" y="86" fill="#245C36">?</text>
-            </g>
-          </g>
-          <!-- soft bookshelf backdrop -->
-          <g opacity=".45">
-            <rect x="20" y="40" width="200" height="8" fill="#B89A7A"/>
-            <rect x="20" y="150" width="200" height="8" fill="#B89A7A"/>
-            <g>
-              <rect x="28" y="62" width="14" height="88" fill="#C9A27E"/><rect x="44" y="70" width="12" height="80" fill="#D8B48C"/>
-              <rect x="58" y="58" width="16" height="92" fill="#B9785E"/><rect x="76" y="66" width="12" height="84" fill="#CDB08C"/>
-              <rect x="90" y="60" width="14" height="90" fill="#D9A06E"/><rect x="106" y="72" width="12" height="78" fill="#C7A27F"/>
-              <rect x="28" y="172" width="16" height="90" fill="#B9785E"/><rect x="46" y="180" width="12" height="82" fill="#D8B48C"/>
-              <rect x="60" y="168" width="14" height="94" fill="#C9A27E"/><rect x="76" y="176" width="16" height="86" fill="#D9A06E"/>
-            </g>
-          </g>
-          <!-- body: dark jacket, white shirt, dark tie -->
-          <path d="M90 400 C96 318 140 288 200 286 C260 288 304 318 310 400Z" fill="#6E6B6A"/>
-          <path d="M168 286 L200 346 L232 286Z" fill="#CFE0EE"/>
-          <path d="M193 298 L207 298 L212 362 L200 376 L188 362Z" fill="#B23A35"/>
-          <path d="M191 312 L209 304 M190 328 L210 320 M189 344 L211 336 M189 360 L211 352" stroke="#F4EDE6" stroke-width="3"/>
-          <path d="M191 318 L209 310 M190 334 L210 326 M189 350 L211 342" stroke="#2D3A5C" stroke-width="2"/>
-          <!-- head group -->
-          <g class="head">
-            <rect x="182" y="234" width="36" height="56" rx="12" fill="#E9B98F"/>
-            <ellipse cx="132" cy="192" rx="11" ry="17" fill="#E2AE84"/>
-            <ellipse cx="268" cy="192" rx="11" ry="17" fill="#E2AE84"/>
-            <!-- face -->
-            <ellipse cx="200" cy="186" rx="64" ry="74" fill="#EFC39A"/>
-            <!-- short, swept-back hair -->
-            <path d="M134 172 C124 110 164 94 204 96 C244 98 276 118 266 172 C262 150 254 134 244 128 C214 116 168 118 150 132 C142 140 138 154 134 172Z" fill="#4A3628"/>
-            <path d="M150 124 C178 108 220 106 252 122" stroke="#6B5140" stroke-width="3" fill="none"/>
-            <path d="M156 116 L160 128" stroke="#EFC39A" stroke-width="3" stroke-linecap="round"/>
-            <!-- puzzled mouth -->
-            <path d="M184 238 C192 233 202 243 210 236" stroke="#8A4A3A" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <!-- nose -->
-            <path d="M200 192 C197 202 194 210 196 214 C200 217 206 216 208 213" stroke="#D59C70" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <!-- eyes -->
-            <g class="eyes">
-              <ellipse cx="172" cy="184" rx="7" ry="8" fill="#2B2B33"/>
-              <ellipse cx="228" cy="182" rx="7" ry="8" fill="#2B2B33"/>
-              <circle cx="174" cy="181" r="2" fill="#fff"/><circle cx="230" cy="179" r="2" fill="#fff"/>
-            </g>
-            <!-- round, heavy-rimmed glasses -->
-            <g stroke="#A0602C" stroke-width="5" fill="#FFE9C9" fill-opacity=".25">
-              <circle cx="172" cy="184" r="20"/><circle cx="228" cy="182" r="20"/>
-              <path d="M192 183 L208 182 M152 184 L134 180 M248 182 L266 178" fill="none"/>
-            </g>
-            <!-- brows -->
-            <path class="brow-l" d="M156 166 C164 160 178 160 188 166" stroke="#4A4038" stroke-width="6" fill="none" stroke-linecap="round"/>
-            <path class="brow-r" d="M212 164 C222 158 236 158 244 164" stroke="#4A4038" stroke-width="6" fill="none" stroke-linecap="round"/>
-          </g>
-          <!-- arm + hand to chin -->
-          <g class="arm">
-            <path d="M270 330 C262 300 252 290 238 282" stroke="#6E6B6A" stroke-width="30" fill="none" stroke-linecap="round"/>
-            <path d="M244 274 L210 250" stroke="#1E1C1C" stroke-width="6" stroke-linecap="round"/>
-            <path d="M246 262 L266 262 L264 286 C262 292 250 292 248 286Z" fill="#2A2422"/>
-            <!-- pipe smoke -->
-            <g fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity=".85">
-              <path class="smoke s1" d="M256 258 C248 248 264 240 256 230 C248 220 262 212 256 202"/>
-              <path class="smoke s2" d="M256 258 C264 248 250 240 258 230 C266 220 252 212 258 202"/>
-              <path class="smoke s3" d="M256 258 C250 250 262 242 255 232 C249 224 260 216 255 206"/>
-            </g>
-            <circle cx="236" cy="278" r="17" fill="#E9B98F"/>
-            <path d="M226 268 C222 258 226 250 232 252" stroke="#E9B98F" stroke-width="9" fill="none" stroke-linecap="round"/>
-          </g>
-        </svg></div><button class="pause" id="pause" aria-pressed="false">Pause animation</button></template>
 
 <script>
 var MODULES=[
@@ -244,7 +137,6 @@ var MODULES=[
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
 function home(){
   return '<div class="wrap"><header><span class="spec">AQA A-level Philosophy · 7172</span><h1>Advanced Level Philosophy</h1>'+
-  document.getElementById('sartre').innerHTML+
   '<p class="lede">Learn each topic from the ground up, or jump straight to arguments, objections and exam practice.</p>'+
   '<details class="tuition"><summary><span class="star a" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span><span class="star b" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span>Get philosophy tuition<span class="star c" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span><span class="star a" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span></summary><div class="body">Email: <a href="mailto:nirshaki@googlemail.com">nirshaki@googlemail.com</a><br>or <a href="mailto:mohiniqavi@hotmail.com">mohiniqavi@hotmail.com</a></div></details></header>'+
   '<nav class="grid" aria-label="Modules">'+MODULES.map(function(m){
@@ -375,7 +267,6 @@ window.addEventListener("message",async function(e){var f=document.getElementByI
   }catch(err){if(err&&err.code==="declined")return;window.open(p,"_blank");}
 });
 function ptab(k){['w','p'].forEach(function(x){var on=x===k;document.getElementById('tb-'+x).setAttribute('aria-selected',on);document.getElementById('pn-'+x).hidden=!on;});}
-document.addEventListener('click',function(e){if(e.target.id!=='pause')return;var p=document.getElementById('stage').classList.toggle('paused');e.target.setAttribute('aria-pressed',p);e.target.textContent=p?'Play animation':'Pause animation';});
 window.addEventListener("hashchange",render); render();
 </script>
 
