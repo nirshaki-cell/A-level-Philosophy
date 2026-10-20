@@ -16,6 +16,16 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font);font-weight:30
 .wrap{max-width:1120px;margin:0 auto;padding-block:clamp(40px,8vw,88px);
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 header{text-align:center;display:grid;gap:12px;margin-bottom:clamp(32px,6vw,56px)}
+header{position:relative}
+.shelf{position:absolute;top:8px;width:170px;height:150px;display:flex;align-items:flex-end;justify-content:center;gap:5px;pointer-events:none;padding:0 10px}
+.shelf.l{left:0}.shelf.r{right:0}
+.shelf::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:8px;border-radius:3px;background:#d9c7ac;box-shadow:0 4px 6px rgba(60,40,20,.12)}
+.book{position:relative;width:34px;border-radius:3px 3px 2px 2px;box-shadow:inset -3px 0 0 rgba(0,0,0,.06),inset 0 6px 0 rgba(255,255,255,.35),0 1px 2px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center}
+.book span{writing-mode:vertical-rl;transform:rotate(180deg);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;white-space:nowrap}
+.book.lean{transform:rotate(-9deg);transform-origin:bottom left}.shelf.r .book.lean{transform:rotate(9deg);transform-origin:bottom right}
+.book.plain{width:18px}
+@media (max-width:1000px){.shelf{display:none}}
+
 .spec{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 h1{margin:0;font-weight:300;font-size:clamp(2rem,5.5vw,3.4rem);line-height:1.15;text-wrap:balance}
 .lede{margin:0 auto;max-width:60ch;color:var(--muted)}
@@ -136,7 +146,7 @@ var MODULES=[
 ];
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
 function home(){
-  return '<div class="wrap"><header><span class="spec">AQA A-level Philosophy · 7172</span><h1>Advanced Level Philosophy</h1>'+
+  return '<div class="wrap"><header><div class="shelf l" aria-hidden="true"><div class="book plain" style="height:92px;background:var(--card);color:"></div><div class="book" style="height:138px;background:var(--god);color:var(--god-ink)"><span>Metaphysics</span></div><div class="book" style="height:128px;background:var(--epi);color:var(--epi-ink)"><span>Epistemology</span></div><div class="book plain lean" style="height:100px;background:var(--mor);color:"></div></div><div class="shelf r" aria-hidden="true"><div class="book plain lean" style="height:100px;background:var(--mor);color:"></div><div class="book" style="height:120px;background:var(--god);color:var(--god-ink)"><span>Theology</span></div><div class="book" style="height:140px;background:var(--mind);color:var(--mind-ink)"><span>Philosophy of mind</span></div><div class="book plain" style="height:88px;background:var(--card);color:"></div></div><span class="spec">AQA A-level Philosophy · 7172</span><h1>Advanced Level Philosophy</h1>'+
   '<p class="lede">Learn each topic from the ground up, or jump straight to arguments, objections and exam practice.</p>'+
   '<details class="tuition"><summary><span class="star a" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span><span class="star b" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span>Get philosophy tuition<span class="star c" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span><span class="star a" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span></summary><div class="body">Email: <a href="mailto:nirshaki@googlemail.com">nirshaki@googlemail.com</a><br>or <a href="mailto:mohiniqavi@hotmail.com">mohiniqavi@hotmail.com</a></div></details></header>'+
   '<nav class="grid" aria-label="Modules">'+MODULES.map(function(m){
