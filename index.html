@@ -251,7 +251,7 @@ window.addEventListener("message",function(e){var f=document.getElementById("tou
 var DL=null;(async function(){try{DL=await claude.use("downloads");}catch(e){}})();
 window.addEventListener("message",async function(e){var f=document.getElementById("tour");
   if(!f||e.source!==f.contentWindow||!e.data||!e.data.dlFile)return;
-  var p=String(e.data.dlFile);if(!/^downloads\/[\w.-]+\.pdf$/.test(p))return;
+  var p=String(e.data.dlFile);if(!/^downloads\/[\w.-]+\.(pdf|pptx|docx)$/.test(p))return;
   try{if(!DL)DL=await claude.use("downloads");if(!DL)throw {code:"unavailable"};
     var b=await (await fetch(p)).blob();await DL.save({filename:p.split("/").pop(),data:b});
   }catch(err){if(err&&err.code==="declined")return;window.open(p,"_blank");}
