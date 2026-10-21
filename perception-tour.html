@@ -137,6 +137,24 @@ aside{position:static!important}
 .panel blockquote{margin:20px 0}
 .panel .map{margin:20px 0}
 
+.consol{background:var(--tint);color:var(--ink);border-radius:14px;padding:18px 20px}
+.consol h4{margin:0 0 6px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.consol p{margin:0 0 10px;font-size:.92rem}
+.consol a{display:flex;gap:10px;align-items:center;background:var(--card);color:var(--ink);text-decoration:none;font-weight:600;font-size:.92rem;padding:10px 14px;border-radius:10px;overflow-wrap:anywhere}
+.consol a:hover{text-decoration:underline}
+.consol a+a{margin-top:8px}
+.consol .fmt{margin-left:auto;font-size:.72rem;letter-spacing:.1em;color:var(--muted);font-weight:600;white-space:nowrap}
+.ptabs{margin:12px 0 4px}
+.ptablist{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+@media (max-width:640px){.ptablist{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ptablist button{font:inherit;font-size:.95rem;text-align:left;line-height:1.3;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--fg);padding:10px 12px;border-radius:10px 10px 0 0;display:grid;gap:2px}
+.ptablist .n{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.ptablist button[aria-selected=true]{background:var(--tint);color:var(--ink);border-color:var(--tint);font-weight:600}
+.ptablist button[aria-selected=true] .n{color:var(--ink)}
+.ptpanel{background:#fff;border:2px solid var(--tint);border-radius:0 0 12px 12px;padding:clamp(16px,3vw,26px)}
+.ptpanel h2{font-size:1.4rem!important}
+.ptpanel .more{font-weight:600;color:var(--ink)}
+@media (max-width:640px){.ptablist button{border-radius:10px}.ptpanel{border-radius:12px;margin-top:6px}}
 /* Cream panels with espresso text */
 .panel,.card,.tabs button,.tile.sm,.soon,.tuition{--fg:#3b2a20;--muted:#6e5a4c;color:#3b2a20}
 .tile.sm h2{color:#3b2a20}
@@ -209,18 +227,22 @@ aside{position:static!important}
   <p>What this means is that the world exists independently of our senses, and is thus <span class="term" data-t="Mind-independent">mind-independent</span>. The world and things in it do not need the mind to exist. So, for example, when I look away from my desk, it is still there, regardless of whether I am looking at it or not. This is what we mean when we say that the ‘direct realism’ is a realist thesis.</p>
   <p>Direct realism also makes the claim that I see things in the world as they are, and that when I look at my desk, it is my desk, that I am seeing. I am not seeing an image of my desk, rather, what is revealed to me, is the desk itself. This is the significance of the word ‘direct’ in the title.</p>
   <h3>The problems with direct realism</h3>
-  <p>There are four problems with direct realism.</p>
-  <ol class="list">
-    <li><a href="#variation">The problem of perceptual variation.</a></li>
-    <li><a href="#illusion">The problem of illusion.</a></li>
-    <li><a href="#hallucination">The problem of hallucination.</a></li>
-    <li><a href="#timelag">The time-lag argument.</a></li>
-  </ol>
+  <p>There are four problems with direct realism. Choose a tab to read each one here. For the replies, see <a href="#replies">Stop 6</a>.</p>
+  <div class="ptabs">
+    <div class="ptablist" role="tablist" aria-label="Problems with direct realism">
+      <button role="tab" id="pt-variation" data-p="variation" aria-selected="true" aria-controls="pt-panel"><span class="n">Problem 1</span>Perceptual variation</button>
+      <button role="tab" id="pt-illusion" data-p="illusion" aria-selected="false" aria-controls="pt-panel" tabindex="-1"><span class="n">Problem 2</span>Illusion</button>
+      <button role="tab" id="pt-hallucination" data-p="hallucination" aria-selected="false" aria-controls="pt-panel" tabindex="-1"><span class="n">Problem 3</span>Hallucination</button>
+      <button role="tab" id="pt-timelag" data-p="timelag" aria-selected="false" aria-controls="pt-panel" tabindex="-1"><span class="n">Problem 4</span>Time lag</button>
+    </div>
+    <div class="ptpanel" id="pt-panel" role="tabpanel" aria-labelledby="pt-variation" tabindex="0"></div>
+  </div>
 </div>
 <aside>
   <div class="card"><h4>Two words, two claims</h4><dl>
     <dt>‘Realism’</dt><dd>The world exists whether or not we look at it.</dd>
     <dt>‘Direct’</dt><dd>What I see is the desk itself, not an image of it.</dd></dl></div>
+  <div class="consol"><h4>Consolidate knowledge</h4><p>Download the workbook and work through it alongside the lesson slides.</p><a href="downloads/Direct_Realism_Workbook.pdf"><span aria-hidden="true">⬇</span>Direct Realism Workbook<span class="fmt">PDF</span></a><a href="downloads/Direct_Realism_Slides.pptx"><span aria-hidden="true">⬇</span>Direct Realism Slides<span class="fmt">PPTX</span></a></div>
 </aside></div>
 </template>
 
@@ -557,6 +579,7 @@ function show(id){
   tabs.querySelectorAll("button").forEach(function(b){var on=b.dataset.id===id;b.setAttribute("aria-selected",on);if(on)b.scrollIntoView({block:"nearest",inline:"center"});});
   stage.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;
     el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(id==="direct")ptInit();
   if(id==="start"){document.getElementById("map").innerHTML=MAP.map(function(m){
     return '<button class="tile'+(m[4]?'':' text-only')+'" data-go="'+m[0]+'">'+(m[4]?'<img src="'+m[4]+'" alt="">':'')+'<span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
     document.getElementById("map").addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
@@ -564,6 +587,20 @@ function show(id){
     function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src">'+(x[2]==="h"?"Handout glossary":"From the handout text")+'</div></div>';}).join("");}
     q.addEventListener("input",draw);draw();}
 }
+function ptShow(k){var pn=stage.querySelector("#pt-panel");if(!pn)return;
+  var src=document.getElementById("s-"+k).content.querySelector(".panel").cloneNode(true);
+  var kk=src.querySelector(".kicker");if(kk)kk.remove();
+  pn.innerHTML="";while(src.firstChild)pn.appendChild(src.firstChild);
+  var lbl=STOPS.filter(function(s){return s[0]===k;})[0][1];
+  var m=document.createElement("p");m.innerHTML='<a class="more" href="#'+k+'">Open “'+lbl+'” as its own stop, with exam practice →</a>';pn.appendChild(m);
+  stage.querySelectorAll(".ptablist button").forEach(function(b){var on=b.dataset.p===k;b.setAttribute("aria-selected",on);b.tabIndex=on?0:-1;if(on)pn.setAttribute("aria-labelledby",b.id);});
+  pn.querySelectorAll(".term").forEach(function(el){el.title=gdef(el.dataset.t);el.tabIndex=0;el.addEventListener("click",function(){alert(el.dataset.t+"\n\n"+gdef(el.dataset.t));});});
+  if(typeof tell==="function")tell(false);}
+function ptInit(){var l=stage.querySelector(".ptablist");if(!l)return;
+  l.addEventListener("click",function(e){var b=e.target.closest("button");if(b)ptShow(b.dataset.p);});
+  l.addEventListener("keydown",function(e){var bs=[].slice.call(l.querySelectorAll("button")),i=bs.indexOf(document.activeElement);if(i<0)return;
+    var j=e.key==="ArrowRight"?(i+1)%bs.length:e.key==="ArrowLeft"?(i+bs.length-1)%bs.length:-1;if(j<0)return;e.preventDefault();bs[j].focus();ptShow(bs[j].dataset.p);});
+  ptShow("variation");}
 var first=true,EMB=window.parent!==window;
 function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
 function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
@@ -594,6 +631,10 @@ window.addEventListener("hashchange",route);route();
   }
   setTimeout(function(){pos=t.scrollLeft;requestAnimationFrame(step);},1500);
 })();
+</script>
+<script>
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest(".consol a");if(!a||window.parent===window)return;
+e.preventDefault();var p=a.getAttribute("href");window.parent.postMessage({dlFile:p,dlName:p.split("/").pop()},"*");});
 </script>
 </body>
 </html>
