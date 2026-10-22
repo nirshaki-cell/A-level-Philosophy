@@ -124,6 +124,12 @@ html.embedded aside{position:static}
 .portrait.wide img{aspect-ratio:4/3;object-position:center}
 .portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
 .portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+.consol{background:var(--tint);color:var(--ink);border-radius:14px;padding:18px 20px}
+.consol h4{margin:0 0 6px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.consol p{margin:0 0 10px;font-size:.92rem}
+.consol a{display:flex;gap:10px;align-items:center;background:var(--card);color:var(--ink);text-decoration:none;font-weight:600;font-size:.92rem;padding:10px 14px;border-radius:10px;overflow-wrap:anywhere}
+.consol a:hover{text-decoration:underline}.consol a+a{margin-top:8px}
+.consol .fmt{margin-left:auto;font-size:.72rem;letter-spacing:.1em;color:var(--muted);font-weight:600}
 </style>
 <script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
 
@@ -302,6 +308,7 @@ aside{position:static!important}
   <tr><td>Wave 3: The evil demon.</td><td>The truthfulness of our thoughts about mathematics and geometry, and thus anything at all.</td></tr></table>
 </div>
 <aside>
+  <div class="consol"><h4>Consolidate knowledge</h4><p>Download the handout on Descartes’ rationalism to read alongside Stops 3–8.</p><a href="downloads/Descartes_Rationalism_Handout.pdf" download target="_blank" rel="noopener"><span aria-hidden="true">⬇</span>Descartes’ Rationalism Handout<span class="fmt">PDF</span></a></div>
   <div class="card"><h4>In a nutshell</h4><p>Descartes’ three waves of doubt are firstly, of sense perception, secondly, of dreaming and lastly of the evil demon hypothesis.</p></div>
   <div class="card"><h4>The goal</h4><p>Certainty. Anything that can be doubted, however unlikely, is put aside.</p></div>
 </aside></div>
@@ -803,5 +810,10 @@ window.addEventListener("hashchange",route);route();
   setTimeout(function(){pos=t.scrollLeft;requestAnimationFrame(step);},1500);
 })();
 </script>
+<script>
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest(".consol a");if(!a)return;
+e.preventDefault();var p=a.getAttribute("href");window.parent.postMessage({dlFile:p,dlName:p.split("/").pop()},"*");});
+</script>
+
 </body>
 </html>
