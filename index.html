@@ -125,6 +125,15 @@ h2.ph{display:flex;align-items:center;gap:8px}h2.ph .star{width:16px;height:16px
 @media (max-width:520px){.catstage .walker{left:50%}.catstage .sleeper{left:calc(50% - 10px)}}
 @media (prefers-reduced-motion:reduce){.catstage .walker{display:none}.catstage .sleeper{animation:none;opacity:1}.catstage .body,.catstage .z{animation:none}.catstage .z{opacity:1}}
 
+
+.band{position:relative;overflow:hidden}
+.band.hascat{padding-right:clamp(24px,34%,360px);min-height:150px}
+.band .catstage{position:absolute;right:8px;bottom:4px;width:320px;height:130px;margin:0}
+.band .catstage .floor{display:none}
+.band .catstage .walker{left:40%}.band .catstage .sleeper{left:calc(40% - 10px)}
+.band.hascat>:not(.catstage){position:relative;z-index:1}
+@media (max-width:700px){.band.hascat{padding-right:clamp(24px,5vw,44px);padding-bottom:140px}.band .catstage{left:0;right:0;width:100%}.band .catstage .walker{left:50%}.band .catstage .sleeper{left:calc(50% - 10px)}}
+
 </style>
 
 <div id="app"></div>
@@ -180,12 +189,12 @@ function home(){
     return '<a class="tile '+m.cls+'" href="#'+m.id+'"><span class="paper">'+m.paper+'</span><h2>'+esc(m.title)+'</h2><p>'+esc(m.home)+'</p><span class="go">Open module →</span></a>';
   }).join("")+'</nav><footer>Modules follow the order of the AQA 7172 specification.</footer></div>';
 }
-function band(m,spec,title,q){
-  return '<div class="band"><span class="spec">'+m.paper+' · Spec '+spec+'</span><h1>'+esc(title)+'</h1>'+(q?'<p class="q">'+esc(q)+'</p>':'')+'</div>';
+function band(m,spec,title,q,cat){
+  return '<div class="band'+(cat?' hascat':'')+'">'+(cat?CAT:'')+'<span class="spec">'+m.paper+' · Spec '+spec+'</span><h1>'+esc(title)+'</h1>'+(q?'<p class="q">'+esc(q)+'</p>':'')+'</div>';
 }
 function module(m){
   var n=m.subs.length+2,cols=n%3===0||n===5||n===7?" three":"";
-  return '<div class="wrap '+m.cls+'"><a class="back" href="#home">← All modules</a>'+CAT+band(m,m.spec,m.title,m.q)+(m.id==="metaphysics-of-mind"?'<section class="podcast" aria-label="Podcast"><span class="kick">Listen · Podcast · 32 min</span><h2>What is consciousness?</h2><p>AI-generated discussion of consciousness. Because it is AI-generated, check anything you use in an essay against the topic notes.</p><audio controls preload="none" src="downloads/What_is_consciousness.mp3">Your browser cannot play this audio. Use the download button instead.</audio><a class="dl" href="downloads/What_is_consciousness.mp3" download>Download podcast (MP3 audio, 19 MB)</a></section>':"")+
+  return '<div class="wrap '+m.cls+'"><a class="back" href="#home">← All modules</a>'+band(m,m.spec,m.title,m.q,true)+(m.id==="metaphysics-of-mind"?'<section class="podcast" aria-label="Podcast"><span class="kick">Listen · Podcast · 32 min</span><h2>What is consciousness?</h2><p>AI-generated discussion of consciousness. Because it is AI-generated, check anything you use in an essay against the topic notes.</p><audio controls preload="none" src="downloads/What_is_consciousness.mp3">Your browser cannot play this audio. Use the download button instead.</audio><a class="dl" href="downloads/What_is_consciousness.mp3" download>Download podcast (MP3 audio, 19 MB)</a></section>':"")+
   '<nav class="grid'+cols+'" aria-label="Topics">'+m.subs.map(function(s){
     return '<a class="tile sm" href="#'+m.id+'--'+s[0]+'"><span class="paper">Spec '+s[1]+'</span><h2>'+esc(s[2])+'</h2><p>'+esc(s[3])+'</p><span class="go">Open topic →</span></a>';
   }).join("")+'<a class="tile sm" href="#'+m.id+'--practise"><span class="paper">Practice</span><h2 class="ph">Practice writing <span class="star" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></span></h2><p>Write and improve your 12-mark answers and 25-mark essays for this module.</p><span class="go">Start writing →</span></a>'+
@@ -205,7 +214,7 @@ function practise(m){
 var EMBED={"moral-philosophy--applied-ethics":"applied-ethics-tour.html","moral-philosophy--virtue-ethics":"virtue-ethics-tour.html","moral-philosophy--kantian-ethics":"kant-tour.html","moral-philosophy--utilitarianism":"utilitarianism-tour.html","moral-philosophy--meta-ethics":"metaethics-tour.html","epistemology--limits-of-knowledge":"scepticism-tour.html","epistemology--reason":"reason-tour.html","epistemology--what-is-knowledge":"knowledge-tour.html","epistemology--perception":"perception-tour.html","metaphysics-of-god--concept-of-god":"concept-god-tour.html","metaphysics-of-god--ontological":"ontological-tour.html","metaphysics-of-god--teleological":"teleological-tour.html","metaphysics-of-god--cosmological":"cosmological-tour.html","metaphysics-of-god--religious-language":"religious-language-tour.html","metaphysics-of-god--problem-of-evil":"evil-tour.html","metaphysics-of-mind--what-is-mind":"mind-intro-tour.html","metaphysics-of-mind--substance-dualism":"substance-dualism-tour.html","metaphysics-of-mind--property-dualism":"property-dualism-tour.html","metaphysics-of-mind--behaviourism":"behaviourism-tour.html","metaphysics-of-mind--identity-theory":"identity-theory-tour.html","metaphysics-of-mind--eliminative-materialism":"eliminativism-tour.html","metaphysics-of-mind--functionalism":"functionalism-tour.html"};
 function topic(m,s){
   var key=m.id+'--'+s[0];
-  if(EMBED[key]) return '<div class="wrap '+m.cls+'"><a class="back" href="#'+m.id+'">← '+esc(m.title)+'</a>'+CAT+'<iframe class="tour" id="tour" title="'+esc(s[2])+'" src="'+EMBED[key]+'"></iframe></div>';
+  if(EMBED[key]) return '<div class="wrap '+m.cls+'"><a class="back" href="#'+m.id+'">← '+esc(m.title)+'</a><iframe class="tour" id="tour" title="'+esc(s[2])+'" src="'+EMBED[key]+'"></iframe></div>';
   return '<div class="wrap '+m.cls+'"><a class="back" href="#'+m.id+'">← '+esc(m.title)+'</a>'+band(m,s[1],s[2],s[3])+
   '<div class="soon">The full page for this topic is being written. It will cover the big question, key terms, explanation, formal arguments, objections and responses, evaluation, exam practice, a revision summary and a quick check quiz.</div></div>';
 }
