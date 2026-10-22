@@ -150,6 +150,12 @@ details.resp summary{cursor:pointer}
 /* Cream panels with espresso text */
 .panel,.card,.tabs button,.tile.sm,.soon,.tuition{--fg:#3b2a20;--muted:#6e5a4c;color:#3b2a20}
 .tile.sm h2{color:#3b2a20}
+.consol{background:var(--tint);color:var(--ink);border-radius:14px;padding:18px 20px}
+.consol h4{margin:0 0 6px;font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.consol p{margin:0 0 10px;font-size:.92rem}
+.consol a{display:flex;gap:10px;align-items:center;background:var(--card);color:var(--ink);text-decoration:none;font-weight:600;font-size:.92rem;padding:10px 14px;border-radius:10px;overflow-wrap:anywhere}
+.consol a:hover{text-decoration:underline}
+.consol .fmt{margin-left:auto;font-size:.72rem;letter-spacing:.1em;color:var(--muted);font-weight:600}
 </style>
 <script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
 
@@ -190,6 +196,7 @@ details.resp summary{cursor:pointer}
   <div class="map" id="map"></div>
 </div>
 <aside>
+  <div class="consol"><h4>Consolidate knowledge</h4><p>Download the workbook and test yourself on this topic, then revisit the lesson slides.</p><a href="downloads/Concept_of_God_Workbook.pdf"><span aria-hidden="true">⬇</span>Concept of God Workbook<span class="fmt">PDF</span></a><a href="downloads/Concept_of_God_Slides.pptx"><span aria-hidden="true">⬇</span>The Concept of God Slides<span class="fmt">PPTX</span></a></div>
   <div class="card"><h4>The big question</h4><p>Can omnipotence, omniscience, supreme goodness and eternity be combined in a single, coherent concept?</p></div>
   <div class="card"><h4>How to use this tour</h4><p>Learning it for the first time? Go through the stops in order. Revising? Jump to a stop, or go straight to <b>Revise</b> for the summary and quiz. Dotted words are in the glossary: tap one to see its meaning.</p></div>
   <div class="card"><h4>Spec checklist</h4><p>✓ Omniscience, omnipotence, supreme goodness – and their meanings<br>✓ Timeless (eternal) vs within time (everlasting)<br>✓ Paradox of the stone<br>✓ Euthyphro dilemma<br>✓ Omniscience and free human beings</p></div>
@@ -457,6 +464,7 @@ details.resp summary{cursor:pointer}
   <div id="quiz"></div>
 </div>
 <aside>
+  <div class="consol"><h4>Consolidate knowledge</h4><p>Download the workbook and test yourself on this topic, then revisit the lesson slides.</p><a href="downloads/Concept_of_God_Workbook.pdf"><span aria-hidden="true">⬇</span>Concept of God Workbook<span class="fmt">PDF</span></a><a href="downloads/Concept_of_God_Slides.pptx"><span aria-hidden="true">⬇</span>The Concept of God Slides<span class="fmt">PPTX</span></a></div>
   <div class="card"><h4>25-mark essay plan</h4><p><b>Is the concept of God coherent?</b><br>1. Claim and definitions (attributes).<br>2. Stone → conditional reply → judge.<br>3. Euthyphro → same-property reply → counter → judge.<br>4. Foreknowledge → eternity solution → is eternity intelligible?<br>5. Conclusion that follows from your judgements.</p></div>
 </aside></div>
 </template>
@@ -631,6 +639,10 @@ window.addEventListener("hashchange",route);route();
   }
   setTimeout(function(){pos=t.scrollLeft;requestAnimationFrame(step);},1500);
 })();
+</script>
+<script>
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest(".consol a");if(!a||window.parent===window)return;
+e.preventDefault();var p=a.getAttribute("href");window.parent.postMessage({dlFile:p,dlName:p.split("/").pop()},"*");});
 </script>
 </body>
 </html>
