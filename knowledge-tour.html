@@ -148,6 +148,12 @@ aside{position:static!important}
 /* Cream panels with espresso text */
 .panel,.card,.tabs button,.tile.sm,.soon,.tuition{--fg:#3b2a20;--muted:#6e5a4c;color:#3b2a20}
 .tile.sm h2{color:#3b2a20}
+.portrait{padding:0;overflow:hidden;margin:0}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block}
+.portrait.wide img{aspect-ratio:4/3;object-position:center}
+.portrait figcaption{padding:12px 18px 14px;font-size:.88rem;color:var(--muted)}
+.portrait figcaption b{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+.portrait.small{max-width:200px;margin-left:auto}
 </style>
 <script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
 
@@ -177,6 +183,7 @@ aside{position:static!important}
   <div class="map" id="map"></div>
 </div>
 <aside>
+  <figure class="card portrait small"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Plato_Silanion_Musei_Capitolini_MC1377.jpg?width=400" alt="Marble bust of Plato with a full beard and a band in his hair" loading="lazy"><figcaption><b>Plato</b>Roman copy of a portrait by Silanion, Capitoline Museums · Photo © Marie-Lan Nguyen / Wikimedia Commons, CC BY 2.5</figcaption></figure>
   <div class="card"><h4>The big question</h4><p>What are the necessary and sufficient conditions for knowledge?</p></div>
   <div class="card"><h4>How to use this tour</h4><p>Work through the stops in order to learn the topic, or jump straight to a stop to revise. Dotted words are in the glossary: tap one to see its meaning.</p></div>
 </aside></div>
