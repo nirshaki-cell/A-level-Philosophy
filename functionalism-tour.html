@@ -170,7 +170,7 @@ details.resp summary{cursor:pointer}
 </style>
 <script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
 
-</head>
+<style>.vidbox{position:relative;aspect-ratio:16/9;margin-top:10px;border-radius:12px;overflow:hidden;background:#0001}.vidbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.vidalt{font-size:.85rem;margin:6px 0 0;opacity:.85}</style></head>
 <body>
 <!--TITLE:Functionalism Tour-->
 <div class="wrap">
@@ -378,6 +378,17 @@ details.resp summary{cursor:pointer}
 </aside></div>
 </template>
 
+<!-- ============ VIDEO ============ -->
+<template id="s-video">
+<div class="stop"><div class="panel">
+  <div class="kicker">Video · Functionalism</div>
+  <h2>Watch: functionalism</h2>
+  <p>Watch the video, then return to the stops to check your understanding. It starts at 1:53, as set for this lesson; drag back to the beginning if you want the full introduction.</p>
+  <div class="vidbox"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/yxq5JopkjsU?start=113" title="Functionalism (A level Philosophy, YouTube)" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+  <p class="vidalt">Player not loading? <a href="https://www.youtube.com/watch?v=yxq5JopkjsU&amp;t=113s" target="_blank" rel="noopener">Open it on YouTube</a></p>
+</div></div>
+</template>
+
 <!-- ============ REVISE ============ -->
 <template id="s-revise">
 <div class="stop"><div class="panel">
@@ -442,7 +453,7 @@ var GLOSS=[
  ["Chinese Room","Searle’s different thought experiment arguing that running a program is not sufficient for understanding.","b"],
  ["Liberalism (Block)","Ned Block’s term for a theory that wrongly attributes minds to systems that lack them – the charge against functionalism.","b"]
 ];
-var STOPS=[["start","Start here"],["roles","Functional roles"],["advantages","Advantages"],["inverted","Inverted qualia"],["china","China brain"],["mary","Mary and function"],["revise","Revise"],["glossary","Glossary"]];
+var STOPS=[["start","Start here"],["roles","Functional roles"],["advantages","Advantages"],["inverted","Inverted qualia"],["china","China brain"],["mary","Mary and function"],["video","Video"],["revise","Revise"],["glossary","Glossary"]];
 var MAP=[
  ["roles","Stop 1","Functional roles","Putnam, software and hardware, multiple realisability."],
  ["advantages","Stop 2","The advantages","Why functionalism beat its rivals."],
