@@ -170,7 +170,15 @@ details.resp summary{cursor:pointer}
 </style>
 <script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
 
-<style>.vid{margin:0 0 14px}.vid summary{cursor:pointer;list-style:none;font-weight:600}.vid summary::-webkit-details-marker{display:none}.vidbox{position:relative;aspect-ratio:16/9;margin-top:10px;border-radius:12px;overflow:hidden;background:#0001}.vidbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.vidalt{font-size:.85rem;margin:6px 0 0;opacity:.85}</style></head>
+<style>.vid{margin:0 0 14px}.vid summary{cursor:pointer;list-style:none;font-weight:600}.vid summary::-webkit-details-marker{display:none}.vidbox{position:relative;aspect-ratio:16/9;margin-top:10px;border-radius:12px;overflow:hidden;background:#0001}.vidbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.vidalt{font-size:.85rem;margin:6px 0 0;opacity:.85}</style><style>
+.stop{position:relative}
+.vtab{position:absolute;top:24px;right:-16px;z-index:4;font:inherit;font-size:.85rem;font-weight:600;letter-spacing:.03em;background:var(--ink);color:#fff;border:0;border-radius:10px 0 0 10px;padding:8px 12px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.12);display:flex;align-items:center;gap:6px;white-space:nowrap}
+.vtab span{font-size:.7rem}
+@media (min-width:1260px){.vtab{right:-12px;transform:translateX(100%);border-radius:0 10px 10px 0}}
+.vbox{background:var(--tint);border-radius:14px;padding:16px;margin:0 0 24px}
+.vbox h4{margin:0 0 10px;color:var(--ink);font-weight:600}
+.vbox p{margin:10px 0 0;font-size:.9rem}
+</style></head>
 <body>
 <!--TITLE:Functionalism Tour-->
 <div class="wrap">
@@ -381,10 +389,10 @@ details.resp summary{cursor:pointer}
 
 <!-- ============ REVISE ============ -->
 <template id="s-revise">
-<div class="stop"><div class="panel">
+<div class="stop"><button class="vtab" id="vtab" aria-expanded="false" aria-controls="vbox"><span aria-hidden="true">▶</span>Video</button><div class="panel">
+  <div class="vbox" id="vbox" hidden><h4>Watch: Is functionalism true?</h4><div class="vidbox" id="vframe" style="margin-top:0"></div><p class="vidalt">Player not loading? <a href="https://www.youtube.com/watch?v=3u65qwqBupI" target="_blank" rel="noopener">Open it on YouTube</a></p></div>
   <div class="kicker">Revise · Evaluation, summary and quiz</div>
   <h2>Is functionalism true?</h2>
-  <details class="vid"><summary class="vidlink"><span aria-hidden="true">▶</span> Watch video: Is functionalism true?</summary><div class="vidbox"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/3u65qwqBupI" title="Is functionalism true? (A level Philosophy, YouTube)" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><p class="vidalt">Player not loading? <a href="https://www.youtube.com/watch?v=3u65qwqBupI" target="_blank" rel="noopener">Open it on YouTube</a></p></details>
   <h3>Overall evaluation</h3>
   <p>Functionalism combines the best of its predecessors: like identity theory, it treats mental states as real inner causes; like behaviourism, it ties them to behaviour; and unlike either, it accommodates multiple realisability and the distinctness of mental states from behaviour. It gives a plausible account of intentional states, whose identity really does seem to lie in their role in reasoning and action. Its weakness is phenomenal consciousness. The inverted qualia, China brain and Mary arguments all claim that qualia are not fixed by functional role, and the most persuasive functionalist replies either deny the intuitions or concede that qualia depend on the physical realiser. A sustained judgement: <b>functionalism is the most successful physicalist theory on the specification for intentional states, but it does not solve the hard problem; at best it is part of the truth about the mind.</b></p>
   <h3>Revision summary</h3>
@@ -522,6 +530,7 @@ function show(id){
   if(id==="start"){var mp=document.getElementById("map");mp.innerHTML=MAP.map(function(m){
     return '<button class="tile text-only" data-go="'+m[0]+'"><span class="t"><span class="paper">'+m[1]+'</span><h3>'+m[2]+'</h3><p>'+m[3]+'</p><span class="go">Go →</span></span></button>';}).join("");
     mp.addEventListener("click",function(e){var b=e.target.closest("button");if(b)location.hash=b.dataset.go;});}
+  if(id==="revise"){var vt=document.getElementById("vtab"),vb=document.getElementById("vbox");vt.addEventListener("click",function(){var op=vb.hidden;vb.hidden=!op;vt.setAttribute("aria-expanded",op);var fr=document.getElementById("vframe");if(op){fr.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/3u65qwqBupI" title="Is functionalism true? (A level Philosophy, YouTube)" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>';vb.scrollIntoView({behavior:"smooth",block:"start"});}else{fr.innerHTML="";}});}
   if(id==="revise"){document.getElementById("quiz").innerHTML=QUIZ.map(function(q,i){return '<details class="resp"><summary><b>'+(i+1)+'.</b> '+q[0]+'</summary><p style="margin-top:10px">'+q[1]+'</p></details>';}).join("");}
   if(id==="glossary"){var g=document.getElementById("gloss"),q=document.getElementById("gsearch");
     function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src'+(x[2]==="b"?" b":"")+'">'+(x[2]==="h"?"Departmental handout":x[2]==="b"?"Beyond the spec":"From the tour text")+'</div></div>';}).join("");}
