@@ -167,6 +167,14 @@ details.resp summary{cursor:pointer}
 .tile.sm h2{color:#3b2a20}
 .consol a+a{margin-top:8px}
 .consol .fmt{white-space:nowrap}
+.stop{position:relative}
+.vbtn{display:flex;width:100%;gap:10px;align-items:center;background:var(--card);color:var(--ink);border:0;font:inherit;font-weight:600;font-size:.92rem;padding:10px 14px;border-radius:10px;cursor:pointer;text-align:left}
+.vbtn:hover{text-decoration:underline}
+.vbtn .fmt{margin-left:auto;font-size:.72rem;letter-spacing:.1em;color:var(--muted);font-weight:600}
+.vbox{background:var(--tint);border-radius:14px;padding:16px;margin:0 0 24px;scroll-margin-top:84px}
+.vbox a{color:var(--ink);font-weight:600}
+.vbox h4{margin:0 0 10px;color:var(--ink);font-weight:600}
+.vbox p{margin:10px 0 0;font-size:.9rem}
 </style>
 <script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
 
@@ -191,6 +199,7 @@ details.resp summary{cursor:pointer}
 <!-- ============ STOP 0 ============ -->
 <template id="s-start">
 <div class="stop"><div class="panel">
+  <div class="vbox" id="vbox-1" hidden><h4>Watch: Eliminative materialism</h4><div class="vidbox" style="margin-top:0"></div><p class="vidalt">Player not loading? <a href="https://www.youtube.com/watch?v=YMUGYfWIMyc" target="_blank" rel="noopener">Open it on YouTube</a></p></div>
   <div class="kicker">Stop 0 · The big question</div>
   <h2>Do beliefs and desires exist?</h2>
   <p>Every day you explain and predict what people do by attributing beliefs and desires to them. She took an umbrella because she <i>believed</i> it would rain and <i>wanted</i> to stay dry. This way of thinking is so natural that it hardly seems like a theory at all. <span class="term" data-t="Eliminative materialism">Eliminative materialism</span> claims that it is a theory – and a false one. AQA puts it this way: <b>some or all common-sense (‘folk-psychological’) mental states/properties do not exist, and our common-sense understanding is radically mistaken</b>, as defended by Patricia Churchland and Paul Churchland.</p>
@@ -200,7 +209,7 @@ details.resp summary{cursor:pointer}
   <div class="map" id="map"></div>
 </div>
 <aside>
-  <div class="consol"><h4>Consolidate knowledge</h4><p>Download the workbook and test yourself on this topic, then revisit the lesson slides.</p><a href="downloads/Eliminative_Materialism_Workbook.pdf"><span aria-hidden="true">⬇</span>Eliminative Materialism Workbook<span class="fmt">PDF</span></a><a href="downloads/Eliminative_Materialism_Slides.pptx"><span aria-hidden="true">⬇</span>Eliminative Materialism Slides<span class="fmt">PPTX</span></a></div><div class="consol"><details class="vid"><summary class="vidlink"><span aria-hidden="true">▶</span> Watch video: Eliminative materialism</summary><div class="vidbox"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/YMUGYfWIMyc" title="Eliminative materialism (A level Philosophy, YouTube)" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><p class="vidalt">Player not loading? <a href="https://www.youtube.com/watch?v=YMUGYfWIMyc" target="_blank" rel="noopener">Open it on YouTube</a></p></details></div>
+  <div class="consol"><h4>Consolidate knowledge</h4><p>Download the workbook and test yourself on this topic, then revisit the lesson slides.</p><a href="downloads/Eliminative_Materialism_Workbook.pdf"><span aria-hidden="true">⬇</span>Eliminative Materialism Workbook<span class="fmt">PDF</span></a><a href="downloads/Eliminative_Materialism_Slides.pptx"><span aria-hidden="true">⬇</span>Eliminative Materialism Slides<span class="fmt">PPTX</span></a></div><div class="consol vcard"><h4>Watch</h4><p>A short video introducing eliminative materialism. It opens at the top of this page.</p><button class="vbtn" data-src="https://www.youtube-nocookie.com/embed/YMUGYfWIMyc" data-label="Eliminative materialism" aria-expanded="false" aria-controls="vbox-1"><span aria-hidden="true">▶</span><span class="vlabel">Eliminative materialism</span><span class="fmt">VIDEO</span></button></div>
   <div class="card"><h4>The big question</h4><p>Is our common-sense understanding of the mind radically mistaken, so that some or all folk-psychological states do not exist?</p></div>
   <div class="card"><h4>How to use this tour</h4><p>Learning it for the first time? Go through the stops in order. Revising? Jump to a stop, or go straight to <b>Revise</b> for the summary and quiz. Dotted words are in the glossary: tap one to see its meaning.</p></div>
   <div class="card"><h4>Spec checklist</h4><p>✓ The thesis (Patricia and Paul Churchland)<br>✓ Our certainty about our mental states takes priority<br>✓ Folk psychology has good predictive and explanatory power<br>✓ Eliminative materialism is self-refuting</p></div>
@@ -508,6 +517,7 @@ function show(id){
     function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src'+(x[2]==="b"?" b":"")+'">'+(x[2]==="h"?"Departmental handout":x[2]==="b"?"Beyond the spec":"From the tour text")+'</div></div>';}).join("");}
     q.addEventListener("input",draw);draw();}
 }
+stage.addEventListener("click",function(e){var b=e.target.closest(".vbtn[data-src]");if(!b)return;var vb=document.getElementById(b.getAttribute("aria-controls"));if(!vb)return;var op=vb.hidden;vb.hidden=!op;b.setAttribute("aria-expanded",op);b.querySelector(".vlabel").textContent=op?"Close video":b.dataset.label;var fr=vb.querySelector(".vidbox");fr.innerHTML="";if(op){var f=document.createElement("iframe");f.src=b.dataset.src;f.title=b.dataset.label+" (A level Philosophy, YouTube)";f.allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen";f.allowFullscreen=true;f.referrerPolicy="strict-origin-when-cross-origin";fr.appendChild(f);vb.scrollIntoView({behavior:"smooth",block:"start"});}});
 var first=true,EMB=window.parent!==window;
 function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
 function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
