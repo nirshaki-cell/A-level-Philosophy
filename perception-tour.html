@@ -167,7 +167,15 @@ aside{position:static!important}
 .podcast .dl:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 </style>
 <script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
-<style>.vid summary{cursor:pointer;list-style:none;font-weight:600}.vid summary::-webkit-details-marker{display:none}.vidbox{position:relative;aspect-ratio:16/9;margin-top:10px;border-radius:12px;overflow:hidden;background:#0001}.vidbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.vidalt{font-size:.85rem;margin:6px 0 0;opacity:.85}</style></head>
+<style>.vid summary{cursor:pointer;list-style:none;font-weight:600}.vid summary::-webkit-details-marker{display:none}.vidbox{position:relative;aspect-ratio:16/9;margin-top:10px;border-radius:12px;overflow:hidden;background:#0001}.vidbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.vidalt{font-size:.85rem;margin:6px 0 0;opacity:.85}.stop{position:relative}
+.vbtn{display:flex;width:100%;gap:10px;align-items:center;background:var(--card);color:var(--ink);border:0;font:inherit;font-weight:600;font-size:.92rem;padding:10px 14px;border-radius:10px;cursor:pointer;text-align:left}
+.vbtn:hover{text-decoration:underline}
+.vbtn .fmt{margin-left:auto;font-size:.72rem;letter-spacing:.1em;color:var(--muted);font-weight:600}
+.vbox{background:var(--tint);border-radius:14px;padding:16px;margin:0 0 24px;scroll-margin-top:84px}
+.vbox a{color:var(--ink);font-weight:600}
+.vbox h4{margin:0 0 10px;color:var(--ink);font-weight:600}
+.vbox p{margin:10px 0 0;font-size:.9rem}
+</style></head>
 <body>
 <div class="wrap">
   <a class="back" href="#">← Epistemology</a>
@@ -221,6 +229,7 @@ aside{position:static!important}
 
 <template id="s-direct" data-label="Direct realism">
 <div class="stop"><div class="panel">
+  <div class="vbox" id="vbox-1" hidden><h4>Watch: Naive realism</h4><div class="vidbox" style="margin-top:0"></div><p class="vidalt">Player not loading? <a href="https://www.youtube.com/watch?v=ATgLzDbWoX4" target="_blank" rel="noopener">Open it on YouTube</a></p></div>
   <div class="kicker">Stop 1 · Direct realism</div>
   <h2>Direct Realism</h2>
   <p class="thesis"><b>Key thesis:</b> Direct realism is the thesis that our senses are linked to the external world directly, and that the external world is real, put otherwise, the external world exists even when we are not looking at it.</p>
@@ -242,7 +251,7 @@ aside{position:static!important}
   <div class="card"><h4>Two words, two claims</h4><dl>
     <dt>‘Realism’</dt><dd>The world exists whether or not we look at it.</dd>
     <dt>‘Direct’</dt><dd>What I see is the desk itself, not an image of it.</dd></dl></div>
-  <div class="consol"><h4>Consolidate knowledge</h4><p>Download the workbook and work through it alongside the lesson slides.</p><a href="downloads/Direct_Realism_Workbook.pdf"><span aria-hidden="true">⬇</span>Direct Realism Workbook<span class="fmt">PDF</span></a><a href="downloads/Direct_Realism_Slides.pptx"><span aria-hidden="true">⬇</span>Direct Realism Slides<span class="fmt">PPTX</span></a></div><div class="consol"><details class="vid"><summary class="vidlink"><span aria-hidden="true">▶</span> Watch video: Naive realism</summary><div class="vidbox"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/ATgLzDbWoX4" title="Naive realism (A level Philosophy, YouTube)" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><p class="vidalt">Player not loading? <a href="https://www.youtube.com/watch?v=ATgLzDbWoX4" target="_blank" rel="noopener">Open it on YouTube</a></p></details></div>
+  <div class="consol"><h4>Consolidate knowledge</h4><p>Download the workbook and work through it alongside the lesson slides.</p><a href="downloads/Direct_Realism_Workbook.pdf"><span aria-hidden="true">⬇</span>Direct Realism Workbook<span class="fmt">PDF</span></a><a href="downloads/Direct_Realism_Slides.pptx"><span aria-hidden="true">⬇</span>Direct Realism Slides<span class="fmt">PPTX</span></a></div><div class="consol vcard"><h4>Watch</h4><p>A short video on naive (direct) realism. It opens at the top of this page.</p><button class="vbtn" data-src="https://www.youtube-nocookie.com/embed/ATgLzDbWoX4" data-label="Naive realism" aria-expanded="false" aria-controls="vbox-1"><span aria-hidden="true">▶</span><span class="vlabel">Naive realism</span><span class="fmt">VIDEO</span></button></div>
 </aside></div>
 </template>
 
@@ -412,6 +421,7 @@ aside{position:static!important}
 
 <template id="s-locke" data-label="Representation &amp; qualities">
 <div class="stop"><div class="panel">
+  <div class="vbox" id="vbox-2" hidden><h4>Watch: Locke’s primary and secondary qualities</h4><div class="vidbox" style="margin-top:0"></div><p class="vidalt">Player not loading? <a href="https://www.youtube.com/watch?v=H1goKnNkrNw" target="_blank" rel="noopener">Open it on YouTube</a></p></div>
   <div class="kicker">Stop 8 · Indirect realism under pressure</div>
   <h2>The question of representation</h2>
   <p>Indirect realism claims that sense-data although they are mind-dependent are related to the external world, first, because they are caused by it, and secondly because they resemble it. The resemblance is supposed to mean that sense-data can represent the objects out in the world.</p>
@@ -436,7 +446,7 @@ aside{position:static!important}
   <blockquote>But you say, though the ideas do not themselves exist without the mind, yet there may be things like them whereof they are copies or resemblances, which things exist outside the mind in an unthinking substance. I answer, an idea can be nothing but an idea; a colour or figure can be like nothing but another colour or figure. If we look but ever so little into our thoughts, we shall find it impossible for us to conceive a likeness except between ideas.<cite>George Berkeley, <i>Principles of Human Knowledge</i></cite></blockquote></div>
 </div>
 <aside>
-  <div class="consol"><details class="vid"><summary class="vidlink"><span aria-hidden="true">▶</span> Watch video: Locke’s primary and secondary qualities</summary><div class="vidbox"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/H1goKnNkrNw" title="Locke’s primary and secondary qualities (A level Philosophy, YouTube)" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><p class="vidalt">Player not loading? <a href="https://www.youtube.com/watch?v=H1goKnNkrNw" target="_blank" rel="noopener">Open it on YouTube</a></p></details></div>
+  <div class="consol vcard"><h4>Watch</h4><p>A short video on Locke’s primary and secondary qualities. It opens at the top of this page.</p><button class="vbtn" data-src="https://www.youtube-nocookie.com/embed/H1goKnNkrNw" data-label="Locke’s primary and secondary qualities" aria-expanded="false" aria-controls="vbox-2"><span aria-hidden="true">▶</span><span class="vlabel">Locke’s primary and secondary qualities</span><span class="fmt">VIDEO</span></button></div>
   <div class="card"><h4>Primary vs secondary</h4><dl>
     <dt>Primary (in the object)</dt><dd>Solidity, extension, figure, mobility, number. Our ideas of them resemble the object.</dd>
     <dt>Secondary (powers)</dt><dd>Colour, sound, taste. Our ideas of them resemble nothing in the object.</dd></dl></div>
@@ -446,6 +456,7 @@ aside{position:static!important}
 
 <template id="s-idealism" data-label="Berkeley's idealism">
 <div class="stop"><div class="panel">
+  <div class="vbox" id="vbox-3" hidden><h4>Watch: Berkeley's idealism</h4><div class="vidbox" style="margin-top:0"></div><p class="vidalt">Player not loading? <a href="https://www.youtube.com/watch?v=zs1CicUwCLQ" target="_blank" rel="noopener">Open it on YouTube</a></p></div>
   <div class="kicker">Stop 9 · Idealism</div>
   <h2>George Berkeley: Idealism</h2>
   <p class="thesis"><b>Key thesis:</b> Idealism is the theory that there is no mind-independent external world, and that the only things that exist, are minds, and ideas in the mind.</p>
@@ -479,7 +490,7 @@ aside{position:static!important}
     <dt>2. Substance</dt><dd>Strip away the qualities and nothing is left.</dd>
     <dt>3. Master argument</dt><dd>You cannot conceive of something unconceived.</dd></dl></div>
   <div class="card"><h4>Where do ideas come from?</h4><p>Not matter. Not my mind (I am passive). So another mind: God.</p></div>
-  <div class="consol"><details class="vid"><summary class="vidlink"><span aria-hidden="true">▶</span> Watch video: Berkeley's idealism</summary><div class="vidbox"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/zs1CicUwCLQ" title="Berkeley's idealism (A level Philosophy, YouTube)" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><p class="vidalt">Player not loading? <a href="https://www.youtube.com/watch?v=zs1CicUwCLQ" target="_blank" rel="noopener">Open it on YouTube</a></p></details></div>
+  <div class="consol vcard"><h4>Watch</h4><p>A short video on Berkeley’s idealism. It opens at the top of this page.</p><button class="vbtn" data-src="https://www.youtube-nocookie.com/embed/zs1CicUwCLQ" data-label="Berkeley&#x27;s idealism" aria-expanded="false" aria-controls="vbox-3"><span aria-hidden="true">▶</span><span class="vlabel">Berkeley's idealism</span><span class="fmt">VIDEO</span></button></div>
   <div class="consol"><h4>Consolidate knowledge</h4><p>Download the workbook and work through it alongside the lesson slides.</p><a href="downloads/Idealism_Workbook.pdf"><span aria-hidden="true">⬇</span>Idealism Workbook<span class="fmt">PDF</span></a><a href="downloads/Idealism_Slides.pptx"><span aria-hidden="true">⬇</span>Idealism Slides<span class="fmt">PPTX</span></a></div>
 </aside></div>
 </template>
@@ -605,6 +616,7 @@ function ptInit(){var l=stage.querySelector(".ptablist");if(!l)return;
   l.addEventListener("keydown",function(e){var bs=[].slice.call(l.querySelectorAll("button")),i=bs.indexOf(document.activeElement);if(i<0)return;
     var j=e.key==="ArrowRight"?(i+1)%bs.length:e.key==="ArrowLeft"?(i+bs.length-1)%bs.length:-1;if(j<0)return;e.preventDefault();bs[j].focus();ptShow(bs[j].dataset.p);});
   ptShow("variation");}
+stage.addEventListener("click",function(e){var b=e.target.closest(".vbtn[data-src]");if(!b)return;var vb=document.getElementById(b.getAttribute("aria-controls"));if(!vb)return;var op=vb.hidden;vb.hidden=!op;b.setAttribute("aria-expanded",op);b.querySelector(".vlabel").textContent=op?"Close video":b.dataset.label;var fr=vb.querySelector(".vidbox");fr.innerHTML="";if(op){var f=document.createElement("iframe");f.src=b.dataset.src;f.title=b.dataset.label+" (A level Philosophy, YouTube)";f.allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen";f.allowFullscreen=true;f.referrerPolicy="strict-origin-when-cross-origin";fr.appendChild(f);vb.scrollIntoView({behavior:"smooth",block:"start"});}});
 var first=true,EMB=window.parent!==window;
 function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
 function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
