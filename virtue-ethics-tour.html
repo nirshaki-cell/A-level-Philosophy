@@ -152,6 +152,18 @@ details.resp summary{cursor:pointer}
 .panel,.card,.tabs button,.tile.sm,.soon,.tuition{--fg:#3b2a20;--muted:#6e5a4c;color:#3b2a20}
 .tile.sm h2{color:#3b2a20}
 </style>
+<style>.consol{background:var(--tint);color:var(--ink);border-radius:14px;padding:18px 20px}
+.consol a{display:flex;gap:10px;align-items:center;background:var(--card);color:var(--ink);text-decoration:none;font-weight:600;font-size:.92rem;padding:10px 14px;border-radius:10px;overflow-wrap:anywhere}
+.consol a:hover{text-decoration:underline}
+.consol .fmt{margin-left:auto;font-size:.72rem;letter-spacing:.1em;color:var(--muted);font-weight:600;white-space:nowrap}</style>
+<style>.vid summary{cursor:pointer;list-style:none;font-weight:600}.vid summary::-webkit-details-marker{display:none}.vidbox{position:relative;aspect-ratio:16/9;margin-top:10px;border-radius:12px;overflow:hidden;background:#0001}.vidbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.vidalt{font-size:.85rem;margin:6px 0 0;opacity:.85}.stop{position:relative}
+.vbtn{display:flex;width:100%;gap:10px;align-items:center;background:var(--card);color:var(--ink);border:0;font:inherit;font-weight:600;font-size:.92rem;padding:10px 14px;border-radius:10px;cursor:pointer;text-align:left}
+.vbtn:hover{text-decoration:underline}
+.vbtn .fmt{margin-left:auto;font-size:.72rem;letter-spacing:.1em;color:var(--muted);font-weight:600}
+.vbox{background:var(--tint);border-radius:14px;padding:16px;margin:0 0 24px;scroll-margin-top:84px}
+.vbox a{color:var(--ink);font-weight:600}
+.vbox h4{margin:0 0 10px;color:var(--ink);font-weight:600}
+.vbox p{margin:10px 0 0;font-size:.9rem}</style>
 <script>if(window.parent!==window)document.documentElement.classList.add("embedded");</script>
 
 
@@ -216,6 +228,7 @@ details.resp summary{cursor:pointer}
 <!-- GOOD -->
 <template id="s-good">
 <div class="stop"><div class="panel">
+  <div class="vbox" id="vbox-1" hidden><h4>Watch: Aristotle’s Eudaimonia</h4><div class="vidbox" style="margin-top:0"></div><p class="vidalt">Player not loading? <a href="https://www.youtube.com/watch?v=ZvEZuoOC5jI" target="_blank" rel="noopener">Open it on YouTube</a></p></div>
   <div class="kicker">Stop 1 · Book I</div>
   <h2>The good and eudaimonia as the final end</h2>
   <blockquote>Every art and every inquiry, and similarly every action and pursuit, is thought to aim at some good; and for this reason the good has rightly been declared to be that at which all things aim.<cite>Aristotle, <i>Nicomachean Ethics</i> I.1, 1094a1–3</cite></blockquote>
@@ -249,6 +262,7 @@ details.resp summary{cursor:pointer}
   </ol>
 </div>
 <aside>
+  <div class="consol vcard"><h4>Watch</h4><p>A short video on Aristotle’s eudaimonia. It opens at the top of this page.</p><button class="vbtn" data-src="https://www.youtube-nocookie.com/embed/ZvEZuoOC5jI" data-label="Aristotle’s Eudaimonia" aria-expanded="false" aria-controls="vbox-1"><span aria-hidden="true">▶</span><span class="vlabel">Aristotle’s Eudaimonia</span><span class="fmt">VIDEO</span></button></div>
   <div class="card"><h4>Utilitarian comparison</h4><p>Like Mill, Aristotle thinks that our pursuit of pleasure is a sign that pleasure is good. Unlike Mill, he denies that it is the only good: virtue, wisdom and contemplation are good too.</p></div>
   <div class="card"><h4>Exam tip</h4><p>For a 5-mark question on eudaimonia, give the three features of the final end and explain why eudaimonia is not just pleasure or happiness.</p></div>
 </aside></div>
@@ -784,6 +798,7 @@ function show(id){
     function draw(){var v=q.value.toLowerCase();g.innerHTML=GLOSS.slice().sort(function(a,b){return a[0].localeCompare(b[0]);}).filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(v)>-1;}).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd><div class="src">'+(x[2]==="h"?"From the slide glossary":"Course definition")+'</div></div>';}).join("");}
     q.addEventListener("input",draw);draw();}
 }
+stage.addEventListener("click",function(e){var b=e.target.closest(".vbtn[data-src]");if(!b)return;var vb=document.getElementById(b.getAttribute("aria-controls"));if(!vb)return;var op=vb.hidden;vb.hidden=!op;b.setAttribute("aria-expanded",op);b.querySelector(".vlabel").textContent=op?"Close video":b.dataset.label;var fr=vb.querySelector(".vidbox");fr.innerHTML="";if(op){var f=document.createElement("iframe");f.src=b.dataset.src;f.title=b.dataset.label+" (A level Philosophy, YouTube)";f.allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen";f.allowFullscreen=true;f.referrerPolicy="strict-origin-when-cross-origin";fr.appendChild(f);vb.scrollIntoView({behavior:"smooth",block:"start"});}});
 var first=true,EMB=window.parent!==window;
 function tell(j){if(EMB)parent.postMessage({tourHeight:document.documentElement.scrollHeight,jump:j},"*");}
 function route(){show((location.hash||"#start").slice(1));if(EMB)tell(!first);else if(!first)tabs.scrollIntoView();first=false;}
